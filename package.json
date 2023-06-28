@@ -8,8 +8,10 @@
     "test": "react-scripts test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "prettier": "prettier --check src/**/*.{ts,tsx,css}",
-    "lint": "eslint src/"
+    "format": "prettier --write src/**/*.{ts,tsx,css}",
+    "lint": "eslint src/",
+    "lint:fix": "npm run lint -- --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -19,8 +21,10 @@
     "@types/node": "^16.18.37",
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
+    "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.14.0",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
@@ -46,10 +50,16 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-storybook": "^0.6.12",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.2.3",
     "prettier": "^2.8.8",
     "prop-types": "^15.8.1",
     "storybook": "^7.0.24",
     "webpack": "^5.88.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "npm run lint",
+    "*.{js,jsx,ts,tsx,css,html,json}": "npm run format"
   },
   "browserslist": {
     "production": [
