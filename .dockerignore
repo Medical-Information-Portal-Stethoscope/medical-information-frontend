@@ -1,0 +1,23 @@
+# Deps
+node_modules/
+
+# Docker
+Dockerfile
+docker-compose.yml
+
+# README и файлы лицензий
+README.md
+LICENSE
+
+# Dist
+dist/
+build/
+
+# IDE Files
+.idea/
+.vscode
+.DS_Store
+
+.husky
+.storybook
+.github
