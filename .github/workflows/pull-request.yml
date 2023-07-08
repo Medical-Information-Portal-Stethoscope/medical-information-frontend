@@ -1,0 +1,25 @@
+name: Pull request pipeline
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - develop
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get repository code
+        uses: actions/checkout@v3
+      - name: Setup node v16
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: Check code quality via ESLint
+        run: npm run lint
+      - name: Check code format via Prettier
+        run: npm run prettier
+      - name: Check bundle build
+        run: npm run build
