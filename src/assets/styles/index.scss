@@ -1,4 +1,4 @@
-@import './abstracts/variables/typography.scss';
+@import './abstracts/variables/fonts.scss';
 @import './abstracts/variables/colors.scss';
 @import './abstracts/variables/media-queries.scss';
 @import './abstracts/variables/wrappers.scss';
@@ -8,3 +8,4 @@
 @import './abstracts/mixins.scss';
 @import './abstracts/functions.scss';
 @import './globals.scss';
+@import '../fonts/fonts.scss';

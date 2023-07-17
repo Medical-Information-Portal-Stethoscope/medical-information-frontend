@@ -1,0 +1,16 @@
+@mixin font-face($weight-name, $weight-number, $style: 'normal') {
+  @font-face {
+    font-family: 'IBM Plex Sans';
+    font-style: $style;
+    font-display: swap;
+    font-weight: $weight-number;
+    src: url(./source/IBMPlexSans-#{$weight-name}.ttf) format('truetype'),
+      url(./source/IBMPlexSans-#{$weight-name}.woff2) format('woff2'),
+      url(./source/IBMPlexSans-#{$weight-name}.woff) format('woff');
+  }
+}
+
+@include font-face('Light', 300);
+@include font-face('Regular', 400);
+@include font-face('SemiBold', 600);
+@include font-face('Bold', 700);

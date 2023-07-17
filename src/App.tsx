@@ -1,5 +1,5 @@
 function App() {
-  return <button type="button">Learn React</button>;
+  return <p>Learn React</p>; // for tests
 }
 
 export default App;
