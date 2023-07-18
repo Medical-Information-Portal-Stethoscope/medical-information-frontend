@@ -24,7 +24,7 @@
   }
 
   &--small {
-    padding: 6px 64px;
+    padding: 12px 64px;
   }
 
   &--medium {
@@ -55,7 +55,7 @@
 .content {
   display: flex;
   align-items: center;
-  column-gap: 4px;
+  column-gap: 4.5px;
 }
 
 .button--primary {
@@ -154,7 +154,7 @@
 }
 
 .button--tertiary {
-  padding: 6 0;
+  padding: 6px 0;
 
   color: $color-brand-primary-900;
   background-color: transparent;

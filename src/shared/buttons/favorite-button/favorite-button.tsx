@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from 'react';
 import classNames from 'classnames';
 import styles from './favorite-button.module.scss';
 
-interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface IFavoriteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extraClass?: string;
   isSelected?: boolean;
   isDisabled?: boolean;
@@ -14,7 +14,7 @@ export default function FavoriteButton({
   isSelected = false,
   isDisabled = false,
   onClick,
-}: IButtonProps) {
+}: IFavoriteButtonProps) {
   const iconBookmark = (
     <svg
       xmlns="http://www.w3.org/2000/svg"

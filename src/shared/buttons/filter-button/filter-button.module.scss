@@ -1,0 +1,89 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.checkbox:not(:checked),
+.checkbox:checked {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.checkbox {
+  + .label {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 8px;
+    height: 40px;
+    padding: 8px 16px;
+    box-sizing: border-box;
+
+    @extend %text-size-medium;
+    color: $color-neutral-900;
+
+    background-color: $color-neutral-0;
+    border: 1px solid $color-neutral-900;
+    border-radius: 16px;
+
+    transition: $transition-button;
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+      color: $color-brand-primary-900;
+
+      background-color: $color-brand-primary-100;
+      border-color: $color-brand-primary-900;
+    }
+  }
+
+  &:checked {
+    + .label {
+      color: $color-neutral-100;
+
+      background-color: $color-brand-primary-900;
+      border-color: $color-brand-primary-900;
+
+      &::after {
+        content: url(../../../assets/icons/cancel.svg);
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    &:disabled + .label {
+      color: $color-neutral-400;
+
+      background-color: $color-neutral-0;
+      border: 1px solid $color-neutral-400;
+
+      cursor: default;
+
+      &:hover {
+        color: $color-neutral-400;
+        border-color: $color-neutral-400;
+
+        cursor: default;
+      }
+
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  &:disabled {
+    + .label {
+      color: $color-neutral-400;
+      border-color: $color-neutral-400;
+
+      cursor: default;
+
+      &:hover {
+        background-color: $color-neutral-0;
+        border: 1px solid $color-neutral-400;
+      }
+    }
+  }
+}
