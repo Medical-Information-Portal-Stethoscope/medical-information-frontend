@@ -6,13 +6,8 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
-    children: {
-      type: 'string',
-      name: 'label',
-      defaultValue: 'Текст',
-    },
-
     type: {
+      description: 'Тип поведения',
       type: 'string',
       options: ['button', 'submit', 'reset'],
       defaultValue: 'button',
@@ -21,7 +16,13 @@ const meta: Meta<typeof Button> = {
       },
     },
 
+    label: {
+      description: 'Текст',
+      type: 'string',
+    },
+
     model: {
+      description: 'Тип модели',
       type: 'string',
       options: ['primary', 'secondary', 'tertiary'],
       defaultValue: 'primary',
@@ -31,6 +32,7 @@ const meta: Meta<typeof Button> = {
     },
 
     size: {
+      description: 'Размер',
       type: 'string',
       options: ['small', 'medium'],
       defaultValue: 'medium',
@@ -40,6 +42,7 @@ const meta: Meta<typeof Button> = {
     },
 
     hasBorder: {
+      description: 'Наличие границы',
       type: 'boolean',
       options: [true, false],
       defaultValue: false,
@@ -48,16 +51,14 @@ const meta: Meta<typeof Button> = {
       },
     },
 
-    hasIconMail: {
-      type: 'boolean',
-      options: [true, false],
-      defaultValue: false,
-      control: {
-        type: 'radio',
-      },
+    customIcon: {
+      type: undefined,
+      description: 'Иконка',
+      defaultValue: undefined,
     },
 
     isDisabled: {
+      description: 'Взаимодействие с кнопкой',
       type: 'boolean',
       options: [true, false],
       defaultValue: false,
@@ -65,15 +66,19 @@ const meta: Meta<typeof Button> = {
     },
 
     isLoading: {
+      description: 'Процесс обмена данными с сервером',
       type: 'boolean',
       options: [true, false],
       defaultValue: false,
       control: { type: 'radio' },
     },
 
-    loadingLabel: { type: 'string' },
+    loadingLabel: {
+      description: 'Текст в процессе обмена данными с сервером',
+      type: 'string',
+    },
 
-    onClick: { type: 'function' },
+    onClick: { description: 'Нажатие', type: 'function' },
   },
 };
 
@@ -82,42 +87,36 @@ type TStory = StoryObj<typeof meta>;
 
 export const Primary: TStory = {
   args: {
-    children: 'Текст',
     type: 'button',
+    label: 'Текст',
     model: 'primary',
     size: 'medium',
     hasBorder: false,
-    hasIconMail: false,
     isDisabled: false,
     isLoading: false,
-    loadingLabel: 'Подождите...',
   },
 };
 
 export const Secondary: TStory = {
   args: {
-    children: 'Текст',
     type: 'button',
+    label: 'Текст',
     model: 'secondary',
     size: 'medium',
     hasBorder: true,
-    hasIconMail: false,
     isDisabled: false,
     isLoading: false,
-    loadingLabel: 'Подождите...',
   },
 };
 
 export const Tertiary: TStory = {
   args: {
-    children: 'Текст',
     type: 'button',
+    label: 'Текст',
     model: 'tertiary',
     size: 'small',
     hasBorder: false,
-    hasIconMail: false,
     isDisabled: false,
     isLoading: false,
-    loadingLabel: 'Подождите...',
   },
 };

@@ -2,49 +2,37 @@ import { JSX, ButtonHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
 import styles from './button.module.scss';
 
+const spinner = (
+  <span className={styles.spinnerWrapper}>
+    <span className={styles.spinner} />
+  </span>
+);
+
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  children?: ReactNode;
   type?: JSX.IntrinsicElements['button']['type'];
+  label: string;
   model?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium';
-  hasBorder?: boolean;
-  hasIconMail?: boolean;
+  hasBorder?: boolean; // not provided for the tertiary
+  customIcon?: ReactNode; // for the best perfomance it should be svg
   isDisabled?: boolean;
   isLoading?: boolean;
-  loadingLabel?: string; // Дизайнеры сейчас прорабатывают эту логику, так что изменится
+  loadingLabel?: string;
   onClick?: () => void;
 }
 
 export default function Button({
-  children,
   type = 'button',
+  label,
   model = 'primary',
   size = 'medium',
   hasBorder = false,
-  hasIconMail = false,
+  customIcon,
   isDisabled = false,
   isLoading = false,
   loadingLabel,
   onClick,
 }: IButtonProps) {
-  const iconMail = (
-    <svg
-      width="20"
-      height="16"
-      viewBox="0 0 20 16"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H17C17.5304 1 18.0391 1.21071 18.4142 1.58579C18.7893 1.96086 19 2.46957 19 3M1 3V13C1 13.5304 1.21071 14.0391 1.58579 14.4142C1.96086 14.7893 2.46957 15 3 15H17C17.5304 15 18.0391 14.7893 18.4142 14.4142C18.7893 14.0391 19 13.5304 19 13V3M1 3L10 9L19 3"
-        stroke="#666372"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-
   return (
     <button
       className={classNames(
@@ -52,7 +40,9 @@ export default function Button({
         styles[`button--${model}`],
         styles[`button--${size}`],
         {
+          [styles[`button--${model}--loading`]]: isLoading,
           [styles[`button--hasBorder`]]: hasBorder,
+          [styles[`button--hasBorder--loading`]]: isLoading && hasBorder,
         }
       )}
       // eslint-disable-next-line react/button-has-type
@@ -60,8 +50,11 @@ export default function Button({
       disabled={isDisabled || isLoading}
       onClick={onClick}
     >
-      {hasIconMail && iconMail}
-      {isLoading && loadingLabel ? loadingLabel : children}
+      <span className={styles.content}>
+        {(isLoading && model !== 'tertiary' && spinner) || null}
+        {customIcon || null}
+        {isLoading && loadingLabel ? loadingLabel : label}
+      </span>
     </button>
   );
 }

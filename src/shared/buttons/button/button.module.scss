@@ -1,13 +1,16 @@
-@import '../../../assets/styles/abstracts/variables/colors.scss';
-@import '../../../assets/styles/abstracts/variables/fonts.scss';
-@import '../../../assets/styles/abstracts/placeholders.scss';
-@import '../../../assets/styles/abstracts/variables/animations.scss';
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/placeholders.scss';
+@import 'assets/styles/abstracts/variables/animations.scss';
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
 
 .button {
-  display: inline-flex;
-  align-items: center;
-  column-gap: 4px;
-  box-sizing: border-box;
+  display: inline-block;
 
   @extend %text-size-medium-semibold;
 
@@ -21,7 +24,7 @@
   }
 
   &--small {
-    padding: 12px 64px;
+    padding: 6px 64px;
   }
 
   &--medium {
@@ -38,11 +41,21 @@
     &:disabled {
       border-color: $color-neutral-400;
     }
+
+    &--loading:disabled {
+      border-color: $color-brand-primary-900 !important;
+    }
   }
 
   * {
     transition: $transition-button;
   }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
 }
 
 .button--primary {
@@ -71,6 +84,20 @@
   &:disabled {
     color: $color-neutral-0;
     background-color: $color-neutral-400;
+  }
+
+  .content > .spinnerWrapper > .spinner {
+    box-shadow: 0 -0.45em rgba(255, 255, 255, 1),
+      0.31em -0.31em rgba(255, 255, 255, 0.95),
+      0.45em 0 rgba(255, 255, 255, 0.9), 0.31em 0.31em rgba(255, 255, 255, 0.85),
+      0 0.45em rgba(255, 255, 255, 0.8),
+      -0.31em 0.31em rgba(255, 255, 255, 0.75),
+      -0.45em 0 rgba(255, 255, 255, 0.7),
+      -0.31em -0.31em rgba(255, 255, 255, 0.65);
+  }
+
+  &--loading:disabled {
+    background-color: $color-brand-primary-900;
   }
 }
 
@@ -109,10 +136,25 @@
       stroke: $color-neutral-400;
     }
   }
+
+  .content > .spinnerWrapper > .spinner {
+    box-shadow: 0 -0.45em rgba(1, 76, 255, 1),
+      0.31em -0.31em rgba(1, 76, 255, 0.95), 0.45em 0 rgba(1, 76, 255, 0.9),
+      0.31em 0.31em rgba(1, 76, 255, 0.85), 0 0.45em rgba(1, 76, 255, 0.8),
+      -0.31em 0.31em rgba(1, 76, 255, 0.75), -0.45em 0 rgba(1, 76, 255, 0.7),
+      -0.31em -0.31em rgba(1, 76, 255, 0.65);
+  }
+
+  &--loading:disabled {
+    color: $color-brand-primary-900;
+
+    background-color: $color-neutral-0;
+    border-color: $color-neutral-0;
+  }
 }
 
 .button--tertiary {
-  padding: 12px 0;
+  padding: 6 0;
 
   color: $color-brand-primary-900;
   background-color: transparent;
@@ -144,4 +186,20 @@
       stroke: $color-neutral-400;
     }
   }
+}
+
+.spinnerWrapper {
+  position: relative;
+  width: 20px;
+  height: 20px;
+}
+
+.spinner {
+  position: absolute;
+  top: 41%;
+  left: 41%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  animation: spin 1.6s linear infinite;
 }
