@@ -1,0 +1,147 @@
+@import '../../../assets/styles/abstracts/variables/colors.scss';
+@import '../../../assets/styles/abstracts/variables/fonts.scss';
+@import '../../../assets/styles/abstracts/placeholders.scss';
+@import '../../../assets/styles/abstracts/variables/animations.scss';
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 4px;
+  box-sizing: border-box;
+
+  @extend %text-size-medium-semibold;
+
+  border: 1px solid transparent;
+  border-radius: 16px;
+
+  transition: $transition-button;
+
+  &:disabled {
+    cursor: default;
+  }
+
+  &--small {
+    padding: 12px 64px;
+  }
+
+  &--medium {
+    padding: 20px 64px;
+  }
+
+  &--hasBorder {
+    border-color: $color-brand-primary-900;
+
+    &:active:enabled {
+      border-color: $color-brand-primary-1000;
+    }
+
+    &:disabled {
+      border-color: $color-neutral-400;
+    }
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}
+
+.button--primary {
+  color: $color-neutral-0;
+  background-color: $color-brand-primary-900;
+
+  svg path {
+    stroke: $color-neutral-0;
+  }
+
+  &:hover:enabled {
+    background-color: $color-brand-primary-700;
+  }
+
+  &:active:enabled {
+    color: $color-brand-primary-500;
+
+    background-color: $color-brand-primary-1000;
+    border-color: $color-brand-primary-1000;
+
+    svg path {
+      stroke: $color-brand-primary-500;
+    }
+  }
+
+  &:disabled {
+    color: $color-neutral-0;
+    background-color: $color-neutral-400;
+  }
+}
+
+.button--secondary {
+  color: $color-brand-primary-900;
+  background-color: $color-neutral-0;
+
+  svg path {
+    stroke: $color-brand-primary-900;
+  }
+
+  &:hover:enabled {
+    background-color: $color-brand-primary-100;
+
+    svg path {
+      stroke: $color-brand-primary-900;
+    }
+  }
+
+  &:active:enabled {
+    color: $color-brand-primary-1000;
+    background-color: $color-neutral-0;
+
+    svg path {
+      stroke: $color-brand-primary-1000;
+    }
+  }
+
+  &:disabled {
+    color: $color-neutral-400;
+
+    border-color: $color-neutral-400;
+    background-color: $color-neutral-0;
+
+    svg path {
+      stroke: $color-neutral-400;
+    }
+  }
+}
+
+.button--tertiary {
+  padding: 12px 0;
+
+  color: $color-brand-primary-900;
+  background-color: transparent;
+
+  svg path {
+    stroke: $color-brand-primary-900;
+  }
+
+  &:hover:enabled {
+    color: $color-brand-primary-700;
+
+    svg path {
+      stroke: $color-brand-primary-700;
+    }
+  }
+
+  &:active:enabled {
+    color: $color-brand-primary-1000;
+
+    svg path {
+      stroke: $color-brand-primary-1000;
+    }
+  }
+
+  &:disabled {
+    color: $color-neutral-400;
+
+    svg path {
+      stroke: $color-neutral-400;
+    }
+  }
+}
