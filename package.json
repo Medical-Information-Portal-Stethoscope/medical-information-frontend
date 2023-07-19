@@ -8,8 +8,8 @@
     "test": "react-scripts test",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "prettier --write src/**/*.{ts,tsx,css}",
-    "prettier": "prettier --check src/**/*.{ts,tsx,css}",
+    "format": "prettier --write src/**/*.{ts,tsx,scss}",
+    "prettier": "prettier --check src/**/*.{ts,tsx,scss}",
     "lint": "eslint src/",
     "lint:fix": "npm run lint -- --fix",
     "prepare": "husky install",
@@ -65,7 +65,7 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": "npm run lint",
-    "*.{js,jsx,ts,tsx,css,html,json}": "npm run format"
+    "*.{js,jsx,ts,tsx,scss,html,json}": "npm run format"
   },
   "config": {
     "commitizen": {
