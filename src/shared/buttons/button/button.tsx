@@ -9,6 +9,7 @@ const spinner = (
 );
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  extraClass?: string;
   type?: JSX.IntrinsicElements['button']['type'];
   label: string;
   model?: 'primary' | 'secondary' | 'tertiary';
@@ -22,6 +23,7 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export default function Button({
+  extraClass,
   type = 'button',
   label,
   model = 'primary',
@@ -37,6 +39,7 @@ export default function Button({
     <button
       className={classNames(
         styles.button,
+        extraClass,
         styles[`button--${model}`],
         styles[`button--${size}`],
         {

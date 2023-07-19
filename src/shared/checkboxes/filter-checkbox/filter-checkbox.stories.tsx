@@ -1,10 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import IconDentistry from 'assets/icons/components/dentistry';
-import FilterTab from './filter-tab';
+import FilterCheckbox from './filter-checkbox';
 
-const meta: Meta<typeof FilterTab> = {
-  title: 'uikit/Buttons/FilterTab',
-  component: FilterTab,
+const meta: Meta<typeof FilterCheckbox> = {
+  title: 'uikit/Checkboxes/FilterCheckbox',
+  component: FilterCheckbox,
   tags: ['autodocs'],
   argTypes: {
     extraClass: {
@@ -23,9 +22,14 @@ const meta: Meta<typeof FilterTab> = {
       type: 'string',
     },
 
-    icon: {
-      description: 'Иконка',
-      icon: 'string',
+    isDisabled: {
+      description: 'Взаимодействие с кнопкой',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: {
+        type: 'radio',
+      },
     },
 
     onChange: {
@@ -41,7 +45,7 @@ type TStory = StoryObj<typeof meta>;
 export const Default: TStory = {
   args: {
     id: 'template',
-    label: 'Стоматология',
-    icon: <IconDentistry />,
+    label: 'Фильтр',
+    isDisabled: false,
   },
 };

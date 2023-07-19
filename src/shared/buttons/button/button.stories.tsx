@@ -6,6 +6,12 @@ const meta: Meta<typeof Button> = {
   component: Button,
   tags: ['autodocs'],
   argTypes: {
+    extraClass: {
+      description: 'Дополнительные стили',
+      type: 'string',
+      defaultValue: undefined,
+    },
+
     type: {
       description: 'Тип поведения',
       type: 'string',
@@ -85,7 +91,7 @@ const meta: Meta<typeof Button> = {
 export default meta;
 type TStory = StoryObj<typeof meta>;
 
-export const Primary: TStory = {
+export const PrimaryMedium: TStory = {
   args: {
     type: 'button',
     label: 'Текст',
@@ -97,13 +103,49 @@ export const Primary: TStory = {
   },
 };
 
-export const Secondary: TStory = {
+export const PrimarySmall: TStory = {
+  args: {
+    type: 'button',
+    label: 'Текст',
+    model: 'primary',
+    size: 'small',
+    hasBorder: false,
+    isDisabled: false,
+    isLoading: false,
+  },
+};
+
+export const SecondaryMediumWithBorder: TStory = {
   args: {
     type: 'button',
     label: 'Текст',
     model: 'secondary',
     size: 'medium',
     hasBorder: true,
+    isDisabled: false,
+    isLoading: false,
+  },
+};
+
+export const SecondarySmallWithBorder: TStory = {
+  args: {
+    type: 'button',
+    label: 'Текст',
+    model: 'secondary',
+    size: 'small',
+    hasBorder: true,
+    isDisabled: false,
+    isLoading: false,
+  },
+};
+
+export const SecondarySmallWithouthBorder: TStory = {
+  args: {
+    type: 'button',
+    label: 'Текст',
+    model: 'secondary',
+    size: 'small',
+    hasBorder: false,
     isDisabled: false,
     isLoading: false,
   },

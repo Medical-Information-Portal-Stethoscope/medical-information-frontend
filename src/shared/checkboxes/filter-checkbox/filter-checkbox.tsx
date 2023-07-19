@@ -1,8 +1,8 @@
 import { InputHTMLAttributes } from 'react';
 import classNames from 'classnames';
-import styles from './filter-button.module.scss';
+import styles from './filter-checkbox.module.scss';
 
-interface IFilterButtonProps extends InputHTMLAttributes<HTMLInputElement> {
+interface IFilterCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   extraClass?: string;
   id: string;
   label: string;
@@ -10,13 +10,13 @@ interface IFilterButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: () => void;
 }
 
-export default function FilterButton({
+export default function FilterCheckbox({
   extraClass,
   id,
   label,
   isDisabled = false,
   onChange,
-}: IFilterButtonProps) {
+}: IFilterCheckboxProps) {
   return (
     <>
       <input
