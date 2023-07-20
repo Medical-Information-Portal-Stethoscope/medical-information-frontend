@@ -5,11 +5,17 @@ import footerLinks from 'utils/data/footer/links';
 import footerContacts from 'utils/data/footer/contacts';
 import styles from './footer.module.scss';
 
-const links = footerLinks.map(({ _id, heading, url }) => (
+const links = footerLinks.map(({ _id, heading, url, isRoute }) => (
   <li className={styles.footerLinkItem} key={_id}>
-    <Link className={styles.link} to={url} target="_blank" rel="noreferrer">
-      {heading}
-    </Link>
+    {isRoute ? (
+      <Link className={styles.link} to={url} target="_blank" rel="noreferrer">
+        {heading}
+      </Link>
+    ) : (
+      <a className={styles.link} href={url} target="_blank" rel="noreferrer">
+        {heading}
+      </a>
+    )}
   </li>
 ));
 
