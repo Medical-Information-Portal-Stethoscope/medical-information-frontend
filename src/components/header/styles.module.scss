@@ -1,0 +1,18 @@
+@import '../../assets/styles/index.scss';
+
+.header {
+  display: flex;
+  flex-direction: row;
+  gap: 118px;
+  justify-content: space-between;
+  align-items: end;
+  margin: 24px 48px 24px;
+}
+
+.header__search {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 40px;
+  width: 100%;
+}

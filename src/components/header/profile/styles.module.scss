@@ -1,0 +1,15 @@
+@import '../../../assets/styles/index.scss';
+
+.profile {
+  width: 24px;
+  transition: all 0.5 ease-out;
+}
+
+svg {
+  fill: $color-brand-primary-900;
+}
+
+.svg:hover {
+  fill: $color-brand-primary-700;
+  cursor: pointer;
+}

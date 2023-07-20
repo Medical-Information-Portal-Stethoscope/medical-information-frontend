@@ -1,0 +1,50 @@
+@import '../../../assets/styles/index.scss';
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 504px;
+  height: 48px;
+  padding: 12px;
+  border: 1px solid $color-neutral-400;
+  border-radius: 70px;
+  box-sizing: border-box;
+  transition: all 300ms ease-out;
+}
+
+.search__input {
+  @extend %text-size-medium;
+  width: 100%;
+  align-self: flex-end;
+  padding: 0;
+  border: none;
+  outline: 0;
+  overflow: hidden;
+}
+
+.search__submit {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+svg {
+  fill: $color-brand-primary-900;
+}
+
+svg:hover {
+  fill: $color-brand-primary-700;
+}
+
+.search:hover {
+  width: 100%;
+  border: 1px solid $color-brand-primary-900;
+}
+
+svg:hover,
+.search__input:hover,
+.search:hover,
+.search__submit:hover {
+  cursor: pointer;
+}
