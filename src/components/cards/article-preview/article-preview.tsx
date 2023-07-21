@@ -3,13 +3,13 @@ import { FC } from 'react';
 import classNames from 'classnames';
 import FavoriteButton from 'shared/buttons/favorite-button/favorite-button';
 import IconViews from './test-data/icon_views';
-import styles from './card-article-preview.module.scss';
+import styles from './article-preview.module.scss';
 
 // TODO: dynamic routes. Here or upper scope?
 // TODO: onClick. Here or upper scope?
 
 interface ICardArticlePreviewProps {
-  testData: {
+  data: {
     title: string;
     annotation: string;
     text: string;
@@ -22,7 +22,7 @@ interface ICardArticlePreviewProps {
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
-  testData: { title, annotation, text, image, created_at, author, views_count },
+  data: { title, annotation, text, image, created_at, author, views_count },
   size,
 }) => {
   const YEAR_NOW = new Date().getFullYear();
