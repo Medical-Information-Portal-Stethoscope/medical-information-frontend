@@ -2,6 +2,8 @@
 import { FC } from 'react';
 import classNames from 'classnames';
 import FavoriteButton from 'shared/buttons/favorite-button/favorite-button';
+import renderFormatDateArticle from 'utils/functions/render-format-date-article';
+import findReadingTimeArticle from 'utils/functions/find-reading-time-article';
 import IconViews from './test-data/icon_views';
 import styles from './article-preview.module.scss';
 
@@ -11,71 +13,35 @@ import styles from './article-preview.module.scss';
 interface ICardArticlePreviewProps {
   data: {
     title: string;
-    annotation: string;
     text: string;
     image: string;
     created_at: string;
     author: string;
     views_count: number;
   };
-  size: 'extraLarge' | 'large' | 'medium' | 'small';
+  type: 'media' | 'default';
+  extraClass?: string; // for cards' margin-bottom description property (sizes medium and small)
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
-  data: { title, annotation, text, image, created_at, author, views_count },
-  size,
+  data: { title, text, image, created_at, author, views_count },
+  type,
+  extraClass,
 }) => {
-  const YEAR_NOW = new Date().getFullYear();
-  const MONTH_NOW = new Date().getMonth();
-  const DAY_NOW = new Date().getDate();
-
-  const AVERAGE_READING_WORDS_PER_MINUTE = 220;
-  const totalWordsArticleCounter = text.split(' ').length;
-  const readingTime = `${Math.ceil(
-    totalWordsArticleCounter / AVERAGE_READING_WORDS_PER_MINUTE
-  )} мин`;
-
-  const [year, month, day] = created_at
-    .slice(0, created_at.indexOf('T'))
-    .split('-')
-    .map(Number);
-
-  let dateArticleCreation = new Date(year, month, day).toLocaleString('ru', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-
-  dateArticleCreation = dateArticleCreation.slice(
-    0,
-    dateArticleCreation.lastIndexOf('г') - 1
-  );
-
-  let date = dateArticleCreation;
-
-  if (YEAR_NOW === year && MONTH_NOW === month && DAY_NOW === day) {
-    date = 'Сегодня';
-  }
-
-  if (
-    YEAR_NOW === year &&
-    MONTH_NOW === month &&
-    [-30, -29, -28, -27, 1].includes(DAY_NOW - day) // numbers are the difference between days (taking into account February and leap year)
-  ) {
-    date = 'Вчера';
-  }
+  const date = renderFormatDateArticle(created_at);
+  const readingTime = findReadingTimeArticle(text);
 
   const handleLike = () => {
     console.log('test');
   }; // TODO: onClick. Here or upper scope?
 
   return (
-    <article className={classNames(styles.article, styles[`article--${size}`])}>
+    <article className={classNames(styles.article, styles[`article--${type}`])}>
       <div className={styles.wrapper}>
         <div
           className={classNames(
             styles.imageWrapper,
-            styles[`imageWrapper--${size}`]
+            styles[`imageWrapper--${type}`]
           )}
         >
           <img className={styles.image} src={image} alt="Превью статьи" />
@@ -89,11 +55,14 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
           <div
             className={classNames(
               styles.description,
-              styles[`description--${size}`]
+              styles[`description--${type}`],
+              extraClass
             )}
           >
             <h3 className={styles.heading}>{title}</h3>
-            <p className={styles.text}>{annotation}</p>
+            <p className={classNames(styles.text, styles[`text--${type}`])}>
+              {text}
+            </p>
           </div>
           <ul className={styles.info}>
             <li className={styles.infoItem}>{author}</li>

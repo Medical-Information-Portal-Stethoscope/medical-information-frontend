@@ -3,27 +3,16 @@
 @import 'assets/styles/abstracts/placeholders';
 
 .article {
+  max-width: 746px;
   padding: 24px;
   box-sizing: border-box;
   border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
   border-radius: 16px;
 
-  &--extraLarge {
+  &--media {
     max-width: 900px;
     padding: 0;
     border: none;
-  }
-
-  &--large {
-    max-width: 746px;
-  }
-
-  &--medium {
-    max-width: 592px;
-  }
-
-  &--small {
-    max-width: 438px;
   }
 }
 
@@ -42,7 +31,7 @@
   width: 100%;
   height: 320px;
 
-  &--extraLarge {
+  &--media {
     height: 360px;
   }
 }
@@ -64,16 +53,8 @@
   row-gap: 8px;
   margin: 12px 0 56px;
 
-  &--extraLarge {
-    margin-bottom: 2px;
-  }
-
-  &--medium {
-    margin-bottom: 24px;
-  }
-
-  &--small {
-    margin-bottom: 24px;
+  &--media {
+    margin-bottom: 28px;
   }
 }
 
@@ -82,13 +63,18 @@
 }
 
 .text {
-  display: -webkit-box;
+  display: -webkit-box; // TODO: Если последнее слово в параграфе имеет точку, то получается многоточие из 4 точек.
   height: 96px;
   @extend %text-description;
   color: $color-neutral-700;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  &--media {
+    height: 70px;
+    -webkit-line-clamp: 3;
+  }
 }
 
 .date {
