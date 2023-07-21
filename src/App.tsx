@@ -1,8 +1,5 @@
-import { Header } from 'components/header';
-
 function App() {
-  // return <p>Learn React</p>; // for tests
-  return <Header />;
+  return <p>Learn React</p>; // for tests
 }
 
 export default App;
