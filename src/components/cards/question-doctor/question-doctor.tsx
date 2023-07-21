@@ -6,18 +6,18 @@ import styles from './question-doctor.module.scss';
 interface ICardQuestionDoctorProps {
   heading: string;
   icon: ReactNode;
-  isCardAllQuestions?: boolean;
+  isCardAll?: boolean;
   extraClass?: string;
 }
 
 const CardQuestionDoctor: FC<ICardQuestionDoctorProps> = ({
   heading,
   icon,
-  isCardAllQuestions = false,
+  isCardAll = false,
   extraClass,
 }) => {
   const renderContent = () => {
-    if (isCardAllQuestions) {
+    if (isCardAll) {
       return (
         <>
           <h3 className={styles.headingAll}>{heading}</h3>
@@ -45,7 +45,7 @@ const CardQuestionDoctor: FC<ICardQuestionDoctorProps> = ({
   return (
     <article
       className={classNames(styles.article, extraClass, {
-        [styles.articleAll]: isCardAllQuestions,
+        [styles.articleAll]: isCardAll,
       })}
     >
       {renderContent()}
