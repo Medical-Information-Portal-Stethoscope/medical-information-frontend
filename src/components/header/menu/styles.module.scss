@@ -1,13 +1,14 @@
 @import '../../../assets/styles/index.scss';
 
 .menu {
-  width: 100%;
+  width: 1272px;
   box-sizing: border-box;
   color: $color-neutral-900;
 }
 
 .menu__item {
   @extend %text-size-large;
+  text-align: center;
   padding: 12px 24px;
   margin-left: 120px;
   border: none;

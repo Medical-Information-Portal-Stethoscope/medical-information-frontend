@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Search } from '.';
+import { Widget } from '.';
 
 const meta = {
-  title: 'uikit/Components/Header/Search',
-  component: Search,
+  title: 'uikit/Components/Header/Widget',
+  component: Widget,
   tags: ['autodocs'],
-} as Meta<typeof Search>;
+} as Meta<typeof Widget>;
 
 export default meta;
 
