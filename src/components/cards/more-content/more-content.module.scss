@@ -1,19 +1,12 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
-@import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
-.article,
-.info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .article {
-  row-gap: 83px;
-  max-width: 284px;
-  padding: 56px 0 26px;
+  display: grid;
+  row-gap: 149px;
+  max-width: 282px;
+  padding: 32px 12px 12px 32px;
   box-sizing: border-box;
   color: $color-neutral-0;
   background: linear-gradient(
@@ -23,17 +16,14 @@
     $color-brand-primary-600 100%
   );
   border-radius: 16px;
-}
+  cursor: pointer;
 
-.info {
-  row-gap: 28px;
+  svg {
+    justify-self: flex-end;
+  }
 }
 
 .heading {
-  @extend %heading-size-small;
-}
-
-.button {
-  padding-right: 47px;
-  padding-left: 47px;
+  width: 75.4%;
+  @extend %text-size-large-extra-semibold;
 }

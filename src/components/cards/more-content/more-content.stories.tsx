@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { Icon } from 'shared/icons';
-import CardQuestionDoctor from './question-doctor';
+import CardMoreContent from './more-content';
 
-const meta: Meta<typeof CardQuestionDoctor> = {
-  title: 'uikit/Cards/QuestionDoctor',
-  component: CardQuestionDoctor,
+const meta: Meta<typeof CardMoreContent> = {
+  title: 'uikit/Cards/MoreContent',
+  component: CardMoreContent,
   tags: ['autodocs'],
   argTypes: {
     heading: {
@@ -28,7 +28,7 @@ type TStory = StoryObj<typeof meta>;
 
 export const Default: TStory = {
   args: {
-    heading: 'Офтальмология',
-    icon: <Icon icon="OphthalmologyIcon" size="80" color="white" />,
+    heading: 'Остальные категории',
+    icon: <Icon icon="BigArrowIcon" color="white" />,
   },
 };
