@@ -7,24 +7,7 @@ const meta: Meta<typeof CardArticlePreview> = {
   tags: ['autodocs'],
   argTypes: {
     data: {
-      title: {
-        type: 'string',
-      },
-      text: {
-        type: 'string',
-      },
-      image: {
-        type: 'string',
-      },
-      created_at: {
-        type: 'string',
-      },
-      author: {
-        type: 'string',
-      },
-      views_count: {
-        type: 'number',
-      },
+      description: 'Данные для статьи',
     },
 
     type: {
