@@ -6,7 +6,7 @@ interface IFavoriteButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extraClass?: string;
   isSelected?: boolean;
   isDisabled?: boolean;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export default function FavoriteButton({
