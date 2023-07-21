@@ -7,7 +7,7 @@ export const getColor = (color: TIconColor) => {
     case 'black':
       return '#000000';
     case 'gray':
-      return '#666372';
+      return '#838090';
     case 'blue':
       return '#014CFF';
     default:
@@ -17,7 +17,7 @@ export const getColor = (color: TIconColor) => {
   }
 };
 
-export interface IIconProps<T = '24'> {
+export interface IIconProps<T = '32'> {
   color: TIconColor;
   size?: T | '16' | '24' | '32' | '80';
   className?: string;

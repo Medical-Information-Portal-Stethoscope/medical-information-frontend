@@ -1,11 +1,10 @@
-import React from 'react';
 import { getColor, IIconProps } from './utils';
 
-export const PodcastIcon = ({ color, size = '24', ...props }: IIconProps) => (
+export const PodcastIcon = ({ color, size = '80', ...props }: IIconProps) => (
   <svg
     width={size}
     height={size}
-    viewBox="0 0 24 24"
+    viewBox="0 0 80 80"
     fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
     {...props}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { getColor, IIconProps } from './utils';
 
 export const LogoutOneIcon = ({ color, size = '24', ...props }: IIconProps) => (

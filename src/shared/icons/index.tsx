@@ -8,6 +8,7 @@ import { CardiologyIcon } from './cardiology-icon';
 
 import { ChatIcon } from './chat-icon';
 import { CheckIcon } from './check-icon';
+import { ClockIcon } from './clock-icon';
 import { CloseIcon } from './close-icon';
 import { CloudDrizzelOneIcon } from './cloud-drizzel-one-icon';
 import { CloudDrizzelIcon } from './cloud-drizzel-icon';
@@ -102,6 +103,7 @@ const icons = {
   CardiologyIcon,
   ChatIcon,
   CheckIcon,
+  ClockIcon,
   CloseIcon,
   CloudDrizzelOneIcon,
   CloudDrizzelIcon,

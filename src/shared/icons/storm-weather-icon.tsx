@@ -1,15 +1,14 @@
-import React from 'react';
 import { getColor, IIconProps } from './utils';
 
 export const StormWeatherIcon = ({
   color,
-  size = '24',
+  size = '32',
   ...props
 }: IIconProps) => (
   <svg
     width={size}
     height={size}
-    viewBox="0 0 24 24"
+    viewBox="0 0 32 32"
     fill={getColor(color)}
     xmlns="http://www.w3.org/2000/svg"
     {...props}

@@ -1,4 +1,3 @@
-import React from 'react';
 import { getColor, IIconProps } from './utils';
 
 export const DotIcon = ({ color, size = '24', ...props }: IIconProps) => (
