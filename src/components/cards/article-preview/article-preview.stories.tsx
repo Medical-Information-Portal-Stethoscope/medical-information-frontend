@@ -18,11 +18,6 @@ const meta: Meta<typeof CardArticlePreview> = {
         type: 'radio',
       },
     },
-
-    extraClass: {
-      description: 'Дополнительный класс (для отступа после аннотации)',
-      type: 'string',
-    },
   },
 };
 
@@ -42,7 +37,6 @@ export const Media: TStory = {
     },
 
     type: 'media',
-    extraClass: '',
   },
 };
 
@@ -59,6 +53,5 @@ export const Default: TStory = {
     },
 
     type: 'default',
-    extraClass: '',
   },
 };

@@ -20,13 +20,11 @@ interface ICardArticlePreviewProps {
     views_count: number;
   };
   type: 'media' | 'default';
-  extraClass?: string; // for cards' margin-bottom description property (sizes medium and small)
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   data: { title, text, image, created_at, author, views_count },
   type,
-  extraClass,
 }) => {
   const date = renderFormatDateArticle(created_at);
   const readingTime = findReadingTimeArticle(text);
@@ -55,23 +53,24 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
           <div
             className={classNames(
               styles.description,
-              styles[`description--${type}`],
-              extraClass
+              styles[`description--${type}`]
             )}
           >
-            <h3 className={styles.heading}>{title}</h3>
-            <p className={classNames(styles.text, styles[`text--${type}`])}>
-              {text}
-            </p>
+            <div className={styles.title}>
+              <h3 className={styles.heading}>{title}</h3>
+              <p className={classNames(styles.text, styles[`text--${type}`])}>
+                {text}
+              </p>
+            </div>
+            <ul className={styles.info}>
+              <li className={styles.infoItem}>{author}</li>
+              <li className={styles.infoItem}>{readingTime}</li>
+              <li className={`${styles.infoItem} ${styles.views}`}>
+                <IconViews />
+                <span>{views_count}</span>
+              </li>
+            </ul>
           </div>
-          <ul className={styles.info}>
-            <li className={styles.infoItem}>{author}</li>
-            <li className={styles.infoItem}>{readingTime}</li>
-            <li className={`${styles.infoItem} ${styles.views}`}>
-              <IconViews />
-              <span>{views_count}</span>
-            </li>
-          </ul>
         </div>
       </div>
     </article>
