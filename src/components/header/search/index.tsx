@@ -1,14 +1,20 @@
-import { FC } from 'react';
-import styles from './styles.module.scss';
+import React, { FC, useState } from 'react';
 import { SearchIcon } from '../icons/Search';
 
+import styles from './styles.module.scss';
+
 export const Search: FC = () => {
-  function handleChange() {
-    return null;
+  const [value, setValue] = useState<string>('');
+
+  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
+    setValue(event.target.value);
   }
 
-  function handleSearch() {
-    return null;
+  function handleSearch(
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ): string {
+    event.preventDefault();
+    return value;
   }
 
   return (
@@ -20,13 +26,13 @@ export const Search: FC = () => {
         name="searchinput"
         placeholder="Поиск"
         required
-        // value=""
-        // onChange={handleChange}
+        value={value}
+        onChange={handleChange}
       />
 
       <button
         className={styles.search__submit}
-        type="submit"
+        type="button"
         name="search-info"
         onClick={handleSearch}
       >

@@ -1,16 +1,18 @@
-// header navigation settings
-
-import { NavLink } from './types/navigation';
+import { NavLinkType } from '../types/navigation';
 
 const routeSettings = {
   news: { route: '/news', name: 'Новости' },
   articles: { route: '/articles', name: 'Статьи' },
   podcasts: { route: '/podcasts', name: 'Подкасты' },
   drugs: { route: '/grugs', name: 'Лекарства и БАД' },
-  doctorQuestion: { route: '/doctorQuestion', name: 'Вопрос врачу' },
+  doctorQuestion: { route: '/doctor', name: 'Вопрос врачу' },
+  profile: { route: '/profile', name: '' },
+  home: { route: '/', name: '' },
 };
 
-export const headerNavLinks: NavLink[] = [
+Object.freeze(routeSettings);
+
+export const headerNavLinks: NavLinkType[] = [
   {
     title: routeSettings.news.name,
     to: routeSettings.news.route,
@@ -33,6 +35,12 @@ export const headerNavLinks: NavLink[] = [
   },
 ];
 
-const headerNavLinksPositionDesc = {};
+export const profileNavLink = {
+  title: routeSettings.profile.name,
+  to: routeSettings.profile.route,
+};
 
-const headerNavLinksPositionMob = {};
+export const homeNavLink = {
+  title: routeSettings.home.name,
+  to: routeSettings.home.route,
+};

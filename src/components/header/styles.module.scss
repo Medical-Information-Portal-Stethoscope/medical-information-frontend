@@ -2,17 +2,36 @@
 
 .header {
   display: flex;
+  max-width: 1920px;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 24px 48px 80px;
+  box-sizing: border-box;
+}
+
+.header__top {
+  display: flex;
   flex-direction: row;
+  padding-bottom: 24px;
+  margin-bottom: 16px;
   gap: 118px;
   justify-content: space-between;
-  align-items: end;
-  margin: 24px 48px 24px;
+  align-items: flex-end;
+}
+
+.header__bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 24px 0;
+  gap: 90px;
 }
 
 .header__search {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: flex-end;
+  align-items: center;
   gap: 40px;
   width: 100%;
 }

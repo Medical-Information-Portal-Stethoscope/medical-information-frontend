@@ -1,4 +1,4 @@
-export type NavLink = {
+export type NavLinkType = {
   title: string;
   to: string;
 };

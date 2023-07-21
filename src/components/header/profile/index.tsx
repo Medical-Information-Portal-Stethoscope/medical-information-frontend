@@ -1,17 +1,14 @@
 import { FC } from 'react';
-import styles from './styles.module.scss';
+import { Link } from 'react-router-dom';
 import { ProfileIcon } from '../icons/Profile';
+import { profileNavLink } from '../utils/routes';
 
-export const Profile: FC = () => {
-  const a = 1;
-  return (
-    <button
-      className={styles.profile}
-      type="button"
-      name="profile"
-      //   onClick={handleSearch}
-    >
+import styles from './styles.module.scss';
+
+export const Profile: FC = () => (
+  <Link to={profileNavLink.to}>
+    <div className={styles.profile}>
       <ProfileIcon />
-    </button>
-  );
-};
+    </div>
+  </Link>
+);

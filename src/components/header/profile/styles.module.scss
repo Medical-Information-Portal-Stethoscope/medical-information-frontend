@@ -2,14 +2,13 @@
 
 .profile {
   width: 24px;
-  transition: all 0.5 ease-out;
-}
-
-svg {
+  border: none;
+  background: none;
   fill: $color-brand-primary-900;
-}
+  transition: all 0.5 ease-out;
 
-.svg:hover {
-  fill: $color-brand-primary-700;
-  cursor: pointer;
+  &:hover {
+    fill: $color-brand-primary-700;
+    cursor: pointer;
+  }
 }
