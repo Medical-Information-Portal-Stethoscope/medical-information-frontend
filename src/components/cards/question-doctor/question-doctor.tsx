@@ -7,12 +7,14 @@ interface ICardQuestionDoctorProps {
   heading: string;
   icon: ReactNode;
   extraClass?: string;
+  onClick?: () => void;
 }
 
 const CardQuestionDoctor: FC<ICardQuestionDoctorProps> = ({
   heading,
   icon,
   extraClass,
+  onClick,
 }) => (
   <article className={classNames(styles.article, extraClass)}>
     <div className={styles.info}>
@@ -24,6 +26,7 @@ const CardQuestionDoctor: FC<ICardQuestionDoctorProps> = ({
       label="Задать вопрос"
       model="secondary"
       size="small"
+      onClick={onClick}
     />
   </article>
 );
