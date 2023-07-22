@@ -28,6 +28,13 @@
   letter-spacing: $font-letter-spacing-main;
 }
 
+%text-size-large-extra-semibold {
+  font-size: $font-size-text-large-extra-semibold;
+  font-weight: 600;
+  line-height: $font-line-height-text-large-extra-semibold;
+  letter-spacing: $font-letter-spacing-main;
+}
+
 %text-size-large {
   font-size: $font-size-text-large;
   line-height: $font-line-height-text-large;
