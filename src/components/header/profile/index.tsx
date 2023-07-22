@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 export const Profile: FC = () => (
   <Link to={profileNavLink.to}>
     <div className={styles.profile}>
-      <UserIcon color="blue" size="32" />
+      <UserIcon color="blue" size="24" />
     </div>
   </Link>
 );

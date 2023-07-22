@@ -46,7 +46,7 @@
     padding: 0;
     fill: $color-brand-primary-900;
 
-    &:hover {
+    &:hover svg {
       fill: $color-brand-primary-700;
       cursor: pointer;
     }

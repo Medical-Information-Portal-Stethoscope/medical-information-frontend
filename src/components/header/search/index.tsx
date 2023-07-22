@@ -1,5 +1,4 @@
 import React, { FC, useState } from 'react';
-// import { SearchIcon } from '../icons/Search';
 import { SearchIcon } from 'shared/icons/search-icon';
 
 import styles from './styles.module.scss';
