@@ -1,9 +1,11 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/no-array-index-key */
 import { FC, ReactNode, useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import styles from './styles.module.scss';
 
-import { headerNavLinks } from '../utils/routes';
+import { headerNavLinks } from 'utils/data/header/links';
+
+import styles from './styles.module.scss';
 
 export const Menu: FC = () => {
   const { pathname } = useLocation();
@@ -19,14 +21,15 @@ export const Menu: FC = () => {
         {headerNavLinks.map(
           (navItem, idx): ReactNode => (
             <li key={idx}>
-              <NavLink to={navItem.to}>
-                <div
-                  className={`${styles.menu__item} ${
-                    link === navItem.to ? styles.menu__item_active : null
-                  }`}
-                >
-                  {navItem.title}
-                </div>
+              <NavLink
+                to={navItem.to}
+                className={({ isActive, isPending }) =>
+                  isActive
+                    ? `${styles.menu__item} ${styles.menu__item_active}`
+                    : styles.menu__item
+                }
+              >
+                {navItem.title}
               </NavLink>
             </li>
           )
