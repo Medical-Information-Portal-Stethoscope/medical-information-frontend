@@ -1,0 +1,128 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.article {
+  max-width: 746px;
+  padding: 24px;
+  box-sizing: border-box;
+  border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
+  border-radius: 16px;
+  cursor: pointer;
+
+  &:hover > .wrapper > .content > .description > .title > .heading {
+    color: $color-brand-secondary-900;
+  }
+
+  &--media {
+    max-width: 900px;
+    padding: 0;
+    border: none;
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}
+
+.wrapper,
+.description {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrapper {
+  row-gap: 10px;
+}
+
+.imageWrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+
+  &--media {
+    height: 360px;
+  }
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.description {
+  justify-content: space-between;
+  min-height: 208px;
+  margin-top: 12px;
+
+  &--media {
+    min-height: 154px;
+    margin-bottom: 28px;
+  }
+}
+
+.heading {
+  @extend %heading-size-small;
+}
+
+.text {
+  display: -webkit-box; // TODO: Если последнее слово в параграфе имеет точку, то получается многоточие из 4 точек.
+  height: 96px;
+  margin-top: 8px;
+  @extend %text-description;
+  color: $color-neutral-700;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  &--media {
+    height: 70px;
+    -webkit-line-clamp: 3;
+  }
+}
+
+.date {
+  @extend %text-size-small;
+  color: $color-neutral-500;
+}
+
+.info,
+.infoItem,
+.views {
+  display: flex;
+  align-items: center;
+}
+
+.info {
+  column-gap: 32px;
+  @extend %text-size-small-light;
+  color: $color-neutral-700;
+}
+
+.infoItem:not(:first-child) {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: $color-neutral-700;
+  }
+}
+
+.views {
+  column-gap: 10px;
+}

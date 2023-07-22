@@ -1,0 +1,53 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/animations.scss';
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+
+  background-color: rgba(222, 222, 222, 0.5);
+  border-radius: 50%;
+
+  transition: $transition-button;
+
+  * {
+    transition: $transition-button;
+  }
+
+  &:hover:enabled {
+    background-color: rgba(0, 75, 255, 0.1);
+    backdrop-filter: blur(5px);
+
+    svg path ~ path {
+      fill: $color-brand-primary-900;
+    }
+  }
+
+  &:active:enabled {
+    background-color: transparent;
+
+    svg * {
+      fill: $color-brand-primary-900;
+    }
+  }
+
+  &:disabled {
+    background-color: transparent;
+    cursor: default;
+
+    svg path {
+      fill: $color-neutral-400;
+    }
+  }
+}
+
+.button--isSelected {
+  background-color: transparent;
+
+  svg * {
+    fill: $color-brand-primary-900;
+  }
+}

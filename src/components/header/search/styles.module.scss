@@ -1,0 +1,54 @@
+@import '../../../assets/styles/index.scss';
+
+.search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 504px;
+  min-width: 504px;
+  height: 48px;
+  padding: 12px;
+  border: 1px solid $color-neutral-400;
+  border-radius: 70px;
+  box-sizing: border-box;
+  transition: all 0.5 ease-out;
+
+  &_active {
+    width: 100%;
+    border: 1px solid $color-brand-primary-900;
+    cursor: pointer;
+  }
+
+  &:hover {
+    width: 100%;
+    border: 1px solid $color-brand-primary-900;
+    cursor: pointer;
+  }
+
+  &__input {
+    @extend %text-size-medium;
+    width: 100%;
+    align-self: flex-end;
+    padding: 0;
+    border: none;
+    outline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__submit {
+    border: none;
+    background: none;
+    padding: 0;
+    fill: $color-brand-primary-900;
+
+    &:hover svg {
+      fill: $color-brand-primary-700;
+      cursor: pointer;
+    }
+  }
+}
