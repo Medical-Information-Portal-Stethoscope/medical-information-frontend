@@ -18,6 +18,11 @@ const meta: Meta<typeof CardArticlePreview> = {
         type: 'radio',
       },
     },
+
+    extraClass: {
+      description: 'Дополнительные стили',
+      type: 'string',
+    },
   },
 };
 
@@ -37,6 +42,7 @@ export const Media: TStory = {
     },
 
     type: 'media',
+    extraClass: '',
   },
 };
 
@@ -53,5 +59,6 @@ export const Default: TStory = {
     },
 
     type: 'default',
+    extraClass: '',
   },
 };

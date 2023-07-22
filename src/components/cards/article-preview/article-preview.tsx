@@ -20,11 +20,13 @@ interface ICardArticlePreviewProps {
     views_count: number;
   };
   type: 'media' | 'default';
+  extraClass?: string;
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   data: { title, text, image, created_at, author, views_count },
   type,
+  extraClass,
 }) => {
   const date = renderFormatDateArticle(created_at);
   const readingTime = findReadingTimeArticle(text);
@@ -34,7 +36,13 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   }; // TODO: onClick. Here or upper scope?
 
   return (
-    <article className={classNames(styles.article, styles[`article--${type}`])}>
+    <article
+      className={classNames(
+        styles.article,
+        styles[`article--${type}`],
+        extraClass
+      )}
+    >
       <div className={styles.wrapper}>
         <div
           className={classNames(

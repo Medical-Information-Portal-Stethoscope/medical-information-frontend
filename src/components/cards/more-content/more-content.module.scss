@@ -4,7 +4,6 @@
 
 .article {
   display: grid;
-  row-gap: 149px;
   max-width: 282px;
   padding: 32px 12px 12px 32px;
   box-sizing: border-box;
@@ -20,10 +19,11 @@
 
   svg {
     justify-self: flex-end;
+    align-self: flex-end;
   }
 }
 
 .heading {
-  width: 75.4%;
+  width: 78%;
   @extend %text-size-large-extra-semibold;
 }
