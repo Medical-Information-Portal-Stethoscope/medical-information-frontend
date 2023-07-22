@@ -3,8 +3,8 @@ export const getDatetimeData = (): string[] => {
   const currentMonth = new Date().getMonth() + 1;
   const currentDay = new Date().getDate();
 
-  const date = `${currentDay < 9 ? `0${currentDay}` : currentDay}.${
-    currentMonth < 9 ? `0${currentMonth}` : currentMonth
+  const date = `${currentDay <= 9 ? `0${currentDay}` : currentDay}.${
+    currentMonth <= 9 ? `0${currentMonth}` : currentMonth
   }.${currentYear}`;
 
   const time = new Date().toLocaleTimeString([], {
