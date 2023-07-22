@@ -1,11 +1,11 @@
 import React from 'react';
 
-type TIconColor = 'black' | 'gray' | 'blue' | 'white';
+type TIconColor = 'white' | 'black' | 'gray' | 'blue';
 
 export const getColor = (color: TIconColor) => {
   switch (color) {
     case 'white':
-      return '#fff';
+      return '#ffffff';
     case 'black':
       return '#000000';
     case 'gray':
