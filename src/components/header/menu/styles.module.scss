@@ -19,8 +19,6 @@
   &:hover {
     color: $color-brand-primary-900;
     cursor: pointer;
-    padding: 12px 24px 4px 24px;
-    border-bottom: 8px solid $color-brand-primary-900;
   }
 
   &:first-child {
@@ -30,8 +28,8 @@
 
 .menu__item_active {
   color: $color-brand-primary-1000;
-  padding: 12px 24px 4px 24px;
-  border-bottom: 8px solid $color-brand-primary-900;
+  padding: 12px 24px 11px 24px;
+  border-bottom: 1px solid $color-brand-primary-900;
 }
 
 .menu__list {

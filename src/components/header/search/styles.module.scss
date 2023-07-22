@@ -13,36 +13,42 @@
   box-sizing: border-box;
   transition: all 0.5 ease-out;
 
+  &_active {
+    width: 100%;
+    border: 1px solid $color-brand-primary-900;
+    cursor: pointer;
+  }
+
   &:hover {
     width: 100%;
     border: 1px solid $color-brand-primary-900;
     cursor: pointer;
   }
-}
 
-.search__input {
-  @extend %text-size-medium;
-  width: 100%;
-  align-self: flex-end;
-  padding: 0;
-  border: none;
-  outline: 0;
-  overflow: hidden;
-  white-space: nowrap;
+  &__input {
+    @extend %text-size-medium;
+    width: 100%;
+    align-self: flex-end;
+    padding: 0;
+    border: none;
+    outline: 0;
+    overflow: hidden;
+    white-space: nowrap;
 
-  &:hover {
-    cursor: pointer;
+    &:hover {
+      cursor: pointer;
+    }
   }
-}
 
-.search__submit {
-  border: none;
-  background: none;
-  padding: 0;
-  fill: $color-brand-primary-900;
+  &__submit {
+    border: none;
+    background: none;
+    padding: 0;
+    fill: $color-brand-primary-900;
 
-  &:hover {
-    fill: $color-brand-primary-700;
-    cursor: pointer;
+    &:hover {
+      fill: $color-brand-primary-700;
+      cursor: pointer;
+    }
   }
 }

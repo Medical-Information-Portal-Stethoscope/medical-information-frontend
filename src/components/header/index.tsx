@@ -16,7 +16,7 @@ export const Header: FC = () => (
   <header className={styles.header}>
     <div className={styles.header__top}>
       <Link to={homeNavLink.to}>
-        <Logo />
+        <Logo isHeading />
       </Link>
       <div className={styles.header__search}>
         <Search />

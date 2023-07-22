@@ -1,10 +1,9 @@
-import styles from './styles.module.scss';
-import { Weather } from '../icons/Weather';
-import { Location } from '../icons/Location';
-
+import { CloudDrizzelIcon } from 'shared/icons/cloud-drizzel-icon';
+import { LocationPinIcon } from 'shared/icons/location-pin-icon';
 import { WidgetType } from '../types/widget';
-
 import { getDatetimeData } from '../utils/getDatetimeData';
+
+import styles from './styles.module.scss';
 
 export const Widget = ({ city, deg }: WidgetType) => {
   const [date, time] = getDatetimeData();
@@ -16,11 +15,13 @@ export const Widget = ({ city, deg }: WidgetType) => {
       </div>
       <div className={styles.widget__info}>
         <p className={styles.widget__temperature}>
-          <Weather /> {deg}&deg;
+          <CloudDrizzelIcon color="blue" size="32" />
+          {deg}&deg;
         </p>
         <p className={styles.widget__city}>
           {' '}
-          <Location /> {city}
+          <LocationPinIcon color="blue" size="16" />
+          {city}
         </p>
       </div>
     </div>

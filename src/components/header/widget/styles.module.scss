@@ -9,48 +9,48 @@
   max-width: 437px;
   padding: 0;
   gap: 20px;
-}
 
-.widget__date {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-}
+  &__date {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+  }
 
-.widget__currentday {
-  @extend %text-size-small;
-  margin-bottom: 4px;
-  padding: 0;
-}
+  &__currentday {
+    @extend %text-size-small;
+    margin-bottom: 4px;
+    padding: 0;
+  }
 
-.widget__currenttime {
-  @extend %text-size-small-extra;
-  padding: 0;
-}
+  &__currenttime {
+    @extend %text-size-small-extra;
+    padding: 0;
+  }
 
-.widget__info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
+  &__info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 
-.widget__temperature {
-  @extend %text-size-small-extra;
-  padding-left: 2px;
-}
+  &__temperature {
+    @extend %text-size-small-extra;
+    padding-left: 2px;
+  }
 
-.widget__temperature svg {
-  fill: $color-neutral-900;
-}
+  &__temperature svg {
+    fill: $color-neutral-900;
+  }
 
-.widget__city {
-  @extend %text-size-small-extra;
-  padding: 0;
-  height: 16px;
-  margin-left: 8px;
-}
+  &__city {
+    @extend %text-size-small-extra;
+    padding: 0;
+    height: 16px;
+    margin-left: 8px;
+  }
 
-.widget__city svg {
-  fill: $color-brand-primary-900;
+  &__city svg {
+    fill: $color-brand-primary-900;
+  }
 }

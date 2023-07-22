@@ -1,10 +1,12 @@
 import React, { FC, useState } from 'react';
-import { SearchIcon } from '../icons/Search';
+// import { SearchIcon } from '../icons/Search';
+import { SearchIcon } from 'shared/icons/search-icon';
 
 import styles from './styles.module.scss';
 
 export const Search: FC = () => {
   const [value, setValue] = useState<string>('');
+  const [isActive, setIsActive] = useState<boolean>(false);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setValue(event.target.value);
@@ -17,8 +19,18 @@ export const Search: FC = () => {
     return value;
   }
 
+  function handleSetActive() {
+    setIsActive(true);
+  }
+  function handleSetInactive() {
+    setIsActive(false);
+  }
+
   return (
-    <form className={styles.search} noValidate>
+    <form
+      className={`${styles.search}  ${isActive ? styles.search_active : null}`}
+      noValidate
+    >
       <input
         className={styles.search__input}
         type="search"
@@ -28,6 +40,8 @@ export const Search: FC = () => {
         required
         value={value}
         onChange={handleChange}
+        onFocus={handleSetActive}
+        onBlur={handleSetInactive}
       />
 
       <button
@@ -36,7 +50,7 @@ export const Search: FC = () => {
         name="search-info"
         onClick={handleSearch}
       >
-        <SearchIcon />
+        <SearchIcon color="blue" size="24" />
       </button>
     </form>
   );
