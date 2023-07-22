@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Icon } from 'shared/icons';
 import styles from './CardPodcast.module.scss';
 
