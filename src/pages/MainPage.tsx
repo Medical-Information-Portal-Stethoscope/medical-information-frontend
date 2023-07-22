@@ -1,30 +1,16 @@
+import News from 'components/news/news';
+import Articles from 'components/articles/articles';
+
 export default function MainPage() {
-  return null;
-  //
-  // Самое популярное и новости
-  //
-
-  //
-  // Карусель
-  //
-
-  //
-  // Статьи
-  //
-
-  //
-  // Подкасты
-  //
-
-  //
-  // Подписка
-  //
-
-  //
-  // Лекарства и БАД
-  //
-
-  //
-  // Задать вопрос врачу
-  //
+  return (
+    <>
+      <News />
+      {/* Карусель */}
+      <Articles />
+      {/* Подкасты */}
+      {/* Подписка */}
+      {/* Лекарства и БАД */}
+      {/* Спроси врача */}
+    </>
+  );
 }
