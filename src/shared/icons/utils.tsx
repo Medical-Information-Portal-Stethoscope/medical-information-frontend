@@ -1,6 +1,6 @@
 import React from 'react';
 
-type TIconColor = 'black' | 'gray' | 'blue';
+type TIconColor = 'black' | 'gray' | 'blue' | 'white';
 
 export const getColor = (color: TIconColor) => {
   switch (color) {
@@ -10,6 +10,8 @@ export const getColor = (color: TIconColor) => {
       return '#838090';
     case 'blue':
       return '#014CFF';
+    case 'white':
+      return '#fff';
     default:
       // eslint-disable-next-line no-case-declarations, @typescript-eslint/no-unused-vars
       const exhaustiveCheck: never = color;
