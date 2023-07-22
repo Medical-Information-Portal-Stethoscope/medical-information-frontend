@@ -1,0 +1,19 @@
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders.scss';
+
+.wrapper {
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+.heading {
+  margin-bottom: 48px;
+  @extend %heading-size-medium;
+}
+
+.questions {
+  display: flex;
+  justify-content: space-between;
+}
