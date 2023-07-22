@@ -1,0 +1,50 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/placeholders.scss';
+@import 'assets/styles/abstracts/variables/animations.scss';
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  background-color: transparent;
+
+  svg {
+    fill: transparent;
+  }
+
+  &:hover {
+    svg {
+      stroke: $color-brand-primary-700;
+    }
+  }
+
+  &:active {
+    svg {
+      stroke: $color-brand-primary-1000;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+
+    svg {
+      stroke: $color-neutral-400;
+    }
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}
+
+.background {
+  background-color: $color-brand-primary-100;
+  border-radius: 50%;
+
+  &:disabled {
+    background-color: $color-neutral-100;
+  }
+}
