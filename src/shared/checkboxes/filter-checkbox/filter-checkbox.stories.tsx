@@ -22,6 +22,16 @@ const meta: Meta<typeof FilterCheckbox> = {
       type: 'string',
     },
 
+    isChecked: {
+      description: 'Автоматический выбор',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: {
+        type: 'radio',
+      },
+    },
+
     isDisabled: {
       description: 'Взаимодействие с кнопкой',
       type: 'boolean',
@@ -46,6 +56,7 @@ export const Default: TStory = {
   args: {
     id: 'template',
     label: 'Фильтр',
+    isChecked: false,
     isDisabled: false,
   },
 };

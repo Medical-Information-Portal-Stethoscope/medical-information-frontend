@@ -7,6 +7,7 @@ interface IFilterTabProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   label: string;
   icon: ReactNode; // icon should be a svg
+  isChecked?: boolean;
   onChange?: () => void;
 }
 
@@ -15,6 +16,7 @@ export default function FilterTab({
   id,
   label,
   icon,
+  isChecked = false,
   onChange,
 }: IFilterTabProps) {
   return (
@@ -25,6 +27,8 @@ export default function FilterTab({
         type="checkbox"
         name={label}
         value={label}
+        defaultChecked={isChecked}
+        aria-label={isChecked ? 'Убрать фильтр' : 'Добавить фильтр'}
         onChange={onChange}
       />
       <label className={styles.label} htmlFor={id}>
