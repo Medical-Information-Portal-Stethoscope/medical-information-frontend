@@ -32,7 +32,7 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   const readingTime = findReadingTimeArticle(text);
 
   const handleLike = () => {
-    console.log('test');
+    // console.log('test');
   }; // TODO: onClick. Here or upper scope?
 
   return (
