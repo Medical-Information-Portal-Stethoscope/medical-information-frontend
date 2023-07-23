@@ -1,0 +1,42 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 49.34% 40.9%;
+  justify-content: space-between;
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.heading {
+  max-width: 80%;
+  margin-bottom: 48px;
+  @extend %heading-size-medium;
+}
+
+.news {
+  margin-bottom: 34px;
+}
+
+.newsItem:not(:first-child) {
+  margin-top: 24px;
+}
+
+.newsLink {
+  display: -webkit-box; // TODO: Если последнее слово в заголовке имеет точку, то получается многоточие из 4 точек.
+  @extend %text-size-large;
+  color: inherit;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  transition: $transition-button;
+
+  &:hover {
+    color: $color-brand-secondary-900;
+  }
+}
