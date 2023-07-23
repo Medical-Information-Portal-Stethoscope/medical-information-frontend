@@ -50,11 +50,9 @@
 
     &_active {
       border: 1px solid $color-brand-primary-900;
-      cursor: pointer;
     }
 
     &:hover {
-      cursor: pointer;
       border: 1px solid $color-brand-primary-900;
     }
   }

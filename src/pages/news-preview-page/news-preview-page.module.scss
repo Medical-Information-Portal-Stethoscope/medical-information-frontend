@@ -1,0 +1,26 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders';
+
+.wrapper {
+  max-width: $wrapper-news-preview-desktop;
+  margin: 0 auto;
+  padding: 40px 0 76px;
+}
+
+.heading {
+  @extend %heading-size-large;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.news {
+  display: grid;
+  row-gap: 22px;
+  padding: 48px 0;
+}
