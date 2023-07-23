@@ -1,0 +1,43 @@
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders';
+
+.section {
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+  padding: 40px 0 32px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section > div > div {
+  overflow: visible !important;
+}
+
+.carousel {
+  padding-left: 64px;
+}
+
+.prev_button {
+  position: absolute;
+  right: -64px;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 1;
+
+  svg {
+    fill: #014cff;
+  }
+}
+
+.next_button {
+  position: absolute;
+  left: -64px;
+  top: 50%;
+  transform: translate(0, -50%);
+  z-index: 10;
+
+  svg {
+    fill: #014cff;
+  }
+}

@@ -1,11 +1,11 @@
-@import '../../assets/styles/index.scss';
+@import 'assets/styles/index.scss';
 
 .header {
   display: flex;
   max-width: $wrapper-main-content-desktop;
   flex-direction: column;
   margin: 0 auto;
-  padding: 24px 0 80px;
+  padding: 24px 0 40px;
   box-sizing: border-box;
 
   &__top {
@@ -24,6 +24,7 @@
     justify-content: space-between;
     padding: 24px 0;
     gap: 90px;
+    align-items: center;
   }
 
   &__search {
@@ -42,7 +43,7 @@
     border: none;
     background: none;
     fill: $color-brand-primary-900;
-    transition: all 0.5 ease-out;
+    transition: $transition-button;
 
     &:hover svg {
       fill: $color-brand-primary-700;
