@@ -16,13 +16,12 @@
   &_active {
     width: 100%;
     border: 1px solid $color-brand-primary-900;
-    cursor: pointer;
   }
 
   &:hover {
     width: 100%;
     border: 1px solid $color-brand-primary-900;
-    cursor: pointer;
+    cursor: text;
   }
 
   &__input {
@@ -34,10 +33,6 @@
     outline: 0;
     overflow: hidden;
     white-space: nowrap;
-
-    &:hover {
-      cursor: pointer;
-    }
   }
 
   &__submit {
