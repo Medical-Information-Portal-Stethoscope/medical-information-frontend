@@ -1,20 +1,25 @@
+@import 'assets/styles/index.scss';
+
 .podcasts {
-  display: flex;
-  flex-direction: column;
   max-width: $wrapper-main-content-desktop;
+  margin: 40px auto;
+  padding: 0;
 
   &__header {
     @extend %heading-size-large;
     padding: 0;
-    margin-bottom: 24px;
+    margin-bottom: 48px;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin: 0 auto;
   }
 
   &__links {
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin: 24px auto 40px;
+    gap: 24px;
   }
 }
