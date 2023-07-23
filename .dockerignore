@@ -1,3 +1,6 @@
+# Git files
+.git/
+
 # Deps
 node_modules/
 
