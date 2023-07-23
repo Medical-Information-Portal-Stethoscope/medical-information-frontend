@@ -1,0 +1,31 @@
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.card {
+  background: linear-gradient(135deg, #2162fd 0%, #457cff 100%);
+  width: 284px;
+  height: 240px;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.title {
+  font-size: 33px;
+  line-height: 40px;
+  letter-spacing: 0.4px;
+  padding: 43px 29px 0;
+}
+
+.icon {
+  position: absolute;
+  right: -132px;
+  bottom: -154px;
+  width: 290px;
+  height: 290px;
+}
