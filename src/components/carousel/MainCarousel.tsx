@@ -1,73 +1,54 @@
-// import { Carousel } from 'react-responsive-carousel';
-// import 'react-responsive-carousel/lib/styles/carousel.min.css';
-// import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
-// import { Icon } from 'shared/icons';
+import { Carousel } from 'react-responsive-carousel';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
+import Button from 'shared/buttons/button/button';
+import { Icon } from 'shared/icons';
+import data from './test-data/test-data';
+import styles from './styles.module.scss';
 
-// function MainCarousel() {
-//   return (
-//     <Carousel
-//       infiniteLoop
-//       showThumbs={false}
-//       showIndicators={false}
-//       showStatus={false}
-//       renderArrowPrev={(onClickHandler) => (
-//         <ButtonWithIcon
-//           ariaLabel="Отправить письмо"
-//           extraClass=""
-//           hasBackground
-//           icon={<Icon color="blue" icon="MailIcon" />}
-//           onClick={onClickHandler}
-//         />
-//       )}
-//       renderArrowNext={(onClickHandler) => (
-//         <ButtonWithIcon
-//           ariaLabel="Отправить письмо"
-//           extraClass=""
-//           hasBackground
-//           icon={<Icon color="blue" icon="MailIcon" />}
-//           onClick={onClickHandler}
-//         />
-//       )}
-//     >
-//       {Object.values(heroTextureImports).map((texture, index) => (
-//         <Box key={`carousel-image-${index}`}>
-//           <img
-//             src={texture}
-//             alt={`carousel-${index}`}
-//             style={{
-//               width: '100%',
-//               height: '700px',
-//               objectFit: 'cover',
-//               backgroundAttachment: 'fixed',
-//             }}
-//           />
-//           <Box
-//             color="white"
-//             padding="20px"
-//             borderRadius="1px"
-//             textAlign="left"
-//             backgroundColor="rgba(0, 0, 0, 0.4)"
-//             position="absolute"
-//             top="46%"
-//             left={isNonMobile ? '10%' : '0'}
-//             right={isNonMobile ? undefined : '0'}
-//             margin={isNonMobile ? undefined : '0 auto'}
-//             maxWidth={isNonMobile ? undefined : '240px'}
-//           >
-//             <Typography color={shades.secondary[200]}>-- NEW ITEMS</Typography>
-//             <Typography variant="h1">Summer Sale</Typography>
-//             <Typography
-//               fontWeight="bold"
-//               color={shades.secondary[300]}
-//               sx={{ textDecoration: 'underline' }}
-//             >
-//               Discover more
-//             </Typography>
-//           </Box>
-//         </Box>
-//       ))}
-//     </Carousel>
-//   );
-// }
+function MainCarousel() {
+  return (
+    <section className={styles.section}>
+      <Carousel
+        swipeScrollTolerance={1}
+        showThumbs={false}
+        showIndicators={false}
+        showStatus={false}
+        centerMode
+        centerSlidePercentage={9.3}
+        width={1542}
+        className={styles.carousel}
+        renderArrowPrev={(onClickHandler) => (
+          <ButtonWithIcon
+            ariaLabel="Отправить письмо"
+            extraClass={styles.prev_button}
+            hasBackground
+            icon={<Icon color="blue" icon="RightArrowIcon" />}
+            onClick={onClickHandler}
+          />
+        )}
+        renderArrowNext={(onClickHandler) => (
+          <ButtonWithIcon
+            ariaLabel="Отправить письмо"
+            extraClass={styles.next_button}
+            hasBackground
+            icon={<Icon color="blue" icon="LeftArrowIcon" />}
+            onClick={onClickHandler}
+          />
+        )}
+      >
+        {data.map((item) => item.icon)}
+      </Carousel>
+      <Button
+        label="Фильтры"
+        model="tertiary"
+        // onClick={function noRefCheck() {}}
+        size="small"
+        type="button"
+        customIcon={<Icon color="blue" icon="FiltersIcon" />}
+      />
+    </section>
+  );
+}
 
-// export default MainCarousel;
+export default MainCarousel;
