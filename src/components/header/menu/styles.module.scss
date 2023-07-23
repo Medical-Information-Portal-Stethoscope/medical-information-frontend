@@ -1,7 +1,7 @@
-@import '../../../assets/styles/index.scss';
+@import 'assets/styles/index.scss';
 
 .menu {
-  width: 1272px;
+  width: 1296px;
   box-sizing: border-box;
   color: $color-neutral-900;
 
@@ -19,8 +19,8 @@
     margin-left: 120px;
     border: none;
     box-sizing: border-box;
-    transition: all 0.5 ease-out;
     color: $color-neutral-900;
+    transition: $transition-button;
 
     &_active {
       color: $color-brand-primary-1000;
