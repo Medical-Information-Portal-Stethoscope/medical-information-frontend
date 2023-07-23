@@ -1,30 +1,16 @@
+import Articles from 'components/articles/articles';
+import AskDoctor from 'components/ask-doctor/ask-doctor';
+
 export default function MainPage() {
-  return null;
-  //
-  // Самое популярное и новости
-  //
-
-  //
-  // Карусель
-  //
-
-  //
-  // Статьи
-  //
-
-  //
-  // Подкасты
-  //
-
-  //
-  // Подписка
-  //
-
-  //
-  // Лекарства и БАД
-  //
-
-  //
-  // Задать вопрос врачу
-  //
+  return (
+    <>
+      {/* Новости */}
+      {/* Карусель */}
+      <Articles />
+      {/* Подкасты */}
+      {/* Подписка */}
+      {/* Лекарства и БАД */}
+      <AskDoctor />
+    </>
+  );
 }
