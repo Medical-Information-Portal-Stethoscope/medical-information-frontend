@@ -1,7 +1,7 @@
 import CardPodcast from './CardPodcast';
 
 export default {
-  title: 'uikit/Components/CardPodcast',
+  title: 'uikit/Cards/CardPodcast',
   component: CardPodcast,
   tags: ['autodocs'],
 };
