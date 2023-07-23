@@ -19,7 +19,7 @@ interface ICardArticlePreviewProps {
     author: string;
     views_count: number;
   };
-  type: 'media' | 'default';
+  type: 'media' | 'news' | 'default';
   extraClass?: string;
 }
 
@@ -43,7 +43,7 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
         extraClass
       )}
     >
-      <div className={styles.wrapper}>
+      <div className={classNames(styles.wrapper, styles[`wrapper--${type}`])}>
         <div
           className={classNames(
             styles.imageWrapper,
@@ -52,11 +52,14 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
         >
           <img className={styles.image} src={image} alt="Превью статьи" />
           <FavoriteButton
-            extraClass={styles.favoriteButton}
+            extraClass={classNames(
+              styles.favoriteButton,
+              styles[`favoriteButton--${type}`]
+            )}
             onClick={handleLike}
           />
         </div>
-        <div className={styles.content}>
+        <div className={classNames(styles.content, styles[`content--${type}`])}>
           <span className={styles.date}>{date}</span>
           <div
             className={classNames(
