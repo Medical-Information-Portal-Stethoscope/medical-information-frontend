@@ -37,7 +37,9 @@ function MainCarousel() {
           />
         )}
       >
-        {data.map((item) => item.icon)}
+        {data.map((item) => (
+          <div key={item.id}>{item.icon}</div>
+        ))}
       </Carousel>
       <Button
         label="Фильтры"
