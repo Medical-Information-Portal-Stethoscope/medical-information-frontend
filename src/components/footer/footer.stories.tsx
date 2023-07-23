@@ -3,7 +3,7 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import Footer from './footer';
 
 const meta: Meta<typeof Footer> = {
-  title: 'uikit/Components/Footer',
+  title: 'Components/Footer',
   component: Footer,
   tags: ['autodocs'],
 };

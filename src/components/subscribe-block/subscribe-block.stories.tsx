@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { Header } from '.';
+import { SubscribeBlock } from '.';
 
 const meta = {
-  title: 'Components/Header',
-  component: Header,
+  title: 'Components/SubscribeBlock',
+  component: SubscribeBlock,
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -14,7 +14,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} as Meta<typeof Header>;
+} as Meta<typeof SubscribeBlock>;
 
 export default meta;
 

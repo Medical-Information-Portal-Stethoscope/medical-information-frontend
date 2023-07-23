@@ -9,9 +9,9 @@
   height: 48px;
   padding: 12px;
   border: 1px solid $color-neutral-400;
-  border-radius: 70px;
+  border-radius: 16px;
   box-sizing: border-box;
-  transition: all 0.5 ease-out;
+  transition: all 0.3s ease-out;
 
   &_active {
     width: 100%;
