@@ -102,11 +102,16 @@
 }
 
 .heading {
+  display: -webkit-box;
+  max-height: 64px;
   @extend %heading-size-small;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .text {
-  display: -webkit-box; // TODO: Если последнее слово в параграфе имеет точку, то получается многоточие из 4 точек.
+  display: -webkit-box; // TODO: Если последнее слово в параграфе имеет точку, то получается многоточие из 4 точек. Также замечен баг, когда многоточие начинается после пустого пробела
   height: 96px;
   margin-top: 8px;
   @extend %text-description;
@@ -156,6 +161,13 @@
     border-radius: 50%;
     background-color: $color-neutral-700;
   }
+}
+
+.author {
+  max-width: 103px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .views {

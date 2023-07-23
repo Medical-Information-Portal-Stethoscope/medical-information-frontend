@@ -13,6 +13,7 @@ import styles from './article-preview.module.scss';
 interface ICardArticlePreviewProps {
   data: {
     title: string;
+    annotation: string;
     text: string;
     image: string;
     created_at: string;
@@ -24,7 +25,7 @@ interface ICardArticlePreviewProps {
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
-  data: { title, text, image, created_at, author, views_count },
+  data: { title, annotation, text, image, created_at, author, views_count },
   type,
   extraClass,
 }) => {
@@ -70,11 +71,13 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
             <div className={styles.title}>
               <h3 className={styles.heading}>{title}</h3>
               <p className={classNames(styles.text, styles[`text--${type}`])}>
-                {text}
+                {annotation}
               </p>
             </div>
             <ul className={styles.info}>
-              <li className={styles.infoItem}>{author}</li>
+              <li className={styles.infoItem}>
+                <span className={styles.author}>{author}</span>
+              </li>
               <li className={styles.infoItem}>{readingTime}</li>
               <li className={`${styles.infoItem} ${styles.views}`}>
                 <IconViews />
