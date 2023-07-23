@@ -5,10 +5,11 @@ import styles from './CardPodcast.module.scss';
 export interface ICardPodcastProps {
   title: string;
   link: string;
+  id: string | number;
 }
 
-const CardPodcast: FC<ICardPodcastProps> = ({ title, link }) => (
-  <li className={styles.card}>
+const CardPodcast: FC<ICardPodcastProps> = ({ title, link, id }) => (
+  <li className={styles.card} key={id}>
     <a className={styles.link} href={link}>
       <Icon
         color="white"

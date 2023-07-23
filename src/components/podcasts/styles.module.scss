@@ -1,0 +1,20 @@
+.podcasts {
+  display: flex;
+  flex-direction: column;
+  max-width: $wrapper-main-content-desktop;
+
+  &__header {
+    @extend %heading-size-large;
+    padding: 0;
+    margin-bottom: 24px;
+  }
+
+  &__links {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 24px auto 40px;
+  }
+}
