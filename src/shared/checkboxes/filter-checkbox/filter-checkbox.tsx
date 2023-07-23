@@ -6,6 +6,7 @@ interface IFilterCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   extraClass?: string;
   id: string;
   label: string;
+  isChecked?: boolean;
   isDisabled?: boolean;
   onChange?: () => void;
 }
@@ -14,6 +15,7 @@ export default function FilterCheckbox({
   extraClass,
   id,
   label,
+  isChecked = false,
   isDisabled = false,
   onChange,
 }: IFilterCheckboxProps) {
@@ -25,7 +27,9 @@ export default function FilterCheckbox({
         type="checkbox"
         name={label}
         value={label}
+        defaultChecked={isChecked}
         disabled={isDisabled}
+        aria-label={isChecked ? 'Убрать фильтр' : 'Добавить'}
         onChange={onChange}
       />
       <label className={styles.label} htmlFor={id}>

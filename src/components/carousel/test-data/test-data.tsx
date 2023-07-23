@@ -11,6 +11,7 @@ const data = [
         icon={<Icon icon="AllIcon" size="24" color="gray" />}
         id="1"
         label="Все разделы"
+        isChecked
         onChange={function noRefCheck() {}}
       />
     ),
