@@ -1,3 +1,4 @@
+$font-size-huge: 7rem;
 $font-size-heading-1: 5.6rem;
 $font-size-heading-2: 3.9rem;
 $font-size-heading-3: 2.4rem;
@@ -9,6 +10,7 @@ $font-size-text-medium: 1.8rem;
 $font-size-text-small: 1.4rem;
 $font-size-text-small-extra: 1.2rem;
 
+$font-line-height-huge: calc(8rem / $font-size-huge * 100%);
 $font-line-height-heading-1: calc(7.2rem / $font-size-heading-1 * 100%);
 $font-line-height-heading-2: calc(4.4rem / $font-size-heading-2 * 100%);
 $font-line-height-heading-3: calc(3.2rem / $font-size-heading-3 * 100%);
