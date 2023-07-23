@@ -1,6 +1,6 @@
 import Footer from 'components/footer/footer';
 import { Header } from 'components/header';
-import MainPage from 'pages/MainPage';
+import MainPage from 'pages/main-page/MainPage';
 import { Route, Routes } from 'react-router-dom';
 
 function App() {

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Search } from '.';
 
 const meta = {
-  title: 'uikit/Components/Header/Search',
+  title: 'Components/Header/Search',
   component: Search,
   tags: ['autodocs'],
 } as Meta<typeof Search>;

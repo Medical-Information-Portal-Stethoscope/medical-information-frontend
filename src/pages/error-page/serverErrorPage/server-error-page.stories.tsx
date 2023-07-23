@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
 
-import { NotFoundPage } from '.';
+import { ServerErrorPage } from '.';
 
 const meta = {
-  title: 'uikit/Components/ErrorPage/NotFoundPage',
-  component: NotFoundPage,
+  title: 'Components/ErrorPage/ServerErrorPage',
+  component: ServerErrorPage,
   tags: ['autodocs'],
   decorators: [
     (Story) => (
@@ -14,7 +14,7 @@ const meta = {
       </BrowserRouter>
     ),
   ],
-} as Meta<typeof NotFoundPage>;
+} as Meta<typeof ServerErrorPage>;
 
 export default meta;
 

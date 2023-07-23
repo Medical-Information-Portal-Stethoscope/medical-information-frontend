@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { SubscribeBlock } from '.';
 
 const meta = {
-  title: 'uikit/Components/SubscribeBlock',
+  title: 'Components/SubscribeBlock',
   component: SubscribeBlock,
   tags: ['autodocs'],
   decorators: [

@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Header } from '.';
 
 const meta = {
-  title: 'uikit/Components/Header',
+  title: 'Components/Header',
   component: Header,
   tags: ['autodocs'],
   decorators: [
