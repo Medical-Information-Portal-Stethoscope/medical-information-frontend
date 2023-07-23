@@ -1,0 +1,75 @@
+@import '../../assets/styles/index.scss';
+
+.subscribe {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: $wrapper-main-content-desktop;
+  height: 480px;
+  margin: 40px auto;
+  padding: 90px 194px 90px 154px;
+  box-sizing: border-box;
+  gap: 10px;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    width: 900px;
+  }
+
+  &__header {
+    @extend %heading-size-large;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  &__paragraph {
+    @extend %text-size-large;
+    margin-top: 8px;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 57px;
+    gap: 24px;
+  }
+
+  &__input {
+    @extend %text-size-medium;
+    width: 592px;
+    box-sizing: border-box;
+    align-self: flex-end;
+    padding: 20px 12px;
+    border: 1px solid $color-neutral-400;
+    border-radius: 16px;
+    outline: 0;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &_active {
+      border: 1px solid $color-brand-primary-900;
+      cursor: pointer;
+    }
+
+    &:hover {
+      cursor: pointer;
+      border: 1px solid $color-brand-primary-900;
+    }
+  }
+
+  &__mail {
+    min-width: 384px;
+    object-fit: contain;
+  }
+
+  &__button {
+    width: 284px;
+  }
+
+  &__button > span {
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
