@@ -1,0 +1,30 @@
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.card {
+  background: linear-gradient(90deg, #00adff 0%, #0fdfc8 100%);
+  color: #fff;
+  width: 284px;
+  height: 240px;
+  margin: 0;
+  border-radius: 16px;
+  list-style: none;
+}
+
+.link {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.title {
+  @extend %heading-size-small;
+  text-align: center;
+  max-width: 244px;
+}
