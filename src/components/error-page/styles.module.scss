@@ -1,0 +1,44 @@
+@import '../../assets/styles/index.scss';
+
+.error {
+  max-width: $wrapper-main-content-desktop;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  &__image {
+    width: 363px;
+    margin: 0 auto 24px;
+  }
+
+  &__title {
+    @extend %heading-size-large;
+    margin: 24px auto 12px;
+    padding: 0;
+    color: $color-neutral-900;
+    text-align: center;
+  }
+
+  &__message {
+    @extend %text-size-large-extra-semibold;
+    margin: 12px auto 24px;
+    padding: 0;
+    color: $color-neutral-500;
+    text-align: center;
+  }
+
+  &__button {
+    width: 284px;
+    height: 48px;
+    margin: 24px auto 40px;
+    padding: 0;
+  }
+
+  &__button > span {
+    justify-content: center;
+    margin: 0 auto;
+  }
+}
