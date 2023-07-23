@@ -13,7 +13,7 @@ const data = [
     id: 2,
     heading: `Биологически\nактивные добавки`,
     image: biologicallyActiveAdditives,
-    alt: 'Таблетки с рыбьим жиром',
+    alt: 'Капсулы с рыбьим жиром',
     route: '/',
   },
 ];

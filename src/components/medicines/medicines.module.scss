@@ -26,24 +26,20 @@
   max-height: 512px;
 
   &:first-child > a > .linkHeading {
-    top: 51%;
+    top: 45%;
     left: 7%;
-    font-size: 4.5em; // TODO: дизайнеры добавят в UI Kit
-    line-height: normal;
   }
 
   &:last-child > a > .linkHeading {
-    bottom: 13%;
+    bottom: 7%;
     left: 6%;
-    font-size: 3.5em;
-    line-height: 72px; // 114.286% TODO: дизайнеры добавят в UI Kit
   }
 }
 
 .linkHeading {
   position: absolute;
-  max-width: 677px;
-  font-weight: 700;
+  max-width: 752px;
+  @extend %font-huge-bold;
   color: $color-neutral-0;
   white-space: pre-wrap;
   text-transform: uppercase;
