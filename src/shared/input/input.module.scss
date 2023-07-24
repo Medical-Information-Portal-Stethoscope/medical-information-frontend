@@ -1,6 +1,11 @@
-@import 'assets/styles/abstracts/variables/colors.scss';
-@import 'assets/styles/abstracts/placeholders.scss';
-@import 'assets/styles/abstracts/variables/animations.scss';
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.icon {
+  cursor: pointer;
+}
 
 .input {
   width: 480px;
@@ -17,6 +22,7 @@
   &--container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin: 12px 0 8px;
     padding: 19px 12px;
     border: 1px solid $color-neutral-400;
@@ -33,6 +39,7 @@
 
     &:hover {
       border: 1px solid $color-brand-primary-900;
+      cursor: text;
     }
 
     &:focus-within {
@@ -56,6 +63,7 @@
     }
 
     &--input {
+      width: 100%;
       @extend %text-size-medium;
       padding: 0;
       border: none;
