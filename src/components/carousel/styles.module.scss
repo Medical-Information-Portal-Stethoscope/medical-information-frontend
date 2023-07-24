@@ -2,15 +2,14 @@
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
 
-.section {
+.wrapper {
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
-  padding: 40px 0 32px;
   display: flex;
   justify-content: space-between;
 }
 
-.section > div > div {
+.wrapper > div > div {
   overflow: visible !important;
 }
 

@@ -17,7 +17,11 @@ interface ICardArticlePreviewProps {
     text: string;
     image: string;
     created_at: string;
-    author: string;
+    author: {
+      id: string;
+      first_name: string;
+      last_name: string;
+    } | null;
     views_count: number;
   };
   type: 'media' | 'news' | 'default';
@@ -76,7 +80,9 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
             </div>
             <ul className={styles.info}>
               <li className={styles.infoItem}>
-                <span className={styles.author}>{author}</span>
+                <span className={styles.author}>{`${
+                  author?.first_name || 'Елена'
+                } ${author?.last_name || 'Малышева'}`}</span>
               </li>
               <li className={styles.infoItem}>{readingTime}</li>
               <li className={`${styles.infoItem} ${styles.views}`}>

@@ -2,14 +2,13 @@ import { ReactNode } from 'react';
 import { useGetArticlesQuery } from 'services/features/articles/api';
 import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
-import CardMoreContent from 'components/cards/more-content/more-content';
+import Button from 'shared/buttons/button/button';
 import { TArticle } from 'utils/types/article';
-import { Icon } from 'shared/icons';
-import styles from './articles.module.scss';
+import styles from './articles-preview-page.module.scss';
 
 const maxNumArticlesDesktop = 6;
 
-export default function Articles() {
+export default function ArticlesPreviewPage() {
   const { data } = useGetArticlesQuery();
 
   const articles: ReactNode | null =
@@ -27,15 +26,11 @@ export default function Articles() {
   return (
     <section>
       <div className={styles.wrapper}>
-        <MainCarousel />
         <h2 className={styles.heading}>Статьи</h2>
-        <div className={styles.articles}>
-          {articles}
-          <CardMoreContent
-            heading="Еще статьи"
-            icon={<Icon icon="BigArrowIcon" color="white" />}
-            extraClass={styles.article}
-          />
+        <MainCarousel />
+        <div className={styles.gallery}>
+          <div className={styles.content}>{articles}</div>
+          <Button label="Еще статьи" model="secondary" size="small" hasBorder />
         </div>
       </div>
     </section>
