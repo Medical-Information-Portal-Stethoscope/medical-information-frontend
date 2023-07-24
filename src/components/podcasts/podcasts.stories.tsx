@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-
-import { Podcasts } from '.';
+import Podcasts from '.';
 
 const meta = {
   title: 'Components/Podcasts',

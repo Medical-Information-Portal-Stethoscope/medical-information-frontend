@@ -1,15 +1,14 @@
 /* eslint-disable react/no-array-index-key */
 import CardPodcast from 'components/cards/card-podcast/CardPodcast';
 import MorePodcast from 'components/cards/more-podcast/MorePodcast';
-import { podcastsData } from './data/podcastData';
+import podcastsData from './data/podcastData';
 import styles from './styles.module.scss';
 
 const enableNumPodcast = 5;
 
-export const Podcasts = () => {
-  // tmp
+export default function Podcasts() {
   const podcasts = podcastsData
-    .splice(0, enableNumPodcast)
+    .slice(0, enableNumPodcast)
     .map((podcast, idx) => (
       <li key={idx}>
         <CardPodcast
@@ -29,4 +28,4 @@ export const Podcasts = () => {
       </div>
     </section>
   );
-};
+}
