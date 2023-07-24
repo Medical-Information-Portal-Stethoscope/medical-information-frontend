@@ -1,0 +1,45 @@
+@import 'assets/styles/index.scss';
+
+.podcasts {
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+  padding: 40px 0 40px;
+
+  &__header {
+    @extend %heading-size-medium;
+    padding: 0;
+    margin-bottom: 48px;
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    margin: 0 auto;
+  }
+
+  &__links {
+    display: flex;
+    gap: 24px;
+  }
+}
+
+.blue_bolt {
+  background: linear-gradient(90deg, #00adff 0%, #0fdfc8 100%);
+}
+
+.american_green {
+  background: linear-gradient(90deg, #24ad46 0%, #72c946 100%);
+}
+
+.cerise_pink {
+  background: linear-gradient(90deg, #eb2f89 0%, #f03081 100%);
+}
+
+.lavender {
+  background: linear-gradient(90deg, #b57dff 0%, #9b55f2 100%);
+}
+
+.blue_cola {
+  background: linear-gradient(90deg, #008ced 0%, #45c5ff 100%);
+}

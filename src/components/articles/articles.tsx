@@ -1,22 +1,27 @@
+import { ReactNode } from 'react';
+import { useGetArticlesQuery } from 'services/features/articles/api';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import CardMoreContent from 'components/cards/more-content/more-content';
+import { TArticle } from 'utils/types/article';
 import { Icon } from 'shared/icons';
-import data from './test-data/test-data';
 import styles from './articles.module.scss';
 
 const maxNumArticlesDesktop = 6;
 
 export default function Articles() {
-  const articles = data
-    .slice(0, maxNumArticlesDesktop)
-    .map((article) => (
-      <CardArticlePreview
-        key={article.id}
-        data={article}
-        type="default"
-        extraClass={styles.article}
-      />
-    ));
+  const { data } = useGetArticlesQuery();
+
+  const articles: ReactNode | null =
+    data?.results
+      .slice(0, maxNumArticlesDesktop)
+      .map((article: TArticle) => (
+        <CardArticlePreview
+          key={article.id}
+          data={article}
+          type="default"
+          extraClass={styles.article}
+        />
+      )) || null;
 
   return (
     <section>
