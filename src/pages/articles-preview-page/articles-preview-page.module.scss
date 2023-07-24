@@ -1,0 +1,32 @@
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  row-gap: 48px;
+  max-width: $wrapper-articles-preview-desktop;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+.heading {
+  @extend %heading-size-large;
+}
+
+.gallery {
+  display: grid;
+  row-gap: 80px;
+
+  button {
+    justify-self: center;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(746px, auto));
+  justify-items: center;
+  gap: 24px;
+}
