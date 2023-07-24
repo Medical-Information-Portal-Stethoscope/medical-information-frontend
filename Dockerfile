@@ -13,4 +13,5 @@ RUN mkdir wtf
 
 FROM debian:12-slim as frontend
 COPY --from=builder /app/build /app/build
+COPY --from=builder /app/src /app/src
 COPY --from=builder /app/wtf /app/wtf
