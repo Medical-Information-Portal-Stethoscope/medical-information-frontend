@@ -6,13 +6,11 @@ import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import routes from 'utils/routes';
 
-import { FiltersPopup } from 'components/popup/filters';
-
 function App() {
   return (
     <>
-      {/* <Header /> */}
-      {/* <main>
+      <Header />
+      <main>
         <Routes>
           <Route path={routes.home} element={<MainPage />} />
           <Route path={routes.news.route} element={<NewsPreviewPage />} />
@@ -24,9 +22,8 @@ function App() {
             element={<NotFoundPage />}
           />
         </Routes>
-      </main> */}
-      <FiltersPopup />
-      {/* <Footer /> */}
+      </main>
+      <Footer />
     </>
   );
 }
