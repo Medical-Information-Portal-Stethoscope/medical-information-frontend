@@ -27,7 +27,7 @@ export default function ArticlesPreviewPage() {
     <section>
       <div className={styles.wrapper}>
         <h2 className={styles.heading}>Статьи</h2>
-        <MainCarousel />
+        <MainCarousel type="articles" />
         <div className={styles.gallery}>
           <div className={styles.content}>{articles}</div>
           <Button label="Еще статьи" model="secondary" size="small" hasBorder />

@@ -1,10 +1,5 @@
-@import 'assets/styles/abstracts/variables/fonts';
-@import 'assets/styles/abstracts/variables/wrappers';
-@import 'assets/styles/abstracts/placeholders';
-
 .wrapper {
-  max-width: $wrapper-main-content-desktop;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
