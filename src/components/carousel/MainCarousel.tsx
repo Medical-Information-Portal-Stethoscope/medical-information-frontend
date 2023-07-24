@@ -6,17 +6,23 @@ import { Icon } from 'shared/icons';
 import data from './test-data/test-data';
 import styles from './styles.module.scss';
 
-function MainCarousel() {
+interface IMainCarouselProps {
+  type?: 'main' | 'articles';
+}
+
+function MainCarousel({ type = 'main' }: IMainCarouselProps) {
+  const dataForArticles = data.slice(0, -1);
+
   return (
-    <section className={styles.section} aria-label="Фильтры">
+    <div className={styles.wrapper}>
       <Carousel
         swipeScrollTolerance={1}
         showThumbs={false}
         showIndicators={false}
         showStatus={false}
         centerMode
-        centerSlidePercentage={9.3}
-        width={1542}
+        centerSlidePercentage={type === 'main' ? 9.3 : 6}
+        width={type === 'main' ? 1542 : 1262}
         className={styles.carousel}
         renderArrowPrev={(onClickHandler) => (
           <ButtonWithIcon
@@ -37,9 +43,9 @@ function MainCarousel() {
           />
         )}
       >
-        {data.map((item) => (
-          <div key={item.id}>{item.icon}</div>
-        ))}
+        {type === 'main'
+          ? data.map((item) => <div key={item.id}>{item.icon}</div>)
+          : dataForArticles.map((item) => <div key={item.id}>{item.icon}</div>)}
       </Carousel>
       <Button
         label="Фильтры"
@@ -49,7 +55,7 @@ function MainCarousel() {
         type="button"
         customIcon={<Icon color="blue" icon="FiltersIcon" />}
       />
-    </section>
+    </div>
   );
 }
 

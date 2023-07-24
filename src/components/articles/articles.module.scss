@@ -5,12 +5,12 @@
 .wrapper {
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
-  padding: 32px 0 40px;
+  padding: 40px 0;
 }
 
 .heading {
   max-width: 40%;
-  margin-bottom: 48px;
+  margin: 64px 0 48px;
   @extend %heading-size-medium;
 }
 
