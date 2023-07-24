@@ -12,7 +12,11 @@ export const Podcasts = () => {
     .splice(0, enableNumPodcast)
     .map((podcast, idx) => (
       <li key={idx}>
-        <CardPodcast title={podcast.title} link={podcast.link} />
+        <CardPodcast
+          title={podcast.title}
+          link={podcast.link}
+          extraClass={styles[podcast.color]}
+        />
       </li>
     ));
 
