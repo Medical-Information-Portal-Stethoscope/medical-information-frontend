@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { useGetArticlesQuery } from 'services/features/articles/api';
+import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import CardMoreContent from 'components/cards/more-content/more-content';
 import { TArticle } from 'utils/types/article';
@@ -26,6 +27,7 @@ export default function Articles() {
   return (
     <section>
       <div className={styles.wrapper}>
+        <MainCarousel />
         <h2 className={styles.heading}>Статьи</h2>
         <div className={styles.articles}>
           {articles}

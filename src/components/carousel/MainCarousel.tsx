@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 function MainCarousel() {
   return (
-    <section className={styles.section} aria-label="Фильтры">
+    <div className={styles.wrapper}>
       <Carousel
         swipeScrollTolerance={1}
         showThumbs={false}
@@ -49,7 +49,7 @@ function MainCarousel() {
         type="button"
         customIcon={<Icon color="blue" icon="FiltersIcon" />}
       />
-    </section>
+    </div>
   );
 }
 
