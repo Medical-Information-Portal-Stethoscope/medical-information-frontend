@@ -46,6 +46,16 @@ const meta: Meta<typeof FilterTab> = {
       icon: 'string',
     },
 
+    isChecked: {
+      description: 'Автоматический выбор',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: {
+        type: 'radio',
+      },
+    },
+
     onChange: {
       description: 'Добавить фильтр либо убрать',
       type: 'function',
@@ -61,5 +71,6 @@ export const Default: TStory = {
     id: 'template',
     label: 'Стоматология',
     icon: iconDentistry,
+    isChecked: false,
   },
 };
