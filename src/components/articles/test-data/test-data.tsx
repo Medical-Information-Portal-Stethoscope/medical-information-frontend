@@ -8,7 +8,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '100',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -20,7 +24,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '101',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -32,7 +40,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '102',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -44,7 +56,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '103',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -56,7 +72,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '104',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -68,7 +88,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '105',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
   {
@@ -80,7 +104,11 @@ const data = [
     image:
       'https://dr-yakimov.ru/wp-content/uploads/2022/04/nit-dlya-gigieny-polosti-rta.jpg',
     created_at: '2023-06-20T00:04:10.002Z',
-    author: 'Дарья Врачева',
+    author: {
+      id: '106',
+      first_name: 'Дарья',
+      last_name: 'Врачева',
+    },
     views_count: 1632,
   },
 ];

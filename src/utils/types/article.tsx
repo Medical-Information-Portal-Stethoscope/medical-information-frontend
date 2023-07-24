@@ -16,6 +16,13 @@ export type TArticle = {
   source_link: string | null;
   is_published: boolean;
   views_count: number;
-  author: string;
-  tags: string[];
+  author: {
+    id: string;
+    first_name: string;
+    last_name: string;
+  } | null;
+  tags: {
+    pk: string;
+    name: string;
+  }[];
 };
