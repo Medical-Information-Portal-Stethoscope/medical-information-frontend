@@ -35,6 +35,7 @@ jobs:
         with:
           context: ./
           push: true
+          no-cache: true
           tags: ${{ vars.DOCKER_USERNAME }}/stethoscope-frontend:latest
 
   deploy:
