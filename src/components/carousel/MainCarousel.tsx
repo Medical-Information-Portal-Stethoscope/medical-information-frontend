@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 function MainCarousel() {
   return (
-    <section className={styles.section}>
+    <section className={styles.section} aria-label="Фильтры">
       <Carousel
         swipeScrollTolerance={1}
         showThumbs={false}
