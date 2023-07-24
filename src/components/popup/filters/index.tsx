@@ -1,38 +1,40 @@
 /* eslint-disable react/no-array-index-key */
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 
-import { tags, deseases } from './data/filtersData';
+import { tags, diseases } from './data/filtersData';
+
 import styles from './styles.module.scss';
 
 export const FiltersPopup: FC = () => {
   const allTags = tags;
-  const allDeseases = deseases;
+  const allDiseases = diseases;
 
-  const [activeDeseases, setActiveDeseases] = useState<string[]>([]);
+  const [activeDiseases, setActiveDiseases] = useState<string[]>([]);
   const [activeTags, setActiveTags] = useState<string[]>([]);
 
-  const closeFilterPopup = () => null;
-
-  const loadMoreDesease = () => null;
+  const loadMoreDisease = () => null;
+  const loadMoreTags = () => null;
 
   const clearFilters = () => {
-    setActiveDeseases([]);
+    setActiveDiseases([]);
     setActiveTags([]);
   };
 
-  const updateDeseasesFilters = () => null;
-  const updateTagsFilters = () => null;
+  // for FilterCheckbox onChange={}
+  // const updateActiveDiseasesFilters = () => null;
+  // const updateActiveTagsFilters = () => null;
 
-  const sendFilters = () => [activeDeseases, activeTags];
+  const closeFilterPopup = () => null;
+  const sendFilters = () => [activeDiseases, activeTags];
 
   function generateFilters(filtersArr: string[]) {
     return filtersArr.map((item, idx) => (
       <li key={idx}>
-        <FilterCheckbox id={item} label={item} />
+        <FilterCheckbox id={item} label={item} onChange={() => null} />
       </li>
     ));
   }
@@ -52,14 +54,14 @@ export const FiltersPopup: FC = () => {
         <div className={styles.filters__section}>
           <h3 className={styles.filters__name}>Заболевания</h3>
           <ul className={styles.filters__items}>
-            {generateFilters(allDeseases)}
+            {generateFilters(allDiseases)}
           </ul>
           <Button
             label="Ещё"
             model="secondary"
             size="small"
             hasBorder
-            onClick={loadMoreDesease}
+            onClick={loadMoreDisease}
             extraClass={styles.filters__more}
           />
         </div>
@@ -72,7 +74,7 @@ export const FiltersPopup: FC = () => {
             model="secondary"
             size="small"
             hasBorder
-            onClick={loadMoreDesease}
+            onClick={loadMoreTags}
             extraClass={styles.filters__more}
           />
         </div>

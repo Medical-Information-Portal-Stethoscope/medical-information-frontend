@@ -1,4 +1,4 @@
-export const deseases = [
+export const diseases = [
   'Катаракта',
   'Астигматизм',
   'Блефарит',
