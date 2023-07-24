@@ -1,0 +1,51 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.main {
+  display: grid;
+  grid-template-columns: 50.62% 49.38%;
+}
+
+.wrapperLeft,
+.wrapperRight {
+  max-width: $wrapper-entry-form-desktop;
+  margin: 0 auto;
+}
+
+.columnLeft {
+  display: flex;
+  align-items: center;
+}
+
+.wrapperLeft {
+  h1 img {
+    width: 592px;
+    height: 124px;
+  }
+}
+
+.columnRight {
+  background-color: $color-brand-primary-900;
+}
+
+.wrapperRight {
+  padding: 48px 0;
+}
+
+.formWrapper {
+  width: 100%;
+  padding: 48px;
+  box-sizing: border-box;
+  background-color: $color-neutral-0;
+  border-radius: 24px;
+}
+
+.form {
+}
+
+.heading {
+  @extend %heading-size-medium;
+}

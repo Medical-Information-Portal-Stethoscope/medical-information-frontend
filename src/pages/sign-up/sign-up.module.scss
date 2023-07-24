@@ -1,0 +1,8 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.navigation {
+  @extend %text-size-medium-semibold;
+  color: $color-neutral-700;
+}
