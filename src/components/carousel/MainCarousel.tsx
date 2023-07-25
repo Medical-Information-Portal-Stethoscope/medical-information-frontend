@@ -15,9 +15,9 @@ interface IMainCarouselProps {
 
 function MainCarousel({ type = 'main' }: IMainCarouselProps) {
   const dataForArticles = data.slice(0, -1);
-  const [isPopupOpened, setIsPopuopOpened] = useState(false);
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
 
-  const handleTogglePopup = () => setIsPopuopOpened(!isPopupOpened);
+  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
 
   return (
     <div className={styles.wrapper}>
@@ -56,7 +56,7 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
       <Button
         label="Фильтры"
         model="tertiary"
-        onClick={() => setIsPopuopOpened(!isPopupOpened)}
+        onClick={handleTogglePopup}
         size="small"
         type="button"
         customIcon={<Icon color="blue" icon="FiltersIcon" />}

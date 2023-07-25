@@ -6,7 +6,7 @@ interface IPortalProps {
   isOpened: boolean;
 }
 
-const modalRoot = document.getElementById('modal') as HTMLElement;
+const modalRoot = document.getElementById('modals') as HTMLElement;
 
 export default function Portal({ children, isOpened }: IPortalProps) {
   if (!isOpened) {

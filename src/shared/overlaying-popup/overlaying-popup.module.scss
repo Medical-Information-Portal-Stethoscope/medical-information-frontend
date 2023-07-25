@@ -1,4 +1,5 @@
 @import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/z-index.scss';
 
 .popup {
   position: fixed;
@@ -8,7 +9,7 @@
   right: 0;
   padding: 30px;
   box-sizing: border-box;
-  z-index: 10;
+  z-index: $zindex-filters-modal;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,5 +23,5 @@
   left: 0;
   right: 0;
   cursor: pointer;
-  z-index: -1;
+  z-index: $zindex-overlay-filters-modal;
 }
