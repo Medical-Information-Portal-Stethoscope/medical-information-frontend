@@ -110,6 +110,7 @@ export const DefaultSmall: TStory = {
     errorText: 'Error message',
     isDisabled: false,
     isValid: false,
+    icon: true,
   },
 };
 

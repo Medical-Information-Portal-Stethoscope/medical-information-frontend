@@ -54,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       extraClass,
       isValid,
       size = 'medium',
-      icon = true,
+      icon,
     },
     forwardedRef
   ) => {
@@ -76,15 +76,25 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const iconToRender = useMemo(
       () =>
         icon && !error ? (
-          <Icon
-            color="blue"
-            icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
+          <button
             onClick={onIconClick}
-            size="24"
-            className={styles.icon}
-          />
+            className={styles.icon_button}
+            type="button"
+            aria-label={visible ? 'скрыть пароль' : 'показать пароль'}
+            disabled={isDisabled}
+          >
+            {!isDisabled ? (
+              <Icon
+                color="blue"
+                icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
+                size="24"
+              />
+            ) : (
+              <Icon color="gray" icon="EyeClosedIcon" size="24" />
+            )}
+          </button>
         ) : null,
-      [error, icon, onIconClick, visible]
+      [error, icon, isDisabled, onIconClick, visible]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
