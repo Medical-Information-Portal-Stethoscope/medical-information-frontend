@@ -9,7 +9,7 @@ import styles from './input.module.scss';
 interface InputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
   type?: 'text' | 'email' | 'password';
-  value: string;
+  value?: string; // TODO: Сделал пока value и onChange необязательными, поскольку, если будем пользоваться формиком, у него это все под капотом
   name: string;
   label?: string;
   placeholder?: string;
@@ -20,7 +20,7 @@ interface InputProps
   isValid?: boolean;
   size?: 'medium' | 'small';
   icon?: boolean;
-  onChange(e: React.ChangeEvent<HTMLInputElement>): void;
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
 }
 
 function useCombinedRefs<T = HTMLElement>(

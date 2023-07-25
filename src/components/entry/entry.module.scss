@@ -1,7 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/wrappers';
-@import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
 .main {
@@ -27,15 +26,25 @@
   }
 }
 
+.logo {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  row-gap: 22px;
+  @extend %text-size-large;
+  color: inherit;
+}
+
 .columnRight {
   background-color: $color-brand-primary-900;
 }
 
 .wrapperRight {
-  padding: 48px 0;
+  padding: 86px 0;
 }
 
 .formWrapper {
+  display: grid;
   width: 100%;
   padding: 48px;
   box-sizing: border-box;
@@ -44,8 +53,16 @@
 }
 
 .form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+
+  label {
+    column-gap: 20px;
+  }
 }
 
 .heading {
+  padding-bottom: 40px;
   @extend %heading-size-medium;
 }

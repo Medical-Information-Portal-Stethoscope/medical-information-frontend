@@ -7,7 +7,7 @@ import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import routes from 'utils/routes';
 
 function App() {
-  // TODO: correct routes
+  // TODO: поправить роуты в develop на страничках?
 
   return (
     <Routes>
