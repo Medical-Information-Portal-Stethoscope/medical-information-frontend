@@ -1,0 +1,115 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.icon_button {
+  background-color: $color-neutral-0;
+  outline: 0;
+  width: 24px;
+  height: 24px;
+
+  &:disabled {
+    background-color: $color-neutral-100;
+    cursor: auto;
+  }
+}
+
+.input {
+  max-width: 544px;
+
+  &--label {
+    @extend %text-size-medium;
+    color: $color-neutral-700;
+
+    &--disabled {
+      color: $color-neutral-400;
+    }
+  }
+
+  &--container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 8px 0 4px;
+    padding: 19px 12px;
+    border: 1px solid $color-neutral-400;
+    border-radius: 16px;
+    transition: $transition-hover;
+
+    &--medium {
+      padding: 19px 12px;
+    }
+
+    &--small {
+      padding: 11px;
+    }
+
+    &:hover {
+      border: 1px solid $color-brand-primary-900;
+      cursor: text;
+    }
+
+    &:focus-within {
+      border: 1px solid $color-brand-primary-900;
+    }
+
+    &--success {
+      border: 1px solid $color-brand-primary-500;
+    }
+
+    &--error {
+      border: 1px solid $color-system-error;
+    }
+
+    &--disabled {
+      border: 1px solid $color-neutral-100;
+      background-color: $color-neutral-100;
+
+      &:hover {
+        border: 1px solid $color-neutral-100;
+      }
+    }
+
+    &--input {
+      width: 100%;
+      @extend %text-size-medium;
+      padding: 0;
+      padding-right: 8px;
+      border: none;
+      color: $color-neutral-900;
+      caret-color: $color-brand-primary-900;
+
+      &::placeholder {
+        color: $color-neutral-400;
+      }
+
+      &:focus-visible {
+        outline: none;
+      }
+
+      &--error {
+        color: $color-system-error;
+      }
+
+      &:disabled {
+        background-color: $color-neutral-100;
+        color: $color-neutral-400;
+
+        &::placeholder {
+          color: transparent;
+        }
+      }
+    }
+  }
+
+  &--span {
+    @extend %text-size-small-light;
+    display: block;
+    color: $color-system-error;
+
+    &:empty {
+      min-height: 16px;
+    }
+  }
+}
