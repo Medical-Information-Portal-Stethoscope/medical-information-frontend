@@ -1,6 +1,9 @@
+import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
+import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
+import { FiltersPopup } from 'shared/popup/filters';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import data from './test-data/test-data';
@@ -12,6 +15,9 @@ interface IMainCarouselProps {
 
 function MainCarousel({ type = 'main' }: IMainCarouselProps) {
   const dataForArticles = data.slice(0, -1);
+  const [isPopupOpened, setIsPopupOpened] = useState(false);
+
+  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
 
   return (
     <div className={styles.wrapper}>
@@ -50,11 +56,16 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
       <Button
         label="Фильтры"
         model="tertiary"
-        // onClick={function noRefCheck() {}}
+        onClick={handleTogglePopup}
         size="small"
         type="button"
         customIcon={<Icon color="blue" icon="FiltersIcon" />}
       />
+      {isPopupOpened && (
+        <OverlayingPopup isOpened={isPopupOpened} onClose={handleTogglePopup}>
+          <FiltersPopup handleCloseClick={handleTogglePopup} />
+        </OverlayingPopup>
+      )}
     </div>
   );
 }
