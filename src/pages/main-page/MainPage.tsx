@@ -13,7 +13,6 @@ export default function MainPage() {
       <Header />
       <main>
         <News />
-        <MainCarousel />
         <Articles />
         <Podcasts />
         <SubscribeBlock />

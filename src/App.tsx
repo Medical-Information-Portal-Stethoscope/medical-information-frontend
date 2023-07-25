@@ -14,7 +14,7 @@ function App() {
     <Routes>
       <Route path={routes.home} element={<MainPage />} />
       <Route path={routes.news.route} element={<NewsPreviewPage />} />
-      <Route path={routes.articles.route} element={<NotFoundPage />} />
+      <Route path={routes.articles.route} element={<ArticlesPreviewPage />} />
       <Route path={routes.podcasts.route} element={<NotFoundPage />} />
       <Route path={routes.drugs.route} element={<NotFoundPage />} />
       <Route path={routes.doctorQuestion.route} element={<NotFoundPage />} />
