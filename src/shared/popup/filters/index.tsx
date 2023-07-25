@@ -4,12 +4,14 @@ import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
-
 import { tags, diseases } from './data/filtersData';
-
 import styles from './styles.module.scss';
 
-export const FiltersPopup: FC = () => {
+interface IFiltersProps {
+  handleCloseClick: () => void;
+}
+
+export const FiltersPopup: FC<IFiltersProps> = ({ handleCloseClick }) => {
   const allTags = tags;
   const allDiseases = diseases;
 
@@ -28,7 +30,6 @@ export const FiltersPopup: FC = () => {
   // const updateActiveDiseasesFilters = () => null;
   // const updateActiveTagsFilters = () => null;
 
-  const closeFilterPopup = () => null;
   const sendFilters = () => [activeDiseases, activeTags];
 
   function generateFilters(filtersArr: string[]) {
@@ -45,7 +46,7 @@ export const FiltersPopup: FC = () => {
         ariaLabel="Закрыть попап"
         icon={<Icon color="blue" icon="CloseIcon" />}
         hasBackground={false}
-        onClick={closeFilterPopup}
+        onClick={handleCloseClick}
         extraClass={styles.filters__close}
       />
 
