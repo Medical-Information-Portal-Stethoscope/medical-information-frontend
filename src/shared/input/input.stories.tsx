@@ -6,7 +6,7 @@ const meta: Meta<typeof Input> = {
   component: Input,
   tags: ['autodocs'],
   argTypes: {
-    format: {
+    size: {
       description: 'Размер',
       type: 'string',
       options: ['medium', 'small'],
@@ -73,6 +73,14 @@ const meta: Meta<typeof Input> = {
       type: 'string',
       defaultValue: 'text',
     },
+
+    icon: {
+      description: 'Наличие иконки глаза',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: { type: 'radio' },
+    },
   },
 };
 
@@ -81,31 +89,34 @@ type TStory = StoryObj<typeof meta>;
 
 export const DefaultMedium: TStory = {
   args: {
-    format: 'medium',
+    size: 'medium',
     label: 'Title',
     placeholder: 'Input text',
     error: false,
     errorText: 'Error message',
     isDisabled: false,
     isValid: false,
+    type: 'password',
+    icon: true,
   },
 };
 
 export const DefaultSmall: TStory = {
   args: {
-    format: 'small',
+    size: 'small',
     label: 'Title',
     placeholder: 'Input text',
     error: false,
     errorText: 'Error message',
     isDisabled: false,
     isValid: false,
+    icon: true,
   },
 };
 
 export const SuccessMedium: TStory = {
   args: {
-    format: 'medium',
+    size: 'medium',
     label: 'Title',
     value: 'Input text',
     placeholder: 'Input text',
@@ -118,7 +129,7 @@ export const SuccessMedium: TStory = {
 
 export const SuccessSmall: TStory = {
   args: {
-    format: 'small',
+    size: 'small',
     label: 'Title',
     value: 'Input text',
     placeholder: 'Input text',
@@ -131,7 +142,7 @@ export const SuccessSmall: TStory = {
 
 export const ErrorMedium: TStory = {
   args: {
-    format: 'medium',
+    size: 'medium',
     label: 'Title',
     value: 'Input text',
     placeholder: 'Input text',
@@ -144,7 +155,7 @@ export const ErrorMedium: TStory = {
 
 export const ErrorSmall: TStory = {
   args: {
-    format: 'small',
+    size: 'small',
     label: 'Title',
     value: 'Input text',
     placeholder: 'Input text',
@@ -157,7 +168,7 @@ export const ErrorSmall: TStory = {
 
 export const DisabledMedium: TStory = {
   args: {
-    format: 'medium',
+    size: 'medium',
     label: 'Title',
     placeholder: 'Input text',
     error: false,
@@ -169,7 +180,7 @@ export const DisabledMedium: TStory = {
 
 export const DisabledSmall: TStory = {
   args: {
-    format: 'small',
+    size: 'small',
     label: 'Title',
     placeholder: 'Input text',
     error: false,
