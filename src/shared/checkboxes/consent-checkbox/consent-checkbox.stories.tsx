@@ -21,9 +21,8 @@ const meta: Meta<typeof ConsentCheckbox> = {
       type: 'string',
     },
 
-    label: {
+    children: {
       description: 'Подпись к чекбоксу',
-      type: 'string',
     },
 
     isChecked: {
