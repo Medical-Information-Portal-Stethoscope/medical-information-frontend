@@ -1,12 +1,25 @@
-@import 'assets/styles/abstracts/variables/colors.scss';
-@import 'assets/styles/abstracts/placeholders.scss';
-@import 'assets/styles/abstracts/variables/animations.scss';
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.icon_button {
+  background-color: $color-neutral-0;
+  outline: 0;
+  width: 24px;
+  height: 24px;
+
+  &:disabled {
+    background-color: $color-neutral-100;
+    cursor: auto;
+  }
+}
 
 .input {
-  width: 480px;
+  max-width: 544px;
 
   &--label {
-    @extend %text-size-large;
+    @extend %text-size-medium;
     color: $color-neutral-700;
 
     &--disabled {
@@ -17,7 +30,8 @@
   &--container {
     display: flex;
     justify-content: space-between;
-    margin: 12px 0 8px;
+    align-items: center;
+    margin: 8px 0 4px;
     padding: 19px 12px;
     border: 1px solid $color-neutral-400;
     border-radius: 16px;
@@ -33,6 +47,7 @@
 
     &:hover {
       border: 1px solid $color-brand-primary-900;
+      cursor: text;
     }
 
     &:focus-within {
@@ -49,6 +64,7 @@
 
     &--disabled {
       border: 1px solid $color-neutral-100;
+      background-color: $color-neutral-100;
 
       &:hover {
         border: 1px solid $color-neutral-100;
@@ -56,10 +72,13 @@
     }
 
     &--input {
+      width: 100%;
       @extend %text-size-medium;
       padding: 0;
+      padding-right: 8px;
       border: none;
       color: $color-neutral-900;
+      caret-color: $color-brand-primary-900;
 
       &::placeholder {
         color: $color-neutral-400;
@@ -74,7 +93,8 @@
       }
 
       &:disabled {
-        background-color: transparent;
+        background-color: $color-neutral-100;
+        color: $color-neutral-400;
 
         &::placeholder {
           color: transparent;
@@ -85,11 +105,11 @@
 
   &--span {
     @extend %text-size-small-light;
-    display: inline-block;
+    display: block;
     color: $color-system-error;
 
     &:empty {
-      height: 16px;
+      min-height: 16px;
     }
   }
 }

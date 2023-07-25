@@ -1,12 +1,15 @@
 const yearNow = new Date().getFullYear();
 const monthNow = new Date().getMonth();
 const dayNow = new Date().getDate();
+const monthDiffWithDjango = 1;
 
 const renderFormatDateArticle = (articleDateCreation: string): string => {
-  const [year, month, day] = articleDateCreation
+  const [year, monthWithoutDiffWithDjango, day] = articleDateCreation
     .slice(0, articleDateCreation.indexOf('T'))
     .split('-')
     .map(Number);
+
+  const month = monthWithoutDiffWithDjango - monthDiffWithDjango;
 
   let dateArticleCreation = new Date(year, month, day).toLocaleString('ru', {
     day: 'numeric',

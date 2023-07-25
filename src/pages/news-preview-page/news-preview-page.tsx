@@ -1,3 +1,5 @@
+import { Header } from 'components/header';
+import Footer from 'components/footer/footer';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import Button from 'shared/buttons/button/button';
 import data from 'components/articles/test-data/test-data';
@@ -11,20 +13,26 @@ const news = data
 
 export default function NewsPreviewPage() {
   return (
-    <section>
-      <div className={styles.wrapper}>
-        <h2 className={styles.heading}>Новости</h2>
-        <div className={styles.gallery}>
-          <div className={styles.news}>{news}</div>
-          <Button
-            label="Еще новости"
-            model="secondary"
-            size="small"
-            hasBorder
-          />
-        </div>
-      </div>
-    </section>
+    <>
+      <Header />
+      <main>
+        <section>
+          <div className={styles.wrapper}>
+            <h2 className={styles.heading}>Новости</h2>
+            <div className={styles.gallery}>
+              <div className={styles.news}>{news}</div>
+              <Button
+                label="Еще новости"
+                model="secondary"
+                size="small"
+                hasBorder
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }
 

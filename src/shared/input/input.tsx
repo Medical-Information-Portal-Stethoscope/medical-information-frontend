@@ -1,28 +1,47 @@
-import React from 'react';
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+import { Icon } from 'shared/icons';
+import { nanoid } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import styles from './input.module.scss';
-import checkIcon from '../../assets/icons/check.svg';
 
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  id: string;
-  type?: string;
-  value: string;
+interface InputProps
+  extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
+  type?: 'text' | 'email' | 'password';
+  value?: string; // TODO: Сделал пока value и onChange необязательными, поскольку, если будем пользоваться формиком, у него это все под капотом
   name: string;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  label: string;
-  placeholder: string;
+  label?: string;
+  placeholder?: string;
   error?: boolean;
   errorText?: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   extraClass?: string;
-  isValid: boolean;
-  format?: 'medium' | 'small';
+  isValid?: boolean;
+  size?: 'medium' | 'small';
+  icon?: boolean;
+  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+}
+
+function useCombinedRefs<T = HTMLElement>(
+  ...refs: Array<React.MutableRefObject<T> | React.LegacyRef<T>>
+): React.MutableRefObject<T | null> {
+  const targetRef = React.useRef<T>(null);
+  React.useEffect(() => {
+    refs.forEach((ref) => {
+      if (typeof ref === 'function') {
+        ref(targetRef.current);
+      } else if (ref != null) {
+        (ref as React.MutableRefObject<T | null>).current = targetRef.current;
+      }
+    });
+  }, [refs]);
+  return targetRef;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
-      id,
       type = 'text',
       value,
       name,
@@ -34,50 +53,95 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       isDisabled,
       extraClass,
       isValid,
-      format,
+      size = 'medium',
+      icon,
     },
-    ref
-  ) => (
-    <div className={classNames(extraClass, styles.input)}>
-      <label
-        className={classNames(styles[`input--label`], {
-          [styles[`input--label--disabled`]]: isDisabled,
-        })}
-        htmlFor={id}
-      >
-        {label}
-      </label>
-      <div
-        className={classNames(
-          styles[`input--container`],
-          styles[`input--container--${format}`],
-          {
-            [styles[`input--container--success`]]: isValid,
-            [styles[`input--container--error`]]: error && errorText,
-            [styles[`input--container--disabled`]]: isDisabled,
-          }
-        )}
-      >
-        <input
-          className={classNames(styles[`input--container--input`], {
-            [styles[`input--container--input--error`]]: error && errorText,
+    forwardedRef
+  ) => {
+    const id = nanoid();
+    const [visible, setVisible] = useState(false);
+    const innerRef = useRef<HTMLInputElement>(null);
+    const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
+
+    const forceFocus = useCallback(() => {
+      ref?.current?.focus();
+    }, [ref]);
+
+    const onWrapperClick = useCallback(() => {
+      forceFocus();
+    }, [forceFocus]);
+
+    const onIconClick = useCallback(() => setVisible(!visible), [visible]);
+
+    const iconToRender = useMemo(
+      () =>
+        icon ? (
+          <button
+            onClick={onIconClick}
+            className={styles.icon_button}
+            type="button"
+            aria-label={visible ? 'скрыть пароль' : 'показать пароль'}
+            disabled={isDisabled}
+          >
+            <Icon
+              // eslint-disable-next-line no-nested-ternary
+              color={!isDisabled ? (error ? 'red' : 'blue') : 'gray'}
+              icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
+              size="24"
+            />
+          </button>
+        ) : null,
+      [error, icon, isDisabled, onIconClick, visible]
+    );
+
+    const typeForPassword = visible ? 'text' : 'password';
+
+    return (
+      <div className={classNames(extraClass, styles.input)}>
+        <label
+          className={classNames(styles[`input--label`], {
+            [styles[`input--label--disabled`]]: isDisabled,
           })}
-          ref={ref}
-          name={name}
-          value={value}
-          id={id}
-          type={type}
-          onChange={onChange}
-          placeholder={placeholder}
-          disabled={isDisabled}
-        />
-        {isValid && <img src={checkIcon} alt="Success icon" />}
+          htmlFor={id}
+        >
+          {label}
+        </label>
+        <div
+          className={classNames(
+            styles[`input--container`],
+            styles[`input--container--${size}`],
+            {
+              [styles[`input--container--success`]]: isValid,
+              [styles[`input--container--error`]]: error && errorText,
+              [styles[`input--container--disabled`]]: isDisabled,
+            }
+          )}
+          onClick={onWrapperClick}
+        >
+          <input
+            className={classNames(styles[`input--container--input`], {
+              [styles[`input--container--input--error`]]: error && errorText,
+            })}
+            ref={ref}
+            name={name}
+            value={value}
+            id={id}
+            type={type === 'password' ? typeForPassword : type}
+            onChange={onChange}
+            placeholder={placeholder}
+            disabled={isDisabled}
+          />
+          {iconToRender}
+          {isValid && !error && type !== 'password' && (
+            <Icon color="green" icon="CheckIcon" size="24" />
+          )}
+        </div>
+        <span className={classNames(styles[`input--span`])}>
+          {error ? errorText : ''}
+        </span>
       </div>
-      <span className={classNames(styles[`input--span`])}>
-        {error ? errorText : ''}
-      </span>
-    </div>
-  )
+    );
+  }
 );
 
 export default Input;
