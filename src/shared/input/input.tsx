@@ -75,7 +75,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
 
     const iconToRender = useMemo(
       () =>
-        icon && !error ? (
+        icon ? (
           <button
             onClick={onIconClick}
             className={styles.icon_button}
@@ -83,15 +83,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-label={visible ? 'скрыть пароль' : 'показать пароль'}
             disabled={isDisabled}
           >
-            {!isDisabled ? (
-              <Icon
-                color="blue"
-                icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
-                size="24"
-              />
-            ) : (
-              <Icon color="gray" icon="EyeClosedIcon" size="24" />
-            )}
+            <Icon
+              // eslint-disable-next-line no-nested-ternary
+              color={!isDisabled ? (error ? 'red' : 'blue') : 'gray'}
+              icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
+              size="24"
+            />
           </button>
         ) : null,
       [error, icon, isDisabled, onIconClick, visible]
@@ -135,7 +132,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             disabled={isDisabled}
           />
           {iconToRender}
-          {isValid && !error && (
+          {isValid && !error && type !== 'password' && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>

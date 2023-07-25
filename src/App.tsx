@@ -3,6 +3,7 @@ import MainPage from 'pages/main-page/MainPage';
 import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import SignUpPage from 'pages/sign-up/sign-up';
 import SignInPage from 'pages/sign-in/sign-in';
+import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import routes from 'utils/routes';
 

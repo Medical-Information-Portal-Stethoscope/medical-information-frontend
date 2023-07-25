@@ -1,16 +1,10 @@
-@import 'assets/styles/abstracts/variables/fonts';
-@import 'assets/styles/abstracts/variables/wrappers';
-@import 'assets/styles/abstracts/placeholders';
-
-.section {
-  max-width: $wrapper-main-content-desktop;
-  margin: 0 auto;
-  padding: 40px 0 32px;
+.wrapper {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
 
-.section > div > div {
+.wrapper > div > div {
   overflow: visible !important;
 }
 
