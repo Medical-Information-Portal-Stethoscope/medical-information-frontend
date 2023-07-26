@@ -7,6 +7,7 @@
   margin: 0 auto;
   padding: 24px 0 40px;
   box-sizing: border-box;
+  position: relative;
 
   &__top {
     display: flex;
@@ -39,8 +40,6 @@
   &__profile {
     width: 24px;
     height: 24px;
-    padding: 12px;
-    border: none;
     background: none;
     fill: $color-brand-primary-900;
     transition: $transition-button;
@@ -105,4 +104,12 @@
       fill: $color-brand-primary-900;
     }
   }
+}
+
+.tooltip {
+  width: 395px;
+  height: 188px;
+  position: absolute;
+  top: 104px;
+  right: -12px;
 }

@@ -1,9 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import FavoriteButton from './favorite-button';
+import { Icon } from 'shared/icons';
+import ButtonWithIconTwo from './button-with-icon-two';
 
-const meta: Meta<typeof FavoriteButton> = {
-  title: 'uikit/Buttons/FavoriteButton',
-  component: FavoriteButton,
+const meta: Meta<typeof ButtonWithIconTwo> = {
+  title: 'uikit/Buttons/ButtonWithIconTwo',
+  component: ButtonWithIconTwo,
   tags: ['autodocs'],
   argTypes: {
     extraClass: {
@@ -46,5 +47,6 @@ export const Default: TStory = {
   args: {
     isSelected: false,
     isDisabled: false,
+    icon: <Icon icon="BookmarkIcon" color="white" size="32" />,
   },
 };

@@ -1,0 +1,29 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+
+.wrapperRight {
+  padding: 245px 0;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.password {
+  position: relative;
+
+  span {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+.navigation {
+  justify-self: center;
+  margin-top: 29px;
+  font-weight: 700;
+  color: $color-neutral-700;
+}

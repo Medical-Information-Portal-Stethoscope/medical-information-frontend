@@ -4,6 +4,8 @@ import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import Button from 'shared/buttons/button/button';
 import { TArticle } from 'utils/types/article';
+import { Header } from 'components/header';
+import Footer from 'components/footer/footer';
 import styles from './articles-preview-page.module.scss';
 
 const maxNumArticlesDesktop = 6;
@@ -24,15 +26,26 @@ export default function ArticlesPreviewPage() {
       )) || null;
 
   return (
-    <section>
-      <div className={styles.wrapper}>
-        <h2 className={styles.heading}>Статьи</h2>
-        <MainCarousel type="articles" />
-        <div className={styles.gallery}>
-          <div className={styles.content}>{articles}</div>
-          <Button label="Еще статьи" model="secondary" size="small" hasBorder />
-        </div>
-      </div>
-    </section>
+    <>
+      <Header />
+      <main>
+        <section>
+          <div className={styles.wrapper}>
+            <h2 className={styles.heading}>Статьи</h2>
+            <MainCarousel type="articles" />
+            <div className={styles.gallery}>
+              <div className={styles.content}>{articles}</div>
+              <Button
+                label="Еще статьи"
+                model="secondary"
+                size="small"
+                hasBorder
+              />
+            </div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
   );
 }

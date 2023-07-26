@@ -1,11 +1,11 @@
-import { InputHTMLAttributes } from 'react';
+import { InputHTMLAttributes, ReactNode } from 'react';
 import styles from './consent-checkbox.module.scss';
 
 interface IConsentCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   name: string;
   value: string;
-  label?: string;
+  children?: string | ReactNode;
   isChecked?: boolean;
   isDisabled?: boolean;
   onChange?: () => void;
@@ -15,13 +15,13 @@ export default function ConsentCheckbox({
   id,
   name,
   value,
-  label,
+  children,
   isChecked = false,
   isDisabled = false,
   onChange,
 }: IConsentCheckboxProps) {
   return (
-    <>
+    <div className={styles.checkbox}>
       <input
         className={styles.input}
         id={id}
@@ -33,8 +33,8 @@ export default function ConsentCheckbox({
         onChange={onChange}
       />
       <label className={styles.label} htmlFor={id}>
-        {label}
+        {children}
       </label>
-    </>
+    </div>
   );
 }

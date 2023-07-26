@@ -1,0 +1,30 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.navigation {
+  @extend %text-size-medium-semibold;
+  color: $color-neutral-700;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.person {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 32px;
+}
+
+.navigation {
+  justify-self: center;
+  margin-top: 29px;
+  font-weight: 700;
+}
+
+.link {
+  color: $color-brand-primary-900;
+}

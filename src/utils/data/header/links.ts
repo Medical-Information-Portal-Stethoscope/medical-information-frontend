@@ -23,11 +23,6 @@ export const headerNavLinks = [
   },
 ];
 
-export const profileNavLink = {
-  title: routes.profile.name,
-  to: routes.profile.route,
-};
-
 export const homeNavLink = {
   title: '',
   to: routes.home,
