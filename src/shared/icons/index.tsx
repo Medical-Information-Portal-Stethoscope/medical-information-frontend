@@ -5,7 +5,6 @@ import { AllIcon } from './all-icon';
 import { BigArrowIcon } from './big-arrow-icon';
 import { CancelIcon } from './cancel-icon';
 import { CardiologyIcon } from './cardiology-icon';
-
 import { ChatIcon } from './chat-icon';
 import { CheckIcon } from './check-icon';
 import { ClockIcon } from './clock-icon';
@@ -37,7 +36,6 @@ import { HailDuringNightIcon } from './hail-during-night-icon';
 import { HailIcon } from './hail-icon';
 import { HighTemperatureOneIcon } from './high-temperature-one-icon';
 import { HighTemperatureIcon } from './high-temperature-icon';
-import { BookmarkFillIcon } from './bookmark-fill-icon';
 import { BookmarkIcon } from './bookmark-icon';
 import { DotIcon } from './dot-icon';
 import { ViewsIcon } from './views-icon';
@@ -95,6 +93,7 @@ import { WindIcon } from './wind-icon';
 import { WindyIcon } from './windy-icon';
 import { YoutubeIcon } from './youtube-icon';
 import { ZenIcon } from './zen-icon';
+import { CommentsIcon } from './comments-icon';
 
 const icons = {
   AllIcon,
@@ -132,7 +131,6 @@ const icons = {
   HailIcon,
   HighTemperatureOneIcon,
   HighTemperatureIcon,
-  BookmarkFillIcon,
   BookmarkIcon,
   DotIcon,
   ViewsIcon,
@@ -190,6 +188,7 @@ const icons = {
   WindyIcon,
   YoutubeIcon,
   ZenIcon,
+  CommentsIcon,
 };
 
 type TIcons = Record<keyof typeof icons, FC<IIconProps>>;

@@ -1,0 +1,50 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/animations.scss';
+
+.button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background-color: $color-neutral-100;
+  border-radius: 50%;
+  transition: $transition-button;
+
+  * {
+    transition: $transition-button;
+  }
+
+  &:hover:enabled {
+    svg {
+      fill: $color-brand-primary-900;
+    }
+  }
+
+  &:active:enabled {
+    .bookmark path {
+      fill: $color-brand-primary-900;
+    }
+    .forward {
+      fill: $color-brand-primary-600;
+      transition: none;
+    }
+  }
+
+  &:disabled {
+    cursor: default;
+    svg {
+      fill: $color-neutral-400;
+    }
+  }
+}
+
+.button--isSelected {
+  .bookmark path {
+    fill: $color-brand-primary-900;
+  }
+  .forward {
+    fill: $color-brand-primary-600;
+    transition: none;
+  }
+}
