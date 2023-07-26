@@ -4,7 +4,6 @@ import { CloudDrizzelIcon } from 'shared/icons/cloud-drizzel-icon';
 import { LocationPinIcon } from 'shared/icons/location-pin-icon';
 import Tooltip from 'shared/tooltip/tooltip';
 import { UserIcon } from 'shared/icons/user-icon';
-import Portal from 'shared/portal';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
 import { Search } from './search';
