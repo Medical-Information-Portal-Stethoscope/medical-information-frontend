@@ -26,7 +26,7 @@
   &__annotation {
     @extend %text-size-large;
     color: $color-neutral-700;
-    margin-bottom: 24px;
+    margin-bottom: 26px;
     padding: 0;
   }
 
@@ -56,8 +56,10 @@
 
   &__cover {
     width: 100%;
+    height: 500px;
     margin: 32px auto;
     object-fit: cover;
+    border-radius: 12px;
   }
 
   &__text {
@@ -71,20 +73,27 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    height: 44px; //tmp
+    height: 44px;
     width: 156px;
 
-    margin-bottom: 32px;
+    margin-bottom: 34px;
+  }
+
+  &__comments {
+    svg {
+      height: 22px;
+      width: 22px;
+    }
   }
 
   &__additional {
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-bottom: 32px;
+    width: 100%;
+    margin-bottom: 30px;
     @extend %text-size-medium-semibold;
     color: $color-neutral-500;
-    margin-right: 16px;
   }
 
   &__additional_text {
@@ -95,12 +104,17 @@
 
   &__author {
     color: $color-brand-primary-900;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    padding: 12px 0;
   }
 
   &__tags {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    width: 100%;
     gap: 12px;
   }
 
