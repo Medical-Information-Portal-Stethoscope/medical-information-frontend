@@ -75,8 +75,7 @@ export const Paper: FC<Ipaper> = ({
         <ButtonWithIconThree
           icon={<CommentsIcon color="gray" size="24" />}
           onClick={handleAddComment}
-          // extraClass={styles.paper__comments}
-          extraClass={`${styles.paper__button}`}
+          extraClass={`${styles.paper__button} `}
         />
       </div>
 
