@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
-import { useGetAllArticlesQuery } from 'services/features/articles/api';
+import { useGetAllArticlesQuery } from 'services/features/information-material/api';
 import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import Button from 'shared/buttons/button/button';

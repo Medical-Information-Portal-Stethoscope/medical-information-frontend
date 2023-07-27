@@ -1,15 +1,18 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { articlesApi } from 'services/features/articles/api';
+import { informationMaterialApi } from 'services/features/information-material/api';
 import { tagsApi } from 'services/features/tags/api';
 
 export const store = configureStore({
   reducer: {
-    [articlesApi.reducerPath]: articlesApi.reducer,
+    [informationMaterialApi.reducerPath]: informationMaterialApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(articlesApi.middleware, tagsApi.middleware),
+    getDefaultMiddleware().concat([
+      informationMaterialApi.middleware,
+      tagsApi.middleware,
+    ]),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

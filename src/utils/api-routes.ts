@@ -6,7 +6,9 @@ const api = Object.freeze({
       base: '/articles',
     },
     tags: {
+      // все теги
       all: '/tags',
+      // верхнеуровневые теги
       roots: '/tags/roots',
     },
   },
