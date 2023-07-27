@@ -24,3 +24,4 @@ build/
 .husky
 .storybook
 .github
+archive/
