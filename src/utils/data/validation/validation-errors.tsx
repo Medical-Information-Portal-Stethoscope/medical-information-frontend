@@ -9,7 +9,6 @@ export const validationErrors = Object.freeze({
     },
 
     password: {
-      unacceptableSymbols: 'Поле не должно содержать символы % ; . * ^ ) _ @ !',
       unacceptableLength: 'Пароль должен содержать 6–20 символов',
       wrong:
         'Неверный пароль. Повторите попытку или нажмите на ссылку «Забыли пароль?», чтобы восстановить его',
