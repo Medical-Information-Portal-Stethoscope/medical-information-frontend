@@ -5,6 +5,10 @@ const api = Object.freeze({
     articles: {
       base: '/articles',
     },
+    tags: {
+      all: '/tags',
+      roots: '/tags/roots',
+    },
   },
 });
 

@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
-import { useGetArticlesQuery } from 'services/features/articles/api';
+import { useGetAllArticlesQuery } from 'services/features/articles/api';
+import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import CardMoreContent from 'components/cards/more-content/more-content';
@@ -10,7 +11,12 @@ import styles from './articles.module.scss';
 const maxNumArticlesDesktop = 6;
 
 export default function Articles() {
-  const { data } = useGetArticlesQuery();
+  // Получаем список всех тегов
+  const { data: tags = [] } = useGetRootsTagsQuery();
+  // Находим тег новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
+  // Получаем список всех статей
+  const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
 
   const articles: ReactNode | null =
     data?.results
