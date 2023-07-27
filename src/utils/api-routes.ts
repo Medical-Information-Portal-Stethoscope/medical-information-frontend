@@ -5,6 +5,12 @@ const api = Object.freeze({
     articles: {
       base: '/articles',
     },
+    tags: {
+      // все теги
+      all: '/tags',
+      // верхнеуровневые теги
+      roots: '/tags/roots',
+    },
   },
 });
 
