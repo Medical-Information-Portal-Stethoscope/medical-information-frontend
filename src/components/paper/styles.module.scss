@@ -77,6 +77,19 @@
     width: 156px;
 
     margin-bottom: 34px;
+
+    button:first-child:active:enabled {
+      .bookmark path {
+        fill: $color-brand-primary-900;
+      }
+    }
+
+    button:not(:first-child):active:enabled {
+      .forward {
+        fill: $color-brand-primary-600;
+        transition: none;
+      }
+    }
   }
 
   &__comments {

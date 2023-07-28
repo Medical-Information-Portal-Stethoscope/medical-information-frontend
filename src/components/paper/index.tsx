@@ -62,18 +62,24 @@ export const Paper: FC<Ipaper> = ({
 
       <div className={styles.paper__buttons}>
         <ButtonWithIconThree
-          icon={<BookmarkIcon color="gray" size="32" />}
+          icon={
+            <BookmarkIcon color="gray" size="32" className={styles.bookmark} />
+          }
           isSelected={data.is_favorited}
           onClick={handleAddBookmark}
           extraClass={styles.paper__button}
         />
         <ButtonWithIconThree
-          icon={<ForwardIcon color="gray" size="32" />}
+          icon={
+            <ForwardIcon color="gray" size="32" className={styles.forward} />
+          }
           onClick={handleForward}
           extraClass={styles.paper__button}
         />
         <ButtonWithIconThree
-          icon={<CommentsIcon color="gray" size="24" />}
+          icon={
+            <CommentsIcon color="gray" size="24" className={styles.forward} />
+          }
           onClick={handleAddComment}
           extraClass={`${styles.paper__button} `}
         />
