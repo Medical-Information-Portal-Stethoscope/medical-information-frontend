@@ -1,0 +1,42 @@
+@import '../../assets/styles/index.scss';
+
+.articles {
+  width: 1208px;
+  margin: 0 auto;
+  padding: 0;
+
+  &__header {
+    @extend %heading-size-medium;
+    color: $color-neutral-900;
+    padding: 0;
+    margin-bottom: 32px;
+  }
+
+  &__containter {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  &__item {
+    width: 592px;
+    height: 624px;
+    padding: 24px;
+    box-sizing: border-box;
+
+    div:first-child {
+      height: 320px;
+    }
+
+    img {
+      width: 544px;
+      height: 320px;
+      object-fit: cover;
+    }
+
+    div:nth-child(2) {
+      height: 205px;
+    }
+  }
+}
