@@ -17,12 +17,7 @@ export const ArticlesPreviewSmall: FC<IArticlePreviewSmall> = ({
   const articles = data
     .slice(0, maxNumCardsDesktop)
     .map((item) => (
-      <CardArticlePreview
-        key={item.id}
-        data={item}
-        type="media"
-        extraClass={styles.articles__item}
-      />
+      <CardArticlePreview key={item.id} data={item} type="default" />
     ));
 
   return (
