@@ -63,7 +63,8 @@ const SignUpPage: FC = (): ReactElement => {
       heading="Регистрация"
       buttonLabel="Зарегистрироваться"
       altNavigation={navigation}
-      isDisabled={!formik.isValid || formik.isSubmitting}
+      isLoading={formik.isSubmitting}
+      isDisabled={!formik.isValid}
       onSubmit={formik.handleSubmit}
     >
       <div className={styles.inputs}>

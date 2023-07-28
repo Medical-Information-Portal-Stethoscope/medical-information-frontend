@@ -10,6 +10,7 @@ interface IEntryProps {
   children: ReactNode;
   heading: string;
   buttonLabel: string;
+  isLoading: boolean;
   isDisabled: boolean;
   altNavigation?: ReactNode;
   extraClass?: string;
@@ -20,6 +21,7 @@ const Entry: FC<IEntryProps> = ({
   children,
   heading,
   buttonLabel,
+  isLoading,
   isDisabled,
   altNavigation,
   extraClass,
@@ -40,7 +42,12 @@ const Entry: FC<IEntryProps> = ({
           <h2 className={styles.heading}>{heading}</h2>
           <form className={styles.form} noValidate onSubmit={onSubmit}>
             {children}
-            <Button type="submit" label={buttonLabel} isDisabled={isDisabled} />
+            <Button
+              type="submit"
+              label={buttonLabel}
+              isLoading={isLoading}
+              isDisabled={isDisabled}
+            />
           </form>
           {altNavigation && altNavigation}
         </div>
