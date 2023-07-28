@@ -1,6 +1,9 @@
+import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import { useAppDispatch } from 'services/app/hooks';
+import { registerUser } from 'services/features/user/api';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
@@ -17,8 +20,9 @@ import {
 } from 'utils/data/validation/yup-schemax';
 import styles from './sign-up.module.scss';
 
-export default function SignUpPage() {
+const SignUpPage: FC = (): ReactElement => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const formik = useFormik({
     initialValues: {
@@ -38,8 +42,8 @@ export default function SignUpPage() {
       .shape(schemaPasswordConfirmation(Yup))
       .shape(schemaPersonalDataConsent(Yup)),
 
-    onSubmit: (values, { resetForm, setSubmitting }) => {
-      console.log(values);
+    onSubmit: (data, { resetForm, setSubmitting }) => {
+      dispatch(registerUser(data));
     },
   });
 
@@ -118,4 +122,6 @@ export default function SignUpPage() {
       </ConsentCheckbox>
     </Entry>
   );
-}
+};
+
+export default SignUpPage;
