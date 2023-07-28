@@ -19,7 +19,14 @@ export const informationMaterialApi = createApi({
     >({
       query: (id) => `${api.endpoints.articles.base}/?tags_exclude=${id}`,
     }),
+    getAllNews: builder.query<
+      TGetInformationMaterialResponse,
+      string | undefined
+    >({
+      query: (id) => `${api.endpoints.articles.base}/?tags=${id}`,
+    }),
   }),
 });
 
-export const { useGetAllArticlesQuery } = informationMaterialApi;
+export const { useGetAllArticlesQuery, useGetAllNewsQuery } =
+  informationMaterialApi;
