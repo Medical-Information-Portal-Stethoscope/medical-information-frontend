@@ -6,6 +6,8 @@ import { nanoid } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import styles from './input.module.scss';
 
+// TODO: зеленая галочка
+
 interface InputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
   type?: 'text' | 'email' | 'password';
@@ -20,7 +22,8 @@ interface InputProps
   isValid?: boolean;
   size?: 'medium' | 'small';
   icon?: boolean;
-  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+  autoComplete?: 'on' | 'off';
+  formik?: any;
 }
 
 function useCombinedRefs<T = HTMLElement>(
@@ -45,16 +48,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       type = 'text',
       value,
       name,
-      onChange,
       label,
       placeholder,
-      error,
-      errorText,
-      isDisabled,
       extraClass,
       isValid,
       size = 'medium',
       icon,
+      autoComplete = 'off',
+      formik,
     },
     forwardedRef
   ) => {
@@ -62,6 +63,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
+    const { errors, touched } = formik;
 
     const forceFocus = useCallback(() => {
       ref?.current?.focus();
@@ -81,17 +83,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={styles.icon_button}
             type="button"
             aria-label={visible ? 'скрыть пароль' : 'показать пароль'}
-            disabled={isDisabled}
+            disabled={isValid}
           >
             <Icon
               // eslint-disable-next-line no-nested-ternary
-              color={!isDisabled ? (error ? 'red' : 'blue') : 'gray'}
+              color={
+                // eslint-disable-next-line no-nested-ternary
+                !isValid
+                  ? errors[name] && touched[name]
+                    ? 'red'
+                    : 'blue'
+                  : 'gray'
+              }
               icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
               size="24"
             />
           </button>
         ) : null,
-      [error, icon, isDisabled, onIconClick, visible]
+      [errors, icon, isValid, onIconClick, visible]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
@@ -100,7 +109,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={classNames(extraClass, styles.input)}>
         <label
           className={classNames(styles[`input--label`], {
-            [styles[`input--label--disabled`]]: isDisabled,
+            [styles[`input--label--disabled`]]: isValid,
           })}
           htmlFor={id}
         >
@@ -112,32 +121,35 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles[`input--container--${size}`],
             {
               [styles[`input--container--success`]]: isValid,
-              [styles[`input--container--error`]]: error && errorText,
-              [styles[`input--container--disabled`]]: isDisabled,
+              [styles[`input--container--error`]]:
+                errors[name] && touched[name],
+              [styles[`input--container--disabled`]]: isValid,
             }
           )}
           onClick={onWrapperClick}
         >
           <input
             className={classNames(styles[`input--container--input`], {
-              [styles[`input--container--input--error`]]: error && errorText,
+              [styles[`input--container--input--error`]]:
+                errors[name] && touched[name],
             })}
             ref={ref}
             name={name}
-            value={value}
+            defaultValue={value}
             id={id}
             type={type === 'password' ? typeForPassword : type}
-            onChange={onChange}
+            {...formik.getFieldProps({ name })}
+            autoComplete={autoComplete}
             placeholder={placeholder}
-            disabled={isDisabled}
+            disabled={isValid}
           />
           {iconToRender}
-          {isValid && !error && type !== 'password' && (
+          {isValid && !errors[name] && type !== 'password' && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {error ? errorText : ''}
+          {errors[name] && touched[name] ? errors[name] : ''}
         </span>
       </div>
     );

@@ -4,6 +4,7 @@ import { validationErrors } from './validation-errors';
 export const schemaEmail = (yup: any) => ({
   email: yup
     .string()
+    .max(50, validationErrors.user.email.unacceptableLength)
     .matches(regexEmail, validationErrors.user.email.acceptableSymbols)
     .required(validationErrors.user.email.required),
 });
@@ -16,8 +17,17 @@ export const schemaPassword = (yup: any) => ({
     .required(validationErrors.user.password.required),
 });
 
+export const schemaPasswordConfirmation = (yup: any) => ({
+  password_confirmation: yup
+    .string()
+    .min(6, validationErrors.user.password.unacceptableLength)
+    .max(20, validationErrors.user.password.unacceptableLength)
+    .oneOf([yup.ref('password')], validationErrors.user.password.confirmation)
+    .required(validationErrors.user.password.required),
+});
+
 export const schemaName = (yup: any) => ({
-  name: yup
+  first_name: yup
     .string()
     .matches(regexName, validationErrors.user.name.unacceptableSymbols)
     .min(1, validationErrors.user.name.unacceptableLength)
@@ -25,8 +35,8 @@ export const schemaName = (yup: any) => ({
     .required(validationErrors.user.name.required),
 });
 
-export const schemaSurname = (yup: any) => ({
-  name: yup
+export const schemaLastname = (yup: any) => ({
+  last_name: yup
     .string()
     .matches(regexSurname, validationErrors.user.surname.unacceptableSymbols)
     .min(1, validationErrors.user.surname.unacceptableLength)
@@ -35,5 +45,5 @@ export const schemaSurname = (yup: any) => ({
 });
 
 export const schemaPersonalDataConsent = (yup: any) => ({
-  is_agreed: yup.bool().required().oneOf([true]),
+  personal_data_confirmation_has_agreed: yup.bool().required().oneOf([true]),
 });

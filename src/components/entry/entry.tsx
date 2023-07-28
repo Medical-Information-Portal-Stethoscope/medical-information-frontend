@@ -1,4 +1,4 @@
-import { ReactNode, FC } from 'react';
+import { ReactNode, FC, FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import { Logo } from 'shared/logo';
@@ -10,16 +10,20 @@ interface IEntryProps {
   children: ReactNode;
   heading: string;
   buttonLabel: string;
+  isDisabled: boolean;
   altNavigation?: ReactNode;
   extraClass?: string;
+  onSubmit: (evt: FormEvent<HTMLFormElement>) => void;
 }
 
 const Entry: FC<IEntryProps> = ({
   children,
   heading,
   buttonLabel,
+  isDisabled,
   altNavigation,
   extraClass,
+  onSubmit,
 }) => (
   <main className={styles.main}>
     <div className={styles.columnLeft}>
@@ -34,9 +38,9 @@ const Entry: FC<IEntryProps> = ({
       <div className={classNames(styles.wrapperRight, extraClass)}>
         <div className={styles.formWrapper}>
           <h2 className={styles.heading}>{heading}</h2>
-          <form className={styles.form}>
+          <form className={styles.form} noValidate onSubmit={onSubmit}>
             {children}
-            <Button label={buttonLabel} />
+            <Button type="submit" label={buttonLabel} isDisabled={isDisabled} />
           </form>
           {altNavigation && altNavigation}
         </div>

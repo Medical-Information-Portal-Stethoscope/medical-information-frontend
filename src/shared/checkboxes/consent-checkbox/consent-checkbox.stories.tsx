@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import ConsentCheckbox from './consent-checkbox';
+import { ConsentCheckbox } from './consent-checkbox';
 
 const meta: Meta<typeof ConsentCheckbox> = {
   title: 'uikit/Checkboxes/ConsentCheckbox',
@@ -13,11 +13,6 @@ const meta: Meta<typeof ConsentCheckbox> = {
 
     name: {
       description: 'Имя чекбокса',
-      type: 'string',
-    },
-
-    value: {
-      description: 'Значение чекбокса',
       type: 'string',
     },
 
@@ -59,7 +54,6 @@ export const Default: TStory = {
   args: {
     id: 'template',
     name: 'consent-checkbox',
-    value: 'agree',
     isChecked: false,
     isDisabled: false,
   },
