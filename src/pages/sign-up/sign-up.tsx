@@ -43,7 +43,10 @@ const SignUpPage: FC = (): ReactElement => {
       .shape(schemaPersonalDataConsent(Yup)),
 
     onSubmit: (data, { resetForm, setSubmitting }) => {
-      dispatch(registerUser(data));
+      dispatch(registerUser(data))
+        .then((res) => console.log(res))
+        .catch((err) => console.error(err))
+        .finally(() => setSubmitting(false));
     },
   });
 

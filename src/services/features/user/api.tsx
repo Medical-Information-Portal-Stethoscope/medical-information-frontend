@@ -11,29 +11,21 @@ interface IUserRegistration extends IUser {
 
 export const registerUser = createAsyncThunk(
   'user/register',
-  async (data: IUserRegistration, { rejectWithValue }) => {
+  async (data: IUserRegistration) => {
     const { email, password, first_name, last_name } = data;
 
-    try {
-      const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password, first_name, last_name }),
-      });
+    const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password, first_name, last_name }),
+    });
 
-      console.log(res);
-
-      if (!res.ok) {
-        Promise.reject(new Error(`Error ${res.status}`));
-      }
-
-      const success = await res.json();
-
-      return success;
-    } catch (err) {
-      return rejectWithValue(`User registration error: ${err}`);
+    if (!res.ok) {
+      Promise.reject(new Error(`Error ${res.status}`));
     }
+
+    return res.json();
   }
 );
