@@ -8,6 +8,13 @@ const api = Object.freeze({
 
     user: {
       base: '/users',
+
+      auth: {
+        base: '/auth',
+
+        login: '/login',
+        logout: '/logout',
+      },
     },
   },
 });
