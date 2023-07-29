@@ -11,7 +11,7 @@ import { ClockIcon } from 'shared/icons/clock-icon';
 import { ViewsIcon } from 'shared/icons/views-icon';
 
 import { ForwardIcon } from 'shared/icons/forward-icon';
-import { BookmarkIcon } from 'shared/icons/bookmark-icon';
+// import { BookmarkIcon } from 'shared/icons/bookmark-icon';
 import { CommentsIcon } from 'shared/icons/comments-icon';
 
 import Button from 'shared/buttons/button/button';
@@ -52,6 +52,18 @@ export const Paper: FC<Ipaper> = ({
         <DotIcon size="24" color="gray" className={styles.paper__dot} />
         <ViewsIcon color="gray" size="24" />
         <p className={styles.paper__views}>{data.views_count}</p>
+        <DotIcon size="24" color="gray" className={styles.paper__dot} />
+        <p className={styles.paper__source}>
+          Источник:{' '}
+          <a
+            className={styles.paper__link}
+            href={data.source_link || '#'}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {data.source_name}
+          </a>
+        </p>
       </div>
       <img
         className={styles.paper__cover}
@@ -61,14 +73,14 @@ export const Paper: FC<Ipaper> = ({
       <p className={styles.paper__text}>{data.text}</p>
 
       <div className={styles.paper__buttons}>
-        <ButtonWithIconThree
+        {/* <ButtonWithIconThree
           icon={
             <BookmarkIcon color="gray" size="32" className={styles.bookmark} />
           }
           isSelected={data.is_favorited}
           onClick={handleAddBookmark}
           extraClass={styles.paper__button}
-        />
+        /> */}
         <ButtonWithIconThree
           icon={
             <ForwardIcon color="gray" size="32" className={styles.forward} />
@@ -90,7 +102,7 @@ export const Paper: FC<Ipaper> = ({
         <p className={styles.paper__additional_text}>Автор:</p>
         <Link
           className={styles.paper__author}
-          to="/author/#"
+          to="/authors/#"
         >{`${data.author?.first_name} ${data.author?.last_name}`}</Link>
       </div>
 
