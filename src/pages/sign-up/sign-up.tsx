@@ -73,6 +73,7 @@ const SignUpPage: FC = (): ReactElement => {
       altNavigation={navigation}
       isLoading={formik.isSubmitting}
       isDisabled={!formik.isValid}
+      hasCommentaryWithRequired
       onSubmit={formik.handleSubmit}
     >
       <div className={styles.inputs}>
