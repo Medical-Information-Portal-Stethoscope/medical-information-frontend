@@ -1,0 +1,14 @@
+@import '../../assets/styles/index.scss';
+
+.article {
+  max-width: $wrapper-main-content-desktop;
+
+  &__container {
+    max-width: 1208px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 80px;
+  }
+}
