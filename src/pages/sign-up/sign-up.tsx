@@ -5,6 +5,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch } from 'services/app/hooks';
 import { registerUser } from 'services/features/user/api';
+import { IUserRegistration } from 'services/features/user/types';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
@@ -19,7 +20,7 @@ import {
   schemaPassword,
   schemaPasswordConfirmation,
   schemaPersonalDataConsent,
-} from 'utils/data/validation/yup-schemax';
+} from 'utils/data/validation/yup-schema';
 import styles from './sign-up.module.scss';
 
 const SignUpPage: FC = (): ReactElement => {

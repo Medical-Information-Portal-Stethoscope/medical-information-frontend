@@ -3,7 +3,7 @@ const api = Object.freeze({
 
   endpoints: {
     articles: {
-      base: 'articles/',
+      base: 'articles',
     },
 
     user: {

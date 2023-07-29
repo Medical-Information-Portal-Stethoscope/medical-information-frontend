@@ -1,13 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from 'utils/types/user';
+import { IUser } from './types';
 import { registerUser, loginUser } from './api';
 
 type TSliceState = {
   user: IUser | null;
+  token: string | null;
 
   process: {
     isLoading: boolean;
-    error: null;
+    error: null | unknown;
   };
 };
 
@@ -23,6 +24,7 @@ const initialState = {
 const userSlice = createSlice({
   name: 'user',
   initialState,
+  reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(registerUser.pending, (state) => {
@@ -45,7 +47,7 @@ const userSlice = createSlice({
         state.process.error = null;
       })
       .addCase(loginUser.fulfilled, (state, { payload }) => {
-        state.user = payload.user;
+        state.token = payload.user.auth_token;
 
         state.process.isLoading = false;
         state.process.error = null;

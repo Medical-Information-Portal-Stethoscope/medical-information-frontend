@@ -8,7 +8,7 @@ import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
-import { schemaEmail, schemaPassword } from 'utils/data/validation/yup-schemax';
+import { schemaEmail, schemaPassword } from 'utils/data/validation/yup-schema';
 import styles from './sign-in.module.scss';
 
 const SignInPage: FC = (): ReactElement => {
@@ -49,7 +49,6 @@ const SignInPage: FC = (): ReactElement => {
       heading="Вход в аккаунт"
       buttonLabel="Войти"
       altNavigation={navigation}
-      extraClass={styles.wrapperRight}
       isLoading={formik.isSubmitting}
       isDisabled={!formik.isValid}
       onSubmit={formik.handleSubmit}

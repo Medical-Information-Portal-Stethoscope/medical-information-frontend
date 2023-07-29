@@ -1,5 +1,8 @@
 import { regexDoubleSpace } from 'utils/regex';
-import { IFormValues } from 'utils/types/general';
+
+export interface IFormValues {
+  [key: string]: string;
+}
 
 export const filterFormValues = (values: IFormValues) => {
   const copyValues = { ...values };

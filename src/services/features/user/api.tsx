@@ -1,6 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { IUserRegistration, IUserLogin } from 'utils/types/user';
 import api from 'utils/api-routes';
+import {
+  IUserRegistration,
+  IUserRegistrationResponse,
+  IUserLogin,
+  IUserLoginResponse,
+} from './types';
 
 export const registerUser = createAsyncThunk(
   'user/registration',
@@ -17,7 +22,7 @@ export const registerUser = createAsyncThunk(
       Promise.reject(new Error(`Error ${res.status}`));
     }
 
-    return res.json();
+    return (await res.json()) as IUserRegistrationResponse;
   }
 );
 
@@ -39,6 +44,6 @@ export const loginUser = createAsyncThunk(
       Promise.reject(new Error(`Error ${res.status}`));
     }
 
-    return res.json();
+    return (await res.json()) as IUserLoginResponse;
   }
 );
