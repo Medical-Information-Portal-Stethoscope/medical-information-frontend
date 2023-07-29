@@ -16,10 +16,6 @@ const meta: Meta<typeof ConsentCheckbox> = {
       type: 'string',
     },
 
-    children: {
-      description: 'Подпись к чекбоксу',
-    },
-
     isChecked: {
       description: 'Отметить чекбокс',
       type: 'boolean',

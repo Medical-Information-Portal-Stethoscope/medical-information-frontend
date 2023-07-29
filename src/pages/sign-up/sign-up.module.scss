@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
 .navigation {
@@ -27,4 +28,21 @@
 
 .link {
   color: $color-brand-primary-900;
+  transition: $transition-button;
+
+  &:hover {
+    color: $color-brand-primary-700;
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
+  }
+}
+
+.consentConfirmation {
+  display: flex;
+  column-gap: 20px;
+  align-items: center;
+  color: $color-neutral-700;
+  letter-spacing: $font-letter-spacing-main;
 }
