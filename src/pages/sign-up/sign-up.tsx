@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -8,6 +9,7 @@ import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import Button from 'shared/buttons/button/button';
+import { filterFormValues } from 'utils/functions/filter-form-values';
 // import termsOfUse from 'assets/documents/terms-of-use.pdf'; TODO: к политике конфиденциальности
 import routes from 'utils/routes';
 import {
@@ -42,7 +44,10 @@ const SignUpPage: FC = (): ReactElement => {
       .shape(schemaPasswordConfirmation(Yup))
       .shape(schemaPersonalDataConsent(Yup)),
 
-    onSubmit: (data, { resetForm, setSubmitting }) => {
+    onSubmit: (values, { resetForm, setSubmitting }) => {
+      const { email, password, first_name, last_name } = values;
+      const data = filterFormValues({ email, password, first_name, last_name });
+
       dispatch(registerUser(data))
         .then((res) => console.log(res))
         .catch((err) => console.error(err))
