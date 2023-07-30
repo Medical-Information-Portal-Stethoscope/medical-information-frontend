@@ -1,10 +1,6 @@
 import { regexDoubleSpace } from 'utils/regex';
 
-export interface IFormValues {
-  [key: string]: string;
-}
-
-export const filterFormValues = (values: IFormValues) => {
+export const filterFormValues = (values: any) => {
   const copyValues = { ...values };
 
   Object.keys(copyValues).map((key) => {

@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import { useAppDispatch } from 'services/app/hooks';
 import { registerUser } from 'services/features/user/api';
 import { resetServerError } from 'services/features/user/slice';
-// import { IUserRegistration } from 'services/features/user/types';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';

@@ -1,7 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import { persistStore, persistReducer } from 'redux-persist'
 import { articlesApi } from 'services/features/articles/api';
 import userSlice from 'services/features/user/slice';
+
+import { authMiddleware } from 'services/features/user/middlewares';
 
 export const store = configureStore({
   reducer: {
@@ -10,7 +11,7 @@ export const store = configureStore({
   },
 
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(articlesApi.middleware),
+    getDefaultMiddleware().concat(authMiddleware, articlesApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

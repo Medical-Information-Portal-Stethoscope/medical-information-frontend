@@ -4,11 +4,10 @@ import { registerUser, loginUser } from './api';
 
 type TSliceState = {
   user: IUser | null;
-  token: string | null;
 
   process: {
     isLoading: boolean;
-    error: null | unknown | any; // TODO: коллеги, если подправите тип, буду признателен. Устал бороться с TS >_<
+    error: null | any; // TODO: коллеги, если подправите тип, буду признателен. Устал бороться с TS >_<
   };
 };
 
@@ -49,11 +48,11 @@ const userSlice = createSlice({
       .addCase(loginUser.pending, (state) => {
         state.process.isLoading = true;
       })
-      .addCase(loginUser.fulfilled, (state, { payload }) => {
-        state.token = payload.auth_token;
-
+      .addCase(loginUser.fulfilled, (state) => {
         state.process.isLoading = false;
         state.process.error = null;
+
+        // TODO: по идее, бэки должны посылать имя и фамилию юзера для сохранения в store и отображения в лк
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.process.isLoading = false;
