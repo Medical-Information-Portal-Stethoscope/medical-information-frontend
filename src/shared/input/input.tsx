@@ -1,19 +1,24 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { Icon } from 'shared/icons';
 import { nanoid } from '@reduxjs/toolkit';
-import { useAppSelector } from 'services/app/hooks';
+import { useAppSelector, useAppDispatch } from 'services/app/hooks';
 import { showServerError } from 'services/features/user/selectors';
+import { resetServerError } from 'services/features/user/slice';
 import classNames from 'classnames';
 import styles from './input.module.scss';
-
-// TODO: зеленая галочка
 
 interface InputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
   type?: 'text' | 'email' | 'password';
-  value?: string; // TODO: Сделал пока value и onChange необязательными, поскольку, если будем пользоваться формиком, у него это все под капотом
+  value?: string;
   name: string;
   label?: string;
   placeholder?: string;
@@ -65,6 +70,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
+    const dispatch = useAppDispatch();
     const serverError = useAppSelector(showServerError);
     const copyServerError = { ...serverError }; // Copy is needed for adding new properties in object (see below)
     const { values, errors, touched } = formik;
@@ -72,6 +78,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     if (serverError?.non_field_errors) {
       copyServerError.password = serverError.non_field_errors;
     }
+
+    useEffect(() => {
+      if (copyServerError[name]) {
+        dispatch(resetServerError());
+      }
+    }, [values[name]]);
 
     const forceFocus = useCallback(() => {
       ref?.current?.focus();
@@ -158,7 +170,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         </div>
         <span className={classNames(styles[`input--span`])}>
           {(errors[name] && touched[name] ? errors[name] : '') ||
-            (copyServerError && copyServerError[name])}
+            copyServerError[name]}
         </span>
       </div>
     );

@@ -38,7 +38,7 @@ const SignInPage: FC = (): ReactElement => {
 
   const navigation = (
     <div className={styles.navigation}>
-      Нет аккаунта?{' '}
+      <span>Нет аккаунта?</span>{' '}
       <Button
         label="Зарегистрируйтесь"
         model="tertiary"

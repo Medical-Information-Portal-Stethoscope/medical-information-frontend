@@ -61,7 +61,7 @@ const SignUpPage: FC = (): ReactElement => {
 
   const navigation = (
     <div className={styles.navigation}>
-      Есть аккаунт?{' '}
+      <span>Есть аккаунт?</span>{' '}
       <Button
         label="Войти"
         model="tertiary"
