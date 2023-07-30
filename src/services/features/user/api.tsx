@@ -22,7 +22,7 @@ export const registerUser = createAsyncThunk(
       const resBody = await res.json();
 
       if (!res.ok) {
-        return rejectWithValue(resBody);
+        throw resBody;
       }
 
       return resBody as IUserRegistrationResponse;
@@ -50,7 +50,7 @@ export const loginUser = createAsyncThunk(
       const resBody = await res.json();
 
       if (!res.ok) {
-        return rejectWithValue(resBody);
+        throw resBody;
       }
 
       return resBody as IUserLoginResponse;
