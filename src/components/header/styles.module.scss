@@ -1,32 +1,18 @@
 @import 'assets/styles/index.scss';
 
 .header {
-  display: flex;
   max-width: $wrapper-main-content-desktop;
-  flex-direction: column;
-  margin: 0 auto;
-  padding: 24px 0 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 83px;
+  height: 168px;
+  margin: 32px auto 0;
+  padding: 42px 48px;
+  border-radius: 16px;
   box-sizing: border-box;
   position: relative;
-
-  &__top {
-    display: flex;
-    flex-direction: row;
-    padding-bottom: 24px;
-    margin-bottom: 16px;
-    gap: 118px;
-    justify-content: space-between;
-    align-items: flex-end;
-  }
-
-  &__bottom {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    padding: 24px 0;
-    gap: 90px;
-    align-items: center;
-  }
+  background-color: $color-brand-primary-900;
 
   &__search {
     display: flex;
@@ -34,74 +20,21 @@
     justify-content: flex-end;
     align-items: center;
     gap: 40px;
-    width: 100%;
+    justify-self: end;
   }
 
   &__profile {
-    width: 24px;
-    height: 24px;
+    width: 48px;
+    height: 48px;
     background: none;
-    fill: $color-brand-primary-900;
+    fill: $color-neutral-0;
     transition: $transition-button;
 
     &:hover svg {
-      fill: $color-brand-primary-700;
+      width: 48px;
+      height: 48px;
+      fill: $color-brand-primary-500;
       cursor: pointer;
-    }
-  }
-
-  &__widget {
-    min-width: 437px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    max-width: 437px;
-    padding: 0;
-    gap: 20px;
-
-    &__date {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: center;
-    }
-
-    &__currentday {
-      @extend %text-size-small;
-      margin-bottom: 4px;
-      padding: 0;
-    }
-
-    &__currenttime {
-      @extend %text-size-small-extra;
-      padding: 0;
-    }
-
-    &__info {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-    }
-
-    &__temperature {
-      @extend %text-size-small-extra;
-      padding-left: 2px;
-    }
-
-    &__temperature svg {
-      fill: $color-neutral-900;
-    }
-
-    &__city {
-      @extend %text-size-small-extra;
-      padding: 0;
-      height: 16px;
-      margin-left: 8px;
-    }
-
-    &__city svg {
-      fill: $color-brand-primary-900;
     }
   }
 }

@@ -8,6 +8,7 @@ const routes = Object.freeze({
   drugs: { route: '/drugs', name: 'Лекарства и БАД' },
   doctorQuestion: { route: '/doctor', name: 'Вопрос врачу' },
   about: { route: '/about', name: 'О портале' },
+  creators: { route: '/creators', name: 'Авторам' },
 });
 
 export default routes;

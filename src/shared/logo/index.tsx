@@ -1,4 +1,5 @@
 import logo from 'assets/images/Logo.svg';
+import logoLight from 'assets/images/Logo-light.svg';
 
 export interface ILogoProps {
   isHeading?: boolean;
@@ -8,7 +9,7 @@ export interface ILogoProps {
 export const Logo = ({ isHeading, extClassName }: ILogoProps) =>
   isHeading ? (
     <h1 className={extClassName}>
-      <img src={logo} alt="логотип" />
+      <img src={logoLight} alt="логотип" />
     </h1>
   ) : (
     <div className={extClassName}>

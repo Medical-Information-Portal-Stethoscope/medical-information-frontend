@@ -10,16 +10,12 @@ export const headerNavLinks = [
     to: routes.articles.route,
   },
   {
-    title: routes.podcasts.name,
-    to: routes.podcasts.route,
+    title: routes.about.name,
+    to: routes.about.route,
   },
   {
-    title: routes.drugs.name,
-    to: routes.drugs.route,
-  },
-  {
-    title: routes.doctorQuestion.name,
-    to: routes.doctorQuestion.route,
+    title: routes.creators.name,
+    to: routes.creators.route,
   },
 ];
 
