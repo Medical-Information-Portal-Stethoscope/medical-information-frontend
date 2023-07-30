@@ -67,7 +67,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
     const serverError = useAppSelector(showServerError);
     const copyServerError = { ...serverError }; // Copy is needed for adding new properties in object (see below)
-    const { errors, touched } = formik;
+    const { values, errors, touched } = formik;
 
     if (serverError?.non_field_errors) {
       copyServerError.password = serverError.non_field_errors;
@@ -152,7 +152,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             disabled={isValid}
           />
           {iconToRender}
-          {isValid && !errors[name] && type !== 'password' && (
+          {values[name] && !errors[name] && type !== 'password' && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>
