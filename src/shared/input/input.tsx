@@ -3,6 +3,8 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 import { Icon } from 'shared/icons';
 import { nanoid } from '@reduxjs/toolkit';
+import { useAppSelector } from 'services/app/hooks';
+import { showServerError } from 'services/features/user/selectors';
 import classNames from 'classnames';
 import styles from './input.module.scss';
 
@@ -63,7 +65,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
+    const serverError = useAppSelector(showServerError);
+    const copyServerError = { ...serverError }; // Copy is needed for adding new properties in object (see below)
     const { errors, touched } = formik;
+
+    if (serverError?.non_field_errors) {
+      copyServerError.password = serverError.non_field_errors;
+    }
 
     const forceFocus = useCallback(() => {
       ref?.current?.focus();
@@ -149,7 +157,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {errors[name] && touched[name] ? errors[name] : ''}
+          {(errors[name] && touched[name] ? errors[name] : '') ||
+            (copyServerError && copyServerError[name])}
         </span>
       </div>
     );

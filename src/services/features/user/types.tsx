@@ -13,15 +13,11 @@ export interface IUserLogin extends IUser {
 }
 
 export interface IUserRegistrationResponse {
-  user: {
-    email: string;
-    first_name: string;
-    last_name: string;
-  };
+  email: string;
+  first_name: string;
+  last_name: string;
 }
 
 export interface IUserLoginResponse {
-  user: {
-    auth_token: string;
-  };
+  auth_token: string;
 }

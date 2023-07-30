@@ -9,41 +9,53 @@ import {
 
 export const registerUser = createAsyncThunk(
   'user/registration',
-  async (data: IUserRegistration) => {
-    const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-
-    if (!res.ok) {
-      Promise.reject(new Error(`Error ${res.status}`));
-    }
-
-    return (await res.json()) as IUserRegistrationResponse;
-  }
-);
-
-export const loginUser = createAsyncThunk(
-  'user/login',
-  async (data: IUserLogin) => {
-    const res = await fetch(
-      `${api.baseUrl}${api.endpoints.user.auth.base}${api.endpoints.user.auth.login}`,
-      {
+  async (data: IUserRegistration, { rejectWithValue }) => {
+    try {
+      const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
+      });
+
+      const resBody = await res.json();
+
+      if (!res.ok) {
+        return rejectWithValue(resBody);
       }
-    );
 
-    if (!res.ok) {
-      Promise.reject(new Error(`Error ${res.status}`));
+      return resBody as IUserRegistrationResponse;
+    } catch (err) {
+      return rejectWithValue(err);
     }
+  }
+);
 
-    return (await res.json()) as IUserLoginResponse;
+export const loginUser = createAsyncThunk(
+  'user/login',
+  async (data: IUserLogin, { rejectWithValue }) => {
+    try {
+      const res = await fetch(
+        `${api.baseUrl}${api.endpoints.user.auth.base}${api.endpoints.user.auth.login}`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        }
+      );
+
+      const resBody = await res.json();
+
+      if (!res.ok) {
+        return rejectWithValue(resBody);
+      }
+
+      return resBody as IUserLoginResponse;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
   }
 );

@@ -15,9 +15,6 @@
   opacity: 0;
 
   &:checked + .checkmark {
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
     background-color: $color-brand-primary-900;
 
     &::after {
@@ -37,7 +34,9 @@
 }
 
 .checkmark {
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   width: inherit;
   height: inherit;
   box-sizing: border-box;

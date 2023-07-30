@@ -1,10 +1,11 @@
 /* eslint-disable camelcase */
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { useAppDispatch } from 'services/app/hooks';
 import { registerUser } from 'services/features/user/api';
+import { resetServerError } from 'services/features/user/slice';
 // import { IUserRegistration } from 'services/features/user/types';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
@@ -28,6 +29,11 @@ const SignUpPage: FC = (): ReactElement => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  // Cleaning errors under inputs with the same label from another form
+  useEffect(() => {
+    dispatch(resetServerError());
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       first_name: '',
@@ -46,14 +52,11 @@ const SignUpPage: FC = (): ReactElement => {
       .shape(schemaPasswordConfirmation(Yup))
       .shape(schemaPersonalDataConsent(Yup)),
 
-    onSubmit: (values, { resetForm, setSubmitting }) => {
+    onSubmit: (values, { setSubmitting }) => {
       const { email, password, first_name, last_name } = values;
       const data = filterFormValues({ email, password, first_name, last_name });
 
-      dispatch(registerUser(data))
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err))
-        .finally(() => setSubmitting(false));
+      dispatch(registerUser(data)).finally(() => setSubmitting(false));
     },
   });
 
@@ -142,7 +145,6 @@ const SignUpPage: FC = (): ReactElement => {
           >
             Пользовательского соглашения
           </a>
-          *
         </p>
       </div>
     </Entry>

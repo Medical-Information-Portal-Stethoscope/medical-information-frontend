@@ -1,9 +1,10 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'services/app/hooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser } from 'services/features/user/api';
+import { resetServerError } from 'services/features/user/slice';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import Button from 'shared/buttons/button/button';
@@ -15,6 +16,11 @@ const SignInPage: FC = (): ReactElement => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  // Cleaning errors under inputs with the same label from another form
+  useEffect(() => {
+    dispatch(resetServerError());
+  }, []);
+
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -25,11 +31,8 @@ const SignInPage: FC = (): ReactElement => {
       .shape(schemaEmail(Yup))
       .shape(schemaPassword(Yup)),
 
-    onSubmit: (data, { resetForm, setSubmitting }) => {
-      dispatch(loginUser(data))
-        .then((res) => console.log(res))
-        .catch((err) => console.error(err))
-        .finally(() => setSubmitting(false));
+    onSubmit: (data, { setSubmitting }) => {
+      dispatch(loginUser(data)).finally(() => setSubmitting(false));
     },
   });
 
