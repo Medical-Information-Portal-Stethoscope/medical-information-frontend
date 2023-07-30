@@ -1,40 +1,31 @@
-import { InputHTMLAttributes, ReactNode } from 'react';
+import { InputHTMLAttributes, ChangeEvent, FC, ReactElement } from 'react';
 import styles from './consent-checkbox.module.scss';
 
 interface IConsentCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   id: string;
   name: string;
-  value: string;
-  children?: string | ReactNode;
   isChecked?: boolean;
   isDisabled?: boolean;
-  onChange?: () => void;
+  onChange?: (evt: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function ConsentCheckbox({
+export const ConsentCheckbox: FC<IConsentCheckboxProps> = ({
   id,
   name,
-  value,
-  children,
   isChecked = false,
   isDisabled = false,
   onChange,
-}: IConsentCheckboxProps) {
-  return (
-    <div className={styles.checkbox}>
-      <input
-        className={styles.input}
-        id={id}
-        type="checkbox"
-        name={name}
-        value={value}
-        defaultChecked={isChecked}
-        disabled={isDisabled}
-        onChange={onChange}
-      />
-      <label className={styles.label} htmlFor={id}>
-        {children}
-      </label>
-    </div>
-  );
-}
+}): ReactElement => (
+  <label className={styles.label} htmlFor={id}>
+    <input
+      className={styles.input}
+      id={id}
+      type="checkbox"
+      name={name}
+      defaultChecked={isChecked}
+      disabled={isDisabled}
+      onChange={onChange}
+    />
+    <span className={styles.checkmark} />
+  </label>
+);
