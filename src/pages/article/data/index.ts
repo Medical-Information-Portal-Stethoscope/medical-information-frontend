@@ -1,4 +1,4 @@
-export const newsExample = [
+export const articleExample = [
   {
     id: '72693381-ddb5-4585-b491-1621cf7f730a',
     is_fan: false,

@@ -4,9 +4,10 @@ import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
 
 import { Header } from 'components/header';
-import Footer from 'components/archive/footer/footer';
+import Footer from 'components/footer/footer';
+import { NotFoundPage } from 'pages/error-page/notFoundPage';
 
-import { newsExample } from './data/news';
+import { articleExample } from './data';
 
 import styles from './styles.module.scss';
 
@@ -17,28 +18,29 @@ export const Article: FC = () => {
   const { id = tmpId } = useParams();
 
   // как будто достали новость по id
-  const data = newsExample;
-  const selectedData = data.find((item) => item.id === id)!;
+  const data = articleExample;
+  const selectedData = data ? data.find((item) => item.id === id) : null;
 
-  // далее достали статьи по тегам
-  const filteredDataByTags = newsExample;
+  // взяли теги
+  // const currentTags = selectedData.tags
 
-  return (
+  // далее достали две статьи по тегам
+  const articlePreviewData = articleExample;
+
+  return selectedData ? (
     <>
       <Header />
       <main>
         <section className={styles.article}>
           <div className={styles.article__container}>
-            {data ? (
-              <>
-                <Paper data={selectedData} type="default" isNews={false} />
-                <ArticlesPreviewSmall data={filteredDataByTags} />
-              </>
-            ) : null}
+            <Paper data={selectedData} type="default" isNews={false} />
+            <ArticlesPreviewSmall data={articlePreviewData} />
           </div>
         </section>
       </main>
       <Footer />
     </>
+  ) : (
+    <NotFoundPage />
   );
 };
