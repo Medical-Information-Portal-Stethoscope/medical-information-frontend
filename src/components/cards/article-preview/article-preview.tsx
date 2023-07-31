@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */ // TODO: for tests before installing npm package for cases transfer
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
 import renderFormatDateArticle from 'utils/functions/render-format-date-article';
@@ -13,6 +14,7 @@ import styles from './article-preview.module.scss';
 
 interface ICardArticlePreviewProps {
   data: {
+    id: string;
     title: string;
     annotation: string;
     text: string;
@@ -30,7 +32,7 @@ interface ICardArticlePreviewProps {
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
-  data: { title, annotation, text, image, created_at, author, views_count },
+  data: { id, title, annotation, text, image, created_at, author, views_count },
   type,
   extraClass,
 }) => {
@@ -42,60 +44,64 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   }; // TODO: onClick. Here or upper scope?
 
   return (
-    <article
-      className={classNames(
-        styles.article,
-        styles[`article--${type}`],
-        extraClass
-      )}
-    >
-      <div className={classNames(styles.wrapper, styles[`wrapper--${type}`])}>
-        <div
-          className={classNames(
-            styles.imageWrapper,
-            styles[`imageWrapper--${type}`]
-          )}
-        >
-          <img className={styles.image} src={image} alt="Превью статьи" />
-          <ButtonWithIconTwo
-            extraClass={classNames(
-              styles.favoriteButton,
-              styles[`favoriteButton--${type}`]
-            )}
-            onClick={handleLike}
-            icon={<Icon icon="BookmarkIcon" color="white" size="32" />}
-          />
-        </div>
-        <div className={classNames(styles.content, styles[`content--${type}`])}>
-          <span className={styles.date}>{date}</span>
+    <Link to={`${id}`}>
+      <article
+        className={classNames(
+          styles.article,
+          styles[`article--${type}`],
+          extraClass
+        )}
+      >
+        <div className={classNames(styles.wrapper, styles[`wrapper--${type}`])}>
           <div
             className={classNames(
-              styles.description,
-              styles[`description--${type}`]
+              styles.imageWrapper,
+              styles[`imageWrapper--${type}`]
             )}
           >
-            <div className={styles.title}>
-              <h3 className={styles.heading}>{title}</h3>
-              <p className={classNames(styles.text, styles[`text--${type}`])}>
-                {annotation}
-              </p>
+            <img className={styles.image} src={image} alt="Превью статьи" />
+            <ButtonWithIconTwo
+              extraClass={classNames(
+                styles.favoriteButton,
+                styles[`favoriteButton--${type}`]
+              )}
+              onClick={handleLike}
+              icon={<Icon icon="BookmarkIcon" color="white" size="32" />}
+            />
+          </div>
+          <div
+            className={classNames(styles.content, styles[`content--${type}`])}
+          >
+            <span className={styles.date}>{date}</span>
+            <div
+              className={classNames(
+                styles.description,
+                styles[`description--${type}`]
+              )}
+            >
+              <div className={styles.title}>
+                <h3 className={styles.heading}>{title}</h3>
+                <p className={classNames(styles.text, styles[`text--${type}`])}>
+                  {annotation}
+                </p>
+              </div>
+              <ul className={styles.info}>
+                <li className={styles.infoItem}>
+                  <span className={styles.author}>{`${
+                    author?.first_name || 'Елена'
+                  } ${author?.last_name || 'Малышева'}`}</span>
+                </li>
+                <li className={styles.infoItem}>{readingTime}</li>
+                <li className={`${styles.infoItem} ${styles.views}`}>
+                  <IconViews />
+                  <span>{views_count}</span>
+                </li>
+              </ul>
             </div>
-            <ul className={styles.info}>
-              <li className={styles.infoItem}>
-                <span className={styles.author}>{`${
-                  author?.first_name || 'Елена'
-                } ${author?.last_name || 'Малышева'}`}</span>
-              </li>
-              <li className={styles.infoItem}>{readingTime}</li>
-              <li className={`${styles.infoItem} ${styles.views}`}>
-                <IconViews />
-                <span>{views_count}</span>
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 };
 
