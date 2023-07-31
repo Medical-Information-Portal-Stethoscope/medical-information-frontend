@@ -1,9 +1,15 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react/jsx-no-bind */
+import { JSX } from 'react';
 import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
 import { Icon } from 'shared/icons';
 
-const data = [
+export interface IData {
+  id: string;
+  icon: JSX.Element;
+}
+
+const data: IData[] = [
   {
     id: '1',
     icon: (
@@ -111,6 +117,50 @@ const data = [
         icon={<Icon icon="FirstAidIcon" size="24" color="gray" />}
         id="10"
         label="Первая помощь"
+        onChange={function noRefCheck() {}}
+      />
+    ),
+  },
+  {
+    id: '11',
+    icon: (
+      <FilterTab
+        icon={<Icon icon="PsychotherapyIcon" size="24" color="gray" />}
+        id="11"
+        label="Психотерапия"
+        onChange={function noRefCheck() {}}
+      />
+    ),
+  },
+  {
+    id: '12',
+    icon: (
+      <FilterTab
+        icon={<Icon icon="OtorhinolaryngologyIcon" size="24" color="gray" />}
+        id="12"
+        label="Оториноларингология"
+        onChange={function noRefCheck() {}}
+      />
+    ),
+  },
+  {
+    id: '13',
+    icon: (
+      <FilterTab
+        icon={<Icon icon="DentistryIcon" size="24" color="gray" />}
+        id="13"
+        label="Стоматология"
+        onChange={function noRefCheck() {}}
+      />
+    ),
+  },
+  {
+    id: '14',
+    icon: (
+      <FilterTab
+        icon={<Icon icon="UrologyIcon" size="24" color="gray" />}
+        id="14"
+        label="Урология"
         onChange={function noRefCheck() {}}
       />
     ),
