@@ -19,7 +19,7 @@ export const News: FC<INews> = ({ data = newsExample }) => {
   return (
     <section className={styles.news}>
       <div className={styles.news__container}>
-        <Paper data={selectedData} type="default" />
+        <Paper data={selectedData} type="default" isNews />
         <NewsPreviewSmall data={data} />
       </div>
     </section>

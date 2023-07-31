@@ -19,7 +19,7 @@ export const Article: FC<IArticle> = ({ data = newsExample }) => {
   return (
     <section className={styles.article}>
       <div className={styles.article__container}>
-        <Paper data={selectedData} type="default" />
+        <Paper data={selectedData} type="default" isNews={false} />
         <ArticlesPreviewSmall data={data} />
       </div>
     </section>

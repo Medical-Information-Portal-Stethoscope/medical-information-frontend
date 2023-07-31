@@ -20,17 +20,20 @@ import ButtonWithIconThree from 'shared/buttons/button-with-icon-three/button-wi
 import { articleExample } from 'components/paper/data/data';
 
 import { TArticle } from 'utils/types/article';
+import { BookmarkIcon } from 'shared/icons/bookmark-icon';
 
 import styles from './styles.module.scss';
 
 interface Ipaper {
   data: TArticle;
+  isNews: boolean;
   type: 'media' | 'news' | 'default';
   extraClass?: string;
 }
 
 export const Paper: FC<Ipaper> = ({
   data = articleExample,
+  isNews = false,
   type = 'default',
   extraClass,
 }) => {
@@ -73,14 +76,22 @@ export const Paper: FC<Ipaper> = ({
       <p className={styles.paper__text}>{data.text}</p>
 
       <div className={styles.paper__buttons}>
-        {/* <ButtonWithIconThree
-          icon={
-            <BookmarkIcon color="gray" size="32" className={styles.bookmark} />
-          }
-          isSelected={data.is_favorited}
-          onClick={handleAddBookmark}
-          extraClass={styles.paper__button}
-        /> */}
+        {/* в фигме дизайнеры указали, что сохранить только для статей */}
+        {!isNews && (
+          <ButtonWithIconThree
+            icon={
+              <BookmarkIcon
+                color="gray"
+                size="32"
+                className={styles.bookmark}
+              />
+            }
+            isSelected={data.is_favorited}
+            onClick={handleAddBookmark}
+            extraClass={styles.paper__button}
+          />
+        )}
+
         <ButtonWithIconThree
           icon={
             <ForwardIcon color="gray" size="32" className={styles.forward} />
