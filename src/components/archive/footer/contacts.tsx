@@ -1,6 +1,6 @@
-import vk from 'components/footer/test-icons/vk.svg';
-import tg from 'components/footer/test-icons/telegram.svg';
-import youtube from 'components/footer/test-icons/youtube.svg';
+import vk from './test-icons/vk.svg';
+import tg from './test-icons/telegram.svg';
+import youtube from './test-icons/youtube.svg';
 
 const footerContacts = [
   {
