@@ -24,7 +24,7 @@ export const validationErrors = Object.freeze({
 
     surname: {
       unacceptableSymbols: 'Поле не должно содержать символы % ; . * ^ ) _ @ !',
-      unacceptableLength: 'Имя может содержать 1-50 символов',
+      unacceptableLength: 'Фамилия может содержать 1-50 символов',
       required: 'Обязательное поле',
     },
   },
