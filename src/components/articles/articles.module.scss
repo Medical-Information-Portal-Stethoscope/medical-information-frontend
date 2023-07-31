@@ -18,6 +18,10 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   gap: 1.33em;
+
+  a {
+    grid-column: 11 / 13;
+  }
 }
 
 .article {
@@ -43,9 +47,5 @@
 
   &:nth-child(6) {
     grid-column: 8 / 11;
-  }
-
-  &:last-child {
-    grid-column: 11 / 13;
   }
 }
