@@ -15,6 +15,8 @@ const api = Object.freeze({
         login: 'login/',
         logout: 'logout/',
       },
+
+      me: 'me/',
     },
   },
 });

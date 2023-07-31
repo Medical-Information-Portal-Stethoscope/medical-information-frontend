@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from './types';
-import { registerUser, loginUser } from './api';
+import { registerUser, loginUser, getUserPersonalData } from './api';
 
 type TSliceState = {
   user: IUser | null;
@@ -34,9 +34,7 @@ const userSlice = createSlice({
       .addCase(registerUser.pending, (state) => {
         state.process.isLoading = true;
       })
-      .addCase(registerUser.fulfilled, (state, { payload }) => {
-        state.user = payload;
-
+      .addCase(registerUser.fulfilled, (state) => {
         state.process.isLoading = false;
         state.process.error = null;
       })
@@ -51,10 +49,21 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state) => {
         state.process.isLoading = false;
         state.process.error = null;
-
-        // TODO: по идее, бэки должны посылать имя и фамилию юзера для сохранения в store и отображения в лк
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload;
+      })
+
+      .addCase(getUserPersonalData.pending, (state) => {
+        state.process.isLoading = true;
+      })
+      .addCase(getUserPersonalData.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state.user = payload;
+      })
+      .addCase(getUserPersonalData.rejected, (state, { payload }) => {
         state.process.isLoading = false;
         state.process.error = payload;
       })

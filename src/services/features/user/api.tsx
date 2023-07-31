@@ -5,6 +5,7 @@ import {
   IUserRegistrationResponse,
   IUserLogin,
   IUserLoginResponse,
+  IUserPersonalData,
 } from './types';
 
 export const registerUser = createAsyncThunk(
@@ -54,6 +55,32 @@ export const loginUser = createAsyncThunk(
       }
 
       return resBody as IUserLoginResponse;
+    } catch (err) {
+      return rejectWithValue(err);
+    }
+  }
+);
+
+export const getUserPersonalData = createAsyncThunk(
+  'user/personalData',
+  async (token: string, { rejectWithValue }) => {
+    try {
+      const res = await fetch(
+        `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.me}`,
+        {
+          headers: {
+            Authorization: `Token ${token}`,
+          },
+        }
+      );
+
+      const resBody = await res.json();
+
+      if (!res.ok) {
+        throw resBody;
+      }
+
+      return resBody as IUserPersonalData;
     } catch (err) {
       return rejectWithValue(err);
     }

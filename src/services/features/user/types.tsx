@@ -21,3 +21,10 @@ export interface IUserRegistrationResponse {
 export interface IUserLoginResponse {
   auth_token: string;
 }
+
+export interface IUserPersonalData extends IUserRegistrationResponse {
+  id: string;
+  rating: number;
+  publications_amount: number;
+  subscribed: boolean;
+}

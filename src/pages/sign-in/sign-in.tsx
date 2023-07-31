@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from 'services/app/hooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { loginUser } from 'services/features/user/api';
+import { loginUser, getUserPersonalData } from 'services/features/user/api';
 import { resetServerError } from 'services/features/user/slice';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
@@ -32,7 +32,16 @@ const SignInPage: FC = (): ReactElement => {
       .shape(schemaPassword(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
-      dispatch(loginUser(data)).finally(() => setSubmitting(false));
+      dispatch(loginUser(data))
+        .then(() => {
+          const token: string | null | undefined =
+            localStorage.getItem('auth_token');
+
+          if (token) {
+            dispatch(getUserPersonalData(token));
+          }
+        })
+        .finally(() => setSubmitting(false));
     },
   });
 
