@@ -1,0 +1,52 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders.scss';
+
+.wrapper {
+  max-width: $wrapper-articles-preview-desktop;
+  margin: 0 auto;
+}
+
+.authors {
+  max-width: $wrapper-authors-desktop;
+  padding: 40px 0 80px;
+}
+
+.authorsHeading {
+  @extend %heading-size-medium;
+  margin-bottom: 48px;
+}
+
+.authorsSection:not(:last-child) {
+  margin-bottom: 44px;
+}
+
+.heading {
+  @extend %heading-size-small;
+  margin-bottom: 16px;
+}
+
+.text {
+  @extend %text-size-large;
+}
+
+.listItem {
+  composes: text;
+  margin-left: 30px;
+  padding-left: 3px;
+}
+
+.link {
+  color: $color-brand-primary-900;
+  transition: $transition-button;
+
+  &:hover {
+    color: $color-brand-primary-700;
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
+  }
+}
