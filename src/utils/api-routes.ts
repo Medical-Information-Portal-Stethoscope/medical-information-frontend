@@ -18,6 +18,12 @@ const api = Object.freeze({
 
       me: 'me/',
     },
+    tags: {
+      // все теги
+      all: '/tags',
+      // верхнеуровневые теги
+      roots: '/tags/roots',
+    },
   },
 });
 

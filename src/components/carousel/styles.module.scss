@@ -12,7 +12,7 @@
   padding-left: 64px;
 }
 
-.prev_button {
+.next_button {
   position: absolute;
   right: -64px;
   top: 50%;
@@ -24,7 +24,7 @@
   }
 }
 
-.next_button {
+.prev_button {
   position: absolute;
   left: -64px;
   top: 50%;
@@ -34,4 +34,13 @@
   svg {
     fill: #014cff;
   }
+}
+
+.container_main {
+  display: flex;
+  gap: 12px;
+}
+
+.container_articles {
+  display: flex;
 }
