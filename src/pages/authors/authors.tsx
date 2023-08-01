@@ -31,7 +31,7 @@ export const AuthorsPage: FC = (): ReactElement => (
           </section>
           <section className={styles.authorsSection}>
             <h3 className={styles.heading}>Как опубликовать статью</h3>
-            <p className={styles.text}>
+            <p className={`${styles.text} ${styles.publication}`}>
               Чтобы опубликовать статью, необходимо пройти всего 3 шага:
             </p>
             <ol>
