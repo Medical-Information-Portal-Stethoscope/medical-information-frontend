@@ -1,4 +1,7 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { useAppDispatch } from 'services/app/hooks';
+import { getUserPersonalData } from 'services/features/user/api';
 import MainPage from 'pages/main-page/MainPage';
 import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import { AuthorsPage } from 'pages/authors/authors';
@@ -10,7 +13,15 @@ import AboutPage from 'pages/about-page/about-page';
 import routes from 'utils/routes';
 
 function App() {
-  // TODO: поправить роуты в develop на страничках?
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token: string | null | undefined = localStorage.getItem('auth_token');
+
+    if (token) {
+      dispatch(getUserPersonalData(token));
+    }
+  }, []);
 
   return (
     <Routes>

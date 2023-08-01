@@ -60,6 +60,14 @@
 
     &--error {
       border: 1px solid $color-system-error;
+
+      &:hover {
+        border-color: $color-system-error;
+      }
+
+      &:focus-within {
+        border-color: $color-system-error;
+      }
     }
 
     &--disabled {
@@ -90,6 +98,7 @@
 
       &--error {
         color: $color-system-error;
+        caret-color: $color-system-error;
       }
 
       &:disabled {
