@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import MainPage from 'pages/main-page/MainPage';
 import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
+import { AuthorsPage } from 'pages/authors/authors';
 import SignUpPage from 'pages/sign-up/sign-up';
 import SignInPage from 'pages/sign-in/sign-in';
 import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
@@ -20,6 +21,7 @@ function App() {
       <Route path={routes.drugs.route} element={<NotFoundPage />} />
       <Route path={routes.doctorQuestion.route} element={<NotFoundPage />} />
       <Route path={routes.about.route} element={<AboutPage />} />
+      <Route path={routes.authors} element={<AuthorsPage />} />
 
       <Route path={routes.signup} element={<SignUpPage />} />
       <Route path={routes.signin} element={<SignInPage />} />
