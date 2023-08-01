@@ -28,3 +28,7 @@ export interface IUserPersonalData extends IUserRegistrationResponse {
   publications_amount: number;
   subscribed: boolean;
 }
+
+export type TErrorResponse = {
+  [key: string]: string[];
+};

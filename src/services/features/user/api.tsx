@@ -6,83 +6,87 @@ import {
   IUserLogin,
   IUserLoginResponse,
   IUserPersonalData,
+  TErrorResponse,
 } from './types';
 
-export const registerUser = createAsyncThunk(
-  'user/registration',
-  async (data: IUserRegistration, { rejectWithValue }) => {
-    try {
-      const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
+export const registerUser = createAsyncThunk<
+  IUserRegistrationResponse,
+  IUserRegistration,
+  { rejectValue: TErrorResponse }
+>('user/registration', async (data, { rejectWithValue }) => {
+  try {
+    const res = await fetch(`${api.baseUrl}${api.endpoints.user.base}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    const resBody: unknown = await res.json();
+
+    if (!res.ok) {
+      throw resBody;
+    }
+
+    return resBody as IUserRegistrationResponse;
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});
+
+export const loginUser = createAsyncThunk<
+  IUserLoginResponse,
+  IUserLogin,
+  { rejectValue: TErrorResponse }
+>('user/login', async (data, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.auth.base}${api.endpoints.user.auth.login}`,
+      {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(data),
-      });
-
-      const resBody = await res.json();
-
-      if (!res.ok) {
-        throw resBody;
       }
+    );
 
-      return resBody as IUserRegistrationResponse;
-    } catch (err) {
-      return rejectWithValue(err);
+    const resBody: unknown = await res.json();
+
+    if (!res.ok) {
+      throw resBody;
     }
+
+    return resBody as IUserLoginResponse;
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
   }
-);
+});
 
-export const loginUser = createAsyncThunk(
-  'user/login',
-  async (data: IUserLogin, { rejectWithValue }) => {
-    try {
-      const res = await fetch(
-        `${api.baseUrl}${api.endpoints.user.auth.base}${api.endpoints.user.auth.login}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
-        }
-      );
-
-      const resBody = await res.json();
-
-      if (!res.ok) {
-        throw resBody;
+export const getUserPersonalData = createAsyncThunk<
+  IUserPersonalData,
+  string,
+  { rejectValue: TErrorResponse }
+>('user/personalData', async (token, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.me}`,
+      {
+        headers: {
+          Authorization: `Token ${token}`,
+        },
       }
+    );
 
-      return resBody as IUserLoginResponse;
-    } catch (err) {
-      return rejectWithValue(err);
+    const resBody: unknown = await res.json();
+
+    if (!res.ok) {
+      throw resBody;
     }
+
+    return resBody as IUserPersonalData;
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
   }
-);
-
-export const getUserPersonalData = createAsyncThunk(
-  'user/personalData',
-  async (token: string, { rejectWithValue }) => {
-    try {
-      const res = await fetch(
-        `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.me}`,
-        {
-          headers: {
-            Authorization: `Token ${token}`,
-          },
-        }
-      );
-
-      const resBody = await res.json();
-
-      if (!res.ok) {
-        throw resBody;
-      }
-
-      return resBody as IUserPersonalData;
-    } catch (err) {
-      return rejectWithValue(err);
-    }
-  }
-);
+});

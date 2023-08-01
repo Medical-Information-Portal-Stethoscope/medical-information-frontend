@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser } from './types';
+import { IUser, TErrorResponse } from './types';
 import { registerUser, loginUser, getUserPersonalData } from './api';
 
 type TSliceState = {
@@ -7,7 +7,7 @@ type TSliceState = {
 
   process: {
     isLoading: boolean;
-    error: null | any; // TODO: коллеги, если подправите тип, буду признателен. Устал бороться с TS >_<
+    error: null | TErrorResponse;
   };
 };
 
@@ -40,7 +40,7 @@ const userSlice = createSlice({
       })
       .addCase(registerUser.rejected, (state, { payload }) => {
         state.process.isLoading = false;
-        state.process.error = payload;
+        state.process.error = payload !== undefined ? payload : null;
       })
 
       .addCase(loginUser.pending, (state) => {
@@ -52,7 +52,7 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.process.isLoading = false;
-        state.process.error = payload;
+        state.process.error = payload !== undefined ? payload : null;
       })
 
       .addCase(getUserPersonalData.pending, (state) => {
@@ -65,7 +65,7 @@ const userSlice = createSlice({
       })
       .addCase(getUserPersonalData.rejected, (state, { payload }) => {
         state.process.isLoading = false;
-        state.process.error = payload;
+        state.process.error = payload !== undefined ? payload : null;
       })
 
       .addDefaultCase((state) => state);

@@ -37,11 +37,6 @@ const meta: Meta<typeof Input> = {
       type: 'string',
     },
 
-    serverError: {
-      description: 'Поведение при ошибке',
-      type: 'string',
-    },
-
     isDisabled: {
       description: 'Поведение при неактивном поле ввода',
       type: 'boolean',
