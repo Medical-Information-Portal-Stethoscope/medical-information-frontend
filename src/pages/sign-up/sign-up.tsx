@@ -65,6 +65,7 @@ const SignUpPage: FC = (): ReactElement => {
     if (serverError) {
       dispatch(resetServerError());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const navigation = (

@@ -75,6 +75,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (serverError) {
         dispatch(resetServerError());
       }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [value]);
 
     const forceFocus = useCallback(() => {
@@ -112,7 +113,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             />
           </button>
         ) : null,
-      [error, serverError, icon, isValid, onIconClick, visible]
+      [error, serverError, icon, isValid, onIconClick, visible, touched]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
