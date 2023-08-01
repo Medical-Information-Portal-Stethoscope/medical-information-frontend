@@ -59,6 +59,9 @@ const SignUpPage: FC = (): ReactElement => {
     },
   });
 
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    formik;
+
   const navigation = (
     <div className={styles.navigation}>
       <span>Есть аккаунт?</span>{' '}
@@ -78,7 +81,7 @@ const SignUpPage: FC = (): ReactElement => {
       isLoading={formik.isSubmitting}
       isDisabled={!formik.isValid}
       hasCommentaryWithRequired
-      onSubmit={formik.handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
         <div className={styles.person}>
@@ -86,13 +89,21 @@ const SignUpPage: FC = (): ReactElement => {
             name="first_name"
             label="Имя*"
             autoComplete="on"
-            formik={formik}
+            value={values.first_name}
+            error={errors?.first_name}
+            touched={touched?.first_name}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           <Input
             name="last_name"
             label="Фамилия*"
             autoComplete="on"
-            formik={formik}
+            value={values.last_name}
+            error={errors?.last_name}
+            touched={touched?.last_name}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
         </div>
         <Input
@@ -101,21 +112,33 @@ const SignUpPage: FC = (): ReactElement => {
           label="Email*"
           placeholder="example@example.ru"
           autoComplete="on"
-          formik={formik}
+          value={values.email}
+          error={errors?.email}
+          touched={touched?.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Input
           type="password"
           name="password"
           label="Пароль*"
           icon
-          formik={formik}
+          value={values.password}
+          error={errors?.password}
+          touched={touched?.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <Input
           type="password"
           name="password_confirmation"
           label="Повторите пароль*"
           icon
-          formik={formik}
+          value={values.password_confirmation}
+          error={errors?.password_confirmation}
+          touched={touched?.password_confirmation}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </div>
       <div className={styles.consentConfirmation}>
@@ -123,7 +146,7 @@ const SignUpPage: FC = (): ReactElement => {
           id="sign-up"
           name="personal_data_confirmation_has_agreed"
           isChecked
-          onChange={formik.handleChange}
+          onChange={handleChange}
         />
         <p>
           Я принимаю условия{' '}

@@ -22,15 +22,14 @@ interface InputProps
   name: string;
   label?: string;
   placeholder?: string;
-  error?: boolean;
-  errorText?: string;
+  error?: boolean | string;
   isDisabled?: boolean;
   extraClass?: string;
   isValid?: boolean;
   size?: 'medium' | 'small';
   icon?: boolean;
   autoComplete?: 'on' | 'off';
-  formik?: any;
+  touched?: boolean;
 }
 
 function useCombinedRefs<T = HTMLElement>(
@@ -54,6 +53,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       type = 'text',
       value,
+      error,
+      isDisabled,
+      touched,
       name,
       label,
       placeholder,
@@ -62,7 +64,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       size = 'medium',
       icon,
       autoComplete = 'off',
-      formik,
+      onBlur,
+      onChange,
     },
     forwardedRef
   ) => {
@@ -73,7 +76,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const dispatch = useAppDispatch();
     const serverError = useAppSelector(showServerError);
     const copyServerError = { ...serverError }; // Copy is needed for adding new properties in object (see below)
-    const { values, errors, touched } = formik;
 
     if (serverError?.non_field_errors) {
       copyServerError.password = serverError.non_field_errors;
@@ -83,7 +85,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       if (copyServerError[name]) {
         dispatch(resetServerError());
       }
-    }, [values[name]]);
+    }, [value]);
 
     const forceFocus = useCallback(() => {
       ref?.current?.focus();
@@ -109,18 +111,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               // eslint-disable-next-line no-nested-ternary
               color={
                 // eslint-disable-next-line no-nested-ternary
-                !isValid
-                  ? errors[name] && touched[name]
-                    ? 'red'
-                    : 'blue'
-                  : 'gray'
+                !isValid ? (error && touched ? 'red' : 'blue') : 'gray'
               }
               icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
               size="24"
             />
           </button>
         ) : null,
-      [errors, icon, isValid, onIconClick, visible]
+      [error, icon, isValid, onIconClick, visible]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
@@ -141,8 +139,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles[`input--container--${size}`],
             {
               [styles[`input--container--success`]]: isValid,
-              [styles[`input--container--error`]]:
-                errors[name] && touched[name],
+              [styles[`input--container--error`]]: error && touched,
               [styles[`input--container--disabled`]]: isValid,
             }
           )}
@@ -150,27 +147,26 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         >
           <input
             className={classNames(styles[`input--container--input`], {
-              [styles[`input--container--input--error`]]:
-                errors[name] && touched[name],
+              [styles[`input--container--input--error`]]: error && touched,
             })}
             ref={ref}
             name={name}
-            defaultValue={value}
+            value={value || ''}
             id={id}
             type={type === 'password' ? typeForPassword : type}
-            {...formik.getFieldProps({ name })}
             autoComplete={autoComplete}
             placeholder={placeholder}
-            disabled={isValid}
+            disabled={isDisabled}
+            onBlur={onBlur}
+            onChange={onChange}
           />
           {iconToRender}
-          {values[name] && !errors[name] && type !== 'password' && (
+          {value && !error && type !== 'password' && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {(errors[name] && touched[name] ? errors[name] : '') ||
-            copyServerError[name]}
+          {(error && touched ? error : '') || copyServerError[name]}
         </span>
       </div>
     );

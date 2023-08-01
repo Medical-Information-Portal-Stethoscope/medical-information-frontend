@@ -45,6 +45,9 @@ const SignInPage: FC = (): ReactElement => {
     },
   });
 
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    formik;
+
   const navigation = (
     <div className={styles.navigation}>
       <span>Нет аккаунта?</span>{' '}
@@ -63,7 +66,7 @@ const SignInPage: FC = (): ReactElement => {
       altNavigation={navigation}
       isLoading={formik.isSubmitting}
       isDisabled={!formik.isValid}
-      onSubmit={formik.handleSubmit}
+      onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
         <Input
@@ -71,7 +74,11 @@ const SignInPage: FC = (): ReactElement => {
           label="Email"
           placeholder="example@example.ru"
           autoComplete="on"
-          formik={formik}
+          value={values.email}
+          error={errors?.email}
+          touched={touched?.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
         <div className={styles.password}>
           <Input
@@ -79,7 +86,11 @@ const SignInPage: FC = (): ReactElement => {
             name="password"
             label="Пароль"
             icon
-            formik={formik}
+            value={values.password}
+            error={errors?.password}
+            touched={touched?.password}
+            onBlur={handleBlur}
+            onChange={handleChange}
           />
           <Button label="Забыли пароль?" model="tertiary" />
         </div>

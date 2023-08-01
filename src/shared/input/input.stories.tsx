@@ -40,12 +40,6 @@ const meta: Meta<typeof Input> = {
       control: { type: 'radio' },
     },
 
-    errorText: {
-      description: 'Сообщение об ошибке',
-      type: 'string',
-      defaultValue: 'Error message',
-    },
-
     isDisabled: {
       description: 'Поведение при неактивном поле ввода',
       type: 'boolean',
@@ -81,6 +75,14 @@ const meta: Meta<typeof Input> = {
       defaultValue: false,
       control: { type: 'radio' },
     },
+
+    touched: {
+      description: 'Снятие фокуса',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: { type: 'radio' },
+    },
   },
 };
 
@@ -93,7 +95,6 @@ export const DefaultMedium: TStory = {
     label: 'Title',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: false,
     type: 'password',
@@ -107,7 +108,6 @@ export const DefaultSmall: TStory = {
     label: 'Title',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: false,
     icon: true,
@@ -121,7 +121,6 @@ export const SuccessMedium: TStory = {
     value: 'Input text',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: true,
   },
@@ -134,7 +133,6 @@ export const SuccessSmall: TStory = {
     value: 'Input text',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: true,
   },
@@ -147,7 +145,6 @@ export const ErrorMedium: TStory = {
     value: 'Input text',
     placeholder: 'Input text',
     error: true,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: false,
   },
@@ -160,7 +157,6 @@ export const ErrorSmall: TStory = {
     value: 'Input text',
     placeholder: 'Input text',
     error: true,
-    errorText: 'Error message',
     isDisabled: false,
     isValid: false,
   },
@@ -172,7 +168,6 @@ export const DisabledMedium: TStory = {
     label: 'Title',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: true,
     isValid: false,
   },
@@ -184,7 +179,6 @@ export const DisabledSmall: TStory = {
     label: 'Title',
     placeholder: 'Input text',
     error: false,
-    errorText: 'Error message',
     isDisabled: true,
     isValid: false,
   },
