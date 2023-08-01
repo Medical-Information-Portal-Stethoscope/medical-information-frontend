@@ -9,6 +9,7 @@ import { showServerError } from 'services/features/user/selectors';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import Button from 'shared/buttons/button/button';
+import { filterFormValues } from 'utils/functions/filter-form-values';
 import routes from 'utils/routes';
 import { schemaEmail, schemaPassword } from 'utils/data/validation/yup-schema';
 import styles from './sign-in.module.scss';
@@ -28,7 +29,7 @@ const SignInPage: FC = (): ReactElement => {
       .shape(schemaPassword(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
-      dispatch(loginUser(data))
+      dispatch(loginUser(filterFormValues(data)))
         .then(() => {
           const token: string | null | undefined =
             localStorage.getItem('auth_token');

@@ -1,5 +1,6 @@
 import { regexDoubleSpace } from 'utils/regex';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const filterFormValues = (values: any) => {
   const copyValues = { ...values };
 

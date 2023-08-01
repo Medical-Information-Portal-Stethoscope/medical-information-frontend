@@ -1,7 +1,7 @@
 import { regexEmail, regexName, regexSurname } from 'utils/regex';
 import { validationErrors } from './validation-errors';
 
-export const schemaEmail = (yup: any) => ({
+export const schemaEmail = (yup: typeof import('yup')) => ({
   email: yup
     .string()
     .defined()
@@ -10,7 +10,7 @@ export const schemaEmail = (yup: any) => ({
     .required(validationErrors.user.email.required),
 });
 
-export const schemaPassword = (yup: any) => ({
+export const schemaPassword = (yup: typeof import('yup')) => ({
   password: yup
     .string()
     .defined()
@@ -19,7 +19,7 @@ export const schemaPassword = (yup: any) => ({
     .required(validationErrors.user.password.required),
 });
 
-export const schemaPasswordConfirmation = (yup: any) => ({
+export const schemaPasswordConfirmation = (yup: typeof import('yup')) => ({
   password_confirmation: yup
     .string()
     .defined()
@@ -29,7 +29,7 @@ export const schemaPasswordConfirmation = (yup: any) => ({
     .required(validationErrors.user.password.required),
 });
 
-export const schemaName = (yup: any) => ({
+export const schemaName = (yup: typeof import('yup')) => ({
   first_name: yup
     .string()
     .defined()
@@ -39,7 +39,7 @@ export const schemaName = (yup: any) => ({
     .required(validationErrors.user.name.required),
 });
 
-export const schemaLastname = (yup: any) => ({
+export const schemaLastname = (yup: typeof import('yup')) => ({
   last_name: yup
     .string()
     .defined()
@@ -49,7 +49,7 @@ export const schemaLastname = (yup: any) => ({
     .required(validationErrors.user.surname.required),
 });
 
-export const schemaPersonalDataConsent = (yup: any) => ({
+export const schemaPersonalDataConsent = (yup: typeof import('yup')) => ({
   personal_data_confirmation_has_agreed: yup
     .bool()
     .default(true)
