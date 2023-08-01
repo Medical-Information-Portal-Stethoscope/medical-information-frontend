@@ -9,26 +9,21 @@ import React, {
 } from 'react';
 import { Icon } from 'shared/icons';
 import { nanoid } from '@reduxjs/toolkit';
-import { useAppSelector, useAppDispatch } from 'services/app/hooks';
-import { showServerError } from 'services/features/user/selectors';
+import { useAppDispatch } from 'services/app/hooks';
 import { resetServerError } from 'services/features/user/slice';
 import classNames from 'classnames';
 import styles from './input.module.scss';
 
 interface InputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
-  type?: 'text' | 'email' | 'password';
-  value?: string;
-  name: string;
-  label?: string;
-  placeholder?: string;
-  error?: boolean | string;
-  isDisabled?: boolean;
   extraClass?: string;
-  isValid?: boolean;
+  type?: 'text' | 'email' | 'password';
+  error?: string;
+  serverError?: string;
   size?: 'medium' | 'small';
   icon?: boolean;
-  autoComplete?: 'on' | 'off';
+  isDisabled?: boolean;
+  isValid?: boolean;
   touched?: boolean;
 }
 
@@ -54,6 +49,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       type = 'text',
       value,
       error,
+      serverError,
       isDisabled,
       touched,
       name,
@@ -74,15 +70,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const innerRef = useRef<HTMLInputElement>(null);
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
     const dispatch = useAppDispatch();
-    const serverError = useAppSelector(showServerError);
-    const copyServerError = { ...serverError }; // Copy is needed for adding new properties in object (see below)
-
-    if (serverError?.non_field_errors) {
-      copyServerError.password = serverError.non_field_errors;
-    }
 
     useEffect(() => {
-      if (copyServerError[name]) {
+      if (serverError) {
         dispatch(resetServerError());
       }
     }, [value]);
@@ -111,14 +101,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               // eslint-disable-next-line no-nested-ternary
               color={
                 // eslint-disable-next-line no-nested-ternary
-                !isValid ? (error && touched ? 'red' : 'blue') : 'gray'
+                !isValid
+                  ? (error || serverError) && touched
+                    ? 'red'
+                    : 'blue'
+                  : 'gray'
               }
               icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
               size="24"
             />
           </button>
         ) : null,
-      [error, icon, isValid, onIconClick, visible]
+      [error, serverError, icon, isValid, onIconClick, visible]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
@@ -139,7 +133,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles[`input--container--${size}`],
             {
               [styles[`input--container--success`]]: isValid,
-              [styles[`input--container--error`]]: error && touched,
+              [styles[`input--container--error`]]:
+                (error || serverError) && touched,
               [styles[`input--container--disabled`]]: isValid,
             }
           )}
@@ -147,7 +142,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         >
           <input
             className={classNames(styles[`input--container--input`], {
-              [styles[`input--container--input--error`]]: error && touched,
+              [styles[`input--container--input--error`]]:
+                (error || serverError) && touched,
             })}
             ref={ref}
             name={name}
@@ -166,7 +162,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {(error && touched ? error : '') || copyServerError[name]}
+          {(error || serverError) && touched ? error || serverError : ''}
         </span>
       </div>
     );

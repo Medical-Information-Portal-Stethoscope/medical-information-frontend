@@ -3,8 +3,9 @@ import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { useAppDispatch } from 'services/app/hooks';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { registerUser } from 'services/features/user/api';
+import { showServerError } from 'services/features/user/selectors';
 import { resetServerError } from 'services/features/user/slice';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
@@ -27,11 +28,6 @@ import styles from './sign-up.module.scss';
 const SignUpPage: FC = (): ReactElement => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  // Cleaning errors under inputs with the same label from another form
-  useEffect(() => {
-    dispatch(resetServerError());
-  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -62,6 +58,15 @@ const SignUpPage: FC = (): ReactElement => {
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     formik;
 
+  const serverError = useAppSelector(showServerError);
+
+  // Cleaning errors under inputs with the same label from another form
+  useEffect(() => {
+    if (serverError) {
+      dispatch(resetServerError());
+    }
+  }, []);
+
   const navigation = (
     <div className={styles.navigation}>
       <span>Есть аккаунт?</span>{' '}
@@ -91,6 +96,7 @@ const SignUpPage: FC = (): ReactElement => {
             autoComplete="on"
             value={values.first_name}
             error={errors?.first_name}
+            serverError={serverError?.first_name}
             touched={touched?.first_name}
             onBlur={handleBlur}
             onChange={handleChange}
@@ -101,6 +107,7 @@ const SignUpPage: FC = (): ReactElement => {
             autoComplete="on"
             value={values.last_name}
             error={errors?.last_name}
+            serverError={serverError?.last_name}
             touched={touched?.last_name}
             onBlur={handleBlur}
             onChange={handleChange}
@@ -114,6 +121,7 @@ const SignUpPage: FC = (): ReactElement => {
           autoComplete="on"
           value={values.email}
           error={errors?.email}
+          serverError={serverError?.email}
           touched={touched?.email}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -125,6 +133,7 @@ const SignUpPage: FC = (): ReactElement => {
           icon
           value={values.password}
           error={errors?.password}
+          serverError={serverError?.password}
           touched={touched?.password}
           onBlur={handleBlur}
           onChange={handleChange}

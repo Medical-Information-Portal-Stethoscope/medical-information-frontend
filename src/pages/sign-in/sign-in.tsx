@@ -1,10 +1,11 @@
 import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'services/app/hooks';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { loginUser, getUserPersonalData } from 'services/features/user/api';
 import { resetServerError } from 'services/features/user/slice';
+import { showServerError } from 'services/features/user/selectors';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import Button from 'shared/buttons/button/button';
@@ -15,11 +16,6 @@ import styles from './sign-in.module.scss';
 const SignInPage: FC = (): ReactElement => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  // Cleaning errors under inputs with the same label from another form
-  useEffect(() => {
-    dispatch(resetServerError());
-  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -47,6 +43,15 @@ const SignInPage: FC = (): ReactElement => {
 
   const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
     formik;
+
+  const serverError = useAppSelector(showServerError);
+
+  // Cleaning errors under inputs with the same label from another form
+  useEffect(() => {
+    if (serverError) {
+      dispatch(resetServerError());
+    }
+  }, []);
 
   const navigation = (
     <div className={styles.navigation}>
@@ -76,6 +81,7 @@ const SignInPage: FC = (): ReactElement => {
           autoComplete="on"
           value={values.email}
           error={errors?.email}
+          serverError={serverError?.email}
           touched={touched?.email}
           onBlur={handleBlur}
           onChange={handleChange}
@@ -88,6 +94,7 @@ const SignInPage: FC = (): ReactElement => {
             icon
             value={values.password}
             error={errors?.password}
+            serverError={serverError?.non_field_errors || serverError?.password}
             touched={touched?.password}
             onBlur={handleBlur}
             onChange={handleChange}
