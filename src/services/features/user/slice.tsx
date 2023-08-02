@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IUser, TErrorResponse } from './types';
+import { TErrorResponse, IUserPersonalData } from './types';
 import { registerUser, loginUser, getUserPersonalData } from './api';
 
 type TSliceState = {
-  user: IUser | null;
+  user: IUserPersonalData | null;
 
   process: {
     isLoading: boolean;
