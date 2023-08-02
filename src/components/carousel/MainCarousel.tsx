@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
@@ -59,15 +60,15 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
         )}
       >
         {type === 'main'
-          ? arrayOfTabsForMainPage.map((arrayOfTabs) => (
-              <div className={styles.container_main}>
+          ? arrayOfTabsForMainPage.map((arrayOfTabs, index) => (
+              <div className={styles.container_main} key={index}>
                 {arrayOfTabs.map((tab) => (
                   <div key={tab.id}>{tab.icon}</div>
                 ))}
               </div>
             ))
-          : arrayOfTabsForArticlesPage.map((arrayOfTabs) => (
-              <div className={styles.container_articles}>
+          : arrayOfTabsForArticlesPage.map((arrayOfTabs, index) => (
+              <div className={styles.container_articles} key={index}>
                 {arrayOfTabs.map((tab) => (
                   <div key={tab.id}>{tab.icon}</div>
                 ))}
