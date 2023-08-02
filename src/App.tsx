@@ -9,7 +9,7 @@ import SignUpPage from 'pages/sign-up/sign-up';
 import SignInPage from 'pages/sign-in/sign-in';
 import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
-import AboutPage from 'pages/about-page/about-page';
+import AboutPage from 'pages/about-us/about-us';
 import routes from 'utils/routes';
 
 function App() {

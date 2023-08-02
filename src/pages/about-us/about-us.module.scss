@@ -1,0 +1,169 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers.scss';
+
+%size-icon-link {
+  a {
+    display: inline-block;
+    width: inherit;
+    height: inherit;
+
+    svg {
+      width: inherit;
+      height: inherit;
+    }
+  }
+}
+
+.wrapper {
+  max-width: $wrapper-articles-preview-desktop;
+  margin: 0 auto;
+  padding: 40px 0 80px;
+}
+
+.about {
+  &--title {
+    @extend %heading-size-medium;
+    margin-bottom: 48px;
+  }
+
+  &--paragraphs {
+    max-width: 1054px;
+
+    section:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &--title {
+      @extend %heading-size-small;
+      margin-bottom: 16px;
+    }
+
+    &--text {
+      @extend %text-size-large;
+    }
+  }
+
+  &--team {
+    &--title {
+      @extend %heading-size-medium;
+      margin-bottom: 47px;
+    }
+
+    &--creators {
+      display: grid;
+      grid-template-columns: repeat(4, max-content);
+      justify-content: space-between;
+      min-height: 700px;
+
+      &--designers {
+        grid-area: 2 / 1 / 3 / 2;
+        align-self: flex-end;
+      }
+
+      &--other {
+        grid-row: 1 / 3;
+      }
+
+      &--department {
+        @extend %text-size-large;
+        font-weight: 400;
+        margin-bottom: 32px;
+      }
+    }
+  }
+}
+
+.team {
+  padding-top: 82px;
+}
+
+.creatorCard {
+  display: flex;
+  column-gap: 16px;
+
+  &:not(:last-child) {
+    margin-bottom: 32px;
+  }
+
+  &--imageWrapper {
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  &--image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+
+    &--teamLead {
+      position: absolute;
+      bottom: -13px;
+      left: 0;
+      padding: 4px 8px;
+      @extend %text-size-small-extra;
+      color: $color-neutral-0;
+      background-color: $color-brand-primary-900;
+      border-radius: 16px;
+    }
+  }
+
+  &--info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 14px;
+
+    &--name {
+      @extend %text-size-medium-semibold;
+      color: $color-neutral-900;
+    }
+
+    &--contacts {
+      @extend %text-size-medium;
+      color: $color-brand-primary-700;
+    }
+  }
+}
+
+.praktikum {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: inherit;
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  column-gap: 8px;
+
+  li {
+    margin-top: 9px;
+  }
+}
+
+.telegram {
+  width: 19px;
+  height: 18px;
+  @extend %size-icon-link;
+}
+
+.email {
+  width: 28px;
+  height: 26px;
+  @extend %size-icon-link;
+}
+
+.github {
+  width: 20px;
+  height: 20px;
+  @extend %size-icon-link;
+}
+
+.behance {
+  width: 24px;
+  height: 16px;
+  @extend %size-icon-link;
+}
