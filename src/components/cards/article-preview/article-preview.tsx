@@ -46,14 +46,14 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   }; // TODO: onClick. Here or upper scope?
 
   return (
-    <Link to={`${route}/${id}`}>
-      <article
-        className={classNames(
-          styles.article,
-          styles[`article--${type}`],
-          extraClass
-        )}
-      >
+    <article
+      className={classNames(
+        styles.article,
+        styles[`article--${type}`],
+        extraClass
+      )}
+    >
+      <Link to={`${route}/${id}`}>
         <div className={classNames(styles.wrapper, styles[`wrapper--${type}`])}>
           <div
             className={classNames(
@@ -102,8 +102,8 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
             </div>
           </div>
         </div>
-      </article>
-    </Link>
+      </Link>
+    </article>
   );
 };
 

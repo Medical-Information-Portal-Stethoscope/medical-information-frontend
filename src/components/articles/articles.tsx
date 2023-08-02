@@ -38,7 +38,7 @@ export default function Articles() {
       <div className={styles.wrapper}>
         <MainCarousel />
         <h2 className={styles.heading}>Статьи</h2>
-        <ul className={styles.articles}>
+        <div className={styles.articles}>
           {articles}
           <Link to={routes.articles.route}>
             <CardMoreContent
@@ -47,7 +47,7 @@ export default function Articles() {
               extraClass={styles.article}
             />
           </Link>
-        </ul>
+        </div>
       </div>
     </section>
   );
