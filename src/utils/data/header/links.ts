@@ -14,8 +14,8 @@ export const headerNavLinks = [
     to: routes.about.route,
   },
   {
-    title: routes.creators.name,
-    to: routes.creators.route,
+    title: routes.authors.name,
+    to: routes.authors.route,
   },
 ];
 

@@ -6,15 +6,25 @@ import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
 import { FiltersPopup } from 'shared/popup/filters';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
-import data from './test-data/test-data';
+import data, { IData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
   type?: 'main' | 'articles';
 }
 
+const getArrayForCarousel = (dataArray: IData[], divider: number) => {
+  const container = [];
+  for (let i = 0; i < Math.ceil(dataArray.length / divider); i += 1) {
+    container[i] = dataArray.slice(i * divider, i * divider + divider);
+  }
+  return container;
+};
+
+const arrayOfTabsForMainPage = getArrayForCarousel(data, 10);
+const arrayOfTabsForArticlesPage = getArrayForCarousel(data, 9);
+
 function MainCarousel({ type = 'main' }: IMainCarouselProps) {
-  const dataForArticles = data.slice(0, -1);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
 
   const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
@@ -22,27 +32,26 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
   return (
     <div className={styles.wrapper}>
       <Carousel
-        swipeScrollTolerance={1}
+        infiniteLoop={false}
+        swipeScrollTolerance={10}
         showThumbs={false}
         showIndicators={false}
         showStatus={false}
-        centerMode
-        centerSlidePercentage={type === 'main' ? 9.3 : 6}
         width={type === 'main' ? 1542 : 1262}
         className={styles.carousel}
-        renderArrowPrev={(onClickHandler) => (
+        renderArrowNext={(onClickHandler) => (
           <ButtonWithIcon
-            ariaLabel="Отправить письмо"
-            extraClass={styles.prev_button}
+            ariaLabel="Прокрутить табы влево"
+            extraClass={styles.next_button}
             hasBackground
             icon={<Icon color="blue" icon="RightArrowIcon" />}
             onClick={onClickHandler}
           />
         )}
-        renderArrowNext={(onClickHandler) => (
+        renderArrowPrev={(onClickHandler) => (
           <ButtonWithIcon
-            ariaLabel="Отправить письмо"
-            extraClass={styles.next_button}
+            ariaLabel="Прокрутить табы вправо"
+            extraClass={styles.prev_button}
             hasBackground
             icon={<Icon color="blue" icon="LeftArrowIcon" />}
             onClick={onClickHandler}
@@ -50,8 +59,20 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
         )}
       >
         {type === 'main'
-          ? data.map((item) => <div key={item.id}>{item.icon}</div>)
-          : dataForArticles.map((item) => <div key={item.id}>{item.icon}</div>)}
+          ? arrayOfTabsForMainPage.map((arrayOfTabs) => (
+              <div className={styles.container_main}>
+                {arrayOfTabs.map((tab) => (
+                  <div key={tab.id}>{tab.icon}</div>
+                ))}
+              </div>
+            ))
+          : arrayOfTabsForArticlesPage.map((arrayOfTabs) => (
+              <div className={styles.container_articles}>
+                {arrayOfTabs.map((tab) => (
+                  <div key={tab.id}>{tab.icon}</div>
+                ))}
+              </div>
+            ))}
       </Carousel>
       <Button
         label="Фильтры"

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
@@ -21,6 +22,14 @@ export default function NewsPreviewPage() {
     .map((item) => (
       <CardArticlePreview key={item.id} data={item} type="news" />
     ));
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
 
   return (
     <>

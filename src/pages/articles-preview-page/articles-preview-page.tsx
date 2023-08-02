@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useGetAllArticlesQuery } from 'services/features/information-material/api';
 import MainCarousel from 'components/carousel/MainCarousel';
@@ -30,6 +30,14 @@ export default function ArticlesPreviewPage() {
           extraClass={styles.article}
         />
       )) || null;
+
+  useEffect(() => {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'auto',
+    });
+  }, []);
 
   return (
     <>

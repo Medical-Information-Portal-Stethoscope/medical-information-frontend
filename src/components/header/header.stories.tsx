@@ -1,4 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { Provider } from 'react-redux';
+import { store } from 'services/app/store';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Header } from '.';
@@ -9,9 +11,11 @@ const meta = {
   tags: ['autodocs'],
   decorators: [
     (Story) => (
-      <BrowserRouter>
-        <Story />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <Story />
+        </BrowserRouter>
+      </Provider>
     ),
   ],
 } as Meta<typeof Header>;

@@ -1,13 +1,15 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useGetAllNewsQuery } from 'services/features/information-material/api';
 import Button from 'shared/buttons/button/button';
+import routes from 'utils/routes';
 import styles from './news.module.scss';
 
 const maxNumNewsDesktop = 6;
 
 export default function News() {
+  const navigate = useNavigate();
   // Получаем список всех тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег новости
@@ -32,7 +34,7 @@ export default function News() {
       <div className={styles.wrapper}>
         <section>
           <h2 className={styles.heading}>Самое популярное</h2>
-          {/* Пока в самое популярное попадает самая новая статья. 
+          {/* Пока в самое популярное попадает самая новая новость. 
           Надо будет разобраться с пагинацией и найти статью у который самой большой views_count */}
           {isSuccess && (
             <CardArticlePreview data={data.results[0]} type="media" />
@@ -41,7 +43,11 @@ export default function News() {
         <section>
           <h2 className={styles.heading}>Новости</h2>
           <ul className={styles.news}>{news}</ul>
-          <Button model="tertiary" label="Показать все новости" />
+          <Button
+            model="tertiary"
+            label="Показать все новости"
+            onClick={() => navigate(routes.news.route)}
+          />
           {/* TODO: Вероятно, добавить флаг Link для кнопки, как изначально и предполагалось  */}
         </section>
       </div>

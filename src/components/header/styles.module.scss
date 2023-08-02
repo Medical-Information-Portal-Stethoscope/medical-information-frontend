@@ -24,18 +24,20 @@
   }
 
   &__profile {
-    width: 48px;
-    height: 48px;
     background: none;
     fill: $color-neutral-0;
     transition: $transition-button;
 
     &:hover svg {
-      width: 48px;
-      height: 48px;
-      fill: $color-brand-primary-500;
       cursor: pointer;
     }
+  }
+
+  &__logotext {
+    @extend %text-size-small;
+    color: $color-neutral-0;
+    font-weight: 600;
+    margin-top: 4px;
   }
 }
 

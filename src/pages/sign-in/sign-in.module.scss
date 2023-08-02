@@ -1,10 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
 
-.wrapperRight {
-  padding: 245px 0;
-}
-
 .inputs {
   display: flex;
   flex-direction: column;
@@ -14,7 +10,7 @@
 .password {
   position: relative;
 
-  span {
+  span:first-child {
     position: absolute;
     top: 0;
     right: 0;
@@ -26,4 +22,5 @@
   margin-top: 29px;
   font-weight: 700;
   color: $color-neutral-700;
+  letter-spacing: $font-letter-spacing-main;
 }

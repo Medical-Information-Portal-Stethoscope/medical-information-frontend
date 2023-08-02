@@ -14,15 +14,16 @@
   transition: all 0.3s ease-out;
   background-color: $color-neutral-0;
 
-  &_active {
-    width: 100%;
+  &_active,
+  &:hover {
     border: 1px solid $color-brand-primary-900;
+  }
+
+  &_active {
     cursor: text;
   }
 
   &:hover {
-    width: 100%;
-    border: 1px solid $color-brand-primary-900;
     cursor: pointer;
   }
 
