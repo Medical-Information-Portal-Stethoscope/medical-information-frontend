@@ -1,18 +1,76 @@
+/* eslint-disable camelcase */
+import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { registerUser } from 'services/features/user/api';
+import { showServerError } from 'services/features/user/selectors';
+import { resetServerError } from 'services/features/user/slice';
 import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
-import ConsentCheckbox from 'shared/checkboxes/consent-checkbox/consent-checkbox';
+import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import Button from 'shared/buttons/button/button';
-// import termsOfUse from 'assets/documents/terms-of-use.pdf'; TODO: к политике конфиденциальности
+import { filterFormValues } from 'utils/functions/filter-form-values';
+import privacyPolicy from 'assets/documents/privacy-policy.pdf';
+import termsOfUse from 'assets/documents/terms-of-use.pdf';
 import routes from 'utils/routes';
+import {
+  schemaName,
+  schemaLastname,
+  schemaEmail,
+  schemaPassword,
+  schemaPasswordConfirmation,
+  schemaPersonalDataConsent,
+} from 'utils/data/validation/yup-schema';
 import styles from './sign-up.module.scss';
 
-export default function SignUpPage() {
+const SignUpPage: FC = (): ReactElement => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
+  const formik = useFormik({
+    initialValues: {
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      password_confirmation: '',
+      personal_data_confirmation_has_agreed: true,
+    },
+
+    validationSchema: Yup.object()
+      .shape(schemaName(Yup))
+      .shape(schemaLastname(Yup))
+      .shape(schemaEmail(Yup))
+      .shape(schemaPassword(Yup))
+      .shape(schemaPasswordConfirmation(Yup))
+      .shape(schemaPersonalDataConsent(Yup)),
+
+    onSubmit: (values, { setSubmitting }) => {
+      const { email, password, first_name, last_name } = values;
+      const data = filterFormValues({ email, password, first_name, last_name });
+
+      dispatch(registerUser(data)).finally(() => setSubmitting(false));
+    },
+  });
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    formik;
+
+  const serverError = useAppSelector(showServerError);
+
+  // Cleaning errors under inputs with the same label from another form
+  useEffect(() => {
+    if (serverError) {
+      dispatch(resetServerError());
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const navigation = (
     <div className={styles.navigation}>
-      Есть аккаунт?{' '}
+      <span>Есть аккаунт?</span>{' '}
       <Button
         label="Войти"
         model="tertiary"
@@ -26,32 +84,103 @@ export default function SignUpPage() {
       heading="Регистрация"
       buttonLabel="Зарегистрироваться"
       altNavigation={navigation}
+      isLoading={formik.isSubmitting}
+      isDisabled={!formik.isValid}
+      hasCommentaryWithRequired
+      onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
         <div className={styles.person}>
-          <Input name="first_name" label="Имя" />
-          <Input name="last_name" label="Фамилия" />
+          <Input
+            name="first_name"
+            label="Имя*"
+            autoComplete="on"
+            value={values.first_name}
+            error={errors?.first_name}
+            serverError={serverError?.first_name}
+            touched={touched?.first_name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
+          <Input
+            name="last_name"
+            label="Фамилия*"
+            autoComplete="on"
+            value={values.last_name}
+            error={errors?.last_name}
+            serverError={serverError?.last_name}
+            touched={touched?.last_name}
+            onBlur={handleBlur}
+            onChange={handleChange}
+          />
         </div>
-        <Input name="email" label="Email" placeholder="example@example.ru" />
-        <Input type="password" name="password" label="Пароль" icon />
+        <Input
+          type="email"
+          name="email"
+          label="Email*"
+          placeholder="example@example.ru"
+          autoComplete="on"
+          value={values.email}
+          error={errors?.email}
+          serverError={serverError?.email}
+          touched={touched?.email}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
         <Input
           type="password"
-          name="confirm_password"
-          label="Повторите пароль"
+          name="password"
+          label="Пароль*"
           icon
+          value={values.password}
+          error={errors?.password}
+          serverError={serverError?.password}
+          touched={touched?.password}
+          onBlur={handleBlur}
+          onChange={handleChange}
+        />
+        <Input
+          type="password"
+          name="password_confirmation"
+          label="Повторите пароль*"
+          icon
+          value={values.password_confirmation}
+          error={errors?.password_confirmation}
+          touched={touched?.password_confirmation}
+          onBlur={handleBlur}
+          onChange={handleChange}
         />
       </div>
-      <ConsentCheckbox id="signUp" name="signnUp" value="signup" isChecked>
-        Я соглашаюсь с условиями обработки персональных данных и принимаю{' '}
-        {/* <a
-          className={styles.link}
-          href={termsOfUse}
-          target="_blank"
-          rel="noreferrer"
-        > */}
-        Пользовательское соглашение
-        {/* </a> TODO: ссылка на политику конфиденциальности. Переделать верстку чекбокса с согласием? */}
-      </ConsentCheckbox>
+      <div className={styles.consentConfirmation}>
+        <ConsentCheckbox
+          id="sign-up"
+          name="personal_data_confirmation_has_agreed"
+          isChecked
+          onChange={handleChange}
+        />
+        <p>
+          Я принимаю условия{' '}
+          <a
+            className={styles.link}
+            href={privacyPolicy}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Политики конфиденциальности
+          </a>{' '}
+          и&nbsp;
+          <a
+            className={styles.link}
+            href={termsOfUse}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Пользовательского соглашения
+          </a>
+        </p>
+      </div>
     </Entry>
   );
-}
+};
+
+export default SignUpPage;

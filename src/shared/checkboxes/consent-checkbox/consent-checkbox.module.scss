@@ -1,61 +1,51 @@
 @import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/z-index';
 @import 'assets/styles/abstracts/variables/animations';
+
+.label {
+  position: relative;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+}
 
 .input {
   position: absolute;
-  z-index: -1;
+  z-index: $zindex-overlay-filters-modal;
   opacity: 0;
 
-  &:disabled + .label {
+  &:checked + .checkmark {
+    background-color: $color-brand-primary-900;
+
+    &::after {
+      content: url(../../../assets/icons/consent.svg);
+    }
+  }
+
+  &:disabled + .checkmark {
+    background-color: $color-neutral-100;
+    border-color: $color-neutral-150;
     cursor: default;
 
-    &::before {
-      border-color: $color-neutral-400;
-    }
-
-    &:hover::before {
+    &:hover {
       border-width: 1px;
     }
   }
+}
 
-  & + .label {
-    display: inline-flex;
-    align-items: center;
-    user-select: none;
-    cursor: pointer;
+.checkmark {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  height: inherit;
+  box-sizing: border-box;
+  border: 1px solid $color-brand-primary-900;
+  border-radius: 3px;
+  cursor: pointer;
+  user-select: none;
 
-    &::before {
-      content: '';
-      display: inline-block;
-      flex-shrink: 0;
-      flex-grow: 0;
-      width: 24px;
-      height: 24px;
-      box-sizing: border-box;
-      background-color: $color-neutral-0;
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: 50% 50%;
-      border: 1px solid $color-brand-primary-900;
-      border-radius: 3px;
-    }
-
-    &:hover::before {
-      border-width: 2px;
-    }
-  }
-
-  &:checked {
-    + .label::before {
-      content: url(../../../assets/icons/consent.svg);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: $color-brand-primary-900;
-    }
-
-    &:disabled + .label::before {
-      background-color: $color-neutral-400;
-    }
+  &:hover {
+    border-width: 2px;
   }
 }
