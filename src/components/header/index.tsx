@@ -16,7 +16,10 @@ export const Header: FC = () => {
   return (
     <header className={styles.header}>
       <Link to={homeNavLink.to}>
-        <Logo isHeading extClassName={styles.header__logotext} />
+        <Logo isHeading />
+        <span className={styles.header__logotext}>
+          медицинский информационный портал
+        </span>
       </Link>
       <Menu />
       <div className={styles.header__search}>
