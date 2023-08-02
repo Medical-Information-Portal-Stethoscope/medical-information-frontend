@@ -15,8 +15,6 @@ import { articleExample } from './data';
 
 import styles from './styles.module.scss';
 
-// const tmpId = 'a1b00f13-39a8-44fc-9051-87659681dd8f';
-
 export const Article: FC = () => {
   const { id = '0' } = useParams();
   const dispatch = useAppDispatch();
