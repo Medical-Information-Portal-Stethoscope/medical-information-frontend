@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch } from 'services/app/hooks';
