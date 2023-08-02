@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import { ArticlesPreviewSmall } from 'components/articles-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
@@ -8,36 +8,41 @@ import Footer from 'components/footer/footer';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 
 import routes from 'utils/routes';
-
+import { getArticleById } from 'services/features/article/api';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { getDataById } from 'services/features/article/selectors';
 import { articleExample } from './data';
 
 import styles from './styles.module.scss';
 
-const tmpId = '72693381-ddb5-4585-b491-1621cf7f730a';
+// const tmpId = 'a1b00f13-39a8-44fc-9051-87659681dd8f';
 
-// { data = newsExample }
 export const Article: FC = () => {
-  const { id = tmpId } = useParams();
+  const { id = '0' } = useParams();
+  const dispatch = useAppDispatch();
 
-  // как будто достали новость по id
-  const data = articleExample;
-  const selectedData = data ? data.find((item) => item.id === id) : null;
+  useEffect(() => {
+    dispatch(getArticleById(id));
+  }, [id]);
 
-  // взяли теги
-  // const currentTags = selectedData.tags
+  const { article } = useAppSelector(getDataById);
 
-  // далее достали две статьи по тегам
-  const articlePreviewData = articleExample;
+  // TODO: решить вопрос с запросом двух статей по тегам для превью
+  // const currentTags = article.tags
 
-  return selectedData ? (
+  // TODO: переписать запрос с использованием тегов, пока берем две первые статьи
+  // const { results } = useAppSelector(getPreviewArticles);
+  // console.log(results)
+
+  return article ? (
     <>
       <Header />
       <main>
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
-            <Paper data={selectedData} type="default" isNews={false} />
+            <Paper data={article} type="default" isNews={false} />
             <ArticlesPreviewSmall
-              data={articlePreviewData}
+              data={articleExample}
               route={routes.articles.route}
             />
           </div>

@@ -3,7 +3,7 @@
 .paper {
   max-width: 900px;
 
-  // margin: 0 auto;
+  margin-top: 40px;
 
   display: flex;
   flex-direction: column;
@@ -143,9 +143,9 @@
   }
 
   &__tag {
-    width: 102px;
+    // width: 102px;
     height: 40px;
-    padding: 0;
+    padding: 8px 24px;
     background-color: $color-brand-primary-700;
 
     span {
