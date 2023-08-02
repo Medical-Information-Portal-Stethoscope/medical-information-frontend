@@ -16,7 +16,7 @@ export const Header: FC = () => {
   return (
     <header className={styles.header}>
       <Link to={homeNavLink.to}>
-        <Logo isHeading />
+        <Logo isHeading theme="light" />
         <span className={styles.header__logotext}>
           медицинский информационный портал
         </span>
