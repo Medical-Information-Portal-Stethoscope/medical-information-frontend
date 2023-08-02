@@ -52,7 +52,7 @@ const SignInPage: FC = (): ReactElement => {
     if (serverError) {
       dispatch(resetServerError());
     }
-  }, []);
+  }, [dispatch, serverError]);
 
   const navigation = (
     <div className={styles.navigation}>
