@@ -1,0 +1,57 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.userProfile {
+  &_title {
+    @extend %heading-size-medium;
+    padding-bottom: 48px;
+  }
+
+  &_subtitle {
+    @extend %heading-size-small;
+    padding-bottom: 32px;
+  }
+
+  &_box {
+    display: grid;
+    grid-template-columns: 130px auto;
+    gap: 32px;
+    max-width: 744px;
+    border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
+    border-radius: 16px;
+    margin-bottom: 48px;
+    padding: 48px;
+    box-sizing: border-box;
+    color: $color-neutral-700;
+  }
+
+  &_userName {
+    @extend %text-size-large;
+    color: $color-neutral-900;
+  }
+
+  &_quote {
+    @extend %text-size-small;
+    padding-top: 16px;
+    color: $color-neutral-600;
+  }
+
+  &_form {
+    padding: 48px;
+    border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
+    border-radius: 16px;
+
+    div:first-child {
+      margin-bottom: 12px;
+    }
+
+    div:nth-of-type(2) {
+      margin-bottom: 22px;
+    }
+  }
+
+  &_button {
+    width: 100%;
+  }
+}
