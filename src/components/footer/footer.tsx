@@ -35,7 +35,7 @@ const Footer: FC = (): ReactElement => (
       <div className={styles.content}>
         <div className={styles.logo}>
           <Link className={styles.logoLink} to={routes.home}>
-            <Logo />
+            <Logo theme="dark" />
             <span className={styles.logoName}>
               медицинский информационный портал
             </span>

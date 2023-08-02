@@ -46,6 +46,12 @@
   line-height: $font-line-height-text-large;
 }
 
+%text-size-large-bold {
+  font-weight: 700;
+  font-size: $font-size-text-large;
+  line-height: $font-line-height-text-large;
+}
+
 %text-size-medium-semibold {
   font-size: $font-size-text-medium;
   font-weight: 600;

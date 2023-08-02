@@ -27,7 +27,7 @@ export const Search: FC = () => {
 
   return (
     <form
-      className={`${styles.search}  ${isActive ? styles.search_active : null}`}
+      className={`${styles.search} ${isActive ? styles.search_active : null}`}
       noValidate
     >
       <input

@@ -1,0 +1,67 @@
+@import '../../assets/styles/index.scss';
+
+.user {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto;
+  padding: 0;
+
+  &__default {
+    background: none;
+    fill: $color-neutral-0;
+
+    &:hover {
+      fill: $color-brand-primary-500;
+      svg {
+        fill: $color-brand-primary-500;
+      }
+    }
+  }
+
+  &__icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    position: relative;
+
+    @extend %text-size-medium-semibold;
+    color: $color-brand-primary-900;
+
+    border-radius: 50px;
+    border: 1px solid $color-brand-primary-500;
+    background-color: $color-neutral-0;
+
+    svg {
+      fill: $color-brand-secondary-900;
+    }
+
+    &:hover {
+      color: $color-brand-primary-500;
+
+      svg {
+        fill: $color-brand-secondary-700;
+      }
+    }
+  }
+
+  &__content {
+    text-align: center;
+    vertical-align: middle;
+  }
+
+  &__plus {
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: -2px;
+    right: 0;
+  }
+
+  &:hover {
+    transition: $transition-button;
+    cursor: pointer;
+  }
+}

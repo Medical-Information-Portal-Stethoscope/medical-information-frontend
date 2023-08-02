@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { useAppDispatch } from 'services/app/hooks';
@@ -38,7 +39,7 @@ function App() {
       <Route path={routes.drugs.route} element={<NotFoundPage />} />
       <Route path={routes.doctorQuestion.route} element={<NotFoundPage />} />
       <Route path={routes.about.route} element={<AboutPage />} />
-      <Route path={routes.authors} element={<AuthorsPage />} />
+      <Route path={routes.authors.route} element={<AuthorsPage />} />
 
       <Route path={routes.signup} element={<SignUpPage />} />
       <Route path={routes.signin} element={<SignInPage />} />

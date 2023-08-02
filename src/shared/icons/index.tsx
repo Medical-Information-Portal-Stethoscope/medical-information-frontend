@@ -55,6 +55,7 @@ import { OphthalmologyIcon } from './ophthalmology-icon';
 import { OtorhinolaryngologyIcon } from './otorhinolaryngology-icon';
 import { PediatricsIcon } from './pediatrics-icon';
 import { PodcastIcon } from './podcast-icon';
+import { PlusIcon } from './plus-icon';
 import { PsychotherapyIcon } from './psychotherapy-icon';
 import { RainOneIcon } from './rain-one-icon';
 import { RainTwoIcon } from './rain-two-icon';
@@ -150,6 +151,7 @@ const icons = {
   OtorhinolaryngologyIcon,
   PediatricsIcon,
   PodcastIcon,
+  PlusIcon,
   PsychotherapyIcon,
   RainOneIcon,
   RainTwoIcon,
