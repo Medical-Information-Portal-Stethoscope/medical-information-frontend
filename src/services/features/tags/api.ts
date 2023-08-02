@@ -14,7 +14,10 @@ export const tagsApi = createApi({
     getRootsTags: builder.query<TTags[], void>({
       query: () => api.endpoints.tags.roots,
     }),
+    getSubtreeTags: builder.query({
+      query: (id) => `/tags/${id}/subtree/`,
+    }),
   }),
 });
 
-export const { useGetRootsTagsQuery } = tagsApi;
+export const { useGetRootsTagsQuery, useGetSubtreeTagsQuery } = tagsApi;

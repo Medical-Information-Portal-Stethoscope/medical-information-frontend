@@ -38,9 +38,10 @@
 
 .container_main {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
 }
 
 .container_articles {
   display: flex;
+  width: 1270px;
 }

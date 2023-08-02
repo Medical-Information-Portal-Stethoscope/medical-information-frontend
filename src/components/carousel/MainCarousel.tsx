@@ -7,7 +7,12 @@ import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
 import { FiltersPopup } from 'shared/popup/filters';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
-import data, { IData } from './test-data/test-data';
+import {
+  useGetRootsTagsQuery,
+  useGetSubtreeTagsQuery,
+} from 'services/features/tags/api';
+import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
+import { IData, iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
@@ -22,11 +27,27 @@ const getArrayForCarousel = (dataArray: IData[], divider: number) => {
   return container;
 };
 
-const arrayOfTabsForMainPage = getArrayForCarousel(data, 10);
-const arrayOfTabsForArticlesPage = getArrayForCarousel(data, 9);
-
 function MainCarousel({ type = 'main' }: IMainCarouselProps) {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
+  // Получаем список всех корневых тегов
+  const { data: tags = [] } = useGetRootsTagsQuery();
+  // Находим тег специализации
+  const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
+  // Получаем список тегов всех специализаций
+  const { data: res = [], isSuccess } = useGetSubtreeTagsQuery(
+    specializationsTag?.pk,
+    { skip: !specializationsTag }
+  );
+  const allSpecializationsTags = isSuccess ? res[0].children : [];
+
+  const arrayOfTabsForMainPage = getArrayForCarousel(
+    allSpecializationsTags,
+    10
+  );
+  const arrayOfTabsForArticlesPage = getArrayForCarousel(
+    allSpecializationsTags,
+    8
+  );
 
   const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
 
@@ -62,15 +83,77 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
         {type === 'main'
           ? arrayOfTabsForMainPage.map((arrayOfTabs, index) => (
               <div className={styles.container_main} key={index}>
+                {index === 0 && (
+                  <div key={index}>
+                    <FilterTab
+                      icon={<Icon icon="AllIcon" size="24" color="gray" />}
+                      id="0"
+                      label="Все разделы"
+                    />
+                  </div>
+                )}
                 {arrayOfTabs.map((tab) => (
-                  <div key={tab.id}>{tab.icon}</div>
+                  <div key={tab.pk}>
+                    {iconsData[tab.name] ? (
+                      <FilterTab
+                        icon={
+                          <Icon
+                            icon={iconsData[tab.name]}
+                            size="24"
+                            color="gray"
+                          />
+                        }
+                        id={tab.pk}
+                        label={tab.name}
+                      />
+                    ) : (
+                      <FilterTab
+                        icon={
+                          <Icon icon="FirstAidIcon" size="24" color="gray" />
+                        }
+                        id={tab.pk}
+                        label={tab.name}
+                      />
+                    )}
+                  </div>
                 ))}
               </div>
             ))
           : arrayOfTabsForArticlesPage.map((arrayOfTabs, index) => (
               <div className={styles.container_articles} key={index}>
+                {index === 0 && (
+                  <div key={index}>
+                    <FilterTab
+                      icon={<Icon icon="AllIcon" size="24" color="gray" />}
+                      id="0"
+                      label="Все разделы"
+                    />
+                  </div>
+                )}
                 {arrayOfTabs.map((tab) => (
-                  <div key={tab.id}>{tab.icon}</div>
+                  <div key={tab.pk}>
+                    {iconsData[tab.name] ? (
+                      <FilterTab
+                        icon={
+                          <Icon
+                            icon={iconsData[tab.name]}
+                            size="24"
+                            color="gray"
+                          />
+                        }
+                        id={tab.pk}
+                        label={tab.name}
+                      />
+                    ) : (
+                      <FilterTab
+                        icon={
+                          <Icon icon="FirstAidIcon" size="24" color="gray" />
+                        }
+                        id={tab.pk}
+                        label={tab.name}
+                      />
+                    )}
+                  </div>
                 ))}
               </div>
             ))}
