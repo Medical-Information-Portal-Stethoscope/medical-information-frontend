@@ -1,7 +1,12 @@
 const routes = Object.freeze({
   home: '/',
+
   signup: '/sign-up',
   signin: '/sign-in',
+  password: {
+    reset: '/reset-password',
+  },
+
   news: { route: '/news', name: 'Новости' },
   articles: { route: '/articles', name: 'Статьи' },
   podcasts: { route: '/podcasts', name: 'Подкасты' },

@@ -8,6 +8,7 @@ import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import { AuthorsPage } from 'pages/authors/authors';
 import SignUpPage from 'pages/sign-up/sign-up';
 import SignInPage from 'pages/sign-in/sign-in';
+import { ResetPasswordPage } from 'pages/reset-password/reset-password';
 import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import AboutPage from 'pages/about-page/about-page';
@@ -37,6 +38,7 @@ function App() {
 
       <Route path={routes.signup} element={<SignUpPage />} />
       <Route path={routes.signin} element={<SignInPage />} />
+      <Route path={routes.password.reset} element={<ResetPasswordPage />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
