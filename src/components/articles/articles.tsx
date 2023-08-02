@@ -29,6 +29,7 @@ export default function Articles() {
           data={article}
           type="default"
           extraClass={styles.article}
+          route={routes.articles.route}
         />
       )) || null;
 

@@ -7,6 +7,7 @@ import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 
+import routes from 'utils/routes';
 import { newsExample } from './data/news';
 
 import styles from './styles.module.scss';
@@ -27,10 +28,13 @@ export const News: FC = () => {
     <>
       <Header />
       <main>
-        <section className={styles.news}>
+        <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>
             <Paper data={selectedData} type="default" isNews />
-            <NewsPreviewSmall data={newsPreviewData} />
+            <NewsPreviewSmall
+              data={newsPreviewData}
+              route={routes.news.route}
+            />
           </div>
         </section>
       </main>

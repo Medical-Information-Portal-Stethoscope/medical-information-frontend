@@ -29,12 +29,14 @@ interface ICardArticlePreviewProps {
   };
   type: 'media' | 'news' | 'default';
   extraClass?: string;
+  route: string;
 }
 
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   data: { id, title, annotation, text, image, created_at, author, views_count },
   type,
   extraClass,
+  route,
 }) => {
   const date = renderFormatDateArticle(created_at);
   const readingTime = findReadingTimeArticle(text);
@@ -44,7 +46,7 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   }; // TODO: onClick. Here or upper scope?
 
   return (
-    <Link to={`${id}`}>
+    <Link to={`${route}/${id}`}>
       <article
         className={classNames(
           styles.article,

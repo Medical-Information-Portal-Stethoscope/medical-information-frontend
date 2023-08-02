@@ -11,7 +11,7 @@ import { ClockIcon } from 'shared/icons/clock-icon';
 import { ViewsIcon } from 'shared/icons/views-icon';
 
 import { ForwardIcon } from 'shared/icons/forward-icon';
-// import { BookmarkIcon } from 'shared/icons/bookmark-icon';
+import { BookmarkIcon } from 'shared/icons/bookmark-icon';
 import { CommentsIcon } from 'shared/icons/comments-icon';
 
 import Button from 'shared/buttons/button/button';
@@ -20,7 +20,6 @@ import ButtonWithIconThree from 'shared/buttons/button-with-icon-three/button-wi
 import { articleExample } from 'components/paper/data/data';
 
 import { TArticle } from 'utils/types/article';
-import { BookmarkIcon } from 'shared/icons/bookmark-icon';
 
 import styles from './styles.module.scss';
 

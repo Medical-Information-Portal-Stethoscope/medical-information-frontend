@@ -7,6 +7,8 @@ import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 
+import routes from 'utils/routes';
+
 import { articleExample } from './data';
 
 import styles from './styles.module.scss';
@@ -31,10 +33,13 @@ export const Article: FC = () => {
     <>
       <Header />
       <main>
-        <section className={styles.article}>
+        <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
             <Paper data={selectedData} type="default" isNews={false} />
-            <ArticlesPreviewSmall data={articlePreviewData} />
+            <ArticlesPreviewSmall
+              data={articlePreviewData}
+              route={routes.articles.route}
+            />
           </div>
         </section>
       </main>

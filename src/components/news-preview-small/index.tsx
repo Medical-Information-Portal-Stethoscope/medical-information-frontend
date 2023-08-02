@@ -7,17 +7,19 @@ import styles from './styles.module.scss';
 
 interface INewsPreviewSmall {
   data: TArticle[];
+  route: string;
 }
 
 const maxNumCardsDesktop = 2;
 
 export const NewsPreviewSmall: FC<INewsPreviewSmall> = ({
   data = newsExample,
+  route = '/',
 }) => {
   const news = data
     .slice(0, maxNumCardsDesktop)
     .map((item) => (
-      <CardArticlePreview key={item.id} data={item} type="news" />
+      <CardArticlePreview key={item.id} data={item} type="news" route={route} />
     ));
 
   return (
