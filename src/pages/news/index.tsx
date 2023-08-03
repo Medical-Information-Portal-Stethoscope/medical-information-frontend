@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect } from 'react';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
