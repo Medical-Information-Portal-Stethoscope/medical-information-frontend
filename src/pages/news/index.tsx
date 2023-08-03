@@ -11,7 +11,8 @@ import routes from 'utils/routes';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { getArticleById } from 'services/features/article/api';
 import { getDataById } from 'services/features/article/selectors';
-import { newsExample } from './data/news';
+import { useGetRootsTagsQuery } from 'services/features/tags/api';
+import { useGetAllNewsQuery } from 'services/features/information-material/api';
 
 import styles from './styles.module.scss';
 
@@ -25,8 +26,12 @@ export const News: FC = () => {
 
   const { article } = useAppSelector(getDataById);
 
-  // TODO: достать две новости из ранее загруженных, пока тестовые данные
-  const newsPreviewData = newsExample;
+  // Получаем список всех тегов
+  const { data: tags = [] } = useGetRootsTagsQuery();
+  // Находим тег новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
+  // Получаем список всех новостей
+  const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
 
   return article ? (
     <>
@@ -35,10 +40,9 @@ export const News: FC = () => {
         <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>
             <Paper data={article} type="default" isNews />
-            <NewsPreviewSmall
-              data={newsPreviewData}
-              route={routes.news.route}
-            />
+            {data ? (
+              <NewsPreviewSmall data={data.results} route={routes.news.route} />
+            ) : null}
           </div>
         </section>
       </main>

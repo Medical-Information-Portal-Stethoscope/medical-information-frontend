@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, useEffect } from 'react';
 import { ArticlesPreviewSmall } from 'components/articles-preview-small';
 import { Paper } from 'components/paper';
