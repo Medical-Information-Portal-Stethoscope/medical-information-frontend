@@ -46,7 +46,7 @@ export default function ArticlesPreviewPage() {
         <section>
           <div className={styles.wrapper}>
             <h2 className={styles.heading}>Статьи</h2>
-            <MainCarousel type="articles" />
+            <MainCarousel type="articles" onChangeTab={() => ''} />
             <div className={styles.gallery}>
               <div className={styles.content}>{articles}</div>
               <Button

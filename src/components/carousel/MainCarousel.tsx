@@ -17,6 +17,7 @@ import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
   type?: 'main' | 'articles';
+  onChangeTab: (id: string) => void;
 }
 
 const getArrayForCarousel = (dataArray: IData[], divider: number) => {
@@ -27,7 +28,7 @@ const getArrayForCarousel = (dataArray: IData[], divider: number) => {
   return container;
 };
 
-function MainCarousel({ type = 'main' }: IMainCarouselProps) {
+function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -88,7 +89,10 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
                     <FilterTab
                       icon={<Icon icon="AllIcon" size="24" color="gray" />}
                       id="0"
-                      label="Все разделы"
+                      label="Все специализации"
+                      isChecked
+                      name="Filter"
+                      // onChange={onChange}
                     />
                   </div>
                 )}
@@ -105,6 +109,8 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
                         }
                         id={tab.pk}
                         label={tab.name}
+                        name="Filter"
+                        onChange={() => onChangeTab(tab.pk)}
                       />
                     ) : (
                       <FilterTab
@@ -113,6 +119,8 @@ function MainCarousel({ type = 'main' }: IMainCarouselProps) {
                         }
                         id={tab.pk}
                         label={tab.name}
+                        name="Filter"
+                        onChange={() => onChangeTab(tab.pk)}
                       />
                     )}
                   </div>
