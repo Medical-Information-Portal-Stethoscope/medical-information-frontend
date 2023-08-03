@@ -12,7 +12,10 @@ import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-pa
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import AboutPage from 'pages/about-page/about-page';
 import routes from 'utils/routes';
+import { Article } from 'pages/article';
+import { News } from 'pages/news';
 import ProfilePage from 'pages/profile/profile-page';
+
 
 function App() {
   const dispatch = useAppDispatch();
@@ -29,7 +32,11 @@ function App() {
     <Routes>
       <Route path={routes.home} element={<MainPage />} />
       <Route path={routes.news.route} element={<NewsPreviewPage />} />
+      <Route path={`${routes.news.route}/:id`} element={<News />} />
+
       <Route path={routes.articles.route} element={<ArticlesPreviewPage />} />
+      <Route path={`${routes.articles.route}/:id`} element={<Article />} />
+
       <Route path={routes.podcasts.route} element={<NotFoundPage />} />
       <Route path={routes.drugs.route} element={<NotFoundPage />} />
       <Route path={routes.doctorQuestion.route} element={<NotFoundPage />} />

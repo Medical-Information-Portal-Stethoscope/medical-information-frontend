@@ -11,7 +11,11 @@
   border-radius: 16px;
   cursor: pointer;
 
-  &:hover > .wrapper > .content > .description > .title > .heading {
+  a {
+    color: initial;
+  }
+
+  &:hover a > .wrapper > .content > .description > .title > .heading {
     color: $color-brand-secondary-900;
   }
 

@@ -7,6 +7,7 @@ import Button from 'shared/buttons/button/button';
 import { TArticle } from 'utils/types/article';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
+import routes from 'utils/routes';
 import styles from './articles-preview-page.module.scss';
 
 const maxNumArticlesDesktop = 6;
@@ -28,6 +29,7 @@ export default function ArticlesPreviewPage() {
           data={article}
           type="default"
           extraClass={styles.article}
+          route={routes.articles.route}
         />
       )) || null;
 

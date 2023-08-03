@@ -23,7 +23,7 @@ export default function News() {
     .slice(0, maxNumNewsDesktop)
     .map(({ id, title }) => (
       <li className={styles.newsItem} key={id}>
-        <Link className={styles.newsLink} to="/">
+        <Link className={styles.newsLink} to={`${routes.news.route}/${id}`}>
           {title}
         </Link>
       </li>
@@ -37,7 +37,11 @@ export default function News() {
           {/* Пока в самое популярное попадает самая новая новость. 
           Надо будет разобраться с пагинацией и найти статью у который самой большой views_count */}
           {isSuccess && (
-            <CardArticlePreview data={data.results[0]} type="media" />
+            <CardArticlePreview
+              data={data.results[0]}
+              type="media"
+              route={routes.news.route}
+            />
           )}
         </section>
         <section>

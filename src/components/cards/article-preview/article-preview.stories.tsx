@@ -32,6 +32,7 @@ type TStory = StoryObj<typeof meta>;
 export const Media: TStory = {
   args: {
     data: {
+      id: '123',
       title: 'Полное руководство по использованию зубной нити',
       annotation:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis exercitationem magni dolor obcaecati modi libero molestias illo, vero fugiat iste, perspiciatis natus consequatur voluptatum voluptas repellat necessitatibus harum provident ab!',
@@ -55,6 +56,7 @@ export const Media: TStory = {
 export const News: TStory = {
   args: {
     data: {
+      id: '123',
       title: 'Полное руководство по использованию зубной нити',
       annotation:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis exercitationem magni dolor obcaecati modi libero molestias illo, vero fugiat iste, perspiciatis natus consequatur voluptatum voluptas repellat necessitatibus harum provident ab!',
@@ -78,6 +80,7 @@ export const News: TStory = {
 export const Default: TStory = {
   args: {
     data: {
+      id: '123',
       title: 'Полное руководство по использованию зубной нити',
       annotation:
         'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis exercitationem magni dolor obcaecati modi libero molestias illo, vero fugiat iste, perspiciatis natus consequatur voluptatum voluptas repellat necessitatibus harum provident ab!',

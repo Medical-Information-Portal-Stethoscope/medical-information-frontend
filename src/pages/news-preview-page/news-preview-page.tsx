@@ -5,6 +5,8 @@ import CardArticlePreview from 'components/cards/article-preview/article-preview
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useGetAllNewsQuery } from 'services/features/information-material/api';
 import Button from 'shared/buttons/button/button';
+import routes from 'utils/routes';
+
 import styles from './news-preview-page.module.scss';
 
 const maxNumCardsDesktop = 5;
@@ -20,7 +22,12 @@ export default function NewsPreviewPage() {
   const news = data?.results
     .slice(0, maxNumCardsDesktop)
     .map((item) => (
-      <CardArticlePreview key={item.id} data={item} type="news" />
+      <CardArticlePreview
+        key={item.id}
+        data={item}
+        type="news"
+        route={routes.news.route}
+      />
     ));
 
   useEffect(() => {
