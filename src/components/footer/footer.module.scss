@@ -23,6 +23,7 @@
 .warning {
   row-gap: 12px;
   max-width: 70%;
+  padding-bottom: 34px;
   letter-spacing: $font-letter-spacing-main;
   color: $color-neutral-700;
 }
@@ -34,20 +35,24 @@
 
 .content {
   display: grid;
-  grid-template-columns: 19.19% 53.77% 1.75%;
+  grid-template-columns: 15.57% 32.46% 15.7%;
   justify-content: space-between;
+  align-items: flex-end;
 }
 
 .logo {
   margin-top: 9px;
+
+  a div img {
+    width: 284px;
+    height: 60px;
+  }
 }
 
 .links {
   display: grid;
-  grid-template-columns: 16.52% 25.16% 41.04%;
+  grid-template-columns: 47.64% 46.11%;
   justify-content: space-between;
-  align-items: center;
-  margin-left: 7%;
 }
 
 .logoLink,
@@ -56,34 +61,55 @@
 }
 
 .logoLink {
-  row-gap: 7px;
+  row-gap: 1px;
   letter-spacing: $font-letter-spacing-main;
 }
 
+.logoName {
+  @extend %text-size-small;
+  font-weight: 600;
+}
+
 .link {
-  @extend %text-size-large;
+  letter-spacing: $font-letter-spacing-main;
+  color: $color-brand-primary-900;
   transition: $transition-button;
   transition-property: color;
 
   &:hover {
-    color: $color-brand-primary-900;
+    color: $color-brand-primary-700;
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
   }
 }
 
 .footerLinkItem {
   width: max-content;
   height: max-content;
-  margin: 12px 24px;
-
-  &:nth-child(3n + 2) {
-    margin-left: 15%;
-  }
-
-  &:nth-child(3n + 3) {
-    margin-left: 9%;
-  }
 }
 
 .contacts {
-  row-gap: 10px;
+  align-items: flex-end;
+  row-gap: 8px;
+  letter-spacing: $font-letter-spacing-main;
+}
+
+.copyright {
+  color: $color-neutral-600;
+}
+
+.email {
+  color: $color-brand-primary-900;
+  transition: $transition-button;
+  transition-property: color;
+
+  &:hover {
+    color: $color-brand-primary-700;
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
+  }
 }

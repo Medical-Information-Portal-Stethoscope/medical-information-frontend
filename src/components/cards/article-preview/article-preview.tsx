@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */ // TODO: for tests before installing npm package for cases transfer
 import { FC } from 'react';
 import classNames from 'classnames';
-import FavoriteButton from 'shared/buttons/favorite-button/favorite-button';
+import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
 import renderFormatDateArticle from 'utils/functions/render-format-date-article';
 import findReadingTimeArticle from 'utils/functions/find-reading-time-article';
+import { Icon } from 'shared/icons';
 import IconViews from './test-data/icon_views';
 import styles from './article-preview.module.scss';
 
@@ -56,12 +57,13 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
           )}
         >
           <img className={styles.image} src={image} alt="Превью статьи" />
-          <FavoriteButton
+          <ButtonWithIconTwo
             extraClass={classNames(
               styles.favoriteButton,
               styles[`favoriteButton--${type}`]
             )}
             onClick={handleLike}
+            icon={<Icon icon="BookmarkIcon" color="white" size="32" />}
           />
         </div>
         <div className={classNames(styles.content, styles[`content--${type}`])}>

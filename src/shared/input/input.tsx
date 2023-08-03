@@ -1,26 +1,30 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useMemo,
+  useRef,
+  useState,
+  useEffect,
+} from 'react';
 import { Icon } from 'shared/icons';
 import { nanoid } from '@reduxjs/toolkit';
+import { useAppDispatch } from 'services/app/hooks';
+import { resetServerError } from 'services/features/user/slice';
 import classNames from 'classnames';
 import styles from './input.module.scss';
 
 interface InputProps
   extends Omit<React.HTMLProps<HTMLInputElement>, 'size' | 'type' | 'ref'> {
-  type?: 'text' | 'email' | 'password';
-  value?: string; // TODO: Сделал пока value и onChange необязательными, поскольку, если будем пользоваться формиком, у него это все под капотом
-  name: string;
-  label?: string;
-  placeholder?: string;
-  error?: boolean;
-  errorText?: string;
-  isDisabled?: boolean;
   extraClass?: string;
-  isValid?: boolean;
+  type?: 'text' | 'email' | 'password';
+  error?: string;
+  serverError?: string[];
   size?: 'medium' | 'small';
   icon?: boolean;
-  onChange?(e: React.ChangeEvent<HTMLInputElement>): void;
+  isDisabled?: boolean;
+  isValid?: boolean;
+  touched?: boolean;
 }
 
 function useCombinedRefs<T = HTMLElement>(
@@ -44,17 +48,20 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     {
       type = 'text',
       value,
+      error,
+      serverError,
+      isDisabled,
+      touched,
       name,
-      onChange,
       label,
       placeholder,
-      error,
-      errorText,
-      isDisabled,
       extraClass,
       isValid,
       size = 'medium',
       icon,
+      autoComplete = 'off',
+      onBlur,
+      onChange,
     },
     forwardedRef
   ) => {
@@ -62,6 +69,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
     const ref = useCombinedRefs<HTMLInputElement>(innerRef, forwardedRef);
+    const dispatch = useAppDispatch();
+
+    useEffect(() => {
+      if (serverError) {
+        dispatch(resetServerError());
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value]);
 
     const forceFocus = useCallback(() => {
       ref?.current?.focus();
@@ -81,17 +96,24 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             className={styles.icon_button}
             type="button"
             aria-label={visible ? 'скрыть пароль' : 'показать пароль'}
-            disabled={isDisabled}
+            disabled={isValid}
           >
             <Icon
               // eslint-disable-next-line no-nested-ternary
-              color={!isDisabled ? (error ? 'red' : 'blue') : 'gray'}
+              color={
+                // eslint-disable-next-line no-nested-ternary
+                !isValid
+                  ? (error || serverError) && touched
+                    ? 'red'
+                    : 'blue'
+                  : 'gray'
+              }
               icon={visible ? 'EyeIcon' : 'EyeClosedIcon'}
               size="24"
             />
           </button>
         ) : null,
-      [error, icon, isDisabled, onIconClick, visible]
+      [error, serverError, icon, isValid, onIconClick, visible, touched]
     );
 
     const typeForPassword = visible ? 'text' : 'password';
@@ -100,7 +122,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       <div className={classNames(extraClass, styles.input)}>
         <label
           className={classNames(styles[`input--label`], {
-            [styles[`input--label--disabled`]]: isDisabled,
+            [styles[`input--label--disabled`]]: isValid,
           })}
           htmlFor={id}
         >
@@ -112,32 +134,36 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             styles[`input--container--${size}`],
             {
               [styles[`input--container--success`]]: isValid,
-              [styles[`input--container--error`]]: error && errorText,
-              [styles[`input--container--disabled`]]: isDisabled,
+              [styles[`input--container--error`]]:
+                (error || serverError) && touched,
+              [styles[`input--container--disabled`]]: isValid,
             }
           )}
           onClick={onWrapperClick}
         >
           <input
             className={classNames(styles[`input--container--input`], {
-              [styles[`input--container--input--error`]]: error && errorText,
+              [styles[`input--container--input--error`]]:
+                (error || serverError) && touched,
             })}
             ref={ref}
             name={name}
-            value={value}
+            value={value || ''}
             id={id}
             type={type === 'password' ? typeForPassword : type}
-            onChange={onChange}
+            autoComplete={autoComplete}
             placeholder={placeholder}
             disabled={isDisabled}
+            onBlur={onBlur}
+            onChange={onChange}
           />
           {iconToRender}
-          {isValid && !error && type !== 'password' && (
+          {value && !error && type !== 'password' && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {error ? errorText : ''}
+          {(error || serverError) && touched ? error || serverError : ''}
         </span>
       </div>
     );
