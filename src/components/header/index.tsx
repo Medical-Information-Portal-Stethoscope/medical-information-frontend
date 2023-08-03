@@ -34,11 +34,9 @@ export const Header: FC = () => {
       </div>
 
       {isPopupOpened && (
-        // <Portal isOpened={isPopupOpened}>
         <div className={styles.tooltip}>
           <Tooltip />
         </div>
-        // </Portal>
       )}
     </header>
   );
