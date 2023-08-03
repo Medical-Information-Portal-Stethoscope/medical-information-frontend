@@ -4,14 +4,12 @@ import userSlice from 'services/features/user/slice';
 import { tagsApi } from 'services/features/tags/api';
 
 import { authMiddleware } from 'services/features/user/middlewares';
-import { articleReducer } from 'services/features/article/slice';
 
 export const store = configureStore({
   reducer: {
     [informationMaterialApi.reducerPath]: informationMaterialApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
     user: userSlice,
-    article: articleReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

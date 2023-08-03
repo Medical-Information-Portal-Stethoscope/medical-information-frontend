@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { ArticlesPreviewSmall } from 'components/articles-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
@@ -10,28 +10,21 @@ import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import { ServerErrorPage } from 'pages/error-page/serverErrorPage';
 
 import routes from 'utils/routes';
-import { getArticleById } from 'services/features/article/api';
-import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
-import { useGetAllArticlesQuery } from 'services/features/information-material/api';
-
 import {
-  getDataById,
-  getErrStatusAboutDataId,
-} from 'services/features/article/selectors';
+  useGetAllArticlesQuery,
+  useGetArticleByIdQuery,
+} from 'services/features/information-material/api';
 
 import styles from './styles.module.scss';
 
 export const Article: FC = () => {
   const { id } = useParams() as { id: string };
-  const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(getArticleById(id));
-  }, [id]);
-
-  const { article } = useAppSelector(getDataById);
-  const errStatus = useAppSelector(getErrStatusAboutDataId);
+  const response = useGetArticleByIdQuery(id);
+  const article = response?.data;
+  const errResponse = response.error || {};
+  const errCode = 'status' in errResponse ? errResponse.status : null;
 
   // TODO: решить вопрос с запросом двух статей по тегам для превью
   // const currentTags = article.tags
@@ -64,10 +57,10 @@ export const Article: FC = () => {
     </>
   ) : (
     (function _() {
-      if (errStatus?.status === 404) {
+      if (errCode === 404) {
         return <NotFoundPage />;
       }
-      if (errStatus?.status === 500) {
+      if (errCode === 500) {
         return <ServerErrorPage />;
       }
       return null;

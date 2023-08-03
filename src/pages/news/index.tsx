@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
@@ -10,12 +10,6 @@ import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import { ServerErrorPage } from 'pages/error-page/serverErrorPage';
 
 import routes from 'utils/routes';
-import { useAppDispatch, useAppSelector } from 'services/app/hooks';
-import { getArticleById } from 'services/features/article/api';
-import {
-  getDataById,
-  getErrStatusAboutDataId,
-} from 'services/features/article/selectors';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import {
   useGetAllNewsQuery,
@@ -26,11 +20,6 @@ import styles from './styles.module.scss';
 
 export const News: FC = () => {
   const { id } = useParams() as { id: string };
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getArticleById(id));
-  }, [id]);
 
   const response = useGetArticleByIdQuery(id);
   const article = response?.data;
