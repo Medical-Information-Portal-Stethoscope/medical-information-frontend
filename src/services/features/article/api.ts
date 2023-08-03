@@ -2,14 +2,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api-routes';
 import { TArticle } from 'utils/types/article';
 
-type TErrorResponse = {
-  [key: string]: string[];
-};
+interface IErrorResponse {
+  [key: string]: string | number | string[];
+}
 
 export const getArticleById = createAsyncThunk<
   TArticle,
   string,
-  { rejectValue: TErrorResponse }
+  { rejectValue: IErrorResponse }
 >('article/getDataById', async (id, { rejectWithValue }) => {
   try {
     const res = await fetch(
@@ -25,11 +25,11 @@ export const getArticleById = createAsyncThunk<
     const resBody: TArticle = await res.json();
 
     if (!res.ok) {
-      throw resBody;
+      throw Object.assign(resBody, { status: res?.status });
     }
 
     return resBody as TArticle;
   } catch (err) {
-    return rejectWithValue(err as TErrorResponse);
+    return rejectWithValue(err as IErrorResponse);
   }
 });

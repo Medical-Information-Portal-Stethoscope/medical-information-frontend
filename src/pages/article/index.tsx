@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
+import { ServerErrorPage } from 'pages/error-page/serverErrorPage';
 
 import routes from 'utils/routes';
 import { getArticleById } from 'services/features/article/api';
@@ -14,7 +15,10 @@ import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useGetAllArticlesQuery } from 'services/features/information-material/api';
 
-import { getDataById } from 'services/features/article/selectors';
+import {
+  getDataById,
+  getErrStatusAboutDataId,
+} from 'services/features/article/selectors';
 
 import styles from './styles.module.scss';
 
@@ -27,6 +31,7 @@ export const Article: FC = () => {
   }, [id]);
 
   const { article } = useAppSelector(getDataById);
+  const errStatus = useAppSelector(getErrStatusAboutDataId);
 
   // TODO: решить вопрос с запросом двух статей по тегам для превью
   // const currentTags = article.tags
@@ -58,6 +63,14 @@ export const Article: FC = () => {
       <Footer />
     </>
   ) : (
-    <NotFoundPage />
+    (function _() {
+      if (errStatus?.status === 404) {
+        return <NotFoundPage />;
+      }
+      if (errStatus?.status === 500) {
+        return <ServerErrorPage />;
+      }
+      return null;
+    })()
   );
 };

@@ -7,11 +7,15 @@ import { useParams } from 'react-router-dom';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
+import { ServerErrorPage } from 'pages/error-page/serverErrorPage';
 
 import routes from 'utils/routes';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { getArticleById } from 'services/features/article/api';
-import { getDataById } from 'services/features/article/selectors';
+import {
+  getDataById,
+  getErrStatusAboutDataId,
+} from 'services/features/article/selectors';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useGetAllNewsQuery } from 'services/features/information-material/api';
 
@@ -26,6 +30,7 @@ export const News: FC = () => {
   }, [id]);
 
   const { article } = useAppSelector(getDataById);
+  const errStatus = useAppSelector(getErrStatusAboutDataId);
 
   // Получаем список всех тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -50,6 +55,14 @@ export const News: FC = () => {
       <Footer />
     </>
   ) : (
-    <NotFoundPage />
+    (function _() {
+      if (errStatus?.status === 404) {
+        return <NotFoundPage />;
+      }
+      if (errStatus?.status === 500) {
+        return <ServerErrorPage />;
+      }
+      return null;
+    })()
   );
 };

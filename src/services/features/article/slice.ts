@@ -2,17 +2,16 @@ import { createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
 import { getArticleById } from './api';
 
-type TErrorResponse = {
-  [key: string]: string[];
-};
+interface IErrorResponse {
+  [key: string]: string | number | string[];
+}
 
 type TSliceState = {
   article: TArticle | null;
 
   process: {
     isLoading: boolean;
-    error: null | TErrorResponse;
-    errorCode: number | string;
+    error: null | IErrorResponse;
   };
 };
 
