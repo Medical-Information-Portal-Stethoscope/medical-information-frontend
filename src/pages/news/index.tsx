@@ -17,7 +17,10 @@ import {
   getErrStatusAboutDataId,
 } from 'services/features/article/selectors';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
-import { useGetAllNewsQuery } from 'services/features/information-material/api';
+import {
+  useGetAllNewsQuery,
+  useGetArticleByIdQuery,
+} from 'services/features/information-material/api';
 
 import styles from './styles.module.scss';
 
@@ -29,8 +32,10 @@ export const News: FC = () => {
     dispatch(getArticleById(id));
   }, [id]);
 
-  const { article } = useAppSelector(getDataById);
-  const errStatus = useAppSelector(getErrStatusAboutDataId);
+  const response = useGetArticleByIdQuery(id);
+  const article = response?.data;
+  const errResponse = response.error || {};
+  const errCode = 'status' in errResponse ? errResponse.status : null;
 
   // Получаем список всех тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -45,7 +50,7 @@ export const News: FC = () => {
       <main>
         <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>
-            <Paper data={article} type="default" isNews />
+            <Paper data={article} isNews />
             {data ? (
               <NewsPreviewSmall data={data.results} route={routes.news.route} />
             ) : null}
@@ -56,10 +61,10 @@ export const News: FC = () => {
     </>
   ) : (
     (function _() {
-      if (errStatus?.status === 404) {
+      if (errCode === 404) {
         return <NotFoundPage />;
       }
-      if (errStatus?.status === 500) {
+      if (errCode === 500) {
         return <ServerErrorPage />;
       }
       return null;

@@ -50,7 +50,7 @@ export const Article: FC = () => {
       <main>
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
-            <Paper data={article} type="default" isNews={false} />
+            <Paper data={article} isNews={false} />
             {data ? (
               <ArticlesPreviewSmall
                 data={data.results}

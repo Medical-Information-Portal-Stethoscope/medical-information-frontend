@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable camelcase */ // TODO: for tests before installing npm package for cases transfer
 import { FC } from 'react';
@@ -27,15 +26,11 @@ import styles from './styles.module.scss';
 interface Ipaper {
   data: TArticle;
   isNews: boolean;
-  type: 'media' | 'news' | 'default';
-  extraClass?: string;
 }
 
 export const Paper: FC<Ipaper> = ({
   data = articleExample,
   isNews = false,
-  type = 'default',
-  extraClass,
 }) => {
   const date = renderFormatDateArticle(data.created_at);
   const readingTime = findReadingTimeArticle(data.text);
