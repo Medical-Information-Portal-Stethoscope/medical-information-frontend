@@ -27,7 +27,7 @@
 
   &_title {
     @extend %heading-size-small;
-    letter-spacing: 0.4px;
+    letter-spacing: $font-letter-spacing-main;
     padding-bottom: 8px;
   }
 
@@ -42,7 +42,7 @@
 
   &_list_item {
     @extend %heading-size-small;
-    letter-spacing: 0.4px;
+    letter-spacing: $font-letter-spacing-main;
     padding-bottom: 16px;
   }
 
@@ -69,11 +69,11 @@
     color: $color-neutral-600;
     font-weight: 600;
     padding-bottom: 16px;
-    letter-spacing: 0.4px;
+    letter-spacing: $font-letter-spacing-main;
   }
 
   &_label {
     padding-left: 20px;
-    letter-spacing: 0.4px;
+    letter-spacing: $font-letter-spacing-main;
   }
 }

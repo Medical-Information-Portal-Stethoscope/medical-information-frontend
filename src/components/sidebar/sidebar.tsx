@@ -15,47 +15,49 @@ function Sidebar() {
           <p className={styles.sidebar_subtitle}>Пользователь</p>
         </div>
       </div>
-      <ul className={styles.sidebar_list}>
-        <li className={styles.sidebar_list_item}>
-          <NavLink
-            end
-            to={routes.profile}
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.sidebar_item_active}`
-                : `${styles.sidebar_item}`
-            }
-          >
-            Профиль
-          </NavLink>
-        </li>
-        <li className={styles.sidebar_list_item}>
-          <NavLink
-            end
-            to={routes.favorites}
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.sidebar_item_active}`
-                : `${styles.sidebar_item}`
-            }
-          >
-            Избранное
-          </NavLink>
-        </li>
-        <li className={styles.sidebar_list_item}>
-          <NavLink
-            end
-            to={routes.publication}
-            className={({ isActive }) =>
-              isActive
-                ? `${styles.sidebar_item_active}`
-                : `${styles.sidebar_item}`
-            }
-          >
-            Публикация статьи
-          </NavLink>
-        </li>
-      </ul>
+      <nav>
+        <ul className={styles.sidebar_list}>
+          <li className={styles.sidebar_list_item}>
+            <NavLink
+              end
+              to={routes.profile}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.sidebar_item_active}`
+                  : `${styles.sidebar_item}`
+              }
+            >
+              Профиль
+            </NavLink>
+          </li>
+          <li className={styles.sidebar_list_item}>
+            <NavLink
+              end
+              to={routes.favorites}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.sidebar_item_active}`
+                  : `${styles.sidebar_item}`
+              }
+            >
+              Избранное
+            </NavLink>
+          </li>
+          <li className={styles.sidebar_list_item}>
+            <NavLink
+              end
+              to={routes.publication}
+              className={({ isActive }) =>
+                isActive
+                  ? `${styles.sidebar_item_active}`
+                  : `${styles.sidebar_item}`
+              }
+            >
+              Публикация статьи
+            </NavLink>
+          </li>
+        </ul>
+      </nav>
       <p className={styles.sidebar_email}>Еженедельная рассылка на email</p>
       <ConsentCheckbox name="email" value="" id="email" isChecked>
         <p className={styles.sidebar_label}>Подписаться на рассылку</p>

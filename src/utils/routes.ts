@@ -11,7 +11,7 @@ const routes = Object.freeze({
   profile: '/profile',
   favorites: 'favorites',
   publication: 'publication',
-  authors: '/authors',
+  authors: { route: '/authors', name: 'Авторам' },
 });
 
 export default routes;
