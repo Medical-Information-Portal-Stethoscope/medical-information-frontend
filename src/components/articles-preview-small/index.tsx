@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useParams } from 'react-router-dom';
 import { TArticle } from 'utils/types/article';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
-import { articlesExample } from './data/articles';
+import { generateSmallPreview } from 'utils/previewSmall';
 
 import styles from './styles.module.scss';
 
@@ -14,19 +14,11 @@ interface IArticlePreviewSmall {
 const maxNumCardsDesktop = 2;
 
 export const ArticlesPreviewSmall: FC<IArticlePreviewSmall> = ({
-  data = articlesExample,
+  data,
   route,
 }) => {
-  const { id } = useParams();
-  const randomData: TArticle[] = [];
-
-  while (randomData.length < maxNumCardsDesktop) {
-    const randomN = Math.floor(Math.random() * data.length);
-    const randomItem = data[randomN];
-    if (!randomData.includes(randomItem) && randomItem.id !== id) {
-      randomData.push(randomItem);
-    }
-  }
+  const { id } = useParams() as { id: string };
+  const randomData = generateSmallPreview(data, maxNumCardsDesktop, id);
 
   const articles = randomData.map((item) => (
     <CardArticlePreview
