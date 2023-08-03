@@ -1,17 +1,31 @@
 import { ReactNode, useEffect } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
-import { useGetAllArticlesQuery } from 'services/features/information-material/api';
+import {
+  getNextPageContent,
+  useGetAllArticlesQuery,
+} from 'services/features/information-material/api';
 import MainCarousel from 'components/carousel/MainCarousel';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import Button from 'shared/buttons/button/button';
 import { TArticle } from 'utils/types/article';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { getFirstPageArticles } from 'services/features/information-material/slice';
+import {
+  articlesStorage,
+  isAllContentArticles,
+  isLoadingContent,
+  nextArticlesPage,
+} from 'services/features/information-material/selectors';
 import styles from './articles-preview-page.module.scss';
 
-const maxNumArticlesDesktop = 6;
-
 export default function ArticlesPreviewPage() {
+  const dispatch = useAppDispatch();
+  const articlesBase = useAppSelector(articlesStorage);
+  const nextPageArticles = useAppSelector(nextArticlesPage);
+  const isAllContent = useAppSelector(isAllContentArticles);
+  const isLoading = useAppSelector(isLoadingContent);
   // Получаем список всех тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег новости
@@ -19,17 +33,11 @@ export default function ArticlesPreviewPage() {
   // Получаем список всех статей
   const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
 
-  const articles: ReactNode | null =
-    data?.results
-      .slice(0, maxNumArticlesDesktop)
-      .map((article: TArticle) => (
-        <CardArticlePreview
-          key={article.id}
-          data={article}
-          type="default"
-          extraClass={styles.article}
-        />
-      )) || null;
+  useEffect(() => {
+    if (data) {
+      dispatch(getFirstPageArticles(data));
+    }
+  }, [data]);
 
   useEffect(() => {
     window.scroll({
@@ -38,6 +46,22 @@ export default function ArticlesPreviewPage() {
       behavior: 'auto',
     });
   }, []);
+
+  const uploadNextPageArticles = () => {
+    if (nextPageArticles) {
+      dispatch(getNextPageContent(nextPageArticles));
+    }
+  };
+
+  const articles: ReactNode | null =
+    articlesBase.map((article: TArticle) => (
+      <CardArticlePreview
+        key={article.id}
+        data={article}
+        type="default"
+        extraClass={styles.article}
+      />
+    )) || null;
 
   return (
     <>
@@ -49,12 +73,16 @@ export default function ArticlesPreviewPage() {
             <MainCarousel type="articles" />
             <div className={styles.gallery}>
               <div className={styles.content}>{articles}</div>
-              <Button
-                label="Еще статьи"
-                model="secondary"
-                size="small"
-                hasBorder
-              />
+              {!isAllContent && (
+                <Button
+                  label="Еще статьи"
+                  model="secondary"
+                  size="small"
+                  hasBorder
+                  onClick={uploadNextPageArticles}
+                  isLoading={isLoading}
+                />
+              )}
             </div>
           </div>
         </section>
