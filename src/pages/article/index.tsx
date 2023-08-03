@@ -10,13 +10,15 @@ import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import routes from 'utils/routes';
 import { getArticleById } from 'services/features/article/api';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { useGetRootsTagsQuery } from 'services/features/tags/api';
+import { useGetAllArticlesQuery } from 'services/features/information-material/api';
+
 import { getDataById } from 'services/features/article/selectors';
-import { articleExample } from './data';
 
 import styles from './styles.module.scss';
 
 export const Article: FC = () => {
-  const { id = '0' } = useParams();
+  const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -27,10 +29,14 @@ export const Article: FC = () => {
 
   // TODO: решить вопрос с запросом двух статей по тегам для превью
   // const currentTags = article.tags
+  // переписать запрос с использованием тегов, пока беру любые статьи
 
-  // TODO: переписать запрос с использованием тегов, пока берем две первые статьи
-  // const { results } = useAppSelector(getPreviewArticles);
-  // console.log(results)
+  // Получаем список всех тегов
+  const { data: tags = [] } = useGetRootsTagsQuery();
+  // Находим тег новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
+  // Получаем список всех статей
+  const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
 
   return article ? (
     <>
@@ -39,10 +45,12 @@ export const Article: FC = () => {
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
             <Paper data={article} type="default" isNews={false} />
-            <ArticlesPreviewSmall
-              data={articleExample}
-              route={routes.articles.route}
-            />
+            {data ? (
+              <ArticlesPreviewSmall
+                data={data.results}
+                route={routes.articles.route}
+              />
+            ) : null}
           </div>
         </section>
       </main>

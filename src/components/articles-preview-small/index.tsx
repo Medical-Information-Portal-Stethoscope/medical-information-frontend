@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { useParams } from 'react-router-dom';
 import { TArticle } from 'utils/types/article';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import { articlesExample } from './data/articles';
@@ -16,16 +17,26 @@ export const ArticlesPreviewSmall: FC<IArticlePreviewSmall> = ({
   data = articlesExample,
   route,
 }) => {
-  const articles = data
-    .slice(0, maxNumCardsDesktop)
-    .map((item) => (
-      <CardArticlePreview
-        key={item.id}
-        data={item}
-        type="default"
-        route={route}
-      />
-    ));
+  const { id } = useParams();
+  const randomData: TArticle[] = [];
+
+  while (randomData.length < maxNumCardsDesktop) {
+    const randomN = Math.floor(Math.random() * data.length);
+    const randomItem = data[randomN];
+    if (!randomData.includes(randomItem) && randomItem.id !== id) {
+      randomData.push(randomItem);
+    }
+  }
+
+  const articles = randomData.map((item) => (
+    <CardArticlePreview
+      key={item.id}
+      data={item}
+      type="default"
+      route={route}
+      extraClass={styles.articles__item}
+    />
+  ));
 
   return (
     <div className={styles.articles}>

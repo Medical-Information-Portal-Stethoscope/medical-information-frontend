@@ -16,7 +16,7 @@ import { newsExample } from './data/news';
 import styles from './styles.module.scss';
 
 export const News: FC = () => {
-  const { id = '0' } = useParams();
+  const { id } = useParams() as { id: string };
   const dispatch = useAppDispatch();
 
   useEffect(() => {
