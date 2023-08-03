@@ -18,7 +18,7 @@ const api = Object.freeze({
 
       password: {
         reset: 'reset_password/',
-        resetConfirm: 'reset_password_confirm/',
+        resetConfirmation: 'reset_password_confirm/',
       },
 
       me: 'me/',

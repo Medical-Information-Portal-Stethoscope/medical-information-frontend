@@ -5,6 +5,7 @@ const routes = Object.freeze({
   signin: '/sign-in',
   password: {
     reset: '/reset-password',
+    resetConfirmation: '/reset-password-confirmation',
   },
 
   news: { route: '/news', name: 'Новости' },
