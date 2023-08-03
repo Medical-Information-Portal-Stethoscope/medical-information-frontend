@@ -1,0 +1,12 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers.scss';
+
+.wrapper {
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto 240px;
+  padding-top: 32px;
+  display: flex;
+  gap: 24px;
+}
