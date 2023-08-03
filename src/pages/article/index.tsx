@@ -13,7 +13,7 @@ import routes from 'utils/routes';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import {
   useGetAllArticlesQuery,
-  useGetArticleByIdQuery,
+  useGetMaterialByIdQuery,
 } from 'services/features/information-material/api';
 
 import styles from './styles.module.scss';
@@ -21,7 +21,7 @@ import styles from './styles.module.scss';
 export const Article: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const response = useGetArticleByIdQuery(id);
+  const response = useGetMaterialByIdQuery(id);
   const article = response?.data;
   const errResponse = response.error || {};
   const errCode = 'status' in errResponse ? errResponse.status : null;
