@@ -15,7 +15,14 @@ function UserProfile() {
           <p className={styles.userProfile_userName}>Пользователь</p>
           <p className={styles.userProfile_quote}>
             Вы можете подтвердить свой статус врача, обратившись к
-            администратору: admin@stethoscope-portal.ru
+            администратору:{' '}
+            <a
+              className={styles.email}
+              href="mailto:admin@stethoscope-portal.ru"
+              lang="en"
+            >
+              admin@stethoscope-portal.ru
+            </a>
           </p>
         </div>
       </div>

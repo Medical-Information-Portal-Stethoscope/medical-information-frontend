@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { FC, ReactElement, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
@@ -53,7 +52,7 @@ const SignInPage: FC = (): ReactElement => {
     if (serverError) {
       dispatch(resetServerError());
     }
-  }, [dispatch, serverError]);
+  }, []); // eslint-disable-line
 
   const navigation = (
     <div className={styles.navigation}>

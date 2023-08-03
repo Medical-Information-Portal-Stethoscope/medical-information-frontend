@@ -5,7 +5,8 @@
 
 .wrapper {
   max-width: $wrapper-main-content-desktop;
-  margin: 32px auto 240px;
+  margin: 0 auto 240px;
+  padding-top: 32px;
   display: flex;
   gap: 24px;
 }

@@ -1,6 +1,7 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/animations';
 
 .userProfile {
   &_title {
@@ -53,5 +54,19 @@
 
   &_button {
     width: 100%;
+  }
+}
+
+.email {
+  color: $color-brand-primary-900;
+  transition: $transition-button;
+  transition-property: color;
+
+  &:hover {
+    color: $color-brand-primary-700;
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
   }
 }
