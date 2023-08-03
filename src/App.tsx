@@ -22,7 +22,7 @@ function App() {
     if (token) {
       dispatch(getUserPersonalData(token));
     }
-  }, [dispatch]);
+  }, []); // eslint-disable-line
 
   return (
     <Routes>

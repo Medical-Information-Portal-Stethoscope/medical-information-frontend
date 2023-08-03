@@ -48,6 +48,7 @@
 
   &_item {
     display: inline-block;
+    box-sizing: border-box;
     color: $color-neutral-700;
     width: 100%;
     padding: 12px;
