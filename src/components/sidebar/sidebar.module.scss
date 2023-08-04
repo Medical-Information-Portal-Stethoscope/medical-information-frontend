@@ -3,7 +3,19 @@
 @import 'assets/styles/abstracts/placeholders';
 
 .sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: calc(100% - 18px);
+
+  &_content {
+    position: sticky;
+    top: 32px;
+
+    button {
+      margin-top: 45vh;
+    }
+  }
 
   &_header {
     display: flex;

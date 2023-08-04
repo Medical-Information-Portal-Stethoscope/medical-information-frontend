@@ -84,6 +84,7 @@ import { SunIcon } from './sun-icon';
 import { SunWithWindIcon } from './sun-with-wind-icon';
 import { SunsetIcon } from './sunset-icon';
 import { TelegramIcon } from './telegram-icon';
+import { UpArrowLongIcon } from './up-arrow-long-icon';
 import { UrologyIcon } from './urology-icon';
 import { UserIcon } from './user-icon';
 import { VaccinationIcon } from './vaccination-icon';
@@ -181,6 +182,7 @@ const icons = {
   SunWithWindIcon,
   SunsetIcon,
   TelegramIcon,
+  UpArrowLongIcon,
   UrologyIcon,
   UserIcon,
   VaccinationIcon,
