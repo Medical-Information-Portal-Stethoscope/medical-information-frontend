@@ -1,12 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TArticle } from 'utils/types/article';
 import api from 'utils/api-routes';
-
-type TGetInformationMaterialResponse = {
-  next: string;
-  previous: null;
-  results: TArticle[];
-};
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TError, TGetInformationMaterialResponse } from './types';
 
 export const informationMaterialApi = createApi({
   reducerPath: 'informationMaterial',
@@ -33,8 +28,30 @@ export const informationMaterialApi = createApi({
   }),
 });
 
+
+export const getNextPageContent = createAsyncThunk<
+  TGetInformationMaterialResponse,
+  string,
+  { rejectValue: TError }
+>('content/getNextPageContent', async (nextUrl, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`${nextUrl}`);
+
+    const data: TGetInformationMaterialResponse = await response.json();
+
+    if (!response.ok) {
+      throw data;
+    }
+
+    return data;
+  } catch (err) {
+    return rejectWithValue(err as TError);
+  }
+});
+
 export const {
   useGetAllArticlesQuery,
   useGetAllNewsQuery,
   useGetMaterialByIdQuery,
 } = informationMaterialApi;
+
