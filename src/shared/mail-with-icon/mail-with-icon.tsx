@@ -5,13 +5,11 @@ import styles from './mail-with-icon.module.scss';
 interface IMailWithIconProps {
   hasStatusIcon?: boolean;
   statusIcon?: 'success' | 'fail';
-  sizeStatusIcon?: '96' | '140';
 }
 
 export const MailWithIcon: FC<IMailWithIconProps> = ({
-  hasStatusIcon,
+  hasStatusIcon = false,
   statusIcon,
-  sizeStatusIcon,
 }): ReactElement => (
   <div className={styles.wrapper}>
     <svg
@@ -75,7 +73,7 @@ export const MailWithIcon: FC<IMailWithIconProps> = ({
       />
     </svg>
     {hasStatusIcon && (
-      <StatusIcon color="white" size={sizeStatusIcon} status={statusIcon} />
+      <StatusIcon color="white" size="96" status={statusIcon} />
     )}
   </div>
 );

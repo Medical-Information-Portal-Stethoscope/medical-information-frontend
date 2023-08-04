@@ -72,7 +72,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
         Мы отправили инструкцию по восстановлению пароля на указанную почту
       </p>
       <div className={styles.iconWrapper}>
-        <MailWithIcon hasStatusIcon statusIcon="success" sizeStatusIcon="96" />
+        <MailWithIcon hasStatusIcon statusIcon="success" />
       </div>
     </>
   );
