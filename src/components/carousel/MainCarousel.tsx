@@ -90,11 +90,11 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                   <div key={index}>
                     <FilterTab
                       icon={<Icon icon="AllIcon" size="24" color="gray" />}
-                      id={idSpecializationsTag}
-                      label="Все специализации"
+                      id="0"
+                      label="Все статьи"
                       isChecked
                       name="Filter"
-                      onChange={() => onChangeTab(idSpecializationsTag)}
+                      onChange={() => onChangeTab('')}
                     />
                   </div>
                 )}
@@ -136,7 +136,10 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                     <FilterTab
                       icon={<Icon icon="AllIcon" size="24" color="gray" />}
                       id="0"
-                      label="Все разделы"
+                      label="Все статьи"
+                      isChecked
+                      name="Filter"
+                      onChange={() => onChangeTab('')}
                     />
                   </div>
                 )}
@@ -153,6 +156,8 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         }
                         id={tab.pk}
                         label={tab.name}
+                        name="Filter"
+                        onChange={() => onChangeTab(tab.pk)}
                       />
                     ) : (
                       <FilterTab
@@ -161,6 +166,8 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         }
                         id={tab.pk}
                         label={tab.name}
+                        name="Filter"
+                        onChange={() => onChangeTab(tab.pk)}
                       />
                     )}
                   </div>

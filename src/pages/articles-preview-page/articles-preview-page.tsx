@@ -12,24 +12,24 @@ import styles from './articles-preview-page.module.scss';
 const maxNumArticlesDesktop = 6;
 
 export default function ArticlesPreviewPage() {
-  // // Получаем список всех тегов
-  // const { data: tags = [] } = useGetRootsTagsQuery();
-  // // Находим тег новости
-  // const newsTag = tags.find((tag) => tag.name === 'Новости');
-  // // Получаем список всех статей
-  // const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
+  // Получаем список всех тегов
+  const { data: tags = [] } = useGetRootsTagsQuery();
+  // Находим тег новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
+  // Получаем список всех статей
+  const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
 
-  // const articles: ReactNode | null =
-  //   data?.results
-  //     .slice(0, maxNumArticlesDesktop)
-  //     .map((article: TArticle) => (
-  //       <CardArticlePreview
-  //         key={article.id}
-  //         data={article}
-  //         type="default"
-  //         extraClass={styles.article}
-  //       />
-  //     )) || null;
+  const articles: ReactNode | null =
+    data?.results
+      .slice(0, maxNumArticlesDesktop)
+      .map((article: TArticle) => (
+        <CardArticlePreview
+          key={article.id}
+          data={article}
+          type="default"
+          extraClass={styles.article}
+        />
+      )) || null;
 
   useEffect(() => {
     window.scroll({

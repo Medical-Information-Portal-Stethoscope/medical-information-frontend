@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useGetAllArticlesQuery } from 'services/features/information-material/api';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import MainCarousel from 'components/carousel/MainCarousel';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import routes from 'utils/routes';
 import { getFilteredArticles } from 'services/features/filter/api';
+import { getAllArticles } from 'services/features/filter/slice';
 import styles from './articles.module.scss';
 
 const maxNumArticlesDesktop = 6;
@@ -21,33 +22,27 @@ export default function Articles() {
   // Находим тег новости
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   const idNewsTag = newsTag ? newsTag.pk : '';
-  // Находим тег специализации
-  const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
-  const idSpecializationsTag = specializationsTag ? specializationsTag.pk : '';
-  // Получаем список топ 6 статей по новизне и по тегу "специализации"
-  const { data } = useGetAllArticlesQuery(
-    { idNewsTag, idSpecializationsTag },
-    { skip: !newsTag || !specializationsTag }
-  );
+  // Получаем список топ 6 статей по новизне
+  const { data } = useGetAllArticlesQuery(idNewsTag, {
+    skip: !newsTag,
+  });
 
   const { articles } = useAppSelector((store) => store.filteredArticles);
 
+  useEffect(() => {
+    if (data) {
+      dispatch(getAllArticles(data));
+    }
+  }, [data]); // eslint-disable-line
+
   // При клике по табу делаем запрос на получение статей по id таба
   const handleClickTab = (id: string) => {
-    dispatch(getFilteredArticles({ id, idNewsTag }));
+    if (id) {
+      dispatch(getFilteredArticles({ id, idNewsTag }));
+    } else if (data) {
+      dispatch(getAllArticles(data));
+    }
   };
-
-  const topArticles: ReactNode[] | null =
-    data?.results
-      .slice(0, maxNumArticlesDesktop)
-      .map((article: TArticle) => (
-        <CardArticlePreview
-          key={article.id}
-          data={article}
-          type="default"
-          extraClass={styles.article}
-        />
-      )) || null;
 
   const filteredArticles: ReactNode[] | null =
     articles
@@ -61,24 +56,18 @@ export default function Articles() {
         />
       )) || null;
 
-  const hasFilteredData =
-    filteredArticles && filteredArticles?.length > 0
-      ? true
-      : filteredArticles === null;
+  const hasFilteredData = !!(filteredArticles && filteredArticles?.length > 0);
 
-  const hasButton =
-    filteredArticles && filteredArticles?.length === 6
-      ? true
-      : filteredArticles === null;
+  const hasButton = !!(filteredArticles && filteredArticles?.length === 6);
 
-  return topArticles ? (
+  return filteredArticles ? (
     <section>
       <div className={styles.wrapper}>
         <MainCarousel onChangeTab={handleClickTab} />
         <h2 className={styles.heading}>Статьи</h2>
         <div className={hasFilteredData ? styles.articles : styles.empty}>
           {hasFilteredData ? (
-            filteredArticles || topArticles
+            filteredArticles
           ) : (
             <p className={styles.text}>По заданным фильтрам ничего нет</p>
           )}
