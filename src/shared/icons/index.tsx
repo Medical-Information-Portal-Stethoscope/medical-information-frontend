@@ -72,6 +72,7 @@ import { RainyWeatherSixIcon } from './rainy-weather-six-icon';
 import { RainyWeatherSevenIcon } from './rainy-weather-seven-icon';
 import { RainyWeatherIcon } from './rainy-weather-icon';
 import { RightArrowIcon } from './right-arrow-icon';
+import { RightArrowLongIcon } from './right-arrow-long-icon';
 import { SceneryIcon } from './scenery-icon';
 import { SearchIcon } from './search-icon';
 import { SnowflakeOneIcon } from './snowflake-one-icon';
@@ -168,6 +169,7 @@ const icons = {
   RainyWeatherSevenIcon,
   RainyWeatherIcon,
   RightArrowIcon,
+  RightArrowLongIcon,
   SceneryIcon,
   SearchIcon,
   SnowflakeOneIcon,
