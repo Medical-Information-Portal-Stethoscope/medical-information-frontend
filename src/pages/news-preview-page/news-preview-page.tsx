@@ -32,12 +32,11 @@ export default function NewsPreviewPage() {
   // Получаем список всех новостей
   const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
 
-
   useEffect(() => {
     if (data) {
       dispatch(getFirstPageNews(data));
     }
-  }, [data]);
+  }, [data]); // eslint-disable-line
 
   useEffect(() => {
     window.scroll({
@@ -54,7 +53,12 @@ export default function NewsPreviewPage() {
   };
 
   const news = newsBase.map((item) => (
-    <CardArticlePreview key={item.id} data={item} type="news" />
+    <CardArticlePreview
+      key={item.id}
+      data={item}
+      type="news"
+      route={routes.news.route}
+    />
   ));
 
   return (

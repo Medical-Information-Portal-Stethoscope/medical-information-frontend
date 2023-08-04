@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import api from 'utils/api-routes';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TArticle } from 'utils/types/article';
 import { TError, TGetInformationMaterialResponse } from './types';
 
 export const informationMaterialApi = createApi({
@@ -28,7 +29,6 @@ export const informationMaterialApi = createApi({
   }),
 });
 
-
 export const getNextPageContent = createAsyncThunk<
   TGetInformationMaterialResponse,
   string,
@@ -54,4 +54,3 @@ export const {
   useGetAllNewsQuery,
   useGetMaterialByIdQuery,
 } = informationMaterialApi;
-
