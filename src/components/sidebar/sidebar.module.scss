@@ -72,8 +72,14 @@
     letter-spacing: $font-letter-spacing-main;
   }
 
+  &_mailingList {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+
   &_label {
-    padding-left: 20px;
+    color: $color-neutral-700;
     letter-spacing: $font-letter-spacing-main;
   }
 }

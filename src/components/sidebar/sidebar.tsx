@@ -1,4 +1,5 @@
 import { NavLink } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import routes from 'utils/routes';
 import styles from './sidebar.module.scss';
@@ -59,9 +60,10 @@ function Sidebar() {
         </ul>
       </nav>
       <p className={styles.sidebar_email}>Еженедельная рассылка на email</p>
-      <ConsentCheckbox name="email" value="" id="email" isChecked>
+      <form className={styles.sidebar_mailingList}>
+        <ConsentCheckbox id={nanoid()} name="email" />
         <p className={styles.sidebar_label}>Подписаться на рассылку</p>
-      </ConsentCheckbox>
+      </form>
     </div>
   );
 }
