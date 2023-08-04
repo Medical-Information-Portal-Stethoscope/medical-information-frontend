@@ -4,6 +4,8 @@
 @import 'assets/styles/abstracts/variables/animations';
 
 .userProfile {
+  max-width: 738px;
+
   &_title {
     @extend %heading-size-medium;
     padding-bottom: 48px;

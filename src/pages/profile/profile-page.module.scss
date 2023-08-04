@@ -4,9 +4,14 @@
 @import 'assets/styles/abstracts/variables/wrappers.scss';
 
 .wrapper {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  column-gap: 8px;
   max-width: $wrapper-main-content-desktop;
-  margin: 0 auto 240px;
-  padding-top: 32px;
-  display: flex;
-  gap: 24px;
+  margin: 0 auto;
+  padding: 32px 0 245px;
+
+  &--favorites {
+    padding-bottom: 80px;
+  }
 }

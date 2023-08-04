@@ -16,7 +16,6 @@ import { Article } from 'pages/article';
 import { News } from 'pages/news';
 import ProfilePage from 'pages/profile/profile-page';
 
-
 function App() {
   const dispatch = useAppDispatch();
 

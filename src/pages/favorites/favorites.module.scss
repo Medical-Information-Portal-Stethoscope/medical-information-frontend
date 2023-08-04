@@ -1,0 +1,20 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers.scss';
+
+.section {
+  width: 100%;
+}
+
+.heading {
+  @extend %heading-size-medium;
+  margin-bottom: 48px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 438px);
+  justify-content: space-around;
+  gap: 24px;
+}
