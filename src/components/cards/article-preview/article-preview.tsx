@@ -6,7 +6,9 @@ import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-i
 import renderFormatDateArticle from 'utils/functions/render-format-date-article';
 import findReadingTimeArticle from 'utils/functions/find-reading-time-article';
 import { Icon } from 'shared/icons';
+import { converMdToHTML } from 'utils/functions/convert-md-to-html';
 import IconViews from './test-data/icon_views';
+
 import styles from './article-preview.module.scss';
 
 // TODO: dynamic routes. Here or upper scope?
@@ -84,7 +86,7 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
               <div className={styles.title}>
                 <h3 className={styles.heading}>{title}</h3>
                 <p className={classNames(styles.text, styles[`text--${type}`])}>
-                  {annotation}
+                  {converMdToHTML(annotation, true)}
                 </p>
               </div>
               <ul className={styles.info}>
