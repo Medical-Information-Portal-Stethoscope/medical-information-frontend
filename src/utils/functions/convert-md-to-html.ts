@@ -34,7 +34,6 @@ export const converMdToHTML = (data: string, isAnnotation: boolean) => {
   let finishData;
   let preparedMD;
 
-  // code.replace(/[^+.]/, '')
   preparedMD = marked.parse(data);
   if (typeof preparedMD === 'string') {
     // h1-h(n) -> p
