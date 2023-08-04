@@ -16,6 +16,7 @@ import {
   newsStorage,
   nextNewsPage,
 } from 'services/features/information-material/selectors';
+import routes from 'utils/routes';
 import styles from './news-preview-page.module.scss';
 
 export default function NewsPreviewPage() {
@@ -30,6 +31,7 @@ export default function NewsPreviewPage() {
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   // Получаем список всех новостей
   const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
+
 
   useEffect(() => {
     if (data) {

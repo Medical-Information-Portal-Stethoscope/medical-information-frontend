@@ -18,6 +18,8 @@ import {
   isLoadingContent,
   nextArticlesPage,
 } from 'services/features/information-material/selectors';
+=======
+import routes from 'utils/routes';
 import styles from './articles-preview-page.module.scss';
 
 export default function ArticlesPreviewPage() {
@@ -32,6 +34,7 @@ export default function ArticlesPreviewPage() {
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   // Получаем список всех статей
   const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
+
 
   useEffect(() => {
     if (data) {

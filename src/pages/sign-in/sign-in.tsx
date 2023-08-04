@@ -52,7 +52,7 @@ const SignInPage: FC = (): ReactElement => {
     if (serverError) {
       dispatch(resetServerError());
     }
-  }, []);
+  }, []); // eslint-disable-line
 
   const navigation = (
     <div className={styles.navigation}>
