@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { ReactNode } from 'react';
 import { useGetAllArticlesQuery } from 'services/features/information-material/api';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import MainCarousel from 'components/carousel/MainCarousel';
@@ -16,19 +16,25 @@ const maxNumArticlesDesktop = 6;
 
 export default function Articles() {
   const dispatch = useAppDispatch();
-
-  // Получаем список всех тегов
+  // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег новости
   const newsTag = tags.find((tag) => tag.name === 'Новости');
-  // Получаем список топ 6 статей по новизне
-  const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
+  const idNewsTag = newsTag ? newsTag.pk : '';
+  // Находим тег специализации
+  const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
+  const idSpecializationsTag = specializationsTag ? specializationsTag.pk : '';
+  // Получаем список топ 6 статей по новизне и по тегу "специализации"
+  const { data } = useGetAllArticlesQuery(
+    { idNewsTag, idSpecializationsTag },
+    { skip: !newsTag || !specializationsTag }
+  );
 
   const { articles } = useAppSelector((store) => store.filteredArticles);
 
   // При клике по табу делаем запрос на получение статей по id таба
-  const handleClickAllTab = (id: string) => {
-    dispatch(getFilteredArticles(id));
+  const handleClickTab = (id: string) => {
+    dispatch(getFilteredArticles({ id, idNewsTag }));
   };
 
   const topArticles: ReactNode[] | null =
@@ -55,24 +61,38 @@ export default function Articles() {
         />
       )) || null;
 
-  return (
+  const hasFilteredData =
+    filteredArticles && filteredArticles?.length > 0
+      ? true
+      : filteredArticles === null;
+
+  const hasButton =
+    filteredArticles && filteredArticles?.length === 6
+      ? true
+      : filteredArticles === null;
+
+  return topArticles ? (
     <section>
       <div className={styles.wrapper}>
-        <MainCarousel onChangeTab={handleClickAllTab} />
+        <MainCarousel onChangeTab={handleClickTab} />
         <h2 className={styles.heading}>Статьи</h2>
-        <div className={styles.articles}>
-          {(filteredArticles && filteredArticles?.length > 1
-            ? filteredArticles
-            : '123') || topArticles}
-          <Link to={routes.articles.route}>
-            <CardMoreContent
-              heading="Еще статьи"
-              icon={<Icon icon="BigArrowIcon" color="white" />}
-              extraClass={styles.article}
-            />
-          </Link>
+        <div className={hasFilteredData ? styles.articles : styles.empty}>
+          {hasFilteredData ? (
+            filteredArticles || topArticles
+          ) : (
+            <p className={styles.text}>По заданным фильтрам ничего нет</p>
+          )}
+          {hasButton && (
+            <Link to={routes.articles.route}>
+              <CardMoreContent
+                heading="Еще статьи"
+                icon={<Icon icon="BigArrowIcon" color="white" />}
+                extraClass={styles.article}
+              />
+            </Link>
+          )}
         </div>
       </div>
     </section>
-  );
+  ) : null;
 }

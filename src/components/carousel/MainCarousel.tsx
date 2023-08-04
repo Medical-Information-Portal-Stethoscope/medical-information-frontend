@@ -34,9 +34,11 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег специализации
   const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
+  const idSpecializationsTag = specializationsTag ? specializationsTag.pk : '';
+
   // Получаем список тегов всех специализаций
   const { data: res = [], isSuccess } = useGetSubtreeTagsQuery(
-    specializationsTag?.pk,
+    idSpecializationsTag,
     { skip: !specializationsTag }
   );
   const allSpecializationsTags = isSuccess ? res[0].children : [];
@@ -88,11 +90,11 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                   <div key={index}>
                     <FilterTab
                       icon={<Icon icon="AllIcon" size="24" color="gray" />}
-                      id="0"
+                      id={idSpecializationsTag}
                       label="Все специализации"
                       isChecked
                       name="Filter"
-                      // onChange={onChange}
+                      onChange={() => onChangeTab(idSpecializationsTag)}
                     />
                   </div>
                 )}

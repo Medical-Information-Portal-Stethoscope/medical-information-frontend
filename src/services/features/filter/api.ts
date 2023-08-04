@@ -14,12 +14,12 @@ type TGetInformationMaterialResponse = {
 
 export const getFilteredArticles = createAsyncThunk<
   TGetInformationMaterialResponse,
-  string,
+  { id: string; idNewsTag: string },
   { rejectValue: IErrorResponse }
->('articles/getDataById', async (id, { rejectWithValue }) => {
+>('articles/getDataById', async (ids, { rejectWithValue }) => {
   try {
     const res = await fetch(
-      `${api.baseUrl}${api.endpoints.articles.base}/?tags=${id}`
+      `${api.baseUrl}${api.endpoints.articles.base}/?tags_exclude=${ids.idNewsTag}&tags=${ids.id}`
     );
 
     const resBody = await res.json();

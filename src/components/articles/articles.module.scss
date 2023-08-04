@@ -1,4 +1,5 @@
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -20,7 +21,7 @@
   gap: 1.33em;
 
   a {
-    grid-column: 11 / 13;
+    grid-column: span 2;
   }
 }
 
@@ -48,4 +49,17 @@
   &:nth-child(6) {
     grid-column: 8 / 11;
   }
+}
+
+.text {
+  @extend %text-size-large;
+  font-weight: 700;
+  color: $color-neutral-500;
+}
+
+.empty {
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
