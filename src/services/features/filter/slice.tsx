@@ -13,7 +13,7 @@ export type TGetInformationMaterialResponse = {
 };
 
 type TSliceState = {
-  articles: TArticle[] | null;
+  articles: TGetInformationMaterialResponse | null;
 
   process: {
     isLoading: boolean;
@@ -38,12 +38,12 @@ export const filteredArticlesSlice = createSlice({
       state,
       action: PayloadAction<TGetInformationMaterialResponse>
     ) {
-      state.articles = action.payload.results;
+      state.articles = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(getFilteredArticles.fulfilled, (state, action) => {
-      state.articles = action.payload.results;
+      state.articles = action.payload;
     });
   },
 });

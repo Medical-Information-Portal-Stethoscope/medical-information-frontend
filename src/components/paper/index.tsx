@@ -25,14 +25,12 @@ import styles from './styles.module.scss';
 
 interface Ipaper {
   data: TArticle;
-  type: 'media' | 'news' | 'default';
-  extraClass?: string;
+  isNews: boolean;
 }
 
 export const Paper: FC<Ipaper> = ({
   data = articleExample,
-  type = 'default',
-  extraClass,
+  isNews = false,
 }) => {
   const date = renderFormatDateArticle(data.created_at);
   const readingTime = findReadingTimeArticle(data.text);
@@ -52,6 +50,18 @@ export const Paper: FC<Ipaper> = ({
         <DotIcon size="24" color="gray" className={styles.paper__dot} />
         <ViewsIcon color="gray" size="24" />
         <p className={styles.paper__views}>{data.views_count}</p>
+        <DotIcon size="24" color="gray" className={styles.paper__dot} />
+        <p className={styles.paper__source}>
+          Источник:{' '}
+          <a
+            className={styles.paper__link}
+            href={data.source_link || '#'}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {data.source_name}
+          </a>
+        </p>
       </div>
       <img
         className={styles.paper__cover}
@@ -61,14 +71,22 @@ export const Paper: FC<Ipaper> = ({
       <p className={styles.paper__text}>{data.text}</p>
 
       <div className={styles.paper__buttons}>
-        <ButtonWithIconThree
-          icon={
-            <BookmarkIcon color="gray" size="32" className={styles.bookmark} />
-          }
-          isSelected={data.is_favorited}
-          onClick={handleAddBookmark}
-          extraClass={styles.paper__button}
-        />
+        {/* в фигме дизайнеры указали, что сохранить только для статей */}
+        {!isNews && (
+          <ButtonWithIconThree
+            icon={
+              <BookmarkIcon
+                color="gray"
+                size="32"
+                className={styles.bookmark}
+              />
+            }
+            isSelected={data.is_favorited}
+            onClick={handleAddBookmark}
+            extraClass={styles.paper__button}
+          />
+        )}
+
         <ButtonWithIconThree
           icon={
             <ForwardIcon color="gray" size="32" className={styles.forward} />
@@ -90,7 +108,7 @@ export const Paper: FC<Ipaper> = ({
         <p className={styles.paper__additional_text}>Автор:</p>
         <Link
           className={styles.paper__author}
-          to="/author/#"
+          to="/authors/#"
         >{`${data.author?.first_name} ${data.author?.last_name}`}</Link>
       </div>
 

@@ -45,7 +45,7 @@ export default function Articles() {
   };
 
   const filteredArticles: ReactNode[] | null =
-    articles
+    articles?.results
       ?.slice(0, maxNumArticlesDesktop)
       .map((article: TArticle) => (
         <CardArticlePreview
@@ -53,6 +53,7 @@ export default function Articles() {
           data={article}
           type="default"
           extraClass={styles.article}
+          route={routes.articles.route}
         />
       )) || null;
 
