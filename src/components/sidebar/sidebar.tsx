@@ -7,8 +7,8 @@ import routes from 'utils/routes';
 import styles from './sidebar.module.scss';
 
 function Sidebar() {
-  const location = useLocation();
-  const isRouteFavorites = location.pathname.endsWith(
+  const { pathname } = useLocation();
+  const isRouteFavorites = pathname.endsWith(
     `${routes.profile}/${routes.favorites}`
   );
 

@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 import classNames from 'classnames';
 import Footer from 'components/footer/footer';
 import { Header } from 'components/header';
@@ -9,10 +10,12 @@ import routes from 'utils/routes';
 import styles from './profile-page.module.scss';
 
 function ProfilePage() {
-  const location = useLocation();
-  const isRouteFavourites = location.pathname.endsWith(
+  const { pathname } = useLocation();
+  const isRouteFavourites = pathname.endsWith(
     `${routes.profile}/${routes.favorites}`
   );
+
+  useScrollToTop();
 
   return (
     <>

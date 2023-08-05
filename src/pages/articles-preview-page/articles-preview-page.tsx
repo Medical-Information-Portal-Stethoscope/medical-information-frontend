@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 import {
   getNextPageContent,
   useGetAllArticlesQuery,
@@ -34,19 +35,13 @@ export default function ArticlesPreviewPage() {
   // Получаем список всех статей
   const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
 
+  useScrollToTop();
+
   useEffect(() => {
     if (data) {
       dispatch(getFirstPageArticles(data));
     }
   }, [data]); // eslint-disable-line
-
-  useEffect(() => {
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'auto',
-    });
-  }, []);
 
   const uploadNextPageArticles = () => {
     if (nextPageArticles) {

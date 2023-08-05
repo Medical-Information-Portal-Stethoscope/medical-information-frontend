@@ -15,6 +15,7 @@ import {
   useGetAllArticlesQuery,
   useGetMaterialByIdQuery,
 } from 'services/features/information-material/api';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 import styles from './styles.module.scss';
 
@@ -36,6 +37,8 @@ export const Article: FC = () => {
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   // Получаем список всех статей
   const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
+
+  useScrollToTop();
 
   return article ? (
     <>
