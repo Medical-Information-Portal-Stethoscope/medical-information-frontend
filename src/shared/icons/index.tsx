@@ -76,6 +76,7 @@ import { SceneryIcon } from './scenery-icon';
 import { SearchIcon } from './search-icon';
 import { SnowflakeOneIcon } from './snowflake-one-icon';
 import { SnowflakeIcon } from './snowflake-icon';
+import { StatusIcon } from './status-icon';
 import { StormWeatherOneIcon } from './storm-weather-one-icon';
 import { StormWeatherTwoIcon } from './storm-weather-two-icon';
 import { StormWeatherIcon } from './storm-weather-icon';
@@ -172,6 +173,7 @@ const icons = {
   SearchIcon,
   SnowflakeOneIcon,
   SnowflakeIcon,
+  StatusIcon,
   StormWeatherOneIcon,
   StormWeatherTwoIcon,
   StormWeatherIcon,

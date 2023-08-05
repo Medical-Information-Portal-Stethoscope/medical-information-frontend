@@ -55,8 +55,16 @@ const SignUpPage: FC = (): ReactElement => {
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    isValid,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = formik;
 
   const serverError = useAppSelector(showServerError);
 
@@ -84,8 +92,8 @@ const SignUpPage: FC = (): ReactElement => {
       heading="Регистрация"
       buttonLabel="Зарегистрироваться"
       altNavigation={navigation}
-      isLoading={formik.isSubmitting}
-      isDisabled={!formik.isValid}
+      isLoading={isSubmitting}
+      isDisabled={!isValid}
       hasCommentaryWithRequired
       onSubmit={handleSubmit}
     >

@@ -6,9 +6,11 @@ import { useAppDispatch } from 'services/app/hooks';
 import { getUserPersonalData } from 'services/features/user/api';
 import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import { AuthorsPage } from 'pages/authors/authors';
+import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
 import SignUpPage from 'pages/sign-up/sign-up';
 import SignInPage from 'pages/sign-in/sign-in';
-import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
+import { ResetPasswordPage } from 'pages/reset-password/reset-password';
+import { ResetPasswordConfirmationPage } from 'pages/reset-password-confirmation/reset-password-confirmation';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
 import AboutPage from 'pages/about-page/about-page';
 import routes from 'utils/routes';
@@ -44,6 +46,11 @@ function App() {
 
       <Route path={routes.signup} element={<SignUpPage />} />
       <Route path={routes.signin} element={<SignInPage />} />
+      <Route path={routes.password.reset} element={<ResetPasswordPage />} />
+      <Route
+        path={routes.password.resetConfirmation}
+        element={<ResetPasswordConfirmationPage />}
+      />
 
       <Route path={`${routes.profile}/*`} element={<ProfilePage />} />
 

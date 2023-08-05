@@ -42,8 +42,16 @@ const SignInPage: FC = (): ReactElement => {
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    isValid,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = formik;
 
   const serverError = useAppSelector(showServerError);
 
@@ -70,8 +78,8 @@ const SignInPage: FC = (): ReactElement => {
       heading="Вход в аккаунт"
       buttonLabel="Войти"
       altNavigation={navigation}
-      isLoading={formik.isSubmitting}
-      isDisabled={!formik.isValid}
+      isLoading={isSubmitting}
+      isDisabled={!isValid}
       onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
@@ -100,7 +108,11 @@ const SignInPage: FC = (): ReactElement => {
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <Button label="Забыли пароль?" model="tertiary" />
+          <Button
+            label="Забыли пароль?"
+            model="tertiary"
+            onClick={() => navigate(routes.password.reset)}
+          />
         </div>
       </div>
     </Entry>
