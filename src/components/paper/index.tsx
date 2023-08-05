@@ -17,6 +17,8 @@ import { CommentsIcon } from 'shared/icons/comments-icon';
 import Button from 'shared/buttons/button/button';
 import ButtonWithIconThree from 'shared/buttons/button-with-icon-three/button-with-icon-three';
 
+import { converMdToHTML } from 'utils/functions/convert-md-to-html';
+
 import { articleExample } from 'components/paper/data/data';
 
 import { TArticle } from 'utils/types/article';
@@ -43,7 +45,9 @@ export const Paper: FC<Ipaper> = ({
     <article className={styles.paper} id={data.id}>
       <p className={styles.paper__date}>{date}</p>
       <h2 className={styles.paper__header}>{data.title}</h2>
-      <p className={styles.paper__annotation}>{data.annotation}</p>
+      <p className={styles.paper__annotation}>
+        {converMdToHTML(data.annotation, true)}
+      </p>
       <div className={styles.paper__info}>
         <ClockIcon color="gray" size="24" className={styles.paper__clock} />
         <p className={styles.paper__time}>{readingTime}</p>
@@ -68,7 +72,7 @@ export const Paper: FC<Ipaper> = ({
         src={data.image}
         alt={`Превью статьи: ${data.title}`}
       />
-      <p className={styles.paper__text}>{data.text}</p>
+      <p className={styles.paper__text}>{converMdToHTML(data.text, false)}</p>
 
       <div className={styles.paper__buttons}>
         {/* в фигме дизайнеры указали, что сохранить только для статей */}
