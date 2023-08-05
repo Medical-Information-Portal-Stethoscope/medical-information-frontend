@@ -52,6 +52,10 @@ const contentSlice = createSlice({
       state.news.storage = action.payload.results;
       state.news.nextPage = action.payload.next;
     },
+    setIsAllArticles(state) {
+      state.news.isAllNews = false;
+      state.articles.isAllArticles = false;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(getNextPageContent.pending, (state) => {
@@ -93,5 +97,6 @@ const contentSlice = createSlice({
   },
 });
 
-export const { getFirstPageArticles, getFirstPageNews } = contentSlice.actions;
+export const { getFirstPageArticles, getFirstPageNews, setIsAllArticles } =
+  contentSlice.actions;
 export default contentSlice.reducer;

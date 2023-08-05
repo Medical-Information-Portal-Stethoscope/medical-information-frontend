@@ -8,7 +8,10 @@ import {
   useGetAllNewsQuery,
 } from 'services/features/information-material/api';
 import Button from 'shared/buttons/button/button';
-import { getFirstPageNews } from 'services/features/information-material/slice';
+import {
+  getFirstPageNews,
+  setIsAllArticles,
+} from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import {
   isAllContentNews,
@@ -39,12 +42,13 @@ export default function NewsPreviewPage() {
   }, [data]); // eslint-disable-line
 
   useEffect(() => {
+    dispatch(setIsAllArticles());
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'auto',
     });
-  }, []);
+  }, []); // eslint-disable-line
 
   const uploadNextPageNews = () => {
     if (nextPageNews) {

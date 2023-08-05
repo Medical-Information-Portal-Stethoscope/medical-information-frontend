@@ -11,7 +11,10 @@ import { TArticle } from 'utils/types/article';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
-import { getFirstPageArticles } from 'services/features/information-material/slice';
+import {
+  getFirstPageArticles,
+  setIsAllArticles,
+} from 'services/features/information-material/slice';
 import {
   articlesStorage,
   isAllContentArticles,
@@ -45,12 +48,13 @@ export default function ArticlesPreviewPage() {
   }, [data]); // eslint-disable-line
 
   useEffect(() => {
+    dispatch(setIsAllArticles());
     window.scroll({
       top: 0,
       left: 0,
       behavior: 'auto',
     });
-  }, []);
+  }, []); // eslint-disable-line
 
   // При клике по табу делаем запрос на получение статей по id таба
   const handleClickTab = async (id: string) => {
@@ -89,7 +93,13 @@ export default function ArticlesPreviewPage() {
             <h2 className={styles.heading}>Статьи</h2>
             <MainCarousel type="articles" onChangeTab={handleClickTab} />
             <div className={styles.gallery}>
-              <div className={styles.content}>{articles}</div>
+              <div className={articles.length ? styles.content : styles.empty}>
+                {articles.length ? (
+                  articles
+                ) : (
+                  <p className={styles.text}>По заданным фильтрам ничего нет</p>
+                )}
+              </div>
               {!isAllContent && articles && articles?.length > 5 && (
                 <Button
                   label="Еще статьи"
