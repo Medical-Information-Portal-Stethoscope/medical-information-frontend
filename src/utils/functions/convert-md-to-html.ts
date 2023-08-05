@@ -34,7 +34,7 @@ export const converMdToHTML = (data: string, isAnnotation: boolean) => {
   if (typeof preparedMD === 'string') {
     preparedMD = isAnnotation
       ? preparedMD.replace(/h[1-6]/g, 'p')
-      : preparedMD.replace(/h[1-5]/g, 'h6');
+      : preparedMD.replace(/h[1-6]/g, 'h3');
     cleanData = DOMPurify.sanitize(preparedMD, purifySettings);
     finishData = parse(cleanData);
     return finishData;
