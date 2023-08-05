@@ -8,6 +8,8 @@ const marked = new Marked({
   gfm: true, // If true, use approved GitHub Flavored Markdown (GFM) specification.
   silent: false,
   breaks: true,
+  mangle: false,
+  headerIds: false,
 });
 
 const purifySettings = {
