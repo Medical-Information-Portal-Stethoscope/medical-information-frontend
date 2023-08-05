@@ -5,16 +5,15 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: calc(100% - 18px);
 
   &_content {
     position: sticky;
     top: 32px;
-
-    button {
-      margin-top: 45vh;
-    }
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 56px); // height of button with indents
   }
 
   &_header {

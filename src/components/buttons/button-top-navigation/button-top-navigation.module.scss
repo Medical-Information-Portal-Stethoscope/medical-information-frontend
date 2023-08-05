@@ -1,0 +1,18 @@
+.button {
+  svg {
+    width: 20px;
+    height: 16px;
+  }
+
+  &:hover {
+    svg {
+      stroke: inherit;
+    }
+  }
+
+  &:active {
+    svg {
+      stroke: inherit;
+    }
+  }
+}
