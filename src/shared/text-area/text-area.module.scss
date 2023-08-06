@@ -1,0 +1,55 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.textarea {
+  display: flex;
+  max-width: 1054px;
+  flex-direction: column;
+
+  &--label {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: $color-neutral-700;
+    font-size: $font-size-text-medium;
+    width: 100%;
+    max-height: 400px;
+  }
+
+  &--text {
+    resize: none;
+    border-radius: 16px;
+    border: 1px solid $color-neutral-400;
+    outline: none;
+    padding: 20px 12px;
+    &--medium {
+      height: 57px;
+    }
+    &--large {
+      height: 88px;
+    }
+  }
+
+  &--text::-webkit-scrollbar {
+    width: 0px;
+  }
+
+  &--text:is(:focus) {
+    border: 1px solid $color-brand-primary-500;
+  }
+
+  &--text::placeholder {
+    @extend %text-size-medium;
+    font-family: 'IBM Plex Sans', 'Arial', 'Helvetica', sans-serif;
+  }
+
+  &--counter {
+    @extend %text-size-small;
+    color: $color-neutral-400;
+    height: 16px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}
