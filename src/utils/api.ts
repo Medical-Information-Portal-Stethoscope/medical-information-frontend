@@ -1,5 +1,30 @@
 import api from './api-routes';
 
+export const confirmSignUp = async (
+  uid: string | null,
+  token: string | null
+) => {
+  const res = await fetch(
+    `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.signupActivation}`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        uid,
+        token,
+      }),
+    }
+  );
+
+  if (res.ok) {
+    return 'Email is successfully confirmed';
+  }
+
+  throw new Error('Something went wrong');
+};
+
 export const resetPassword = async (data: { email: string }) => {
   const res = await fetch(
     `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.password.reset}`,

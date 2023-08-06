@@ -1,17 +1,29 @@
-import { FC, ReactElement, useState } from 'react';
+import { FC, ReactElement, useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import Entry from 'components/entry/entry';
 import { MailWithIcon } from 'shared/mail-with-icon/mail-with-icon';
 import routes from 'utils/routes';
-import styles from './sign-up-confirmation.module.scss';
+import { confirmSignUp } from 'utils/api';
+import styles from './sign-up-activation.module.scss';
 
-export const SignUpConfirmationPage: FC = (): ReactElement => {
+export const SignUpActivationPage: FC = (): ReactElement => {
   const [responseStatus, setResponseStatus] = useState<boolean | undefined>(
     undefined
   );
   const navigate = useNavigate();
   const location = useLocation();
+
+  const queries = new URLSearchParams(location.search);
+  const uid = queries.get('uid');
+  const token = queries.get('token');
+
+  useEffect(() => {
+    confirmSignUp(uid, token)
+      .then(() => setResponseStatus(true))
+      .catch(() => setResponseStatus(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const renderContent = () => {
     switch (responseStatus) {
