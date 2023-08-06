@@ -8,10 +8,10 @@ import styles from './entry.module.scss';
 interface IEntryProps {
   children: ReactNode;
   heading: string;
-  buttonLabel: string;
+  buttonLabel?: string;
   buttonType?: 'submit' | 'button';
-  isLoading: boolean;
-  isDisabled: boolean;
+  isLoading?: boolean;
+  isDisabled?: boolean;
   altNavigation?: ReactNode | null;
   hasCommentaryWithRequired?: boolean;
   onSubmit?: (evt: FormEvent<HTMLFormElement>) => void;
@@ -43,6 +43,9 @@ const Entry: FC<IEntryProps> = ({
         label={buttonLabel}
         isLoading={isLoading}
         isDisabled={isDisabled}
+        hasSpinner
+        spinnerSize="small"
+        spinnerColor="white"
         onClick={onClick}
       />
     </>

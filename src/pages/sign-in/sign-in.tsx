@@ -66,7 +66,7 @@ const SignInPage: FC = (): ReactElement => {
     <div className={styles.navigation}>
       <span>Нет аккаунта?</span>{' '}
       <Button
-        label="Зарегистрируйтесь"
+        label="Зарегистрироваться"
         model="tertiary"
         onClick={() => navigate(routes.signup)}
       />

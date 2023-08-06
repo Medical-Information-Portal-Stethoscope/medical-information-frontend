@@ -2,6 +2,7 @@ const routes = Object.freeze({
   home: '/',
 
   signup: '/sign-up',
+  signupConfirmation: '/sign-up-confirmation',
   signin: '/sign-in',
   password: {
     reset: '/reset-password',

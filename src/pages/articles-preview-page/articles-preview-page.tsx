@@ -83,6 +83,9 @@ export default function ArticlesPreviewPage() {
                   hasBorder
                   onClick={uploadNextPageArticles}
                   isLoading={isLoading}
+                  hasSpinner
+                  spinnerSize="small"
+                  spinnerColor="blue"
                 />
               )}
             </div>

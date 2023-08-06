@@ -4,7 +4,7 @@ import styles from './mail-with-icon.module.scss';
 
 interface IMailWithIconProps {
   hasStatusIcon?: boolean;
-  statusIcon?: 'success' | 'fail';
+  statusIcon?: 'success' | 'fail' | 'loading';
 }
 
 export const MailWithIcon: FC<IMailWithIconProps> = ({
@@ -77,3 +77,5 @@ export const MailWithIcon: FC<IMailWithIconProps> = ({
     )}
   </div>
 );
+
+// TODO: в зависимости от наличия иконки возвращать тот или иной svg
