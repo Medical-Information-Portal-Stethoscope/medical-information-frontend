@@ -48,10 +48,17 @@ const SignUpPage: FC = (): ReactElement => {
       .shape(schemaPersonalDataConsent(Yup)),
 
     onSubmit: (values, { setSubmitting }) => {
-      const { email, password, first_name, last_name } = values;
-      const data = filterFormValues({ email, password, first_name, last_name });
+      const { email, password, password_confirmation, first_name, last_name } =
+        values;
+      const data = filterFormValues({
+        email,
+        first_name,
+        last_name,
+      });
 
-      dispatch(registerUser(data)).finally(() => setSubmitting(false));
+      dispatch(
+        registerUser({ ...data, password, re_password: password_confirmation })
+      ).finally(() => setSubmitting(false));
     },
   });
 
