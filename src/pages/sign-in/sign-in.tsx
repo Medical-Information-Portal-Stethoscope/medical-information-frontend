@@ -36,6 +36,7 @@ const SignInPage: FC = (): ReactElement => {
 
           if (token) {
             dispatch(getUserPersonalData(token));
+            navigate(routes.profile);
           }
         })
         .finally(() => setSubmitting(false));
