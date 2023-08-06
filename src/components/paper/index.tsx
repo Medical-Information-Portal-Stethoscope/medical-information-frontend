@@ -72,7 +72,9 @@ export const Paper: FC<Ipaper> = ({
         src={data.image}
         alt={`Превью статьи: ${data.title}`}
       />
-      <p className={styles.paper__text}>{converMdToHTML(data.text, false)}</p>
+      <div className={styles.paper__text}>
+        {converMdToHTML(data.text, false)}
+      </div>
 
       <div className={styles.paper__buttons}>
         {/* в фигме дизайнеры указали, что сохранить только для статей */}
