@@ -53,6 +53,7 @@ import { NotAvailableIcon } from './not-available-icon';
 import { OceanIcon } from './ocean-icon';
 import { OphthalmologyIcon } from './ophthalmology-icon';
 import { OtorhinolaryngologyIcon } from './otorhinolaryngology-icon';
+import { PaperClipIcon } from './paper-clip-icon';
 import { PediatricsIcon } from './pediatrics-icon';
 import { PodcastIcon } from './podcast-icon';
 import { PlusIcon } from './plus-icon';
@@ -152,6 +153,7 @@ const icons = {
   OceanIcon,
   OphthalmologyIcon,
   OtorhinolaryngologyIcon,
+  PaperClipIcon,
   PediatricsIcon,
   PodcastIcon,
   PlusIcon,
@@ -199,7 +201,7 @@ const icons = {
   CommentsIcon,
 };
 
-type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
+export type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
 
 export interface IconProps extends IIconProps {
   icon: keyof TIcons;

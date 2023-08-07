@@ -1,0 +1,52 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders.scss';
+
+.wrapper {
+  max-width: $wrapper-authors-desktop;
+}
+
+.heading {
+  @extend %heading-size-medium;
+  margin-bottom: 48px;
+}
+
+.subheading {
+  @extend %heading-size-small;
+  letter-spacing: $font-letter-spacing-main;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+}
+
+.instruction {
+  *:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  div {
+    max-width: 100%;
+  }
+}
+
+.comment {
+  @extend %text-size-small;
+  color: $color-neutral-500;
+  letter-spacing: $font-letter-spacing-main;
+}
+
+.submit {
+  *:not(:first-child) {
+    margin-top: 24px;
+  }
+}

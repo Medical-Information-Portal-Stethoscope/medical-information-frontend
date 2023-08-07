@@ -6,6 +6,7 @@ import { Header } from 'components/header';
 import UserProfile from 'components/user-profile/user-profile';
 import Sidebar from 'components/sidebar/sidebar';
 import { FavoritesPage } from 'pages/favorites/favorites';
+import { CreatingAnArticlePage } from 'pages/creating-an-article/creating-an-article';
 import routes from 'utils/routes';
 import styles from './profile-page.module.scss';
 
@@ -29,7 +30,10 @@ function ProfilePage() {
         <Routes>
           <Route index element={<UserProfile />} />
           <Route path={routes.favorites} element={<FavoritesPage />} />
-          <Route path="publication" element={456} />
+          <Route
+            path={routes.publication}
+            element={<CreatingAnArticlePage />}
+          />
         </Routes>
       </main>
       <Footer />

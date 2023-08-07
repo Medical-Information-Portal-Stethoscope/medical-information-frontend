@@ -17,7 +17,7 @@ const routes = Object.freeze({
   about: { route: '/about', name: 'О портале' },
   profile: '/profile',
   favorites: 'favorites',
-  publication: 'publication',
+  publication: 'creating-an-article',
   authors: { route: '/authors', name: 'Авторам' },
 });
 
