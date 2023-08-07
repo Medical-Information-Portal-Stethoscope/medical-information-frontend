@@ -8,7 +8,10 @@ import {
   useGetAllNewsQuery,
 } from 'services/features/information-material/api';
 import Button from 'shared/buttons/button/button';
-import { getFirstPageNews } from 'services/features/information-material/slice';
+import {
+  getFirstPageNews,
+  setIsAllArticles,
+} from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useScrollToTop } from 'hooks/useScrollToTop';
 import {

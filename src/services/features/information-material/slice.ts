@@ -6,7 +6,7 @@ import { TGetInformationMaterialResponse } from './types';
 type TSliceState = {
   articles: {
     storage: TArticle[];
-    nextPage: string | null;
+    nextPage: string | null | undefined;
     isAllArticles: boolean;
   };
   news: {
@@ -41,10 +41,7 @@ const contentSlice = createSlice({
   name: 'content',
   initialState,
   reducers: {
-    getFirstPageArticles(
-      state,
-      action: PayloadAction<TGetInformationMaterialResponse>
-    ) {
+    getFirstPageArticles(state, action) {
       state.articles.storage = action.payload.results;
       state.articles.nextPage = action.payload.next;
     },
@@ -54,6 +51,10 @@ const contentSlice = createSlice({
     ) {
       state.news.storage = action.payload.results;
       state.news.nextPage = action.payload.next;
+    },
+    setIsAllArticles(state) {
+      state.news.isAllNews = false;
+      state.articles.isAllArticles = false;
     },
   },
   extraReducers: (builder) => {
@@ -96,5 +97,6 @@ const contentSlice = createSlice({
   },
 });
 
-export const { getFirstPageArticles, getFirstPageNews } = contentSlice.actions;
+export const { getFirstPageArticles, getFirstPageNews, setIsAllArticles } =
+  contentSlice.actions;
 export default contentSlice.reducer;

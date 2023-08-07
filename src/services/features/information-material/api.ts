@@ -13,7 +13,8 @@ export const informationMaterialApi = createApi({
       TGetInformationMaterialResponse,
       string | undefined
     >({
-      query: (id) => `${api.endpoints.articles.base}/?tags_exclude=${id}`,
+      query: (idNewsTag) =>
+        `${api.endpoints.articles.base}/?tags_exclude=${idNewsTag}`,
     }),
 
     getAllNews: builder.query<

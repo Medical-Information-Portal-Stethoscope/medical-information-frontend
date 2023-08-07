@@ -1,3 +1,5 @@
+@import 'assets/styles/abstracts/variables/colors';
+
 .wrapper {
   width: 100%;
   display: flex;
@@ -20,7 +22,13 @@
   z-index: 1;
 
   svg {
-    fill: #014cff;
+    fill: $color-brand-primary-900;
+  }
+
+  &_disabled {
+    svg {
+      fill: $color-neutral-400;
+    }
   }
 }
 
@@ -32,15 +40,24 @@
   z-index: 10;
 
   svg {
-    fill: #014cff;
+    fill: $color-brand-primary-900;
+  }
+
+  &_disabled {
+    svg {
+      fill: $color-neutral-400;
+    }
   }
 }
 
 .container_main {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
+  width: 1570px;
 }
 
 .container_articles {
   display: flex;
+  width: 1350px;
+  gap: 5px;
 }
