@@ -4,13 +4,11 @@
 .subscribe {
   display: flex;
   max-width: $wrapper-main-content-desktop;
-  height: 424px;
-  margin: 80px auto;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 40px auto;
   justify-content: space-between;
-  align-items: center;
   overflow: hidden;
+  border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
+  border-radius: 16px;
 
   &__content {
     width: 1252px;
@@ -21,7 +19,6 @@
 
   &__header {
     @extend %heading-size-medium;
-    width: 100%;
   }
 
   &__list {
@@ -53,11 +50,6 @@
     display: flex;
     align-items: center;
     gap: 40px;
-  }
-
-  &__button {
-    width: 315px;
-    height: 64px;
   }
 
   &__button > span {
