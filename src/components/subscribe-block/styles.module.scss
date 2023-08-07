@@ -1,41 +1,81 @@
 @import '../../assets/styles/index.scss';
+@import '../../assets/styles/abstracts/variables/colors';
 
 .subscribe {
   display: flex;
+  max-width: $wrapper-main-content-desktop;
+  height: 424px;
+  margin: 80px auto;
+  padding: 0;
+  box-sizing: border-box;
   justify-content: space-between;
   align-items: center;
-  max-width: $wrapper-main-content-desktop;
-  height: 480px;
-  margin: 40px auto;
-  padding: 90px 194px 90px 154px;
-  box-sizing: border-box;
-  gap: 10px;
+  overflow: hidden;
 
   &__content {
+    width: 1252px;
+    margin: 60px;
     display: flex;
     flex-direction: column;
-    width: 746px;
   }
 
   &__header {
     @extend %heading-size-medium;
     width: 100%;
-    margin-bottom: 24px;
   }
 
-  &__paragraph {
-    @extend %text-size-large;
-    margin-bottom: 40px;
+  &__list {
+    margin: 74px 0;
+    display: flex;
+    gap: 60px;
+  }
+
+  &__item {
+    margin-left: 42px;
+    position: relative;
+    @extend %text-size-medium;
+    color: $color-neutral-900;
+  }
+
+  &__item::before {
+    margin: 15px 24px 15px 0;
+    content: '';
+    background-color: $color-brand-secondary-700;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    left: -42px;
+    top: 0;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    gap: 40px;
   }
 
   &__button {
-    width: 100%;
+    width: 315px;
     height: 64px;
   }
 
   &__button > span {
-    @extend %text-size-medium-semibold;
+    @extend %text-size-medium;
     justify-content: center;
     margin: 0 auto;
+  }
+
+  &__caption {
+    @extend %text-size-medium;
+    color: $color-neutral-500;
+  }
+
+  &__ellipse {
+    width: 424px;
+    height: 424px;
+    background-color: $color-brand-secondary-700;
+    border-radius: 424px;
+    margin-right: -246px;
   }
 }
