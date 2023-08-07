@@ -98,7 +98,7 @@ export default function ArticlesPreviewPage() {
                   <p className={styles.text}>По заданным фильтрам ничего нет</p>
                 )}
               </div>
-              {!isAllContent && articles && articles?.length > 5 && (
+              {!isAllContent && (
                 <Button
                   label="Еще статьи"
                   model="secondary"

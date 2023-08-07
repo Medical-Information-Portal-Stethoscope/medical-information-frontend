@@ -44,6 +44,11 @@ const contentSlice = createSlice({
     getFirstPageArticles(state, action) {
       state.articles.storage = action.payload.results;
       state.articles.nextPage = action.payload.next;
+      if (!action.payload.next) {
+        state.articles.isAllArticles = true;
+      } else {
+        state.articles.isAllArticles = false;
+      }
     },
     getFirstPageNews(
       state,
