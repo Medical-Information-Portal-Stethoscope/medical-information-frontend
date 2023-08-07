@@ -1,0 +1,60 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.section {
+  width: 100%;
+}
+
+.emptyGallery {
+  max-width: 900px;
+  padding-bottom: 163px;
+}
+
+.heading {
+  @extend %heading-size-medium;
+  margin-bottom: 48px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 438px);
+  justify-content: space-around;
+  gap: 24px;
+}
+
+.info {
+  @extend %text-size-large;
+  color: $color-neutral-500;
+
+  *:not(:first-child) {
+    margin-top: 24px;
+  }
+}
+
+.tip {
+  display: flex;
+  align-items: center;
+  column-gap: 32px;
+  margin: 56px 0 32px;
+}
+
+.bookmarkIcon {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 44px;
+  height: 44px;
+  background-color: $color-neutral-100;
+  border-radius: 50%;
+
+  &:last-child {
+    svg {
+      fill: $color-brand-primary-900;
+
+      path:last-child {
+        fill: $color-brand-primary-900;
+      }
+    }
+  }
+}

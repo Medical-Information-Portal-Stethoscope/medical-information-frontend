@@ -3,7 +3,18 @@
 @import 'assets/styles/abstracts/placeholders';
 
 .sidebar {
-  width: 438px;
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 18px);
+
+  &_content {
+    position: sticky;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 56px); // height of button with indents
+  }
 
   &_header {
     display: flex;
@@ -72,8 +83,14 @@
     letter-spacing: $font-letter-spacing-main;
   }
 
+  &_mailingList {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+  }
+
   &_label {
-    padding-left: 20px;
+    color: $color-neutral-700;
     letter-spacing: $font-letter-spacing-main;
   }
 }

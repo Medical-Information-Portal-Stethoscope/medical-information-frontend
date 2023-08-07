@@ -24,13 +24,10 @@
   }
 
   &__profile {
+    margin: 0 8px;
     background: none;
     fill: $color-neutral-0;
     transition: $transition-button;
-
-    &:hover svg {
-      cursor: pointer;
-    }
   }
 
   &__logotext {
