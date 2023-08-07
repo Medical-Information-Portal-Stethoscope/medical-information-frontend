@@ -33,9 +33,8 @@
 }
 
 .text {
-  @extend %text-size-large;
-  font-weight: 700;
-  color: $color-neutral-500;
+  @extend %text-size-medium;
+  color: $color-neutral-600;
 }
 
 .empty {

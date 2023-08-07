@@ -12,12 +12,18 @@ import {
   useGetSubtreeTagsQuery,
 } from 'services/features/tags/api';
 import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
-import { IData, iconsData } from './test-data/test-data';
+import classNames from 'classnames';
+import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
   type?: 'main' | 'articles';
   onChangeTab: (id: string) => void;
+}
+
+interface IData {
+  pk: string;
+  name: string;
 }
 
 const getArrayForCarousel = (dataArray: IData[], divider: number) => {
@@ -64,20 +70,30 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
         showStatus={false}
         width={type === 'main' ? 1542 : 1262}
         className={styles.carousel}
-        renderArrowNext={(onClickHandler) => (
+        renderArrowNext={(onClickHandler, hasNext) => (
           <ButtonWithIcon
             ariaLabel="Прокрутить табы влево"
-            extraClass={styles.next_button}
+            extraClass={
+              hasNext
+                ? styles.next_button
+                : classNames(styles.next_button, styles.next_button_disabled)
+            }
+            isDisabled={!hasNext}
             hasBackground
             icon={<Icon color="blue" icon="RightArrowIcon" />}
             onClick={onClickHandler}
           />
         )}
-        renderArrowPrev={(onClickHandler) => (
+        renderArrowPrev={(onClickHandler, hasNext) => (
           <ButtonWithIcon
             ariaLabel="Прокрутить табы вправо"
-            extraClass={styles.prev_button}
+            extraClass={
+              hasNext
+                ? styles.prev_button
+                : classNames(styles.prev_button, styles.prev_button_disabled)
+            }
             hasBackground
+            isDisabled={!hasNext}
             icon={<Icon color="blue" icon="LeftArrowIcon" />}
             onClick={onClickHandler}
           />
