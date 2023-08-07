@@ -39,6 +39,10 @@ export default function NewsPreviewPage() {
   useScrollToTop();
 
   useEffect(() => {
+    dispatch(setIsAllArticles());
+  }, []); // eslint-disable-line
+
+  useEffect(() => {
     if (data) {
       dispatch(getFirstPageNews(data));
     }
@@ -75,7 +79,10 @@ export default function NewsPreviewPage() {
                   size="small"
                   hasBorder
                   onClick={uploadNextPageNews}
+                  hasSpinner
                   isLoading={isLoading}
+                  spinnerSize="small"
+                  spinnerColor="blue"
                 />
               )}
             </div>

@@ -45,6 +45,10 @@ export default function ArticlesPreviewPage() {
   useScrollToTop();
 
   useEffect(() => {
+    dispatch(setIsAllArticles());
+  }, []); // eslint-disable-line
+
+  useEffect(() => {
     if (data) {
       dispatch(getFirstPageArticles(data));
     }
