@@ -9,6 +9,8 @@ export const filterFormValues = (values: any) => {
       copyValues[key] = copyValues[key].trim().replace(regexDoubleSpace, ' ');
     }
 
+    if (key === 'email') copyValues[key] = copyValues[key].toLowerCase();
+
     return copyValues;
   });
 

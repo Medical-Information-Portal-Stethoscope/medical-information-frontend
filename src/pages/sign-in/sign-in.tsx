@@ -36,14 +36,23 @@ const SignInPage: FC = (): ReactElement => {
 
           if (token) {
             dispatch(getUserPersonalData(token));
+            navigate(routes.profile);
           }
         })
         .finally(() => setSubmitting(false));
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    isValid,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = formik;
 
   const serverError = useAppSelector(showServerError);
 
@@ -58,7 +67,7 @@ const SignInPage: FC = (): ReactElement => {
     <div className={styles.navigation}>
       <span>Нет аккаунта?</span>{' '}
       <Button
-        label="Зарегистрируйтесь"
+        label="Зарегистрироваться"
         model="tertiary"
         onClick={() => navigate(routes.signup)}
       />
@@ -70,8 +79,8 @@ const SignInPage: FC = (): ReactElement => {
       heading="Вход в аккаунт"
       buttonLabel="Войти"
       altNavigation={navigation}
-      isLoading={formik.isSubmitting}
-      isDisabled={!formik.isValid}
+      isLoading={isSubmitting}
+      isDisabled={!isValid}
       onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
@@ -100,7 +109,11 @@ const SignInPage: FC = (): ReactElement => {
             onBlur={handleBlur}
             onChange={handleChange}
           />
-          <Button label="Забыли пароль?" model="tertiary" />
+          <Button
+            label="Забыли пароль?"
+            model="tertiary"
+            onClick={() => navigate(routes.password.reset)}
+          />
         </div>
       </div>
     </Entry>

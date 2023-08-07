@@ -158,7 +158,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={onChange}
           />
           {iconToRender}
-          {value && !error && type !== 'password' && (
+          {value && !error && type !== 'password' && touched && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>

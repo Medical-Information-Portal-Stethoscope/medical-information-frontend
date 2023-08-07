@@ -1,5 +1,6 @@
 import { ReactNode, useEffect } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 import {
   getNextPageContent,
   useGetAllArticlesQuery,
@@ -41,20 +42,13 @@ export default function ArticlesPreviewPage() {
     skip: !newsTag,
   });
 
+  useScrollToTop();
+
   useEffect(() => {
     if (data) {
       dispatch(getFirstPageArticles(data));
     }
   }, [data]); // eslint-disable-line
-
-  useEffect(() => {
-    dispatch(setIsAllArticles());
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'auto',
-    });
-  }, []); // eslint-disable-line
 
   // При клике по табу делаем запрос на получение статей по id таба
   const handleClickTab = async (id: string) => {
@@ -108,6 +102,9 @@ export default function ArticlesPreviewPage() {
                   hasBorder
                   onClick={uploadNextPageArticles}
                   isLoading={isLoading}
+                  hasSpinner
+                  spinnerSize="small"
+                  spinnerColor="blue"
                 />
               )}
             </div>

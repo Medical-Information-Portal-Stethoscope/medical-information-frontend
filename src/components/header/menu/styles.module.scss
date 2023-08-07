@@ -11,6 +11,7 @@
     text-align: center;
     justify-content: space-between;
     gap: 40px;
+    white-space: nowrap;
   }
 
   &__item {
@@ -20,6 +21,7 @@
     text-align: center;
     border: none;
     box-sizing: border-box;
+    transition: $transition-hover;
 
     &_active {
       padding: 12px 24px 10px 24px;

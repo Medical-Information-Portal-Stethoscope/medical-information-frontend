@@ -1,0 +1,13 @@
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: max-content;
+
+  svg:nth-child(2) {
+    position: absolute;
+    right: -44px;
+    bottom: -48px;
+  }
+}

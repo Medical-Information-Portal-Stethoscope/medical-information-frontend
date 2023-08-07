@@ -13,6 +13,7 @@ import {
   setIsAllArticles,
 } from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 import {
   isAllContentNews,
   isLoadingContent,
@@ -35,20 +36,13 @@ export default function NewsPreviewPage() {
   // Получаем список всех новостей
   const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
 
+  useScrollToTop();
+
   useEffect(() => {
     if (data) {
       dispatch(getFirstPageNews(data));
     }
   }, [data]); // eslint-disable-line
-
-  useEffect(() => {
-    dispatch(setIsAllArticles());
-    window.scroll({
-      top: 0,
-      left: 0,
-      behavior: 'auto',
-    });
-  }, []); // eslint-disable-line
 
   const uploadNextPageNews = () => {
     if (nextPageNews) {
@@ -92,5 +86,3 @@ export default function NewsPreviewPage() {
     </>
   );
 }
-
-// TODO: логика кнопки после сдачи макета на планшет и телефон

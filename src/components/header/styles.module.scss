@@ -5,10 +5,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 83px;
   height: 168px;
   margin: 32px auto;
   padding: 42px 48px;
+  padding-right: 56px;
   border-radius: 16px;
   box-sizing: border-box;
   position: relative;
@@ -19,18 +19,15 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    gap: 40px;
+    gap: 48px;
     justify-self: end;
   }
 
   &__profile {
+    margin: 0 8px;
     background: none;
     fill: $color-neutral-0;
     transition: $transition-button;
-
-    &:hover svg {
-      cursor: pointer;
-    }
   }
 
   &__logotext {
@@ -46,5 +43,5 @@
   height: 188px;
   position: absolute;
   top: 116px;
-  right: 40px;
+  right: 48px;
 }

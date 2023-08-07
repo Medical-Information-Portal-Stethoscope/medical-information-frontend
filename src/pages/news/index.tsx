@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
+import { useScrollToTop } from 'hooks/useScrollToTop';
 
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
@@ -32,6 +33,8 @@ export const News: FC = () => {
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   // Получаем список всех новостей
   const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
+
+  useScrollToTop();
 
   return article ? (
     <>

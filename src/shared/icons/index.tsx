@@ -72,10 +72,12 @@ import { RainyWeatherSixIcon } from './rainy-weather-six-icon';
 import { RainyWeatherSevenIcon } from './rainy-weather-seven-icon';
 import { RainyWeatherIcon } from './rainy-weather-icon';
 import { RightArrowIcon } from './right-arrow-icon';
+import { RightArrowLongIcon } from './right-arrow-long-icon';
 import { SceneryIcon } from './scenery-icon';
 import { SearchIcon } from './search-icon';
 import { SnowflakeOneIcon } from './snowflake-one-icon';
 import { SnowflakeIcon } from './snowflake-icon';
+import { StatusIcon } from './status-icon';
 import { StormWeatherOneIcon } from './storm-weather-one-icon';
 import { StormWeatherTwoIcon } from './storm-weather-two-icon';
 import { StormWeatherIcon } from './storm-weather-icon';
@@ -83,6 +85,7 @@ import { SunIcon } from './sun-icon';
 import { SunWithWindIcon } from './sun-with-wind-icon';
 import { SunsetIcon } from './sunset-icon';
 import { TelegramIcon } from './telegram-icon';
+import { UpArrowLongIcon } from './up-arrow-long-icon';
 import { UrologyIcon } from './urology-icon';
 import { UserIcon } from './user-icon';
 import { VaccinationIcon } from './vaccination-icon';
@@ -168,10 +171,12 @@ const icons = {
   RainyWeatherSevenIcon,
   RainyWeatherIcon,
   RightArrowIcon,
+  RightArrowLongIcon,
   SceneryIcon,
   SearchIcon,
   SnowflakeOneIcon,
   SnowflakeIcon,
+  StatusIcon,
   StormWeatherOneIcon,
   StormWeatherTwoIcon,
   StormWeatherIcon,
@@ -179,6 +184,7 @@ const icons = {
   SunWithWindIcon,
   SunsetIcon,
   TelegramIcon,
+  UpArrowLongIcon,
   UrologyIcon,
   UserIcon,
   VaccinationIcon,

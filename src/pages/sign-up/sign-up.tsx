@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { FC, ReactElement, useEffect } from 'react';
+import { FC, ReactElement, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -11,6 +11,7 @@ import Entry from 'components/entry/entry';
 import Input from 'shared/input/input';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import Button from 'shared/buttons/button/button';
+import { MailWithIcon } from 'shared/mail-with-icon/mail-with-icon';
 import { filterFormValues } from 'utils/functions/filter-form-values';
 import privacyPolicy from 'assets/documents/privacy-policy.pdf';
 import termsOfUse from 'assets/documents/terms-of-use.pdf';
@@ -26,6 +27,7 @@ import {
 import styles from './sign-up.module.scss';
 
 const SignUpPage: FC = (): ReactElement => {
+  const [isSuccess, setIsSuccess] = useState(false);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -48,15 +50,34 @@ const SignUpPage: FC = (): ReactElement => {
       .shape(schemaPersonalDataConsent(Yup)),
 
     onSubmit: (values, { setSubmitting }) => {
-      const { email, password, first_name, last_name } = values;
-      const data = filterFormValues({ email, password, first_name, last_name });
+      const { email, password, password_confirmation, first_name, last_name } =
+        values;
+      const data = filterFormValues({
+        email,
+        first_name,
+        last_name,
+      });
 
-      dispatch(registerUser(data)).finally(() => setSubmitting(false));
+      dispatch(
+        registerUser({ ...data, password, re_password: password_confirmation })
+      )
+        .then((res) => {
+          if (res.type.endsWith('fulfilled')) setIsSuccess(true);
+        })
+        .finally(() => setSubmitting(false));
     },
   });
 
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
-    formik;
+  const {
+    values,
+    errors,
+    touched,
+    isValid,
+    isSubmitting,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+  } = formik;
 
   const serverError = useAppSelector(showServerError);
 
@@ -68,27 +89,8 @@ const SignUpPage: FC = (): ReactElement => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const navigation = (
-    <div className={styles.navigation}>
-      <span>Есть аккаунт?</span>{' '}
-      <Button
-        label="Войти"
-        model="tertiary"
-        onClick={() => navigate(routes.signin)}
-      />
-    </div>
-  );
-
-  return (
-    <Entry
-      heading="Регистрация"
-      buttonLabel="Зарегистрироваться"
-      altNavigation={navigation}
-      isLoading={formik.isSubmitting}
-      isDisabled={!formik.isValid}
-      hasCommentaryWithRequired
-      onSubmit={handleSubmit}
-    >
+  const initialState = (
+    <>
       <div className={styles.inputs}>
         <div className={styles.person}>
           <Input
@@ -179,6 +181,46 @@ const SignUpPage: FC = (): ReactElement => {
           </a>
         </p>
       </div>
+    </>
+  );
+
+  const successState = (
+    <div className={styles.content}>
+      <p className={styles.instruction}>
+        Мы&nbsp;отправили вам письмо на&nbsp;почтовый адрес. Для&nbsp;завершения
+        регистрации необходимо перейти по&nbsp;ссылке из&nbsp;письма
+        и&nbsp;подтвердить email. Ссылка действительна ограниченное время.
+      </p>
+      <div className={styles.iconWrapper}>
+        <MailWithIcon />
+      </div>
+    </div>
+  );
+
+  const navigation = (
+    <div className={styles.navigation}>
+      <span>Есть аккаунт?</span>{' '}
+      <Button
+        label="Войти"
+        model="tertiary"
+        onClick={() => navigate(routes.signin)}
+      />
+    </div>
+  );
+
+  return (
+    <Entry
+      heading={isSuccess ? 'Подтверждение email' : 'Регистрация'}
+      buttonType={isSuccess ? 'button' : 'submit'}
+      buttonLabel={isSuccess ? 'Перейти на главную' : 'Зарегистрироваться'}
+      altNavigation={isSuccess ? null : navigation}
+      isLoading={isSubmitting}
+      isDisabled={!isValid}
+      hasCommentaryWithRequired={!isSuccess}
+      onSubmit={handleSubmit}
+      onClick={isSuccess ? () => navigate(routes.home) : undefined}
+    >
+      {(isSuccess && successState) || initialState}
     </Entry>
   );
 };

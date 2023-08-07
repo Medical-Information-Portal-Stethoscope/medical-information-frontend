@@ -13,21 +13,18 @@
     @extend %text-size-medium-semibold;
     color: $color-neutral-400;
     margin-bottom: 20px;
-    padding: 0;
   }
 
   &__header {
     @extend %heading-size-medium;
     color: $color-neutral-900;
     margin-bottom: 24px;
-    padding: 0;
   }
 
   &__annotation {
     @extend %text-size-large;
     color: $color-neutral-700;
     margin-bottom: 26px;
-    padding: 0;
   }
 
   &__info {
@@ -40,10 +37,6 @@
 
   &__clock {
     margin-right: 4px;
-  }
-
-  &__time {
-    margin: 0;
   }
 
   &__dot {
@@ -78,6 +71,15 @@
     @extend %text-article;
     color: $color-neutral-900;
     margin: 0 auto 32px;
+
+    h3,
+    p {
+      margin-bottom: 24px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__buttons {
@@ -150,7 +152,6 @@
 
     span {
       @extend %text-size-medium-semibold;
-      justify-content: center;
     }
   }
 }

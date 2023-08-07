@@ -6,6 +6,7 @@ export interface IUserRegistration extends IUser {
   first_name: string;
   last_name: string;
   password: string;
+  re_password: string;
 }
 
 export interface IUserLogin extends IUser {
