@@ -8,6 +8,7 @@ import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
 import { AuthorsPage } from 'pages/authors/authors';
 import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
 import SignUpPage from 'pages/sign-up/sign-up';
+import { SignUpActivationPage } from 'pages/sign-up-activation/sign-up-activation';
 import SignInPage from 'pages/sign-in/sign-in';
 import { ResetPasswordPage } from 'pages/reset-password/reset-password';
 import { ResetPasswordConfirmationPage } from 'pages/reset-password-confirmation/reset-password-confirmation';
@@ -45,6 +46,10 @@ function App() {
       <Route path={routes.authors.route} element={<AuthorsPage />} />
 
       <Route path={routes.signup} element={<SignUpPage />} />
+      <Route
+        path={routes.signupActivation}
+        element={<SignUpActivationPage />}
+      />
       <Route path={routes.signin} element={<SignInPage />} />
       <Route path={routes.password.reset} element={<ResetPasswordPage />} />
       <Route

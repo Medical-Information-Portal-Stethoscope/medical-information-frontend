@@ -1,17 +1,12 @@
 import { JSX, ButtonHTMLAttributes, ReactNode } from 'react';
 import classNames from 'classnames';
+import { Spinner } from 'shared/preloaders/circle-with-dots/circle-with-dots';
 import styles from './button.module.scss';
-
-const spinner = (
-  <span className={styles.spinnerWrapper}>
-    <span className={styles.spinner} />
-  </span>
-);
 
 interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   extraClass?: string;
   type?: JSX.IntrinsicElements['button']['type'];
-  label: string;
+  label?: string;
   model?: 'primary' | 'secondary' | 'tertiary';
   size?: 'small' | 'medium';
   hasBorder?: boolean; // not provided for the tertiary
@@ -19,6 +14,9 @@ interface IButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isDisabled?: boolean;
   isLoading?: boolean;
   loadingLabel?: string;
+  hasSpinner?: boolean;
+  spinnerSize?: 'big' | 'small';
+  spinnerColor?: 'blue' | 'gray' | 'white';
   onClick?: () => void;
 }
 
@@ -33,6 +31,9 @@ export default function Button({
   isDisabled = false,
   isLoading = false,
   loadingLabel,
+  hasSpinner = false,
+  spinnerSize,
+  spinnerColor,
   onClick,
 }: IButtonProps) {
   return (
@@ -54,7 +55,10 @@ export default function Button({
       onClick={onClick}
     >
       <span className={styles.content}>
-        {(isLoading && model !== 'tertiary' && spinner) || null}
+        {(hasSpinner && isLoading && model !== 'tertiary' && (
+          <Spinner size={spinnerSize} color={spinnerColor} />
+        )) ||
+          null}
         {customIcon || null}
         {isLoading && loadingLabel ? loadingLabel : label}
       </span>

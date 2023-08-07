@@ -36,6 +36,7 @@ const SignInPage: FC = (): ReactElement => {
 
           if (token) {
             dispatch(getUserPersonalData(token));
+            navigate(routes.profile);
           }
         })
         .finally(() => setSubmitting(false));
@@ -66,7 +67,7 @@ const SignInPage: FC = (): ReactElement => {
     <div className={styles.navigation}>
       <span>Нет аккаунта?</span>{' '}
       <Button
-        label="Зарегистрируйтесь"
+        label="Зарегистрироваться"
         model="tertiary"
         onClick={() => navigate(routes.signup)}
       />

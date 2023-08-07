@@ -17,7 +17,7 @@ const meta: Meta<typeof MailWithIcon> = {
     statusIcon: {
       description: 'Значок в иконке успеха/неудачи операции',
       type: 'string',
-      options: ['success', 'fail'],
+      options: ['success', 'fail', 'loading'],
       control: { type: 'radio' },
     },
   },

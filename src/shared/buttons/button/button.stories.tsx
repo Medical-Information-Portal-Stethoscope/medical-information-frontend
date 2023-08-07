@@ -84,6 +84,28 @@ const meta: Meta<typeof Button> = {
       type: 'string',
     },
 
+    hasSpinner: {
+      description: 'Наличие прелоадера',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: { type: 'radio' },
+    },
+
+    spinnerSize: {
+      description: 'Размер прелоадера',
+      type: 'string',
+      options: ['big', 'small'],
+      control: { type: 'radio' },
+    },
+
+    spinnerColor: {
+      description: 'Цвет прелоадера',
+      type: 'string',
+      options: ['blue', 'gray', 'white'],
+      control: { type: 'radio' },
+    },
+
     onClick: { description: 'Нажатие', type: 'function' },
   },
 };

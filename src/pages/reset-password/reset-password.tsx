@@ -77,22 +77,22 @@ export const ResetPasswordPage: FC = (): ReactElement => {
     </>
   );
 
+  const navigation = (
+    <div className={styles.buttonBack}>
+      <Button
+        label="Вернуться назад"
+        model="tertiary"
+        onClick={() => navigate(-1)}
+      />
+    </div>
+  );
+
   return (
     <Entry
       heading="Восстановление пароля"
-      buttonLabel={isSuccess ? 'Вернуться на главную' : 'Отправить'}
       buttonType={isSuccess ? 'button' : 'submit'}
-      altNavigation={
-        isSuccess ? null : (
-          <div className={styles.buttonBack}>
-            <Button
-              label="Вернуться назад"
-              model="tertiary"
-              onClick={() => navigate(-1)}
-            />
-          </div>
-        )
-      }
+      buttonLabel={isSuccess ? 'Вернуться на главную' : 'Отправить'}
+      altNavigation={isSuccess ? null : navigation}
       isLoading={isSubmitting}
       isDisabled={!isValid}
       onSubmit={handleSubmit}

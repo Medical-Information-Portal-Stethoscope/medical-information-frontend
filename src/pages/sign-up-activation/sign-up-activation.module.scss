@@ -1,0 +1,40 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 239px;
+  margin-bottom: 40px;
+
+  &--response {
+    margin-bottom: 0;
+
+    + button {
+      display: none;
+    }
+  }
+
+  div:first-child {
+    margin-right: 8%;
+
+    > span {
+      position: absolute;
+      right: -38px;
+      bottom: -44px;
+
+      > span {
+        top: 42%;
+        left: 40%;
+      }
+    }
+  }
+}
+
+.subheading {
+  @extend %text-size-large;
+  color: $color-neutral-500;
+  margin-bottom: 40px;
+}
