@@ -8,6 +8,8 @@ const marked = new Marked({
   gfm: true, // If true, use approved GitHub Flavored Markdown (GFM) specification.
   silent: false,
   breaks: true,
+  mangle: false,
+  headerIds: false,
 });
 
 const purifySettings = {
@@ -32,9 +34,13 @@ export const converMdToHTML = (data: string, isAnnotation: boolean) => {
 
   preparedMD = marked.parse(data);
   if (typeof preparedMD === 'string') {
-    preparedMD = isAnnotation
-      ? preparedMD.replace(/h[1-6]/g, 'p')
-      : preparedMD.replace(/h[1-6]/g, 'h3');
+    if (isAnnotation) {
+      preparedMD = preparedMD.replace(/h[1-6]/g, 'span');
+      preparedMD = preparedMD.replace(/p>/g, 'span>');
+    } else {
+      preparedMD = preparedMD.replace(/h[1-6]/g, 'h3');
+    }
+
     cleanData = DOMPurify.sanitize(preparedMD, purifySettings);
     finishData = parse(cleanData);
     return finishData;
