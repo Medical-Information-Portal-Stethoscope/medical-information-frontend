@@ -4,7 +4,7 @@
 .subscribe {
   display: flex;
   max-width: $wrapper-main-content-desktop;
-  margin: 40px auto;
+  margin: 40px auto 80px auto;
   justify-content: space-between;
   overflow: hidden;
   border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
