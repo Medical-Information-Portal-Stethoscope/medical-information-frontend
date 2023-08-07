@@ -6,7 +6,7 @@ import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-chec
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import routes from 'utils/routes';
 import {
-  footerHeightWithIndentsDesktopBig,
+  headerHeightWithIndentsDesktopBig,
   cardFavoritesHeightDesktopBig,
   cardFavoritesGapDesktopBig,
 } from 'utils/constants';
@@ -27,8 +27,8 @@ function Sidebar() {
     if (
       isRouteFavorites &&
       sidebarRef.current.offsetHeight >= galleryHeightDesktopBig &&
-      (document.body.scrollTop > footerHeightWithIndentsDesktopBig ||
-        document.documentElement.scrollTop > footerHeightWithIndentsDesktopBig)
+      (document.body.scrollTop > headerHeightWithIndentsDesktopBig ||
+        document.documentElement.scrollTop > headerHeightWithIndentsDesktopBig)
     ) {
       setIsButtonToTopVisible(true);
     } else {

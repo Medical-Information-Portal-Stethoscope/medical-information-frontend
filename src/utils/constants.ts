@@ -1,5 +1,5 @@
 // HEADER
-export const footerHeightWithIndentsDesktopBig = 200;
+export const headerHeightWithIndentsDesktopBig = 200;
 
 // FAVORITES CARDS
 export const cardFavoritesHeightDesktopBig = 438;
