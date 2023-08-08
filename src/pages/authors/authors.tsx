@@ -11,7 +11,7 @@ import styles from './authors.module.scss';
 export const AuthorsPage: FC = (): ReactElement => (
   <>
     <Header />
-    <Breadcrumbs />
+    <Breadcrumbs extraClass={styles.crumbs} />
     <main>
       <div className={styles.wrapper}>
         {/* TODO: Хлебные крошки */}
@@ -20,21 +20,22 @@ export const AuthorsPage: FC = (): ReactElement => (
           <section className={styles.authorsSection}>
             <h3 className={styles.heading}>Хочу опубликовать статью</h3>
             <p className={styles.text}>
-              Мы очень рады новым авторам на Медицинском информационном портале
-              «Стетоскоп». Главная цель МИП Стетоскоп — помогать читателям
-              получать знания о медицине и просвещаться в вопросах здоровья и
-              как жить лучше. Если вы хотите продемонстрировать свою экспертизу
-              в области медицинских знаний или поделиться практическим
-              материалом, основанном на профессиональном или личном опыте, вы
-              можете написать статью и отправить нам. Напишите то, что будет
-              полезно всем или хотя бы большинству читателей. Статья пройдёт
-              модерацию и её опубликуют на сайте.
+              Мы&nbsp;очень рады новым авторам на&nbsp;Медицинском
+              информационном портале &laquo;Стетоскоп&raquo;. Главная цель МИП
+              Стетоскоп&nbsp;&mdash; помогать читателям получать знания
+              о&nbsp;медицине и&nbsp;просвещаться в&nbsp;вопросах здоровья и как
+              жить лучше. Если вы&nbsp;хотите продемонстрировать свою экспертизу
+              в&nbsp;области медицинских знаний или поделиться практическим
+              материалом, основанном на&nbsp;профессиональном или личном опыте,
+              вы можете написать статью и&nbsp;отправить нам. Напишите&nbsp;то,
+              что будет полезно всем или хотя&nbsp;бы большинству читателей.
+              Статья пройдёт модерацию и&nbsp;её&nbsp;опубликуют на&nbsp;сайте.
             </p>
           </section>
           <section className={styles.authorsSection}>
             <h3 className={styles.heading}>Как опубликовать статью</h3>
             <p className={`${styles.text} ${styles.publication}`}>
-              Чтобы опубликовать статью, необходимо пройти всего 3 шага:
+              Чтобы опубликовать статью, необходимо пройти всего 3&nbsp;шага:
             </p>
             <ol>
               <li className={styles.listItem}>
@@ -45,16 +46,16 @@ export const AuthorsPage: FC = (): ReactElement => (
                 <Link className={styles.link} to={routes.signin}>
                   войти
                 </Link>{' '}
-                в личный кабинет;
+                в&nbsp;личный кабинет;
               </li>
               <li className={styles.listItem}>
-                Заполнить и отправить{' '}
+                Заполнить и&nbsp;отправить{' '}
                 <Link className={styles.link} to="/#">
                   форму
                 </Link>{' '}
                 для публикации статьи;
               </li>
-              <li className={styles.listItem}>Вы великолепны.</li>
+              <li className={styles.listItem}>Вы&nbsp;великолепны.</li>
             </ol>
           </section>
           <section className={styles.authorsSection}>
@@ -64,13 +65,14 @@ export const AuthorsPage: FC = (): ReactElement => (
             <ol>
               <li className={styles.listItem}>Заголовок вашей статьи;</li>
               <li className={styles.listItem}>
-                Аннотацию (лид) к статье (не более 400 символов);
+                Аннотацию (лид) к&nbsp;статье (не&nbsp;более 400&nbsp;символов);
               </li>
               <li className={styles.listItem}>Текст статьи;</li>
               <li className={styles.listItem}>Наименование источника;</li>
-              <li className={styles.listItem}>Ссылка на источник;</li>
+              <li className={styles.listItem}>Ссылка на&nbsp;источник;</li>
               <li className={styles.listItem}>
-                Теги для определения тематики и лучшей выдачи в поиске;
+                Теги для определения тематики и&nbsp;лучшей выдачи
+                в&nbsp;поиске;
               </li>
               <li className={styles.listItem}>Фотографии или иллюстрации.</li>
             </ol>

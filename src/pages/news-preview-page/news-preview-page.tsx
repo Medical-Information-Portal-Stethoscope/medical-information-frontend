@@ -67,7 +67,7 @@ export default function NewsPreviewPage() {
   return (
     <>
       <Header />
-      <Breadcrumbs />
+      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
         <section>
           <div className={styles.wrapper}>

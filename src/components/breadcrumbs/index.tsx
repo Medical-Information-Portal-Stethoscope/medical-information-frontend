@@ -6,7 +6,8 @@ import styles from './style.module.scss';
 const materialIdLength = 36;
 
 type AdditionalData = {
-  [key: string]: string;
+  materialName?: string | null;
+  extraClass?: string;
 };
 
 const routeMapping = {
@@ -17,7 +18,7 @@ const routeMapping = {
   authors: 'Авторам',
 };
 
-export const Breadcrumbs = (additionalData: AdditionalData) => {
+export const Breadcrumbs = ({ materialName, extraClass }: AdditionalData) => {
   let currentLink = '';
 
   const routeData = [{ name: 'Главная', route: '/' }];
@@ -29,15 +30,15 @@ export const Breadcrumbs = (additionalData: AdditionalData) => {
     currentLink += `/${crumb}`;
     const linkName =
       crumb.length >= materialIdLength
-        ? additionalData?.materialName
+        ? materialName
         : routeMapping[crumb as keyof typeof routeMapping];
 
-    routeData.push({ name: linkName, route: currentLink });
+    routeData.push({ name: linkName || '', route: currentLink });
     return null;
   });
 
   return routeData.length > 1 ? (
-    <div className={styles.crumbs}>
+    <div className={(styles.crumbs, extraClass)}>
       <ul className={styles.crumbs__list}>
         {routeData.map((item) => (
           <React.Fragment key={nanoid()}>

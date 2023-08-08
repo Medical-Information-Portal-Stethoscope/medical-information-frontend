@@ -40,7 +40,7 @@ export const News = () => {
   return article ? (
     <>
       <Header />
-      <Breadcrumbs materialName={article?.title} />
+      <Breadcrumbs materialName={article.title} extraClass={styles.crumbs} />
       <main>
         <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>

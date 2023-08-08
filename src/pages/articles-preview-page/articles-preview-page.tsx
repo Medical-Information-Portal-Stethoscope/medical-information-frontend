@@ -86,7 +86,7 @@ export default function ArticlesPreviewPage() {
   return (
     <>
       <Header />
-      <Breadcrumbs />
+      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
         <section>
           <div className={styles.wrapper}>
