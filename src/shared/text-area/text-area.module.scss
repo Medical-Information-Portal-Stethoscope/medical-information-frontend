@@ -36,8 +36,12 @@
     width: 0px;
   }
 
-  &--text:is(:focus) {
+  &--text:not(:focus):not(:placeholder-shown):valid {
     border: 1px solid $color-brand-primary-500;
+  }
+
+  &--text:not(:focus):not(:placeholder-shown):invalid {
+    border: 1px solid $color-brand-secondary-700;
   }
 
   &--text::placeholder {
@@ -51,5 +55,8 @@
     height: 16px;
     display: flex;
     justify-content: flex-end;
+    &--error {
+      color: $color-brand-secondary-700;
+    }
   }
 }

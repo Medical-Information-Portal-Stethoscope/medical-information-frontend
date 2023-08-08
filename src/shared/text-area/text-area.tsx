@@ -1,5 +1,5 @@
 /* eslint-disable arrow-body-style */
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useRef, useMemo, useImperativeHandle } from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import styles from './text-area.module.scss';
@@ -8,22 +8,38 @@ import useAutoResizeTextArea from './lib';
 interface TextAreaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
-  size?: 'medium' | 'large';
-  maxTextAreaLength?: 400 | typeof Infinity;
+  size?: string;
+  maxTextAreaLength?: number;
   counter?: boolean;
 }
 
 const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
   (
-    { name, label, size, maxTextAreaLength, counter, placeholder, ...props },
-    ref
+    {
+      name,
+      label,
+      value,
+      onChange,
+      size,
+      maxTextAreaLength,
+      counter,
+      placeholder,
+      ...props
+    },
+    forwardRef
   ) => {
     const id = nanoid();
     const textAreaRef = useRef<HTMLTextAreaElement>(null);
-    const [value, setValue] = useState('');
 
     useAutoResizeTextArea(textAreaRef.current, value);
+
+    useImperativeHandle(
+      forwardRef,
+      () => textAreaRef.current as HTMLTextAreaElement
+    );
 
     const symbols = useMemo(
       () =>
@@ -31,11 +47,6 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         value ? (value.length <= 400 ? 0 + value.length : '400') : '0',
       [value]
     );
-
-    const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const textareaValue = e.target?.value;
-      setValue(textareaValue);
-    };
 
     return (
       <div className={classNames(styles.textarea)}>
@@ -50,7 +61,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             ref={textAreaRef}
             value={value}
             name={name}
-            onChange={handleChange}
+            onChange={onChange}
             placeholder={placeholder}
             rows={1}
             maxLength={maxTextAreaLength}
@@ -59,7 +70,11 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
             {...props}
           />
         </label>
-        <p className={classNames(styles[`textarea--counter`])}>
+        <p
+          className={classNames(styles[`textarea--counter`], {
+            [styles[`textarea--counter--error`]]: value?.length >= 400,
+          })}
+        >
           {counter ? `${symbols}/400` : ''}
         </p>
       </div>

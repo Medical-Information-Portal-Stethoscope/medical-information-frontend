@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 const useAutoResizeTextArea = (
   textAreaRef: HTMLTextAreaElement | null,
-  value: string
+  value: string | undefined
 ) => {
   useEffect(() => {
     if (textAreaRef) {
