@@ -1,12 +1,36 @@
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement, ChangeEvent, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import Input from 'shared/input/input';
 import { FileInput } from 'shared/file-input/file-input';
 import Button from 'shared/buttons/button/button';
+import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
+import { Icon } from 'shared/icons';
 import styles from './creating-an-article.module.scss';
 
 export const CreatingAnArticlePage: FC = (): ReactElement => {
-  const fileId = nanoid();
+  const [selectedImage, setSelectedImage] = useState<null | Blob | MediaSource>(
+    null
+  );
+  const [selectedImagePreview, setSelectedImagePreview] = useState('');
+
+  useEffect(() => {
+    if (!selectedImage) {
+      return setSelectedImagePreview('');
+    }
+
+    const objectUrl = URL.createObjectURL(selectedImage);
+    setSelectedImagePreview(objectUrl);
+
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [selectedImage]);
+
+  const selectFile = (evt: ChangeEvent<HTMLInputElement>) =>
+    setSelectedImage(!evt.target.files ? null : evt.target.files[0]);
+
+  const deleteFile = () => {
+    setSelectedImage(null);
+    setSelectedImagePreview('');
+  };
 
   return (
     <section>
@@ -26,28 +50,41 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             />
             {/* TEXTAREA */}
             {/* TEXTAREA */}
-            <div className={styles.source}>
-              <Input
-                label="Источник и/или автор оригинала"
-                placeholder="Минздрав"
-              />
-              <p className={styles.comment}>
-                Наименование источника или домен сайта, например:
-                minzdrav.gov.ru
-              </p>
-            </div>
+            <Input
+              label="Источник и/или автор оригинала"
+              placeholder="Минздрав или minzdrav.gov.ru"
+            />
             <Input
               label="Ссылка на источник"
-              placeholder="https://minzdrav.gov.ru/novosibirskie-hirurgi-proveli-slozhneyshuyu-operatsiyu"
+              placeholder="https://minzdrav.gov.ru/сhto-delayet-mozg,-poka-my-spim"
             />
           </div>
-          <FileInput
-            id={fileId}
-            label="Прикрепить фотографию"
-            icon="PaperClipIcon"
-            color="blue"
-            accept=".jpg, .jpeg, .png"
-          />
+          <div>
+            {selectedImagePreview && (
+              <div className={styles.imageWrapper}>
+                <img
+                  className={styles.imagePreview}
+                  src={selectedImagePreview}
+                  alt="Предпросмотр изображения, добавленного с компьютера пользователя"
+                />
+                <ButtonWithIconTwo
+                  extraClass={styles.imageDeleteButton}
+                  icon={<Icon icon="CancelIcon" color="white" />}
+                  ariaLabel="Удалить прикрепленное изображение"
+                  onClick={deleteFile}
+                />
+              </div>
+            )}
+            {!selectedImagePreview && (
+              <FileInput
+                id={nanoid()}
+                label="Прикрепить фотографию"
+                icon={<Icon icon="PaperClipIcon" color="blue" />}
+                accept=".jpg, .jpeg, .png"
+                onChange={selectFile}
+              />
+            )}
+          </div>
           <div className={styles.submit}>
             <p className={styles.comment}>
               Статья будет опубликована на сайте после модерации

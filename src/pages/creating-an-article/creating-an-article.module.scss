@@ -17,6 +17,11 @@
   letter-spacing: $font-letter-spacing-main;
 }
 
+.rule {
+  color: $color-neutral-500;
+  letter-spacing: $font-letter-spacing-main;
+}
+
 .form {
   display: flex;
   flex-direction: column;
@@ -49,4 +54,46 @@
   *:not(:first-child) {
     margin-top: 24px;
   }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 390px;
+  height: 320px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+        0deg,
+        rgba(72, 69, 84, 0.2) 0%,
+        rgba(72, 69, 84, 0.2) 100%
+      ),
+      lightgray 50%;
+
+    opacity: 0.2;
+  }
+}
+
+.imageDeleteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(222, 222, 222, 0.3);
+  backdrop-filter: blur(5px);
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
 }
