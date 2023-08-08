@@ -45,6 +45,7 @@
 }
 
 .comment {
+  width: 50%;
   @extend %text-size-small;
   color: $color-neutral-500;
   letter-spacing: $font-letter-spacing-main;
@@ -53,6 +54,12 @@
 .submit {
   *:not(:first-child) {
     margin-top: 24px;
+  }
+}
+
+.imageFile {
+  > .comment {
+    margin-top: 8px;
   }
 }
 

@@ -1,85 +1,79 @@
-/* eslint-disable arrow-body-style */
-import React, { useRef, useMemo, useImperativeHandle } from 'react';
+import {
+  useRef,
+  useLayoutEffect,
+  forwardRef,
+  TextareaHTMLAttributes,
+} from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import styles from './text-area.module.scss';
-import useAutoResizeTextArea from './lib';
 
-interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  name: string;
+interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  minHeight: number;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
-  size?: string;
-  maxTextAreaLength?: number;
-  counter?: boolean;
+  hasCounter?: boolean;
+  maxSymbols?: number;
+  error?: string;
 }
 
-const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  (
-    {
-      name,
-      label,
-      value,
-      onChange,
-      size,
-      maxTextAreaLength,
-      counter,
-      placeholder,
-      ...props
-    },
-    forwardRef
-  ) => {
+const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
+  ({
+    name,
+    label,
+    value,
+    minHeight,
+    hasCounter,
+    maxSymbols = 0,
+    placeholder,
+    autoComplete = 'off',
+    error,
+    onChange,
+  }) => {
     const id = nanoid();
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    useAutoResizeTextArea(textAreaRef.current, value);
+    useLayoutEffect(() => {
+      if (textareaRef?.current) {
+        textareaRef.current.style.height = 'inherit';
 
-    useImperativeHandle(
-      forwardRef,
-      () => textAreaRef.current as HTMLTextAreaElement
-    );
-
-    const symbols = useMemo(
-      () =>
-        // eslint-disable-next-line no-nested-ternary
-        value ? (value.length <= 400 ? 0 + value.length : '400') : '0',
-      [value]
-    );
+        textareaRef.current.style.height = `${Math.max(
+          textareaRef.current.scrollHeight,
+          minHeight
+        )}px`;
+      }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [value]);
 
     return (
-      <div className={classNames(styles.textarea)}>
-        <label className={classNames(styles[`textarea--label`])} htmlFor={id}>
+      <div className={styles.textarea}>
+        <label className={styles[`textarea--label`]} htmlFor={id}>
           {label}
           <textarea
-            className={classNames(
-              styles[`textarea--text`],
-              styles[`textarea--text--${size}`]
-            )}
+            className={styles[`textarea--text`]}
             id={id}
-            ref={textAreaRef}
+            ref={textareaRef}
             value={value}
             name={name}
-            onChange={onChange}
             placeholder={placeholder}
-            rows={1}
-            maxLength={maxTextAreaLength}
-            autoComplete="on"
-            required
-            {...props}
+            autoComplete={autoComplete}
+            onChange={onChange}
           />
         </label>
-        <p
-          className={classNames(styles[`textarea--counter`], {
-            [styles[`textarea--counter--error`]]: value?.length >= 400,
-          })}
-        >
-          {counter ? `${symbols}/400` : ''}
-        </p>
+        {(hasCounter && (
+          <span
+            className={classNames(styles[`textarea--counter`], {
+              [styles[`textarea--error`]]: value?.length > maxSymbols,
+            })}
+          >
+            {`${value?.length}/${maxSymbols}`}
+          </span>
+        )) || <span className={styles[`textarea--error`]}>{error}</span>}
       </div>
     );
   }
 );
 
 export default TextArea;
+
+// TODO: useMemo

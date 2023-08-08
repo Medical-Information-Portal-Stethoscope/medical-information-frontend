@@ -1,6 +1,7 @@
 import { FC, ReactElement, ChangeEvent, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import Input from 'shared/input/input';
+import TextArea from 'shared/text-area/text-area';
 import { FileInput } from 'shared/file-input/file-input';
 import Button from 'shared/buttons/button/button';
 import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
@@ -41,15 +42,23 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             <h3 className={styles.subheading}>
               Заполните форму и отправьте статью
             </h3>
-            <p className={styles.rule}>Все поля обязательны для заполнения</p>
+            <p className={styles.rule}>
+              Поля со звёздочкой обязательны для заполнения
+            </p>
           </div>
           <div className={styles.inputs}>
             <Input
-              label="Заголовок статьи"
+              label="Заголовок статьи*"
               placeholder="Что делает мозг, пока мы спим"
             />
-            {/* TEXTAREA */}
-            {/* TEXTAREA */}
+            <TextArea
+              label="Аннотация*"
+              placeholder="3-4 предложения"
+              minHeight={97}
+              hasCounter
+              maxSymbols={400}
+            />
+            <TextArea label="Текст статьи*" minHeight={128} />
             <Input
               label="Источник и/или автор оригинала"
               placeholder="Минздрав или minzdrav.gov.ru"
@@ -59,7 +68,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
               placeholder="https://minzdrav.gov.ru/сhto-delayet-mozg,-poka-my-spim"
             />
           </div>
-          <div>
+          <div className={styles.imageFile}>
             {selectedImagePreview && (
               <div className={styles.imageWrapper}>
                 <img
@@ -84,6 +93,10 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
                 onChange={selectFile}
               />
             )}
+            <p className={styles.comment}>
+              Фотография обязательна, не более 1,5 MБ в форматах jpg, jpeg или
+              png
+            </p>
           </div>
           <div className={styles.submit}>
             <p className={styles.comment}>
