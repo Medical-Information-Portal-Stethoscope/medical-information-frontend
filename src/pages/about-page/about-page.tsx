@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import styles from './about-page.module.scss';
 import creatorM from '../../assets/images/CreatorMale.png';
 import creatorF from '../../assets/images/CreatorFemale.png';
@@ -56,6 +57,7 @@ export default function AboutPage() {
   return (
     <>
       <Header />
+      <Breadcrumbs />
       <main>
         <section className={styles.wrapper}>
           <h2 className={classNames(styles[`about--title`])}>О портале</h2>

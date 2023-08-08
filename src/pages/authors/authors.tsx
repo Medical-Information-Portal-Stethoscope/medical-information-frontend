@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import routes from 'utils/routes';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import styles from './authors.module.scss';
 
 // TODO: one more link for navigation
@@ -10,6 +11,7 @@ import styles from './authors.module.scss';
 export const AuthorsPage: FC = (): ReactElement => (
   <>
     <Header />
+    <Breadcrumbs />
     <main>
       <div className={styles.wrapper}>
         {/* TODO: Хлебные крошки */}

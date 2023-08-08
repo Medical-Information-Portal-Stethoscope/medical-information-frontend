@@ -22,6 +22,7 @@ import {
   isLoadingContent,
   nextArticlesPage,
 } from 'services/features/information-material/selectors';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import routes from 'utils/routes';
 import { getFilteredArticles } from 'services/features/filter/api';
 import styles from './articles-preview-page.module.scss';
@@ -85,6 +86,7 @@ export default function ArticlesPreviewPage() {
   return (
     <>
       <Header />
+      <Breadcrumbs />
       <main>
         <section>
           <div className={styles.wrapper}>

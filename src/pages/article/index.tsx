@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { FC } from 'react';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import { ArticlesPreviewSmall } from 'components/articles-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
@@ -43,6 +44,7 @@ export const Article: FC = () => {
   return article ? (
     <>
       <Header />
+      <Breadcrumbs materialName={article.title} />
       <main>
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
