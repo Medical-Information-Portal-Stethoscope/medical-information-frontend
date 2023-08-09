@@ -27,6 +27,10 @@ export const informationMaterialApi = createApi({
     getMaterialById: builder.query<TArticle, string | undefined>({
       query: (id) => `${api.endpoints.articles.base}/${id}`,
     }),
+
+    getArticlesbyTags: builder.query<any, string | undefined>({
+      query: (tagsQuery) => `${api.endpoints.articles.base}/?${tagsQuery}`,
+    }),
   }),
 });
 
@@ -54,4 +58,5 @@ export const {
   useGetAllArticlesQuery,
   useGetAllNewsQuery,
   useGetMaterialByIdQuery,
+  useGetArticlesbyTagsQuery,
 } = informationMaterialApi;
