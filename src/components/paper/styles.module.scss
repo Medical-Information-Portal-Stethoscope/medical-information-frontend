@@ -145,13 +145,7 @@
   }
 
   &__tag {
-    // width: 102px;
     height: 40px;
     padding: 8px 24px;
-    background-color: $color-brand-primary-700;
-
-    span {
-      @extend %text-size-medium-semibold;
-    }
   }
 }

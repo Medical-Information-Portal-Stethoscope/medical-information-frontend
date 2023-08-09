@@ -10,7 +10,7 @@ import { DotIcon } from 'shared/icons/dot-icon';
 import { ClockIcon } from 'shared/icons/clock-icon';
 import { ViewsIcon } from 'shared/icons/views-icon';
 
-import { ForwardIcon } from 'shared/icons/forward-icon';
+// import { ForwardIcon } from 'shared/icons/forward-icon';
 import { BookmarkIcon } from 'shared/icons/bookmark-icon';
 import { CommentsIcon } from 'shared/icons/comments-icon';
 
@@ -39,7 +39,7 @@ export const Paper: FC<Ipaper> = ({
 
   const handleAddBookmark = () => null;
   const handleAddComment = () => null;
-  const handleForward = () => null;
+  // const handleForward = () => null;
 
   return (
     <article className={styles.paper} id={data.id}>
@@ -77,7 +77,7 @@ export const Paper: FC<Ipaper> = ({
       </div>
 
       <div className={styles.paper__buttons}>
-        {/* в фигме дизайнеры указали, что сохранить только для статей */}
+        {/* сохранить только для статей */}
         {!isNews && (
           <ButtonWithIconThree
             icon={
@@ -92,14 +92,15 @@ export const Paper: FC<Ipaper> = ({
             extraClass={styles.paper__button}
           />
         )}
-
-        <ButtonWithIconThree
+        {/* поделиться в текущем релизе не используется ни для статьи, ни для новости */}
+        {/* <ButtonWithIconThree
           icon={
             <ForwardIcon color="gray" size="32" className={styles.forward} />
           }
           onClick={handleForward}
           extraClass={styles.paper__button}
-        />
+        /> */}
+
         <ButtonWithIconThree
           icon={
             <CommentsIcon color="gray" size="24" className={styles.forward} />
@@ -118,16 +119,18 @@ export const Paper: FC<Ipaper> = ({
         >{`${data.author?.first_name} ${data.author?.last_name}`}</Link>
       </div>
 
-      {data.tags ? (
+      {data.tags && !isNews ? (
         <div className={styles.paper__additional}>
           <p className={styles.paper__additional_text}>Теги:</p>
           <ul className={styles.paper__tags}>
             {data?.tags.map((tag, idx) => (
               <li key={idx}>
                 <Button
+                  model="secondary"
                   label={tag.name}
                   id={tag.pk}
-                  color="blue"
+                  color="white"
+                  hasBorder
                   size="small"
                   extraClass={styles.paper__tag}
                 />
