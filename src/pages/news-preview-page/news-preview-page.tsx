@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
@@ -66,6 +67,7 @@ export default function NewsPreviewPage() {
   return (
     <>
       <Header />
+      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
         <section>
           <div className={styles.wrapper}>
