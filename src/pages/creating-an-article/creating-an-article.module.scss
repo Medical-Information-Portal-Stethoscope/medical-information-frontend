@@ -29,7 +29,16 @@
 .form {
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+
+  > div:not(:first-child) {
+    margin-top: 40px;
+  }
+
+  &--photoPreview {
+    > div:last-child {
+      margin-top: 32px;
+    }
+  }
 }
 
 .instruction {

@@ -120,7 +120,12 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
   };
 
   const initialState = (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <form
+      className={classNames(styles.form, {
+        [styles[`form--photoPreview`]]: selectedImagePreview,
+      })}
+      onSubmit={handleSubmit}
+    >
       <div className={styles.instruction}>
         <h3 className={styles.subheading}>
           Заполните форму и отправьте статью
@@ -276,7 +281,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
     <section>
       <div
         className={classNames(styles.wrapper, {
-          [styles[`wrapper--response`]]: typeof response === 'boolean',
+          [styles[`wrapper--response`]]:
+            typeof response === 'boolean' || selectedImagePreview,
         })}
       >
         <h2 className={styles.heading}>Публикация статьи</h2>
