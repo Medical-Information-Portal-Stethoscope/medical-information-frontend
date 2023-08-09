@@ -27,17 +27,24 @@ export const Article: FC = () => {
   const errResponse = response.error || {};
   const errCode = 'status' in errResponse ? errResponse.status : null;
 
-  // теги
+  // все теги
   const { data: tags = [] } = useGetRootsTagsQuery();
   const newsTag = tags.find((tag) => tag.name === 'Новости');
 
   // теги по конкретной статье, исключаем новости
-  const materialTagsQuery = `${article?.tags
-    ?.map((tag) => `tags=${tag.pk}`)
-    .join('&')}&tags_exclude=${newsTag?.pk}`;
+  // есть ли у статьи теги
+  const tagsQuery =
+    article?.tags && article?.tags.map((tag) => `tags=${tag.pk}`).join('&');
+  // есть\нет теги исключений
+  const tagsExclude = newsTag?.pk ? `tags_exclude=${newsTag?.pk}` : '';
+
+  const materialTagsQuery = tagsQuery
+    ? `${tagsQuery}&${tagsExclude}`
+    : tagsExclude;
 
   const { data } = useGetArticlesbyTagsQuery(materialTagsQuery);
-  console.log(data);
+
+  const materials = data?.results.filter((item) => item.id !== article?.id);
 
   useScrollToTop();
 
@@ -49,9 +56,9 @@ export const Article: FC = () => {
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
             <Paper data={article} isNews={false} />
-            {data ? (
+            {materials?.length ? (
               <ArticlesPreviewSmall
-                data={data.results}
+                data={materials}
                 route={routes.articles.route}
               />
             ) : null}

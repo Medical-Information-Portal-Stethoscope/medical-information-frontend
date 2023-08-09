@@ -28,7 +28,10 @@ export const informationMaterialApi = createApi({
       query: (id) => `${api.endpoints.articles.base}/${id}`,
     }),
 
-    getArticlesbyTags: builder.query<any, string | undefined>({
+    getArticlesbyTags: builder.query<
+      TGetInformationMaterialResponse,
+      string | undefined
+    >({
       query: (tagsQuery) => `${api.endpoints.articles.base}/?${tagsQuery}`,
     }),
   }),

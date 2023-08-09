@@ -5,15 +5,6 @@ export const generateSmallPreview = (
   maxNumberWindow: number,
   id: string
 ) => {
-  const randomData: TArticle[] = [];
-
-  while (randomData.length < maxNumberWindow) {
-    const randomN = Math.floor(Math.random() * data.length);
-    const randomItem = data[randomN];
-    if (!randomData.includes(randomItem) && randomItem.id !== id) {
-      randomData.push(randomItem);
-    }
-  }
-
-  return randomData;
+  const dataArr = data.filter((item) => item.id !== id);
+  return dataArr.slice(0, maxNumberWindow);
 };
