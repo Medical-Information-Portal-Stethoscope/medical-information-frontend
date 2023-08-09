@@ -94,3 +94,7 @@ export const schemaArticleSourceLink = (yup: typeof import('yup')) => ({
     .matches(regexUrl, validationErrors.articles.sourceLink.unacceptableType)
     .max(2047, validationErrors.articles.sourceLink.unacceptableLength),
 });
+
+export const schemaArticleImage = (yup: typeof import('yup')) => ({
+  image: yup.string().required(),
+});

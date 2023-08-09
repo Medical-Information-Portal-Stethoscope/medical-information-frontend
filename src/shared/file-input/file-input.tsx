@@ -3,6 +3,7 @@ import styles from './file-input.module.scss';
 
 interface IFileInputProps {
   id: string;
+  name: string;
   label: string;
   icon?: ReactNode;
   accept: string;
@@ -11,6 +12,7 @@ interface IFileInputProps {
 
 export const FileInput: FC<IFileInputProps> = ({
   id,
+  name,
   label,
   icon,
   accept,
@@ -25,8 +27,11 @@ export const FileInput: FC<IFileInputProps> = ({
       className={styles.file}
       id={id}
       type="file"
+      name={name}
       accept={accept}
       onChange={onChange}
     />
   </div>
 );
+
+// TODO: STORYBOOK

@@ -15,11 +15,17 @@ import {
   schemaArticleText,
   schemaArticleSourceName,
   schemaArticleSourceLink,
+  schemaArticleImage,
 } from 'utils/data/validation/yup-schema';
+import { bytesInMegabyte } from 'utils/constants';
+import { validationErrors } from 'utils/data/validation/validation-errors';
 import { createArticle } from 'utils/api';
 import { filterFormValues } from 'utils/functions/filter-form-values';
 import { Response } from './components/response';
 import styles from './creating-an-article.module.scss';
+
+const articleImageSizeLimitMb = 1.5;
+const articleImageSizeLimitBytes = articleImageSizeLimitMb * bytesInMegabyte;
 
 export const CreatingAnArticlePage: FC = (): ReactElement => {
   const [response, setResponse] = useState<undefined | boolean>(undefined);
@@ -27,6 +33,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
     null
   );
   const [selectedImagePreview, setSelectedImagePreview] = useState('');
+  const [hasSelectedImageSizeError, setHasSelectedImageSizeError] =
+    useState(false);
 
   useEffect(() => {
     if (!selectedImage) {
@@ -46,6 +54,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
       text: '',
       source_name: '',
       source_link: '',
+      image: '',
     },
 
     validationSchema: Yup.object()
@@ -53,13 +62,16 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
       .shape(schemaArticleAnnotation(Yup))
       .shape(schemaArticleText(Yup))
       .shape(schemaArticleSourceName(Yup))
-      .shape(schemaArticleSourceLink(Yup)),
+      .shape(schemaArticleSourceLink(Yup))
+      .shape(schemaArticleImage(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
       createArticle(filterFormValues(data))
         .then(() => {
           setResponse(true);
           formik.resetForm();
+          setSelectedImage(null);
+          setSelectedImagePreview('');
         })
         .catch(() => setResponse(false))
         .finally(() => setSubmitting(false));
@@ -88,16 +100,23 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
 
     reader.readAsDataURL(file);
     reader.onload = () => {
-      setFieldValue('image', reader.result);
-    };
+      if (file.size > articleImageSizeLimitBytes) {
+        setFieldValue('image', null);
+        setHasSelectedImageSizeError(true);
+      } else {
+        setFieldValue('image', reader.result);
+        setHasSelectedImageSizeError(false);
+      }
 
-    setSelectedImage(file);
+      setSelectedImage(file);
+    };
   };
 
   const deleteFile = () => {
     setSelectedImage(null);
     setSelectedImagePreview('');
     setFieldValue('image', null);
+    setHasSelectedImageSizeError(false);
   };
 
   const initialState = (
@@ -174,14 +193,22 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
         {!selectedImagePreview && (
           <FileInput
             id={nanoid()}
+            name="image"
             label="Прикрепить фотографию"
             icon={<Icon icon="PaperClipIcon" color="blue" />}
             accept=".jpg, .jpeg, .png"
             onChange={selectFile}
           />
         )}
-        <p className={styles.comment}>
-          Фотография обязательна, не более 1,5 MБ в форматах jpg, jpeg или png
+        <p
+          className={classNames(styles.comment, {
+            [styles[`comment--error`]]: hasSelectedImageSizeError,
+          })}
+        >
+          {!selectedImage &&
+            'Фотография обязательна, не более 1,5 MБ в форматах jpg, jpeg или png'}
+          {hasSelectedImageSizeError &&
+            validationErrors.articles.image.unacceptableSize}
         </p>
       </div>
       <div className={styles.submit}>
@@ -224,7 +251,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           <form onSubmit={handleSubmit}>
             <Response
               message={
-                'Во время отравления статьи произошла ошибка.\nПопробуйте отправить ещё раз.'
+                'Во время отправления статьи произошла ошибка.\nПопробуйте отправить ещё раз.'
               }
               status="fail"
               button={

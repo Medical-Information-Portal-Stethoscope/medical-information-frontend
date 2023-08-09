@@ -144,7 +144,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             className={classNames(styles[`input--container--input`], {
               [styles[`input--container--input--error`]]:
-                (error || serverError) && touched && touched,
+                (error || serverError) && touched,
             })}
             ref={ref}
             name={name}
@@ -163,7 +163,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {error || serverError ? error || serverError : ''}
+          {(error || serverError) && touched ? error || serverError : ''}
         </span>
       </div>
     );

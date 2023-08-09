@@ -51,6 +51,7 @@ const TextArea: FC<ITextAreaProps> = ({
         {label}
         <textarea
           className={classNames(styles[`textarea--text`], {
+            [styles[`textarea--error`]]: error,
             [styles[`textarea--error--border`]]: error,
           })}
           id={id}

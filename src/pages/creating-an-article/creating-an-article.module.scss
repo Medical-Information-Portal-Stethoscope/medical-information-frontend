@@ -53,6 +53,10 @@
   @extend %text-size-small;
   color: $color-neutral-500;
   letter-spacing: $font-letter-spacing-main;
+
+  &--error {
+    color: $color-system-error;
+  }
 }
 
 .submit {
