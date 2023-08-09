@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC } from 'react';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
