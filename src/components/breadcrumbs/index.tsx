@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { RightArrowIcon } from 'shared/icons/right-arrow-icon';
 import { nanoid } from 'nanoid';
 import styles from './style.module.scss';
 
@@ -47,7 +48,7 @@ export const Breadcrumbs = ({ materialName, extraClass }: AdditionalData) => {
                 {item.name}
               </Link>
             </li>
-            <span className={styles.crumbs__arrow}>&#x3e;</span>
+            <RightArrowIcon className={styles.crumbs__arrow} color="gray" />
           </React.Fragment>
         ))}
       </ul>

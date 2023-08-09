@@ -16,14 +16,11 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    row-gap: 4px;
+    column-gap: 4px;
   }
 
   &__arrow {
-    margin: 5px 5px 5px 10px;
-    color: $color-neutral-700;
-    font-weight: bolder;
-
+    fill: $color-neutral-700;
     &:last-child {
       display: none;
     }
