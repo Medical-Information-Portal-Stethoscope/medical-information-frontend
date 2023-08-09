@@ -8,14 +8,16 @@
   gap: 15px;
 
   overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 
   &__list {
     max-width: 100%;
+    padding-top: 32px;
     display: flex;
     align-items: center;
     flex-direction: row;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     column-gap: 4px;
   }
 

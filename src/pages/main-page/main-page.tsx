@@ -4,7 +4,6 @@ import News from 'components/news/news';
 import Articles from 'components/articles/articles';
 import { SubscribeBlock } from 'components/subscribe-block';
 import Footer from 'components/footer/footer';
-import { Breadcrumbs } from 'components/breadcrumbs';
 
 export default function MainPage() {
   useScrollToTop();
@@ -13,7 +12,6 @@ export default function MainPage() {
     <>
       <Header />
       <main>
-        <Breadcrumbs />
         <News />
         <Articles />
         <SubscribeBlock />
