@@ -4,6 +4,7 @@ import { useAppDispatch } from 'services/app/hooks';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
 import { getFilteredArticlesForModal } from 'services/features/filter/api';
+import { getFirstPageArticles } from 'services/features/information-material/slice';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import { TTags } from 'services/features/tags/api';
@@ -38,7 +39,7 @@ export const FiltersPopup: FC<IFiltersProps> = ({
     setActiveTags([]);
   };
 
-  const sendFilters = () => {
+  const sendFilters = async () => {
     if (!activeTags.length) {
       handleCloseClick();
     } else {
@@ -46,7 +47,10 @@ export const FiltersPopup: FC<IFiltersProps> = ({
       const filterParamsArr = idsArr.map((item) => ['tags', item]);
       const params = new URLSearchParams(filterParamsArr);
       if (newsTag) params.set('tags_exclude', newsTag.pk);
-      dispatch(getFilteredArticlesForModal(params.toString()));
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
       handleCloseClick();
     }
   };
