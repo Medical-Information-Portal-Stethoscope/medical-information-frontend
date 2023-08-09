@@ -1,0 +1,27 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders';
+
+.content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 54px;
+  max-width: $wrapper-response-desktop;
+  white-space: pre-wrap;
+
+  button {
+    max-width: 370px;
+  }
+}
+
+.message {
+  @extend %text-size-large;
+  line-height: 151%;
+  color: $color-neutral-700;
+}
+
+.icon {
+  min-height: 235px;
+  margin-left: 11%;
+}

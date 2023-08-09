@@ -85,7 +85,6 @@ export const createArticle = async (data) => {
     headers: {
       Authorization: `Token ${localStorage.getItem('auth_token')}`,
       'Content-Type': 'application/json',
-      // 'Content-Type': 'multipart/form-data',
     },
     body: JSON.stringify(data),
   });
@@ -93,10 +92,8 @@ export const createArticle = async (data) => {
   const body = await res.json();
 
   if (res.ok) {
-    console.log(body);
-    // return "Link for password reset is sent on user's email";
+    return body;
   }
 
-  // throw new Error('Something went wrong');
-  console.log(body);
+  throw new Error('Something went wrong');
 };

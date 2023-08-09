@@ -5,6 +5,10 @@
 
 .wrapper {
   max-width: $wrapper-authors-desktop;
+
+  &--response {
+    padding-bottom: 25px;
+  }
 }
 
 .heading {
