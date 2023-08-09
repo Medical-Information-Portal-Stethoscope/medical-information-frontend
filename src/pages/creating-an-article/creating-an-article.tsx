@@ -17,6 +17,7 @@ import {
   schemaArticleSourceLink,
 } from 'utils/data/validation/yup-schema';
 import { createArticle } from 'utils/api';
+import { filterFormValues } from 'utils/functions/filter-form-values';
 import { Response } from './components/response';
 import styles from './creating-an-article.module.scss';
 
@@ -55,8 +56,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
       .shape(schemaArticleSourceLink(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
-      // console.log(data);
-      createArticle(data)
+      createArticle(filterFormValues(data))
         .then(() => {
           setResponse(true);
           formik.resetForm();
