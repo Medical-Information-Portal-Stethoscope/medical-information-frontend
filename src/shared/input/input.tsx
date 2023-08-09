@@ -65,7 +65,6 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     forwardedRef
   ) => {
-    console.log(value);
     const id = nanoid();
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);

@@ -15,6 +15,7 @@ import {
   schemaArticleSourceName,
   schemaArticleSourceLink,
 } from 'utils/data/validation/yup-schema';
+import { createArticle } from 'utils/api';
 import styles from './creating-an-article.module.scss';
 
 export const CreatingAnArticlePage: FC = (): ReactElement => {
@@ -50,8 +51,9 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
       .shape(schemaArticleSourceName(Yup))
       .shape(schemaArticleSourceLink(Yup)),
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: (data) => {
+      // console.log(data);
+      createArticle(data);
     },
   });
 
@@ -71,8 +73,16 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
   const selectFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = !evt.target.files ? null : evt.target.files[0];
 
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      setFieldValue('image', reader.result);
+    };
+
     setSelectedImage(file);
-    setFieldValue('image', file);
   };
 
   const deleteFile = () => {

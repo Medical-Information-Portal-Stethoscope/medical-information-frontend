@@ -1,5 +1,6 @@
 import api from './api-routes';
 
+// USER
 export const confirmSignUp = async (
   uid: string | null,
   token: string | null
@@ -73,4 +74,29 @@ export const resetPasswordConfirmation = async (
   }
 
   throw new Error('Something went wrong');
+};
+
+// ARTICLES
+export const createArticle = async (data) => {
+  console.log(data);
+
+  const res = await fetch(`${api.baseUrl}${api.endpoints.articles.base}/`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Token ${localStorage.getItem('auth_token')}`,
+      'Content-Type': 'application/json',
+      // 'Content-Type': 'multipart/form-data',
+    },
+    body: JSON.stringify(data),
+  });
+
+  const body = await res.json();
+
+  if (res.ok) {
+    console.log(body);
+    // return "Link for password reset is sent on user's email";
+  }
+
+  // throw new Error('Something went wrong');
+  console.log(body);
 };
