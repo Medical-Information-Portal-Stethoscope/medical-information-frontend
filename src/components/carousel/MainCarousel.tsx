@@ -41,13 +41,29 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   // Находим тег специализации
   const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
   const idSpecializationsTag = specializationsTag ? specializationsTag.pk : '';
+  // Находим тег заболевания
+  const diseasesTag = tags.find((tag) => tag.name === 'Заболевания');
+  const idDiseasesTag = diseasesTag ? diseasesTag.pk : '';
+  // Находим тег "Теги"
+  const tagsTag = tags.find((tag) => tag.name === 'Теги');
+  const idTagsTag = tagsTag ? tagsTag.pk : '';
 
   // Получаем список тегов всех специализаций
-  const { data: res = [], isSuccess } = useGetSubtreeTagsQuery(
-    idSpecializationsTag,
-    { skip: !specializationsTag }
-  );
-  const allSpecializationsTags = isSuccess ? res[0].children : [];
+  const { data: resSpecializations = [], isSuccess: isSuccessSpecializations } =
+    useGetSubtreeTagsQuery(idSpecializationsTag, { skip: !specializationsTag });
+  const allSpecializationsTags = isSuccessSpecializations
+    ? resSpecializations[0].children
+    : [];
+
+  // Получаем список тегов всех заболеваний
+  const { data: resDiseases = [], isSuccess: isSuccessDiseases } =
+    useGetSubtreeTagsQuery(idDiseasesTag, { skip: !diseasesTag });
+  const allDiseasesTags = isSuccessDiseases ? resDiseases[0].children : [];
+
+  // Получаем список все тегов тега "Теги"
+  const { data: resTags = [], isSuccess: isSuccessTags } =
+    useGetSubtreeTagsQuery(idTagsTag, { skip: !idTagsTag });
+  const allTags = isSuccessTags ? resTags[0].children : [];
 
   const arrayOfTabsForMainPage = getArrayForCarousel(
     allSpecializationsTags,
@@ -201,7 +217,11 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
       />
       {isPopupOpened && (
         <OverlayingPopup isOpened={isPopupOpened} onClose={handleTogglePopup}>
-          <FiltersPopup handleCloseClick={handleTogglePopup} />
+          <FiltersPopup
+            handleCloseClick={handleTogglePopup}
+            allDiseasesTags={allDiseasesTags}
+            allTags={allTags}
+          />
         </OverlayingPopup>
       )}
     </div>

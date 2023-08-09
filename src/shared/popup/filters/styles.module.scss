@@ -45,6 +45,8 @@
 
   &__items {
     display: flex;
+    height: 144px;
+    overflow-y: scroll;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 12px;

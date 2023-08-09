@@ -1,41 +1,43 @@
 /* eslint-disable react/no-array-index-key */
-import { FC, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
-import { tags, diseases } from './data/filtersData';
 import styles from './styles.module.scss';
 
 interface IFiltersProps {
   handleCloseClick: () => void;
+  allDiseasesTags: { pk: string; name: string }[];
+  allTags: { pk: string; name: string }[];
 }
 
-export const FiltersPopup: FC<IFiltersProps> = ({ handleCloseClick }) => {
-  const allTags = tags;
-  const allDiseases = diseases;
-
-  const [activeDiseases, setActiveDiseases] = useState<string[]>([]);
-  const [activeTags, setActiveTags] = useState<string[]>([]);
-
-  const loadMoreDisease = () => null;
-  const loadMoreTags = () => null;
+export const FiltersPopup: FC<IFiltersProps> = ({
+  handleCloseClick,
+  allDiseasesTags,
+  allTags,
+}) => {
+  const [activeTags, setActiveTags] = useState<{ pk: string; name: string }[]>(
+    []
+  );
+  const ref = useRef(null);
+  console.log('ref:', ref);
 
   const clearFilters = () => {
-    setActiveDiseases([]);
     setActiveTags([]);
   };
 
-  // for FilterCheckbox onChange={}
-  // const updateActiveDiseasesFilters = () => null;
-  // const updateActiveTagsFilters = () => null;
+  const sendFilters = () => [activeTags];
 
-  const sendFilters = () => [activeDiseases, activeTags];
-
-  function generateFilters(filtersArr: string[]) {
-    return filtersArr.map((item, idx) => (
-      <li key={idx}>
-        <FilterCheckbox id={item} label={item} onChange={() => null} />
+  function generateFilters(filtersArr: { pk: string; name: string }[]) {
+    return filtersArr.map((item) => (
+      <li key={item.pk}>
+        <FilterCheckbox
+          id={item.pk}
+          label={item.name}
+          onChange={() => null}
+          ref={ref}
+        />
       </li>
     ));
   }
@@ -55,29 +57,13 @@ export const FiltersPopup: FC<IFiltersProps> = ({ handleCloseClick }) => {
         <div className={styles.filters__section}>
           <h3 className={styles.filters__name}>Заболевания</h3>
           <ul className={styles.filters__items}>
-            {generateFilters(allDiseases)}
+            {generateFilters(allDiseasesTags)}
           </ul>
-          <Button
-            label="Ещё"
-            model="secondary"
-            size="small"
-            hasBorder
-            onClick={loadMoreDisease}
-            extraClass={styles.filters__more}
-          />
         </div>
 
         <div className={styles.filters__section}>
           <h3 className={styles.filters__name}>Теги</h3>
           <ul className={styles.filters__items}>{generateFilters(allTags)}</ul>
-          <Button
-            label="Ещё"
-            model="secondary"
-            size="small"
-            hasBorder
-            onClick={loadMoreTags}
-            extraClass={styles.filters__more}
-          />
         </div>
 
         <div className={styles.filters__buttons}>

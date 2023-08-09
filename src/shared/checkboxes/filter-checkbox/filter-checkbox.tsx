@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import classNames from 'classnames';
 import styles from './filter-checkbox.module.scss';
 
@@ -11,19 +11,23 @@ interface IFilterCheckboxProps extends InputHTMLAttributes<HTMLInputElement> {
   onChange?: () => void;
 }
 
-export default function FilterCheckbox({
-  extraClass,
-  id,
-  label,
-  isChecked = false,
-  isDisabled = false,
-  onChange,
-}: IFilterCheckboxProps) {
-  return (
+const FilterCheckbox = React.forwardRef<HTMLInputElement, IFilterCheckboxProps>(
+  (
+    {
+      extraClass,
+      id,
+      label,
+      isChecked = false,
+      isDisabled = false,
+      onChange,
+    }: IFilterCheckboxProps,
+    ref
+  ) => (
     <>
       <input
         className={classNames(styles.checkbox, extraClass)}
         id={id}
+        ref={ref}
         type="checkbox"
         name={label}
         value={label}
@@ -36,5 +40,6 @@ export default function FilterCheckbox({
         {label}
       </label>
     </>
-  );
-}
+  )
+);
+export default FilterCheckbox;
