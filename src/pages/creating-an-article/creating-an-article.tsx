@@ -1,11 +1,20 @@
 import { FC, ReactElement, ChangeEvent, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 import Input from 'shared/input/input';
 import TextArea from 'shared/text-area/text-area';
 import { FileInput } from 'shared/file-input/file-input';
 import Button from 'shared/buttons/button/button';
 import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
 import { Icon } from 'shared/icons';
+import {
+  schemaArticleTitle,
+  schemaArticleAnnotation,
+  schemaArticleText,
+  schemaArticleSourceName,
+  schemaArticleSourceLink,
+} from 'utils/data/validation/yup-schema';
 import styles from './creating-an-article.module.scss';
 
 export const CreatingAnArticlePage: FC = (): ReactElement => {
@@ -25,19 +34,58 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
     return () => URL.revokeObjectURL(objectUrl);
   }, [selectedImage]);
 
-  const selectFile = (evt: ChangeEvent<HTMLInputElement>) =>
-    setSelectedImage(!evt.target.files ? null : evt.target.files[0]);
+  const formik = useFormik({
+    initialValues: {
+      title: '',
+      annotation: '',
+      text: '',
+      source_name: '',
+      source_link: '',
+    },
+
+    validationSchema: Yup.object()
+      .shape(schemaArticleTitle(Yup))
+      .shape(schemaArticleAnnotation(Yup))
+      .shape(schemaArticleText(Yup))
+      .shape(schemaArticleSourceName(Yup))
+      .shape(schemaArticleSourceLink(Yup)),
+
+    onSubmit: (values) => {
+      console.log(values);
+    },
+  });
+
+  const {
+    values,
+    errors,
+    dirty,
+    isValid,
+    isSubmitting,
+    setFieldValue,
+    handleChange,
+    handleSubmit,
+  } = formik;
+
+  // TODO: optimize with formik field values and validate form
+
+  const selectFile = (evt: ChangeEvent<HTMLInputElement>) => {
+    const file = !evt.target.files ? null : evt.target.files[0];
+
+    setSelectedImage(file);
+    setFieldValue('image', file);
+  };
 
   const deleteFile = () => {
     setSelectedImage(null);
     setSelectedImagePreview('');
+    setFieldValue('image', null);
   };
 
   return (
     <section>
       <div className={styles.wrapper}>
         <h2 className={styles.heading}>Публикация статьи</h2>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <div className={styles.instruction}>
             <h3 className={styles.subheading}>
               Заполните форму и отправьте статью
@@ -48,24 +96,47 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           </div>
           <div className={styles.inputs}>
             <Input
+              name="title"
               label="Заголовок статьи*"
               placeholder="Что делает мозг, пока мы спим"
+              value={values.title}
+              error={errors?.title}
+              onChange={handleChange}
             />
             <TextArea
+              name="annotation"
               label="Аннотация*"
               placeholder="3-4 предложения"
               minHeight={97}
               hasCounter
               maxSymbols={400}
+              value={values.annotation}
+              error={errors.annotation}
+              onChange={handleChange}
             />
-            <TextArea label="Текст статьи*" minHeight={128} />
+            <TextArea
+              name="text"
+              label="Текст статьи*"
+              minHeight={128}
+              value={values.text}
+              error={errors.text}
+              onChange={handleChange}
+            />
             <Input
+              name="source_name"
               label="Источник и/или автор оригинала"
               placeholder="Минздрав или minzdrav.gov.ru"
+              value={values.source_name}
+              error={errors.source_name}
+              onChange={handleChange}
             />
             <Input
+              name="source_link"
               label="Ссылка на источник"
-              placeholder="https://minzdrav.gov.ru/сhto-delayet-mozg,-poka-my-spim"
+              placeholder="https://cuprum.media/lifestyle/the-brain-sleeps"
+              value={values.source_link}
+              error={errors.source_link}
+              onChange={handleChange}
             />
           </div>
           <div className={styles.imageFile}>
@@ -106,6 +177,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
               type="submit"
               label="Отправить на публикацию"
               size="medium"
+              isDisabled={!dirty || !isValid}
+              isLoading={isSubmitting}
               hasSpinner
               spinnerSize="small"
               spinnerColor="white"

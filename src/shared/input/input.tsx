@@ -65,6 +65,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     forwardedRef
   ) => {
+    console.log(value);
     const id = nanoid();
     const [visible, setVisible] = useState(false);
     const innerRef = useRef<HTMLInputElement>(null);
@@ -144,7 +145,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             className={classNames(styles[`input--container--input`], {
               [styles[`input--container--input--error`]]:
-                (error || serverError) && touched,
+                (error || serverError) && touched && touched,
             })}
             ref={ref}
             name={name}
@@ -163,7 +164,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {(error || serverError) && touched ? error || serverError : ''}
+          {error || serverError ? error || serverError : ''}
         </span>
       </div>
     );

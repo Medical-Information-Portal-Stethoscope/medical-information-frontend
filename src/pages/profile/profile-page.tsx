@@ -15,6 +15,9 @@ function ProfilePage() {
   const isRouteFavourites = pathname.endsWith(
     `${routes.profile}/${routes.favorites}`
   );
+  const isRouteCreatingAnArticle = pathname.endsWith(
+    `${routes.profile}/${routes.publication}`
+  );
 
   useScrollToTop();
 
@@ -24,6 +27,7 @@ function ProfilePage() {
       <main
         className={classNames(styles.wrapper, {
           [styles[`wrapper--favorites`]]: isRouteFavourites,
+          [styles[`wrapper--publication`]]: isRouteCreatingAnArticle,
         })}
       >
         <Sidebar />
