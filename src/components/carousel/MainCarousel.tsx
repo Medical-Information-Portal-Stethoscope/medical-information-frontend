@@ -47,6 +47,8 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   // Находим тег "Теги"
   const tagsTag = tags.find((tag) => tag.name === 'Теги');
   const idTagsTag = tagsTag ? tagsTag.pk : '';
+  // Находим тег Новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
 
   // Получаем список тегов всех специализаций
   const { data: resSpecializations = [], isSuccess: isSuccessSpecializations } =
@@ -221,6 +223,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
             handleCloseClick={handleTogglePopup}
             allDiseasesTags={allDiseasesTags}
             allTags={allTags}
+            newsTag={newsTag}
           />
         </OverlayingPopup>
       )}

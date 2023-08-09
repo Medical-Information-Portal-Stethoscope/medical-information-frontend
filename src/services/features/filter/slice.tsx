@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
-import { getFilteredArticles } from './api';
+import { getFilteredArticles, getFilteredArticlesForModal } from './api';
 
 export type TErrorResponse = {
   [key: string]: string[];
@@ -43,6 +43,9 @@ export const filteredArticlesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getFilteredArticles.fulfilled, (state, action) => {
+      state.articles = action.payload;
+    });
+    builder.addCase(getFilteredArticlesForModal.fulfilled, (state, action) => {
       state.articles = action.payload;
     });
   },

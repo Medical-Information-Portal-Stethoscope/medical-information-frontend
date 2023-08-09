@@ -1,42 +1,64 @@
 /* eslint-disable react/no-array-index-key */
-import { FC, useRef, useState } from 'react';
+import { FC, useState } from 'react';
+import { useAppDispatch } from 'services/app/hooks';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
+import { getFilteredArticlesForModal } from 'services/features/filter/api';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
+import { TTags } from 'services/features/tags/api';
 import styles from './styles.module.scss';
 
 interface IFiltersProps {
   handleCloseClick: () => void;
-  allDiseasesTags: { pk: string; name: string }[];
-  allTags: { pk: string; name: string }[];
+  allDiseasesTags: TTags[];
+  allTags: TTags[];
+  newsTag: TTags | undefined;
 }
 
 export const FiltersPopup: FC<IFiltersProps> = ({
   handleCloseClick,
   allDiseasesTags,
   allTags,
+  newsTag,
 }) => {
-  const [activeTags, setActiveTags] = useState<{ pk: string; name: string }[]>(
-    []
-  );
-  const ref = useRef(null);
-  console.log('ref:', ref);
+  const [activeTags, setActiveTags] = useState<TTags[]>([]);
+
+  const dispatch = useAppDispatch();
+
+  const handleClickCheckbox = (tag: TTags) => {
+    if (!activeTags.find((item) => item.pk === tag.pk)) {
+      setActiveTags([...activeTags, tag]);
+    } else {
+      setActiveTags(activeTags.filter((item) => item.pk !== tag.pk));
+    }
+  };
 
   const clearFilters = () => {
     setActiveTags([]);
   };
 
-  const sendFilters = () => [activeTags];
+  const sendFilters = () => {
+    if (!activeTags.length) {
+      handleCloseClick();
+    } else {
+      const idsArr = activeTags.map((item) => item.pk);
+      const filterParamsArr = idsArr.map((item) => ['tags', item]);
+      const params = new URLSearchParams(filterParamsArr);
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      dispatch(getFilteredArticlesForModal(params.toString()));
+      handleCloseClick();
+    }
+  };
 
-  function generateFilters(filtersArr: { pk: string; name: string }[]) {
+  function generateFilters(filtersArr: TTags[]) {
     return filtersArr.map((item) => (
       <li key={item.pk}>
         <FilterCheckbox
           id={item.pk}
           label={item.name}
-          onChange={() => null}
-          ref={ref}
+          onChange={() => handleClickCheckbox(item)}
+          isChecked={!!activeTags.find(({ pk }) => pk === item.pk)}
         />
       </li>
     ));

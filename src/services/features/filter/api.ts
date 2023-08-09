@@ -33,3 +33,25 @@ export const getFilteredArticles = createAsyncThunk<
     return rejectWithValue(err as IErrorResponse);
   }
 });
+
+export const getFilteredArticlesForModal = createAsyncThunk<
+  TGetInformationMaterialResponse,
+  string,
+  { rejectValue: IErrorResponse }
+>('articles/getDataByIdforModal', async (query, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.articles.base}/?${query}`
+    );
+
+    const resBody = await res.json();
+
+    if (!res.ok) {
+      throw Object.assign(resBody, { status: res?.status });
+    }
+
+    return resBody;
+  } catch (err) {
+    return rejectWithValue(err as IErrorResponse);
+  }
+});
