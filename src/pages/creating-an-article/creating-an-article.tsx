@@ -84,11 +84,12 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
     dirty,
     isValid,
     isSubmitting,
+    touched,
     setFieldValue,
+    setFieldTouched,
     handleChange,
     handleSubmit,
   } = formik;
-
   // TODO: optimize with formik field values and validate form
 
   const selectFile = (evt: ChangeEvent<HTMLInputElement>) => {
@@ -141,6 +142,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           placeholder="Что делает мозг, пока мы спим"
           value={values.title}
           error={errors?.title}
+          touched={touched?.title}
+          onFocus={() => setFieldTouched('title')}
           onChange={handleChange}
         />
         <TextArea
@@ -152,6 +155,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           maxSymbols={400}
           value={values.annotation}
           error={errors.annotation}
+          touched={touched.annotation}
+          onFocus={() => setFieldTouched('annotation')}
           onChange={handleChange}
         />
         <TextArea
@@ -160,6 +165,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           minHeight={128}
           value={values.text}
           error={errors.text}
+          touched={touched.text}
+          onFocus={() => setFieldTouched('text')}
           onChange={handleChange}
         />
         <Input
@@ -168,6 +175,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           placeholder="Минздрав или minzdrav.gov.ru"
           value={values.source_name}
           error={errors.source_name}
+          touched={touched.source_name}
+          onFocus={() => setFieldTouched('source_name')}
           onChange={handleChange}
         />
         <Input
@@ -176,6 +185,8 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           placeholder="https://cuprum.media/lifestyle/the-brain-sleeps"
           value={values.source_link}
           error={errors.source_link}
+          touched={touched.source_link}
+          onFocus={() => setFieldTouched('source_link')}
           onChange={handleChange}
         />
       </div>

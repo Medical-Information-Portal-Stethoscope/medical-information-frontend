@@ -16,6 +16,7 @@ interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   hasCounter?: boolean;
   maxSymbols?: number;
   error?: string;
+  touched?: boolean;
 }
 
 const TextArea: FC<ITextAreaProps> = ({
@@ -28,6 +29,9 @@ const TextArea: FC<ITextAreaProps> = ({
   placeholder,
   autoComplete = 'off',
   error,
+  touched,
+  onFocus,
+  onBlur,
   onChange,
 }): ReactElement => {
   const id = nanoid();
@@ -51,8 +55,8 @@ const TextArea: FC<ITextAreaProps> = ({
         {label}
         <textarea
           className={classNames(styles[`textarea--text`], {
-            [styles[`textarea--error`]]: error,
-            [styles[`textarea--error--border`]]: error,
+            [styles[`textarea--error`]]: touched && error,
+            [styles[`textarea--error--border`]]: touched && error,
           })}
           id={id}
           ref={textareaRef}
@@ -60,16 +64,20 @@ const TextArea: FC<ITextAreaProps> = ({
           name={name}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          onFocus={onFocus}
+          onBlur={onBlur}
           onChange={onChange}
         />
       </label>
 
       <div
         className={classNames(styles[`textarea--errorWrapper`], {
-          [styles[`textarea--errorWrapper--two`]]: error,
+          [styles[`textarea--errorWrapper--two`]]: touched && error,
         })}
       >
-        <span className={styles[`textarea--error`]}>{error}</span>
+        {touched && error && (
+          <span className={styles[`textarea--error`]}>{error}</span>
+        )}
         {hasCounter && (
           <span
             className={classNames(styles[`textarea--counter`], {

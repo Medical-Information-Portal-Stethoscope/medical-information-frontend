@@ -60,6 +60,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       size = 'medium',
       icon,
       autoComplete = 'off',
+      onFocus,
       onBlur,
       onChange,
     },
@@ -154,6 +155,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             autoComplete={autoComplete}
             placeholder={placeholder}
             disabled={isDisabled}
+            onFocus={onFocus}
             onBlur={onBlur}
             onChange={onChange}
           />
