@@ -1,4 +1,5 @@
 import api from './api-routes';
+import { TArticleCreation, TArticle } from './types/article';
 
 // USER
 export const confirmSignUp = async (
@@ -77,9 +78,7 @@ export const resetPasswordConfirmation = async (
 };
 
 // ARTICLES
-export const createArticle = async (data) => {
-  console.log(data);
-
+export const createArticle = async (data: TArticleCreation) => {
   const res = await fetch(`${api.baseUrl}${api.endpoints.articles.base}/`, {
     method: 'POST',
     headers: {
@@ -89,7 +88,7 @@ export const createArticle = async (data) => {
     body: JSON.stringify(data),
   });
 
-  const body = await res.json();
+  const body: TArticle = await res.json();
 
   if (res.ok) {
     return body;

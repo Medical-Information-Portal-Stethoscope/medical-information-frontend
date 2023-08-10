@@ -26,3 +26,12 @@ export type TArticle = {
     name: string;
   }[];
 };
+
+export type TArticleCreation = {
+  title: string;
+  annotation: string;
+  text: string;
+  source_name?: string;
+  source_link?: string;
+  image: string;
+};
