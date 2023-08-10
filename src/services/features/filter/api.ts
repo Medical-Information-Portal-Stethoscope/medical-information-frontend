@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api-routes';
 import { TArticle } from 'utils/types/article';
 
-interface IErrorResponse {
+export interface IErrorResponse {
   [key: string]: string | number | string[];
 }
 
@@ -20,6 +20,28 @@ export const getFilteredArticles = createAsyncThunk<
   try {
     const res = await fetch(
       `${api.baseUrl}${api.endpoints.articles.base}/?tags_exclude=${ids.idNewsTag}&tags=${ids.id}`
+    );
+
+    const resBody = await res.json();
+
+    if (!res.ok) {
+      throw Object.assign(resBody, { status: res?.status });
+    }
+
+    return resBody;
+  } catch (err) {
+    return rejectWithValue(err as IErrorResponse);
+  }
+});
+
+export const getFilteredArticlesForModal = createAsyncThunk<
+  TGetInformationMaterialResponse,
+  string,
+  { rejectValue: IErrorResponse }
+>('articles/getDataByIdforModal', async (query, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.articles.base}/?${query}`
     );
 
     const resBody = await res.json();

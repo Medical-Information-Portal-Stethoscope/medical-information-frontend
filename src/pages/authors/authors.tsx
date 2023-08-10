@@ -5,9 +5,8 @@ import { showUserPersonalData } from 'services/features/user/selectors';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import routes from 'utils/routes';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import styles from './authors.module.scss';
-
-// TODO: one more link for navigation
 
 export const AuthorsPage: FC = (): ReactElement => {
   const { user } = useAppSelector(showUserPersonalData);
@@ -17,7 +16,7 @@ export const AuthorsPage: FC = (): ReactElement => {
       <Header />
       <main>
         <div className={styles.wrapper}>
-          {/* TODO: Хлебные крошки */}
+          <Breadcrumbs />
           <section className={styles.authors}>
             <h2 className={styles.authorsHeading}>Авторам</h2>
             <section className={styles.authorsSection}>

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC } from 'react';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
 import { useParams } from 'react-router-dom';
@@ -19,7 +19,7 @@ import {
 
 import styles from './styles.module.scss';
 
-export const News: FC = () => {
+export const News = () => {
   const { id } = useParams() as { id: string };
 
   const response = useGetMaterialByIdQuery(id);
@@ -39,6 +39,7 @@ export const News: FC = () => {
   return article ? (
     <>
       <Header />
+      <Breadcrumbs materialName={article.title} extraClass={styles.crumbs} />
       <main>
         <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>
