@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { FC, useState } from 'react';
+import React, { FC } from 'react';
 import { useAppDispatch } from 'services/app/hooks';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
@@ -15,6 +15,15 @@ interface IFiltersProps {
   allDiseasesTags: TTags[];
   allTags: TTags[];
   newsTag: TTags | undefined;
+  activeTags: TTags[];
+  setActiveTags: React.Dispatch<React.SetStateAction<TTags[]>>;
+  isButtonShowPress: boolean;
+  setIsButtonShowPress: React.Dispatch<React.SetStateAction<boolean>>;
+  activeTagsForClearModal: TTags[] | null;
+  setActiveTagsForClearModal: React.Dispatch<
+    React.SetStateAction<TTags[] | null>
+  >;
+  activeTab: TTags | null;
 }
 
 export const FiltersPopup: FC<IFiltersProps> = ({
@@ -22,9 +31,14 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   allDiseasesTags,
   allTags,
   newsTag,
+  activeTags,
+  setActiveTags,
+  isButtonShowPress,
+  setIsButtonShowPress,
+  activeTagsForClearModal,
+  setActiveTagsForClearModal,
+  activeTab,
 }) => {
-  const [activeTags, setActiveTags] = useState<TTags[]>([]);
-
   const dispatch = useAppDispatch();
 
   const handleClickCheckbox = (tag: TTags) => {
@@ -36,14 +50,26 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   };
 
   const clearFilters = () => {
+    setActiveTagsForClearModal(activeTags);
     setActiveTags([]);
   };
 
   const sendFilters = async () => {
     if (!activeTags.length) {
+      const params = new URLSearchParams();
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      if (activeTab) params.set('tags', activeTab.pk);
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
       handleCloseClick();
+      setIsButtonShowPress(true);
+      setActiveTagsForClearModal(null);
+      setActiveTagsForClearModal(activeTags);
     } else {
       const idsArr = activeTags.map((item) => item.pk);
+      if (activeTab) idsArr.push(activeTab.pk);
       const filterParamsArr = idsArr.map((item) => ['tags', item]);
       const params = new URLSearchParams(filterParamsArr);
       if (newsTag) params.set('tags_exclude', newsTag.pk);
@@ -52,7 +78,18 @@ export const FiltersPopup: FC<IFiltersProps> = ({
       );
       dispatch(getFirstPageArticles(res.payload));
       handleCloseClick();
+      setIsButtonShowPress(true);
+      setActiveTagsForClearModal(activeTags);
     }
+  };
+
+  const handlePopupClose = () => {
+    if (!isButtonShowPress) {
+      setActiveTags([]);
+    } else if (activeTagsForClearModal) {
+      setActiveTags(activeTagsForClearModal);
+    }
+    handleCloseClick();
   };
 
   function generateFilters(filtersArr: TTags[]) {
@@ -74,7 +111,7 @@ export const FiltersPopup: FC<IFiltersProps> = ({
         ariaLabel="Закрыть попап"
         icon={<Icon color="blue" icon="CloseIcon" />}
         hasBackground={false}
-        onClick={handleCloseClick}
+        onClick={handlePopupClose}
         extraClass={styles.filters__close}
       />
 

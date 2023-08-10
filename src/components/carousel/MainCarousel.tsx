@@ -8,6 +8,7 @@ import { FiltersPopup } from 'shared/popup/filters';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import {
+  TTags,
   useGetRootsTagsQuery,
   useGetSubtreeTagsQuery,
 } from 'services/features/tags/api';
@@ -21,12 +22,7 @@ interface IMainCarouselProps {
   onChangeTab: (id: string) => void;
 }
 
-interface IData {
-  pk: string;
-  name: string;
-}
-
-const getArrayForCarousel = (dataArray: IData[], divider: number) => {
+const getArrayForCarousel = (dataArray: TTags[], divider: number) => {
   const container = [];
   for (let i = 0; i < Math.ceil(dataArray.length / divider); i += 1) {
     container[i] = dataArray.slice(i * divider, i * divider + divider);
@@ -35,7 +31,14 @@ const getArrayForCarousel = (dataArray: IData[], divider: number) => {
 };
 
 function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
+  const [activeTags, setActiveTags] = useState<TTags[]>([]);
+  const [activeTagsForClearModal, setActiveTagsForClearModal] = useState<
+    TTags[] | null
+  >(null);
+  const [activeTab, setActiveTab] = useState<TTags | null>(null);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
+  const [isButtonShowPress, setIsButtonShowPress] = useState(false);
+
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег специализации
@@ -76,7 +79,30 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
     8
   );
 
-  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
+  const handleTogglePopup = () => {
+    setIsPopupOpened(!isPopupOpened);
+  };
+
+  const handlePopupClose = () => {
+    if (!isButtonShowPress) {
+      setActiveTags([]);
+    } else if (activeTagsForClearModal) {
+      setActiveTags(activeTagsForClearModal);
+    }
+    handleTogglePopup();
+  };
+
+  const handleChangeTab = (tab: TTags | string) => {
+    if (typeof tab === 'string') {
+      onChangeTab(tab);
+      setActiveTab(null);
+    } else {
+      onChangeTab(tab.pk);
+      setActiveTab(tab);
+    }
+    setActiveTags([]);
+    setActiveTagsForClearModal([]);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -128,7 +154,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                       label="Все статьи"
                       isChecked
                       name="Filter"
-                      onChange={() => onChangeTab('')}
+                      onChange={() => handleChangeTab('')}
                     />
                   </div>
                 )}
@@ -146,7 +172,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     ) : (
                       <FilterTab
@@ -156,7 +182,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     )}
                   </div>
@@ -173,7 +199,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                       label="Все статьи"
                       isChecked
                       name="Filter"
-                      onChange={() => onChangeTab('')}
+                      onChange={() => handleChangeTab('')}
                     />
                   </div>
                 )}
@@ -191,7 +217,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab.pk)}
                       />
                     ) : (
                       <FilterTab
@@ -201,7 +227,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab.pk)}
                       />
                     )}
                   </div>
@@ -209,21 +235,33 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
               </div>
             ))}
       </Carousel>
-      <Button
-        label="Фильтры"
-        model="tertiary"
-        onClick={handleTogglePopup}
-        size="small"
-        type="button"
-        customIcon={<Icon color="blue" icon="FiltersIcon" />}
-      />
+      <div className={styles.button_filter_wrapper}>
+        <Button
+          label="Фильтры"
+          model="tertiary"
+          onClick={handleTogglePopup}
+          size="small"
+          type="button"
+          customIcon={<Icon color="blue" icon="FiltersIcon" />}
+        />
+        {activeTags.length > 0 && (
+          <div className={styles.counter}>{activeTags.length}</div>
+        )}
+      </div>
       {isPopupOpened && (
-        <OverlayingPopup isOpened={isPopupOpened} onClose={handleTogglePopup}>
+        <OverlayingPopup isOpened={isPopupOpened} onClose={handlePopupClose}>
           <FiltersPopup
             handleCloseClick={handleTogglePopup}
             allDiseasesTags={allDiseasesTags}
             allTags={allTags}
             newsTag={newsTag}
+            activeTags={activeTags}
+            setActiveTags={setActiveTags}
+            isButtonShowPress={isButtonShowPress}
+            setIsButtonShowPress={setIsButtonShowPress}
+            activeTagsForClearModal={activeTagsForClearModal}
+            setActiveTagsForClearModal={setActiveTagsForClearModal}
+            activeTab={activeTab}
           />
         </OverlayingPopup>
       )}
