@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api-routes';
 import { TArticle } from 'utils/types/article';
 
-interface IErrorResponse {
+export interface IErrorResponse {
   [key: string]: string | number | string[];
 }
 

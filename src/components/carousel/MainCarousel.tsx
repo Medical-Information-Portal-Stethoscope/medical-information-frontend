@@ -13,6 +13,9 @@ import {
   useGetSubtreeTagsQuery,
 } from 'services/features/tags/api';
 import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
+import { getFilteredArticlesForModal } from 'services/features/filter/api';
+import { useAppDispatch } from 'services/app/hooks';
+import { getFirstPageArticles } from 'services/features/information-material/slice';
 import classNames from 'classnames';
 import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
@@ -38,6 +41,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   const [activeTab, setActiveTab] = useState<TTags | null>(null);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [isButtonShowPress, setIsButtonShowPress] = useState(false);
+  const dispatch = useAppDispatch();
 
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -92,16 +96,37 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
     handleTogglePopup();
   };
 
-  const handleChangeTab = (tab: TTags | string) => {
-    if (typeof tab === 'string') {
+  const handleChangeTab = async (tab: TTags | string) => {
+    if (typeof tab === 'string' && !activeTags.length) {
       onChangeTab(tab);
       setActiveTab(null);
-    } else {
+    } else if (typeof tab !== 'string' && activeTags.length) {
+      setActiveTab(tab);
+      const idsArr = activeTags.map((item) => item.pk);
+      idsArr.push(tab.pk);
+      const filterParamsArr = idsArr.map((item) => ['tags', item]);
+      const params = new URLSearchParams(filterParamsArr);
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
+      setActiveTagsForClearModal(activeTags);
+    } else if (typeof tab !== 'string') {
       onChangeTab(tab.pk);
       setActiveTab(tab);
+    } else if (typeof tab === 'string' && activeTags.length) {
+      setActiveTab(null);
+      const idsArr = activeTags.map((item) => item.pk);
+      const filterParamsArr = idsArr.map((item) => ['tags', item]);
+      const params = new URLSearchParams(filterParamsArr);
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
+      setActiveTagsForClearModal(activeTags);
     }
-    setActiveTags([]);
-    setActiveTagsForClearModal([]);
   };
 
   return (
