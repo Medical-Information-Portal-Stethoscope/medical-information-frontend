@@ -1,7 +1,9 @@
 import { FC, ReactElement, ReactNode, ChangeEventHandler } from 'react';
+import classNames from 'classnames';
 import styles from './file-input.module.scss';
 
 interface IFileInputProps {
+  extraClass?: string;
   id: string;
   name: string;
   label: string;
@@ -11,6 +13,7 @@ interface IFileInputProps {
 }
 
 export const FileInput: FC<IFileInputProps> = ({
+  extraClass,
   id,
   name,
   label,
@@ -18,7 +21,7 @@ export const FileInput: FC<IFileInputProps> = ({
   accept,
   onChange,
 }): ReactElement => (
-  <div className={styles.fileWrapper}>
+  <div className={classNames(styles.fileWrapper, extraClass)}>
     <label className={styles.fileLabel} htmlFor={id}>
       {icon && icon}
       <span>{label}</span>
@@ -33,5 +36,3 @@ export const FileInput: FC<IFileInputProps> = ({
     />
   </div>
 );
-
-// TODO: STORYBOOK

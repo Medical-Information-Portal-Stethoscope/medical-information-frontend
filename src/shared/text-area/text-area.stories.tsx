@@ -40,6 +40,14 @@ const meta: Meta<typeof TextArea> = {
     maxSymbols: {
       description: 'Максимальное количество символов',
       type: 'number',
+      defaultValue: 0,
+    },
+
+    autoComplete: {
+      description: 'Автозаполнение',
+      type: 'string',
+      options: ['on', 'off'],
+      control: { type: 'radio' },
     },
   },
 };
