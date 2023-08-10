@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
-import { getFilteredArticles } from './api';
-
-export type TErrorResponse = {
-  [key: string]: string[];
-};
+import {
+  getFilteredArticles,
+  getFilteredArticlesForModal,
+  IErrorResponse,
+} from './api';
 
 export type TGetInformationMaterialResponse = {
   next: string;
@@ -17,7 +17,7 @@ type TSliceState = {
 
   process: {
     isLoading: boolean;
-    error: null | TErrorResponse;
+    error: IErrorResponse | null;
   };
 };
 
@@ -45,6 +45,20 @@ export const filteredArticlesSlice = createSlice({
     builder.addCase(getFilteredArticles.fulfilled, (state, action) => {
       state.articles = action.payload;
     });
+    builder.addCase(getFilteredArticles.rejected, (state, { payload }) => {
+      state.process.isLoading = false;
+      state.process.error = payload !== undefined ? payload : null;
+    });
+    builder.addCase(getFilteredArticlesForModal.fulfilled, (state, action) => {
+      state.articles = action.payload;
+    });
+    builder.addCase(
+      getFilteredArticlesForModal.rejected,
+      (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      }
+    );
   },
 });
 export const { getAllArticles } = filteredArticlesSlice.actions;

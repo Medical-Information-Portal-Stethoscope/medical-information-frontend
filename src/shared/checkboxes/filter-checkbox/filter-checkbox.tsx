@@ -27,7 +27,7 @@ export default function FilterCheckbox({
         type="checkbox"
         name={label}
         value={label}
-        defaultChecked={isChecked}
+        checked={isChecked}
         disabled={isDisabled}
         aria-label={isChecked ? 'Убрать фильтр' : 'Добавить'}
         onChange={onChange}
