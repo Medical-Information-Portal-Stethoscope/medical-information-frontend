@@ -28,6 +28,9 @@ export const informationMaterialApi = createApi({
       query: (id) => `${api.endpoints.articles.base}/${id}`,
     }),
 
+    getMostPopularArticle: builder.query<TArticle, void>({
+      query: () => `${api.endpoints.articles.base}/the_most_popular`,
+
     getArticlesbyTags: builder.query<
       TGetInformationMaterialResponse,
       string | undefined
@@ -61,5 +64,6 @@ export const {
   useGetAllArticlesQuery,
   useGetAllNewsQuery,
   useGetMaterialByIdQuery,
+  useGetMostPopularArticleQuery,
   useGetArticlesbyTagsQuery,
 } = informationMaterialApi;
