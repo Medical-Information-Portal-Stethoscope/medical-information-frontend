@@ -101,6 +101,7 @@ const SignUpPage: FC = (): ReactElement => {
             error={errors?.first_name}
             serverError={serverError?.first_name}
             touched={touched?.first_name}
+            hasCheckmark
             onBlur={handleBlur}
             onChange={handleChange}
           />
@@ -112,6 +113,7 @@ const SignUpPage: FC = (): ReactElement => {
             error={errors?.last_name}
             serverError={serverError?.last_name}
             touched={touched?.last_name}
+            hasCheckmark
             onBlur={handleBlur}
             onChange={handleChange}
           />
@@ -126,6 +128,7 @@ const SignUpPage: FC = (): ReactElement => {
           error={errors?.email}
           serverError={serverError?.email}
           touched={touched?.email}
+          hasCheckmark
           onBlur={handleBlur}
           onChange={handleChange}
         />

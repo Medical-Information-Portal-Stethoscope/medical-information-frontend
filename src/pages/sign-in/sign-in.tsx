@@ -93,6 +93,7 @@ const SignInPage: FC = (): ReactElement => {
           error={errors?.email}
           serverError={serverError?.email}
           touched={touched?.email}
+          hasCheckmark
           onBlur={handleBlur}
           onChange={handleChange}
         />

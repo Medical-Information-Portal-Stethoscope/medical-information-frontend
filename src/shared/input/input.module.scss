@@ -115,10 +115,7 @@
   &--span {
     @extend %text-size-small-light;
     display: block;
+    min-height: 16px;
     color: $color-system-error;
-
-    &:empty {
-      min-height: 16px;
-    }
   }
 }

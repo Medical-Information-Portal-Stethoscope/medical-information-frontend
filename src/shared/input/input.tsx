@@ -25,6 +25,7 @@ interface InputProps
   isDisabled?: boolean;
   isValid?: boolean;
   touched?: boolean;
+  hasCheckmark?: boolean;
 }
 
 function useCombinedRefs<T = HTMLElement>(
@@ -60,6 +61,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       size = 'medium',
       icon,
       autoComplete = 'off',
+      hasCheckmark = false,
       onFocus,
       onBlur,
       onChange,
@@ -160,7 +162,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             onChange={onChange}
           />
           {iconToRender}
-          {value && !error && type !== 'password' && touched && (
+          {value && !error && hasCheckmark && touched && (
             <Icon color="green" icon="CheckIcon" size="24" />
           )}
         </div>
