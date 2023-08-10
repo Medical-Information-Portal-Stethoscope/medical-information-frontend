@@ -1,5 +1,6 @@
-import api from './api-routes';
+import { TError } from 'services/features/information-material/types';
 import { TArticleCreation, TArticle } from './types/article';
+import api from './api-routes';
 
 // USER
 export const confirmSignUp = async (
@@ -88,10 +89,10 @@ export const createArticle = async (data: TArticleCreation) => {
     body: JSON.stringify(data),
   });
 
-  const body: TArticle = await res.json();
+  const body: TArticle | TError = await res.json();
 
   if (res.ok) {
-    return body;
+    return body as TArticle;
   }
 
   throw new Error('Something went wrong');
