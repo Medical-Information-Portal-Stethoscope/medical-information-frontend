@@ -50,7 +50,6 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   };
 
   const clearFilters = () => {
-    setActiveTagsForClearModal(activeTags);
     setActiveTags([]);
   };
 
@@ -65,7 +64,6 @@ export const FiltersPopup: FC<IFiltersProps> = ({
       dispatch(getFirstPageArticles(res.payload));
       handleCloseClick();
       setIsButtonShowPress(true);
-      setActiveTagsForClearModal(null);
       setActiveTagsForClearModal(activeTags);
     } else {
       const idsArr = activeTags.map((item) => item.pk);

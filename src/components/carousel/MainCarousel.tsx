@@ -217,7 +217,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => handleChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     ) : (
                       <FilterTab
@@ -227,7 +227,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => handleChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     )}
                   </div>
