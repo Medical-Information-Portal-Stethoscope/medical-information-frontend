@@ -1,7 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
-import { useGetAllNewsQuery } from 'services/features/information-material/api';
+import {
+  useGetAllNewsQuery,
+  useGetMostPopularArticleQuery,
+} from 'services/features/information-material/api';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
 import styles from './news.module.scss';
@@ -15,9 +18,11 @@ export default function News() {
   // Находим тег новости
   const newsTag = tags.find((tag) => tag.name === 'Новости');
   // Получаем список всех новостей
-  const { data, isSuccess } = useGetAllNewsQuery(newsTag?.pk, {
+  const { data } = useGetAllNewsQuery(newsTag?.pk, {
     skip: !newsTag,
   });
+
+  const mostPopularArticle = useGetMostPopularArticleQuery();
 
   const news = data?.results
     .slice(0, maxNumNewsDesktop)
@@ -34,11 +39,9 @@ export default function News() {
       <div className={styles.wrapper}>
         <section>
           <h2 className={styles.heading}>Самое популярное</h2>
-          {/* Пока в самое популярное попадает самая новая новость. 
-          Надо будет разобраться с пагинацией и найти статью у который самой большой views_count */}
-          {isSuccess && (
+          {mostPopularArticle.isSuccess && (
             <CardArticlePreview
-              data={data.results[0]}
+              data={mostPopularArticle.data}
               type="media"
               route={routes.news.route}
             />
