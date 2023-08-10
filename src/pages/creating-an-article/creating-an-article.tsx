@@ -90,7 +90,6 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
     handleChange,
     handleSubmit,
   } = formik;
-  // TODO: optimize with formik field values and validate form
 
   const selectFile = (evt: ChangeEvent<HTMLInputElement>) => {
     const file = !evt.target.files ? null : evt.target.files[0];

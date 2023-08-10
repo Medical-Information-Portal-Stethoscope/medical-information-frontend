@@ -93,5 +93,3 @@ const TextArea: FC<ITextAreaProps> = ({
 };
 
 export default TextArea;
-
-// TODO: useMemo
