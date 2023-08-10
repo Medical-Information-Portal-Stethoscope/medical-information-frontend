@@ -8,10 +8,14 @@ import { FiltersPopup } from 'shared/popup/filters';
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import {
+  TTags,
   useGetRootsTagsQuery,
   useGetSubtreeTagsQuery,
 } from 'services/features/tags/api';
 import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
+import { getFilteredArticlesForModal } from 'services/features/filter/api';
+import { useAppDispatch } from 'services/app/hooks';
+import { getFirstPageArticles } from 'services/features/information-material/slice';
 import classNames from 'classnames';
 import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
@@ -21,12 +25,7 @@ interface IMainCarouselProps {
   onChangeTab: (id: string) => void;
 }
 
-interface IData {
-  pk: string;
-  name: string;
-}
-
-const getArrayForCarousel = (dataArray: IData[], divider: number) => {
+const getArrayForCarousel = (dataArray: TTags[], divider: number) => {
   const container = [];
   for (let i = 0; i < Math.ceil(dataArray.length / divider); i += 1) {
     container[i] = dataArray.slice(i * divider, i * divider + divider);
@@ -35,19 +34,45 @@ const getArrayForCarousel = (dataArray: IData[], divider: number) => {
 };
 
 function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
+  const [activeTags, setActiveTags] = useState<TTags[]>([]);
+  const [activeTagsForClearModal, setActiveTagsForClearModal] = useState<
+    TTags[] | null
+  >(null);
+  const [activeTab, setActiveTab] = useState<TTags | null>(null);
   const [isPopupOpened, setIsPopupOpened] = useState(false);
+  const [isButtonShowPress, setIsButtonShowPress] = useState(false);
+  const dispatch = useAppDispatch();
+
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
   // Находим тег специализации
   const specializationsTag = tags.find((tag) => tag.name === 'Специализации');
   const idSpecializationsTag = specializationsTag ? specializationsTag.pk : '';
+  // Находим тег заболевания
+  const diseasesTag = tags.find((tag) => tag.name === 'Заболевания');
+  const idDiseasesTag = diseasesTag ? diseasesTag.pk : '';
+  // Находим тег "Теги"
+  const tagsTag = tags.find((tag) => tag.name === 'Теги');
+  const idTagsTag = tagsTag ? tagsTag.pk : '';
+  // Находим тег Новости
+  const newsTag = tags.find((tag) => tag.name === 'Новости');
 
   // Получаем список тегов всех специализаций
-  const { data: res = [], isSuccess } = useGetSubtreeTagsQuery(
-    idSpecializationsTag,
-    { skip: !specializationsTag }
-  );
-  const allSpecializationsTags = isSuccess ? res[0].children : [];
+  const { data: resSpecializations = [], isSuccess: isSuccessSpecializations } =
+    useGetSubtreeTagsQuery(idSpecializationsTag, { skip: !specializationsTag });
+  const allSpecializationsTags = isSuccessSpecializations
+    ? resSpecializations[0].children
+    : [];
+
+  // Получаем список тегов всех заболеваний
+  const { data: resDiseases = [], isSuccess: isSuccessDiseases } =
+    useGetSubtreeTagsQuery(idDiseasesTag, { skip: !diseasesTag });
+  const allDiseasesTags = isSuccessDiseases ? resDiseases[0].children : [];
+
+  // Получаем список все тегов тега "Теги"
+  const { data: resTags = [], isSuccess: isSuccessTags } =
+    useGetSubtreeTagsQuery(idTagsTag, { skip: !idTagsTag });
+  const allTags = isSuccessTags ? resTags[0].children : [];
 
   const arrayOfTabsForMainPage = getArrayForCarousel(
     allSpecializationsTags,
@@ -58,7 +83,51 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
     8
   );
 
-  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
+  const handleTogglePopup = () => {
+    setIsPopupOpened(!isPopupOpened);
+  };
+
+  const handlePopupClose = () => {
+    if (!isButtonShowPress) {
+      setActiveTags([]);
+    } else if (activeTagsForClearModal) {
+      setActiveTags(activeTagsForClearModal);
+    }
+    handleTogglePopup();
+  };
+
+  const handleChangeTab = async (tab: TTags | string) => {
+    if (typeof tab === 'string' && !activeTags.length) {
+      onChangeTab(tab);
+      setActiveTab(null);
+    } else if (typeof tab !== 'string' && activeTags.length) {
+      setActiveTab(tab);
+      const idsArr = activeTags.map((item) => item.pk);
+      idsArr.push(tab.pk);
+      const filterParamsArr = idsArr.map((item) => ['tags', item]);
+      const params = new URLSearchParams(filterParamsArr);
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
+      setActiveTagsForClearModal(activeTags);
+    } else if (typeof tab !== 'string') {
+      onChangeTab(tab.pk);
+      setActiveTab(tab);
+    } else if (typeof tab === 'string' && activeTags.length) {
+      setActiveTab(null);
+      const idsArr = activeTags.map((item) => item.pk);
+      const filterParamsArr = idsArr.map((item) => ['tags', item]);
+      const params = new URLSearchParams(filterParamsArr);
+      if (newsTag) params.set('tags_exclude', newsTag.pk);
+      const res = await dispatch(
+        getFilteredArticlesForModal(params.toString())
+      );
+      dispatch(getFirstPageArticles(res.payload));
+      setActiveTagsForClearModal(activeTags);
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -110,7 +179,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                       label="Все статьи"
                       isChecked
                       name="Filter"
-                      onChange={() => onChangeTab('')}
+                      onChange={() => handleChangeTab('')}
                     />
                   </div>
                 )}
@@ -128,7 +197,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     ) : (
                       <FilterTab
@@ -138,7 +207,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     )}
                   </div>
@@ -155,7 +224,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                       label="Все статьи"
                       isChecked
                       name="Filter"
-                      onChange={() => onChangeTab('')}
+                      onChange={() => handleChangeTab('')}
                     />
                   </div>
                 )}
@@ -173,7 +242,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     ) : (
                       <FilterTab
@@ -183,7 +252,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
                         id={tab.pk}
                         label={tab.name}
                         name="Filter"
-                        onChange={() => onChangeTab(tab.pk)}
+                        onChange={() => handleChangeTab(tab)}
                       />
                     )}
                   </div>
@@ -191,17 +260,34 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
               </div>
             ))}
       </Carousel>
-      <Button
-        label="Фильтры"
-        model="tertiary"
-        onClick={handleTogglePopup}
-        size="small"
-        type="button"
-        customIcon={<Icon color="blue" icon="FiltersIcon" />}
-      />
+      <div className={styles.button_filter_wrapper}>
+        <Button
+          label="Фильтры"
+          model="tertiary"
+          onClick={handleTogglePopup}
+          size="small"
+          type="button"
+          customIcon={<Icon color="blue" icon="FiltersIcon" />}
+        />
+        {activeTags.length > 0 && (
+          <div className={styles.counter}>{activeTags.length}</div>
+        )}
+      </div>
       {isPopupOpened && (
-        <OverlayingPopup isOpened={isPopupOpened} onClose={handleTogglePopup}>
-          <FiltersPopup handleCloseClick={handleTogglePopup} />
+        <OverlayingPopup isOpened={isPopupOpened} onClose={handlePopupClose}>
+          <FiltersPopup
+            handleCloseClick={handleTogglePopup}
+            allDiseasesTags={allDiseasesTags}
+            allTags={allTags}
+            newsTag={newsTag}
+            activeTags={activeTags}
+            setActiveTags={setActiveTags}
+            isButtonShowPress={isButtonShowPress}
+            setIsButtonShowPress={setIsButtonShowPress}
+            activeTagsForClearModal={activeTagsForClearModal}
+            setActiveTagsForClearModal={setActiveTagsForClearModal}
+            activeTab={activeTab}
+          />
         </OverlayingPopup>
       )}
     </div>
