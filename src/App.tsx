@@ -18,6 +18,9 @@ import routes from 'utils/routes';
 import { Article } from 'pages/article';
 import { News } from 'pages/news';
 import ProfilePage from 'pages/profile/profile-page';
+import UserProfile from 'components/user-profile/user-profile';
+import { FavoritesPage } from 'pages/favorites/favorites';
+import { CreatingAnArticlePage } from 'pages/creating-an-article/creating-an-article';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -57,7 +60,11 @@ function App() {
         element={<ResetPasswordConfirmationPage />}
       />
 
-      <Route path={`${routes.profile}/*`} element={<ProfilePage />} />
+      <Route path={`${routes.profile}/*`} element={<ProfilePage />}>
+        <Route index element={<UserProfile />} />
+        <Route path={routes.favorites} element={<FavoritesPage />} />
+        <Route path={routes.publication} element={<CreatingAnArticlePage />} />
+      </Route>
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
