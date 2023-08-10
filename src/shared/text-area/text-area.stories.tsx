@@ -16,13 +16,11 @@ const meta: Meta<typeof TextArea> = {
       type: 'string',
       defaultValue: 'Title',
     },
-
     value: {
       description: 'Содержание',
       type: 'string',
       defaultValue: 'Text',
     },
-
     placeholder: {
       description: 'Placeholder',
       type: 'string',
