@@ -13,11 +13,10 @@ import { ServerErrorPage } from 'pages/error-page/serverErrorPage';
 import routes from 'utils/routes';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import {
-  useGetAllArticlesQuery,
+  useGetArticlesbyTagsQuery,
   useGetMaterialByIdQuery,
 } from 'services/features/information-material/api';
 import { useScrollToTop } from 'hooks/useScrollToTop';
-
 import styles from './styles.module.scss';
 
 export const Article: FC = () => {
@@ -28,16 +27,24 @@ export const Article: FC = () => {
   const errResponse = response.error || {};
   const errCode = 'status' in errResponse ? errResponse.status : null;
 
-  // TODO: решить вопрос с запросом двух статей по тегам для превью
-  // const currentTags = article.tags
-  // переписать запрос с использованием тегов, пока беру любые статьи
-
-  // Получаем список всех тегов
+  // все теги
   const { data: tags = [] } = useGetRootsTagsQuery();
-  // Находим тег новости
   const newsTag = tags.find((tag) => tag.name === 'Новости');
-  // Получаем список всех статей
-  const { data } = useGetAllArticlesQuery(newsTag?.pk, { skip: !newsTag });
+
+  // теги по конкретной статье, исключаем новости
+  // есть ли у статьи теги
+  const tagsQuery =
+    article?.tags && article?.tags.map((tag) => `tags=${tag.pk}`).join('&');
+  // есть\нет теги исключений
+  const tagsExclude = newsTag?.pk ? `tags_exclude=${newsTag?.pk}` : '';
+
+  const materialTagsQuery = tagsQuery
+    ? `${tagsQuery}&${tagsExclude}`
+    : tagsExclude;
+
+  const { data } = useGetArticlesbyTagsQuery(materialTagsQuery);
+
+  const materials = data?.results.filter((item) => item.id !== article?.id);
 
   useScrollToTop();
 
@@ -49,9 +56,9 @@ export const Article: FC = () => {
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
             <Paper data={article} isNews={false} />
-            {data ? (
+            {materials?.length ? (
               <ArticlesPreviewSmall
-                data={data.results}
+                data={materials}
                 route={routes.articles.route}
               />
             ) : null}
