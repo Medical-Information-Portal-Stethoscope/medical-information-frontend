@@ -89,6 +89,14 @@ const meta: Meta<typeof Input> = {
       defaultValue: false,
       control: { type: 'radio' },
     },
+
+    hasCheckmark: {
+      description: 'Зеленая галочка при успешной валидации данных',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: { type: 'radio' },
+    },
   },
 };
 

@@ -1,85 +1,95 @@
-/* eslint-disable arrow-body-style */
-import React, { useRef, useMemo, useImperativeHandle } from 'react';
+import {
+  useRef,
+  useLayoutEffect,
+  TextareaHTMLAttributes,
+  FC,
+  ReactElement,
+} from 'react';
 import { nanoid } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import styles from './text-area.module.scss';
-import useAutoResizeTextArea from './lib';
 
-interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  name: string;
+interface ITextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
+  minHeight: number;
   value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   label?: string;
-  size?: string;
-  maxTextAreaLength?: number;
-  counter?: boolean;
+  hasCounter?: boolean;
+  maxSymbols?: number;
+  error?: string;
+  touched?: boolean;
 }
 
-const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
-  (
-    {
-      name,
-      label,
-      value,
-      onChange,
-      size,
-      maxTextAreaLength,
-      counter,
-      placeholder,
-      ...props
-    },
-    forwardRef
-  ) => {
-    const id = nanoid();
-    const textAreaRef = useRef<HTMLTextAreaElement>(null);
+const TextArea: FC<ITextAreaProps> = ({
+  name,
+  label,
+  value,
+  minHeight,
+  hasCounter,
+  maxSymbols = 0,
+  placeholder,
+  autoComplete = 'off',
+  error,
+  touched,
+  onFocus,
+  onBlur,
+  onChange,
+}): ReactElement => {
+  const id = nanoid();
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-    useAutoResizeTextArea(textAreaRef.current, value);
+  useLayoutEffect(() => {
+    if (textareaRef?.current) {
+      textareaRef.current.style.height = 'inherit';
 
-    useImperativeHandle(
-      forwardRef,
-      () => textAreaRef.current as HTMLTextAreaElement
-    );
+      textareaRef.current.style.height = `${Math.max(
+        textareaRef.current.scrollHeight,
+        minHeight
+      )}px`;
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
 
-    const symbols = useMemo(
-      () =>
-        // eslint-disable-next-line no-nested-ternary
-        value ? (value.length <= 400 ? 0 + value.length : '400') : '0',
-      [value]
-    );
-
-    return (
-      <div className={classNames(styles.textarea)}>
-        <label className={classNames(styles[`textarea--label`])} htmlFor={id}>
-          {label}
-          <textarea
-            className={classNames(
-              styles[`textarea--text`],
-              styles[`textarea--text--${size}`]
-            )}
-            id={id}
-            ref={textAreaRef}
-            value={value}
-            name={name}
-            onChange={onChange}
-            placeholder={placeholder}
-            rows={1}
-            maxLength={maxTextAreaLength}
-            autoComplete="on"
-            required
-            {...props}
-          />
-        </label>
-        <p
-          className={classNames(styles[`textarea--counter`], {
-            [styles[`textarea--counter--error`]]: value?.length >= 400,
+  return (
+    <div className={styles.textarea}>
+      <label className={styles[`textarea--label`]} htmlFor={id}>
+        {label}
+        <textarea
+          className={classNames(styles[`textarea--text`], {
+            [styles[`textarea--error`]]: touched && error,
+            [styles[`textarea--error--border`]]: touched && error,
           })}
-        >
-          {counter ? `${symbols}/400` : ''}
-        </p>
+          id={id}
+          ref={textareaRef}
+          value={value}
+          name={name}
+          placeholder={placeholder}
+          autoComplete={autoComplete}
+          onFocus={onFocus}
+          onBlur={onBlur}
+          onChange={onChange}
+        />
+      </label>
+
+      <div
+        className={classNames(styles[`textarea--errorWrapper`], {
+          [styles[`textarea--errorWrapper--two`]]: touched && error,
+        })}
+      >
+        {touched && error && (
+          <span className={styles[`textarea--error`]}>{error}</span>
+        )}
+        {hasCounter && (
+          <span
+            className={classNames(styles[`textarea--counter`], {
+              [styles[`textarea--error`]]: value?.length > maxSymbols,
+            })}
+          >
+            {`${value?.length}/${maxSymbols}`}
+          </span>
+        )}
       </div>
-    );
-  }
-);
+    </div>
+  );
+};
 
 export default TextArea;

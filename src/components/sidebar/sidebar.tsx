@@ -19,13 +19,16 @@ function Sidebar() {
   const isRouteFavorites = pathname.endsWith(
     `${routes.profile}/${routes.favorites}`
   );
+  const isRouteCreatingAnArticle = pathname.endsWith(
+    `${routes.profile}/${routes.publication}`
+  );
 
   const galleryHeightDesktopBig =
     cardFavoritesHeightDesktopBig * 2 + cardFavoritesGapDesktopBig;
 
   const toggleButtonVisible = () => {
     if (
-      isRouteFavorites &&
+      (isRouteFavorites || isRouteCreatingAnArticle) &&
       sidebarRef.current.offsetHeight >= galleryHeightDesktopBig &&
       (document.body.scrollTop > headerHeightWithIndentsDesktopBig ||
         document.documentElement.scrollTop > headerHeightWithIndentsDesktopBig)

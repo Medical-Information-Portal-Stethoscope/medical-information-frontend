@@ -1,5 +1,8 @@
+import { TError } from 'services/features/information-material/types';
+import { TArticleCreation, TArticle } from './types/article';
 import api from './api-routes';
 
+// USER
 export const confirmSignUp = async (
   uid: string | null,
   token: string | null
@@ -70,6 +73,26 @@ export const resetPasswordConfirmation = async (
 
   if (res.ok) {
     return "Link for password reset is sent on user's email";
+  }
+
+  throw new Error('Something went wrong');
+};
+
+// ARTICLES
+export const createArticle = async (data: TArticleCreation) => {
+  const res = await fetch(`${api.baseUrl}${api.endpoints.articles.base}/`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Token ${localStorage.getItem('auth_token')}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+
+  const body: TArticle | TError = await res.json();
+
+  if (res.ok) {
+    return body as TArticle;
   }
 
   throw new Error('Something went wrong');

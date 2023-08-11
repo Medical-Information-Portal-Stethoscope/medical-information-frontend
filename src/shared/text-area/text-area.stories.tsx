@@ -6,13 +6,11 @@ const meta: Meta<typeof TextArea> = {
   component: TextArea,
   tags: ['autodocs'],
   argTypes: {
-    size: {
-      description: 'Размер',
-      type: 'string',
-      options: ['medium', 'large'],
-      defaultValue: 'medium',
-      control: { type: 'radio' },
+    minHeight: {
+      description: 'Минимальная высота',
+      type: 'number',
     },
+
     label: {
       description: 'Заголовок',
       type: 'string',
@@ -28,18 +26,25 @@ const meta: Meta<typeof TextArea> = {
       type: 'string',
       defaultValue: 'Text',
     },
-    counter: {
+
+    hasCounter: {
       description: 'Счетчик символов',
       type: 'boolean',
       options: [true, false],
       defaultValue: false,
       control: { type: 'radio' },
     },
-    maxTextAreaLength: {
+
+    maxSymbols: {
       description: 'Максимальное количество символов',
       type: 'number',
-      options: [400, Infinity],
-      defaultValue: Infinity,
+      defaultValue: 0,
+    },
+
+    autoComplete: {
+      description: 'Автозаполнение',
+      type: 'string',
+      options: ['on', 'off'],
       control: { type: 'radio' },
     },
   },
@@ -50,40 +55,36 @@ type TStory = StoryObj<typeof meta>;
 
 export const DefaultMediumWithCounter: TStory = {
   args: {
-    size: 'medium',
     label: 'Text',
     placeholder: 'Type some text',
-    counter: true,
-    maxTextAreaLength: 400,
+    hasCounter: true,
+    maxSymbols: 400,
   },
 };
 
 export const DefaultMediumWithoutCounter: TStory = {
   args: {
-    size: 'medium',
     label: 'Text',
     placeholder: 'Type some text',
-    counter: false,
-    maxTextAreaLength: Infinity,
+    hasCounter: false,
+    maxSymbols: Infinity,
   },
 };
 
 export const DefaultLargeWithCounter: TStory = {
   args: {
-    size: 'large',
     label: 'Text',
     placeholder: 'Type some text',
-    counter: true,
-    maxTextAreaLength: 400,
+    hasCounter: true,
+    maxSymbols: 400,
   },
 };
 
 export const DefaultLargeWithoutCounter: TStory = {
   args: {
-    size: 'large',
     label: 'Text',
     placeholder: 'Type some text',
-    counter: false,
-    maxTextAreaLength: Infinity,
+    hasCounter: false,
+    maxSymbols: Infinity,
   },
 };

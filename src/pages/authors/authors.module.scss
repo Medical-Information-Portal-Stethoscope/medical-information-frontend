@@ -11,7 +11,7 @@
 
 .authors {
   max-width: $wrapper-authors-desktop;
-  padding: 40px 0 80px;
+  padding: 40px 0 108px;
 }
 
 .authorsHeading {
@@ -53,9 +53,4 @@
   &:active {
     color: $color-brand-primary-1000;
   }
-}
-
-.crumbs {
-  max-width: $wrapper-articles-preview-desktop;
-  margin: 0 auto;
 }
