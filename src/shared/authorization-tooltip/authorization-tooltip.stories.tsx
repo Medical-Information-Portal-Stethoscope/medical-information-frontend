@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AuthorizationTooltip from './authorization-tooltip';
 
 const meta = {
-  title: 'uikit/Tooltip/AuthorizationTooltip',
+  title: 'uikit/AuthorizationTooltip',
   component: AuthorizationTooltip,
   tags: ['autodocs'],
   decorators: [
