@@ -64,6 +64,32 @@ export const loginUser = createAsyncThunk<
   }
 });
 
+export const logoutUser = createAsyncThunk<
+  unknown,
+  string,
+  { rejectValue: TErrorResponse }
+>('user/logout', async (token, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.auth.base}${api.endpoints.user.auth.logout}`,
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw await res.json();
+    }
+
+    return 'You have successfully logged out';
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});
+
 export const getUserPersonalData = createAsyncThunk<
   IUserPersonalData,
   string,

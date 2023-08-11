@@ -1,9 +1,12 @@
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from 'services/app/hooks';
+import { logoutUser } from 'services/features/user/api';
 import classNames from 'classnames';
 import { nanoid } from 'nanoid';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
+import { Icon } from 'shared/icons';
 import routes from 'utils/routes';
 import {
   headerHeightWithIndentsDesktopBig,
@@ -13,6 +16,9 @@ import {
 import styles from './sidebar.module.scss';
 
 function Sidebar() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
   const sidebarRef = useRef() as MutableRefObject<HTMLDivElement>;
   const { pathname } = useLocation();
@@ -48,13 +54,19 @@ function Sidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]); // TODO: скорее всего, в массив зависимостей потребуется добавить карточки
 
+  const handleUserOut = () => {
+    const token = localStorage.getItem('auth_token');
+
+    if (!token) return;
+
+    dispatch(logoutUser(token)).then(() =>
+      navigate(routes.home, { replace: true })
+    );
+  };
+
   return (
     <div className={styles.sidebar} ref={sidebarRef}>
-      <div
-        className={classNames({
-          [styles.sidebar_content]: isButtonToTopVisible,
-        })}
-      >
+      <div className={isButtonToTopVisible ? styles.sidebar_content : ''}>
         <div>
           <div className={styles.sidebar_header}>
             <div className={styles.sidebar_avatar}>
@@ -113,6 +125,15 @@ function Sidebar() {
             <ConsentCheckbox id={nanoid()} name="email" />
             <p className={styles.sidebar_label}>Подписаться на рассылку</p>
           </form>
+          <div className={styles.sidebar_border} />
+          <button
+            className={styles.sidebar_logout}
+            type="button"
+            onClick={handleUserOut}
+          >
+            <Icon icon="LogoutTwoIcon" color="blue" />
+            <span>Выйти</span>
+          </button>
         </div>
         {isButtonToTopVisible && <ButtonTopNavigation />}
       </div>

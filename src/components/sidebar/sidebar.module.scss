@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
 .sidebar {
@@ -92,5 +93,35 @@
   &_label {
     color: $color-neutral-700;
     letter-spacing: $font-letter-spacing-main;
+  }
+
+  &_border {
+    margin: 32px 0;
+    border-top: 1px solid rgba(189, 189, 189, 0.36);
+  }
+
+  &_logout {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 8px;
+    letter-spacing: $font-letter-spacing-main;
+    color: $color-neutral-700;
+    background-color: transparent;
+
+    &:hover {
+      color: $color-brand-primary-900;
+    }
+
+    &:active {
+      color: $color-brand-primary-700;
+
+      svg path {
+        stroke: $color-brand-primary-700;
+      }
+    }
+
+    * {
+      transition: $transition-button;
+    }
   }
 }

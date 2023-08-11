@@ -1,6 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TErrorResponse, IUserPersonalData } from './types';
-import { registerUser, loginUser, getUserPersonalData } from './api';
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserPersonalData,
+} from './api';
 
 type TSliceState = {
   user: IUserPersonalData | null;
@@ -52,6 +57,14 @@ const userSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, { payload }) => {
         state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.process.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, { payload }) => {
         state.process.error = payload !== undefined ? payload : null;
       })
 
