@@ -1,7 +1,11 @@
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
-import { logoutUser } from 'services/features/user/api';
+import {
+  logoutUser,
+  subscribeUserToMailingList,
+  unsubscribeUserFromMailingList,
+} from 'services/features/user/api';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import { nanoid } from 'nanoid';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
@@ -21,8 +25,16 @@ function Sidebar() {
 
   const { user } = useAppSelector(showUserPersonalData);
 
+  const [hasSubscription, setHasSubscription] = useState(false);
   const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
   const sidebarRef = useRef() as MutableRefObject<HTMLDivElement>;
+
+  useEffect(() => {
+    if (!user) return;
+
+    setHasSubscription(user.subscribed);
+  }, [user]);
+
   const { pathname } = useLocation();
   const isRouteFavorites = pathname.endsWith(
     `${routes.profile}/${routes.favorites}`
@@ -56,13 +68,26 @@ function Sidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]); // TODO: скорее всего, в массив зависимостей потребуется добавить карточки
 
-  const handeUserRole = () => {
+  const handleUserRole = () => {
     switch (user?.role) {
       case 'doctor':
         return 'Врач';
       default:
         return 'Пользователь';
     }
+  };
+
+  const handleUserSubscription = () => {
+    const token = localStorage.getItem('auth_token');
+
+    if (!token) return;
+
+    setHasSubscription(!hasSubscription);
+    dispatch(
+      hasSubscription
+        ? unsubscribeUserFromMailingList(token)
+        : subscribeUserToMailingList(token)
+    );
   };
 
   const handleUserOut = () => {
@@ -87,7 +112,7 @@ function Sidebar() {
               <h2
                 className={styles.sidebar_title}
               >{`${user?.first_name} ${user?.last_name}`}</h2>
-              <p className={styles.sidebar_subtitle}>{handeUserRole()}</p>
+              <p className={styles.sidebar_subtitle}>{handleUserRole()}</p>
             </div>
           </div>
           <nav>
@@ -134,10 +159,15 @@ function Sidebar() {
             </ul>
           </nav>
           <p className={styles.sidebar_email}>Еженедельная рассылка на email</p>
-          <form className={styles.sidebar_mailingList}>
-            <ConsentCheckbox id={nanoid()} name="email" />
+          <div className={styles.sidebar_mailingList}>
+            <ConsentCheckbox
+              id={nanoid()}
+              name="mailingList"
+              isChecked={hasSubscription}
+              onChange={handleUserSubscription}
+            />
             <p className={styles.sidebar_label}>Подписаться на рассылку</p>
-          </form>
+          </div>
           <div className={styles.sidebar_border} />
           <button
             className={styles.sidebar_logout}

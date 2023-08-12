@@ -5,6 +5,8 @@ import {
   loginUser,
   logoutUser,
   getUserPersonalData,
+  subscribeUserToMailingList,
+  unsubscribeUserFromMailingList,
 } from './api';
 
 type TSliceState = {
@@ -80,6 +82,31 @@ const userSlice = createSlice({
         state.process.isLoading = false;
         state.process.error = payload !== undefined ? payload : null;
       })
+
+      .addCase(subscribeUserToMailingList.fulfilled, (state) => {
+        state.process.error = null;
+
+        if (state.user) {
+          state.user.subscribed = true;
+        }
+      })
+      .addCase(subscribeUserToMailingList.rejected, (state, { payload }) => {
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(unsubscribeUserFromMailingList.fulfilled, (state) => {
+        state.process.error = null;
+
+        if (state.user) {
+          state.user.subscribed = false;
+        }
+      })
+      .addCase(
+        unsubscribeUserFromMailingList.rejected,
+        (state, { payload }) => {
+          state.process.error = payload !== undefined ? payload : null;
+        }
+      )
 
       .addDefaultCase((state) => state);
   },

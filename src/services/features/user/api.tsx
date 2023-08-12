@@ -116,3 +116,55 @@ export const getUserPersonalData = createAsyncThunk<
     return rejectWithValue(err as TErrorResponse);
   }
 });
+
+export const subscribeUserToMailingList = createAsyncThunk<
+  unknown,
+  string,
+  { rejectValue: TErrorResponse }
+>('user/subscription', async (token, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.subscription}`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw await res.json();
+    }
+
+    return 'Subscription is successfull';
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});
+
+export const unsubscribeUserFromMailingList = createAsyncThunk<
+  unknown,
+  string,
+  { rejectValue: TErrorResponse }
+>('user/unsubscription', async (token, { rejectWithValue }) => {
+  try {
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.subscription}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+      }
+    );
+
+    if (!res.ok) {
+      throw await res.json();
+    }
+
+    return 'Unsubscription is successfull';
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});

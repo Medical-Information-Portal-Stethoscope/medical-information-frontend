@@ -25,6 +25,8 @@ const api = Object.freeze({
       },
 
       me: 'me/',
+
+      subscription: 'subscription/',
     },
 
     tags: {
