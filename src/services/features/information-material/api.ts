@@ -1,12 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { TArticle } from 'utils/types/article';
 import api from 'utils/api-routes';
-
-type TGetInformationMaterialResponse = {
-  next: string;
-  previous: null;
-  results: TArticle[];
-};
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { TArticle } from 'utils/types/article';
+import { TError, TGetInformationMaterialResponse } from './types';
 
 export const informationMaterialApi = createApi({
   reducerPath: 'informationMaterial',
@@ -17,16 +13,58 @@ export const informationMaterialApi = createApi({
       TGetInformationMaterialResponse,
       string | undefined
     >({
-      query: (id) => `${api.endpoints.articles.base}/?tags_exclude=${id}`,
+      query: (idNewsTag) =>
+        `${api.endpoints.articles.base}/?tags_exclude=${idNewsTag}`,
     }),
+
     getAllNews: builder.query<
       TGetInformationMaterialResponse,
       string | undefined
     >({
       query: (id) => `${api.endpoints.articles.base}/?tags=${id}`,
     }),
+
+    getMaterialById: builder.query<TArticle, string | undefined>({
+      query: (id) => `${api.endpoints.articles.base}/${id}`,
+    }),
+
+    getMostPopularArticle: builder.query<TArticle, void>({
+      query: () => `${api.endpoints.articles.base}/the_most_popular`,
+    }),
+
+    getArticlesbyTags: builder.query<
+      TGetInformationMaterialResponse,
+      string | undefined
+    >({
+      query: (tagsQuery) => `${api.endpoints.articles.base}/?${tagsQuery}`,
+    }),
   }),
 });
 
-export const { useGetAllArticlesQuery, useGetAllNewsQuery } =
-  informationMaterialApi;
+export const getNextPageContent = createAsyncThunk<
+  TGetInformationMaterialResponse,
+  string,
+  { rejectValue: TError }
+>('content/getNextPageContent', async (nextUrl, { rejectWithValue }) => {
+  try {
+    const response = await fetch(`${nextUrl}`);
+
+    const data: TGetInformationMaterialResponse = await response.json();
+
+    if (!response.ok) {
+      throw data;
+    }
+
+    return data;
+  } catch (err) {
+    return rejectWithValue(err as TError);
+  }
+});
+
+export const {
+  useGetAllArticlesQuery,
+  useGetAllNewsQuery,
+  useGetMaterialByIdQuery,
+  useGetMostPopularArticleQuery,
+  useGetArticlesbyTagsQuery,
+} = informationMaterialApi;

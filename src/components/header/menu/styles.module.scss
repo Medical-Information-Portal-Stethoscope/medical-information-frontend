@@ -1,7 +1,6 @@
 @import 'assets/styles/index.scss';
 
 .menu {
-  width: 1296px;
   box-sizing: border-box;
   color: $color-neutral-900;
 
@@ -9,32 +8,30 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    text-align: center;
     justify-content: space-between;
+    gap: 40px;
+    white-space: nowrap;
   }
 
   &__item {
-    @extend %text-size-large;
-    text-align: center;
+    @extend %text-size-large-bold;
+    color: $color-neutral-0;
     padding: 12px 24px;
-    margin-left: 120px;
+    text-align: center;
     border: none;
     box-sizing: border-box;
-    color: $color-neutral-900;
-    transition: $transition-button;
+    transition: $transition-hover;
 
     &_active {
-      color: $color-brand-primary-1000;
-      padding: 12px 24px 11px 24px;
-      border-bottom: 1px solid $color-brand-primary-900;
+      padding: 12px 24px 10px 24px;
+      border-bottom: 2px solid $color-neutral-0;
     }
 
     &:hover {
-      color: $color-brand-primary-900;
       cursor: pointer;
-    }
-
-    &:first-child {
-      margin-left: 0;
+      padding: 12px 24px 10px 24px;
+      border-bottom: 2px solid $color-neutral-0;
     }
   }
 }

@@ -1,0 +1,96 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &_content {
+    position: sticky;
+    top: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100vh - 56px); // height of button with indents
+  }
+
+  &_header {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 56px;
+  }
+
+  &_avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 91px;
+    height: 88px;
+    background-color: $color-brand-primary-100;
+    border-radius: 50%;
+    color: $color-brand-primary-900;
+    @extend %text-article;
+    font-weight: 600;
+  }
+
+  &_title {
+    @extend %heading-size-small;
+    letter-spacing: $font-letter-spacing-main;
+    padding-bottom: 8px;
+  }
+
+  &_subtitle {
+    @extend %text-article;
+    color: $color-neutral-500;
+  }
+
+  &_list {
+    padding-bottom: 40px;
+  }
+
+  &_list_item {
+    @extend %heading-size-small;
+    letter-spacing: $font-letter-spacing-main;
+    padding-bottom: 16px;
+  }
+
+  &_item {
+    display: inline-block;
+    box-sizing: border-box;
+    color: $color-neutral-700;
+    width: 100%;
+    padding: 12px;
+
+    &_active {
+      display: inline-block;
+      width: 100%;
+      box-sizing: border-box;
+      color: $color-brand-primary-900;
+      background-color: $color-brand-primary-100;
+      border-radius: 12px;
+      padding: 12px;
+    }
+  }
+
+  &_email {
+    @extend %text-article;
+    color: $color-neutral-600;
+    font-weight: 600;
+    padding-bottom: 16px;
+    letter-spacing: $font-letter-spacing-main;
+  }
+
+  &_mailingList {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
+  }
+
+  &_label {
+    color: $color-neutral-700;
+    letter-spacing: $font-letter-spacing-main;
+  }
+}

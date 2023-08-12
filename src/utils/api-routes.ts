@@ -16,6 +16,13 @@ const api = Object.freeze({
         logout: 'logout/',
       },
 
+      signupActivation: 'activation/',
+
+      password: {
+        reset: 'reset_password/',
+        resetConfirmation: 'reset_password_confirm/',
+      },
+
       me: 'me/',
     },
     tags: {

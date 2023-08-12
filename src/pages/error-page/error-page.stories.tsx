@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
+import { store } from 'services/app/store';
+import { Provider } from 'react-redux';
 
 import { ErrorPage } from '.';
 
@@ -10,7 +12,9 @@ const meta = {
   decorators: [
     (Story) => (
       <BrowserRouter>
-        <Story />
+        <Provider store={store}>
+          <Story />
+        </Provider>
       </BrowserRouter>
     ),
   ],

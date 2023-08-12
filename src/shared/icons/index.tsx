@@ -53,8 +53,10 @@ import { NotAvailableIcon } from './not-available-icon';
 import { OceanIcon } from './ocean-icon';
 import { OphthalmologyIcon } from './ophthalmology-icon';
 import { OtorhinolaryngologyIcon } from './otorhinolaryngology-icon';
+import { PaperClipIcon } from './paper-clip-icon';
 import { PediatricsIcon } from './pediatrics-icon';
 import { PodcastIcon } from './podcast-icon';
+import { PlusIcon } from './plus-icon';
 import { PsychotherapyIcon } from './psychotherapy-icon';
 import { RainOneIcon } from './rain-one-icon';
 import { RainTwoIcon } from './rain-two-icon';
@@ -71,6 +73,7 @@ import { RainyWeatherSixIcon } from './rainy-weather-six-icon';
 import { RainyWeatherSevenIcon } from './rainy-weather-seven-icon';
 import { RainyWeatherIcon } from './rainy-weather-icon';
 import { RightArrowIcon } from './right-arrow-icon';
+import { RightArrowLongIcon } from './right-arrow-long-icon';
 import { SceneryIcon } from './scenery-icon';
 import { SearchIcon } from './search-icon';
 import { SnowflakeOneIcon } from './snowflake-one-icon';
@@ -78,6 +81,7 @@ import { SnowflakeIcon } from './snowflake-icon';
 import { SocialBehanceIcon } from './social-behance-icon';
 import { SocialGithubIcon } from './social-github-icon';
 import { SocialTelegramIcon } from './social-telegram-icon';
+import { StatusIcon } from './status-icon';
 import { StormWeatherOneIcon } from './storm-weather-one-icon';
 import { StormWeatherTwoIcon } from './storm-weather-two-icon';
 import { StormWeatherIcon } from './storm-weather-icon';
@@ -85,6 +89,7 @@ import { SunIcon } from './sun-icon';
 import { SunWithWindIcon } from './sun-with-wind-icon';
 import { SunsetIcon } from './sunset-icon';
 import { TelegramIcon } from './telegram-icon';
+import { UpArrowLongIcon } from './up-arrow-long-icon';
 import { UrologyIcon } from './urology-icon';
 import { UserIcon } from './user-icon';
 import { VaccinationIcon } from './vaccination-icon';
@@ -151,8 +156,10 @@ const icons = {
   OceanIcon,
   OphthalmologyIcon,
   OtorhinolaryngologyIcon,
+  PaperClipIcon,
   PediatricsIcon,
   PodcastIcon,
+  PlusIcon,
   PsychotherapyIcon,
   RainOneIcon,
   RainTwoIcon,
@@ -169,6 +176,7 @@ const icons = {
   RainyWeatherSevenIcon,
   RainyWeatherIcon,
   RightArrowIcon,
+  RightArrowLongIcon,
   SceneryIcon,
   SearchIcon,
   SnowflakeOneIcon,
@@ -176,6 +184,7 @@ const icons = {
   SocialBehanceIcon,
   SocialGithubIcon,
   SocialTelegramIcon,
+  StatusIcon,
   StormWeatherOneIcon,
   StormWeatherTwoIcon,
   StormWeatherIcon,
@@ -183,6 +192,7 @@ const icons = {
   SunWithWindIcon,
   SunsetIcon,
   TelegramIcon,
+  UpArrowLongIcon,
   UrologyIcon,
   UserIcon,
   VaccinationIcon,
@@ -197,7 +207,7 @@ const icons = {
   CommentsIcon,
 };
 
-type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
+export type TIcons = Record<keyof typeof icons, FC<IIconProps>>;
 
 export interface IconProps extends IIconProps {
   icon: keyof TIcons;

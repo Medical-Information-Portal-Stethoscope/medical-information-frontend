@@ -18,14 +18,15 @@ export default function FilterTab({
   icon,
   isChecked = false,
   onChange,
+  name,
 }: IFilterTabProps) {
   return (
     <>
       <input
         className={classNames(styles.checkbox, extraClass)}
         id={id}
-        type="checkbox"
-        name={label}
+        type="radio"
+        name={name}
         value={label}
         defaultChecked={isChecked}
         aria-label={isChecked ? 'Убрать фильтр' : 'Добавить фильтр'}

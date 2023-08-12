@@ -2,7 +2,7 @@
 
 .articles {
   max-width: 1208px;
-  margin: 0 auto;
+  // margin: 0 auto;
   padding: 0;
 
   &__header {
@@ -16,5 +16,9 @@
     display: flex;
     justify-content: space-between;
     gap: 24px;
+  }
+
+  &__item {
+    max-width: 592px;
   }
 }

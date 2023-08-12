@@ -28,4 +28,34 @@ export const validationErrors = Object.freeze({
       required: 'Обязательное поле',
     },
   },
+
+  articles: {
+    title: {
+      unacceptableLength: 'Недопустимая длина',
+      required: 'Обязательное поле',
+    },
+
+    annotation: {
+      unacceptableLength: 'Недопустимая длина',
+      required: 'Обязательное поле',
+    },
+
+    text: {
+      required: 'Обязательное поле',
+    },
+
+    sourceName: {
+      unacceptableLength: 'Недопустимая длина',
+    },
+
+    sourceLink: {
+      unacceptableLength: 'Недопустимая длина',
+      unacceptableType: 'Введите URL',
+    },
+
+    image: {
+      unacceptableSize: 'Размер фотографии превышает 1,5 Мб',
+      required: 'Обязательное поле',
+    },
+  },
 });
