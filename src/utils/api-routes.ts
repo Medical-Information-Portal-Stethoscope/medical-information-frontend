@@ -19,12 +19,14 @@ const api = Object.freeze({
       signupActivation: 'activation/',
 
       password: {
-        reset: 'reset_password/',
-        resetConfirmation: 'reset_password_confirm/',
+        reset: 'reset_password/', // in auth form
+        resetConfirmation: 'reset_password_confirm/', // in auth form
+        change: 'set_password/', // in profile
       },
 
       me: 'me/',
     },
+
     tags: {
       // все теги
       all: '/tags',
