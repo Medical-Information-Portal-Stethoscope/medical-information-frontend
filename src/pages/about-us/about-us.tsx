@@ -2,6 +2,7 @@ import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 import { Icon } from 'shared/icons';
 import { Header } from 'components/header';
+import { Breadcrumbs } from 'components/breadcrumbs';
 import Footer from 'components/footer/footer';
 import data from 'utils/data/about-us/our-team';
 import styles from './about-us.module.scss';
@@ -102,8 +103,8 @@ export default function AboutPage() {
       <Header />
       <main>
         <div className={styles.wrapper}>
-          {/* TODO: Хлебные крошки */}
-          <section>
+          <Breadcrumbs />
+          <section className={styles.about}>
             <h2 className={styles['about--title']}>О портале</h2>
             <div className={styles['about--paragraphs']}>
               <section>
