@@ -10,7 +10,7 @@ import styles from './styles.module.scss';
 export const UserHeaderIcon: FC = () => {
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
-  const username = `${user?.first_name[0]} ${user?.last_name[0]}`;
+  const username = `${user?.first_name[0]} ${user?.last_name[0]}` || 'X Y';
   const isDoctor = user?.role === 'doctor';
 
   const defaultUserIcon = (

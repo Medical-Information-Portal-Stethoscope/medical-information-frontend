@@ -6,6 +6,7 @@ import contentSlice from 'services/features/information-material/slice';
 
 import { authMiddleware } from 'services/features/user/middlewares';
 import { filteredArticlesSlice } from 'services/features/filter/slice';
+import { materialReducer } from 'services/features/material/slice';
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     user: userSlice,
     [filteredArticlesSlice.name]: filteredArticlesSlice.reducer,
     content: contentSlice,
+    material: materialReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

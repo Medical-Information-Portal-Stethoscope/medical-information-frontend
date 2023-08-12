@@ -1,0 +1,15 @@
+@import '../../../assets/styles/index.scss';
+
+.comment {
+  width: 900px;
+  min-height: 140px;
+  // для границы цвет не определен в colors
+  border-bottom: 1px solid #bdbdbd5c;
+  border-radius: 16px;
+  transition: $transition-hover;
+
+  :hover {
+    background-color: $color-neutral-100;
+    cursor: pointer;
+  }
+}
