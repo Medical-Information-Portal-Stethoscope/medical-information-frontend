@@ -14,11 +14,11 @@ const routes = Object.freeze({
   podcasts: { route: '/podcasts', name: 'Подкасты' },
   drugs: { route: '/drugs', name: 'Лекарства и БАД' },
   doctorQuestion: { route: '/doctor', name: 'Вопрос врачу' },
-  about: { route: '/about', name: 'О портале' },
+  authors: { route: '/authors', name: 'Авторы' },
+  about: { route: '/about-us', name: 'О портале' },
   profile: '/profile',
   favorites: 'favorites',
   publication: 'creating-an-article',
-  authors: { route: '/authors', name: 'Авторам' },
 });
 
 export default routes;

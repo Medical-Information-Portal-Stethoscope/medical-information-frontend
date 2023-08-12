@@ -78,6 +78,9 @@ import { SceneryIcon } from './scenery-icon';
 import { SearchIcon } from './search-icon';
 import { SnowflakeOneIcon } from './snowflake-one-icon';
 import { SnowflakeIcon } from './snowflake-icon';
+import { SocialBehanceIcon } from './social-behance-icon';
+import { SocialGithubIcon } from './social-github-icon';
+import { SocialTelegramIcon } from './social-telegram-icon';
 import { StatusIcon } from './status-icon';
 import { StormWeatherOneIcon } from './storm-weather-one-icon';
 import { StormWeatherTwoIcon } from './storm-weather-two-icon';
@@ -178,6 +181,9 @@ const icons = {
   SearchIcon,
   SnowflakeOneIcon,
   SnowflakeIcon,
+  SocialBehanceIcon,
+  SocialGithubIcon,
+  SocialTelegramIcon,
   StatusIcon,
   StormWeatherOneIcon,
   StormWeatherTwoIcon,
