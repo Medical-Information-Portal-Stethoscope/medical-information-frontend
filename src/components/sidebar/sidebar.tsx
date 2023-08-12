@@ -1,8 +1,8 @@
 import { useRef, useEffect, useState, MutableRefObject } from 'react';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
-import { useAppDispatch } from 'services/app/hooks';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { logoutUser } from 'services/features/user/api';
-import classNames from 'classnames';
+import { showUserPersonalData } from 'services/features/user/selectors';
 import { nanoid } from 'nanoid';
 import { ConsentCheckbox } from 'shared/checkboxes/consent-checkbox/consent-checkbox';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
@@ -18,6 +18,8 @@ import styles from './sidebar.module.scss';
 function Sidebar() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const { user } = useAppSelector(showUserPersonalData);
 
   const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
   const sidebarRef = useRef() as MutableRefObject<HTMLDivElement>;
@@ -54,6 +56,15 @@ function Sidebar() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]); // TODO: скорее всего, в массив зависимостей потребуется добавить карточки
 
+  const handeUserRole = () => {
+    switch (user?.role) {
+      case 'doctor':
+        return 'Врач';
+      default:
+        return 'Пользователь';
+    }
+  };
+
   const handleUserOut = () => {
     const token = localStorage.getItem('auth_token');
 
@@ -73,8 +84,10 @@ function Sidebar() {
               <p>ДВ</p>
             </div>
             <div>
-              <h3 className={styles.sidebar_title}>Дарья Врачева</h3>
-              <p className={styles.sidebar_subtitle}>Пользователь</p>
+              <h2
+                className={styles.sidebar_title}
+              >{`${user?.first_name} ${user?.last_name}`}</h2>
+              <p className={styles.sidebar_subtitle}>{handeUserRole()}</p>
             </div>
           </div>
           <nav>

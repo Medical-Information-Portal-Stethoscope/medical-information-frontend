@@ -1,0 +1,39 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
+.userProfile {
+  &_form {
+    padding: 32px;
+    box-sizing: border-box;
+    border-radius: 16px;
+    border: 1px solid rgba(189, 189, 189, 0.36);
+
+    > button {
+      max-width: 224px;
+    }
+  }
+
+  &_title {
+    @extend %heading-size-small;
+  }
+
+  &_inputs {
+    margin: 28px 0 7px;
+
+    > div {
+      > div {
+        background-color: $color-neutral-100;
+        border-color: $color-neutral-150;
+
+        input {
+          background-color: $color-neutral-100;
+        }
+      }
+
+      &:not(:first-child) {
+        margin-top: 4px;
+      }
+    }
+  }
+}

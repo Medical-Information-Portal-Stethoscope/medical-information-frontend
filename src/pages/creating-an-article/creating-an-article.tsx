@@ -295,7 +295,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             typeof response === 'boolean' || selectedImagePreview,
         })}
       >
-        <h2 className={styles.heading}>Публикация статьи</h2>
+        <h3 className={styles.heading}>Публикация статьи</h3>
         {renderContent()}
       </div>
     </section>
