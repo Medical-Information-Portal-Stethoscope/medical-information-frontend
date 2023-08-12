@@ -76,7 +76,7 @@ export default function NewsPreviewPage() {
               <div className={styles.news}>{news}</div>
               {!isAllContent && (
                 <Button
-                  label="Еще новости"
+                  label="Еще"
                   model="secondary"
                   size="small"
                   hasBorder
