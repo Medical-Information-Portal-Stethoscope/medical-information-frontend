@@ -3,7 +3,7 @@
 .paper {
   max-width: 900px;
 
-  margin: 0 auto;
+  margin-top: 40px;
 
   display: flex;
   flex-direction: column;
@@ -13,21 +13,18 @@
     @extend %text-size-medium-semibold;
     color: $color-neutral-400;
     margin-bottom: 20px;
-    padding: 0;
   }
 
   &__header {
     @extend %heading-size-medium;
     color: $color-neutral-900;
     margin-bottom: 24px;
-    padding: 0;
   }
 
   &__annotation {
     @extend %text-size-large;
     color: $color-neutral-700;
     margin-bottom: 26px;
-    padding: 0;
   }
 
   &__info {
@@ -42,16 +39,24 @@
     margin-right: 4px;
   }
 
-  &__time {
-    margin: 0;
-  }
-
   &__dot {
     margin: 0 8px;
   }
 
   &__views {
     margin-left: 4px;
+  }
+
+  &__source {
+    max-width: 700px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  &__link {
+    @extend %text-size-small-light;
+    color: $color-neutral-700;
   }
 
   &__cover {
@@ -66,15 +71,23 @@
     @extend %text-article;
     color: $color-neutral-900;
     margin: 0 auto 32px;
+
+    h3,
+    p {
+      margin-bottom: 24px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
   }
 
   &__buttons {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: space-between;
     height: 44px;
-    width: 156px;
+    gap: 12px;
 
     margin-bottom: 34px;
 
@@ -132,14 +145,7 @@
   }
 
   &__tag {
-    width: 102px;
     height: 40px;
-    padding: 0;
-    background-color: $color-brand-primary-700;
-
-    span {
-      @extend %text-size-medium-semibold;
-      justify-content: center;
-    }
+    padding: 8px 24px;
   }
 }

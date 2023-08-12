@@ -1,0 +1,21 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers.scss';
+
+.wrapper {
+  display: grid;
+  grid-template-columns: 360px 74.7%;
+  column-gap: 5.59%;
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+  padding: 32px 0 245px;
+
+  &--favorites {
+    padding-bottom: 80px;
+  }
+
+  &--publication {
+    padding-bottom: 55px;
+  }
+}

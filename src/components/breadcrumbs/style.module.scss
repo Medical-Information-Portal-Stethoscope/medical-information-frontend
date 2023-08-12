@@ -1,0 +1,44 @@
+@import '../../assets/styles/index.scss';
+
+.crumbs {
+  max-width: $wrapper-news-preview-desktop;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  overflow: hidden;
+
+  &__list {
+    max-width: 100%;
+    padding-top: 32px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    column-gap: 4px;
+  }
+
+  &__arrow {
+    fill: $color-neutral-700;
+    &:last-child {
+      display: none;
+    }
+  }
+
+  &__link {
+    @extend %text-size-medium;
+    color: $color-neutral-900;
+    transition: all 100ms ease-out;
+
+    &:hover {
+      color: $color-brand-primary-900;
+    }
+
+    &:active {
+      color: $color-brand-primary-1000;
+    }
+  }
+}

@@ -1,0 +1,51 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/z-index';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders.scss';
+
+.fileWrapper {
+  position: relative;
+  width: max-content;
+  padding: 12px 0;
+}
+
+.file {
+  position: absolute;
+  z-index: $zindex-overlay-filters-modal;
+  opacity: 0;
+}
+
+.fileLabel {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+  @extend %text-size-medium-semibold;
+  letter-spacing: $font-letter-spacing-main;
+  color: $color-brand-primary-900;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-brand-primary-700;
+
+    svg {
+      path {
+        fill: $color-brand-primary-700;
+      }
+    }
+  }
+
+  &:active {
+    color: $color-brand-primary-1000;
+
+    svg {
+      path {
+        fill: $color-brand-primary-1000;
+      }
+    }
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}

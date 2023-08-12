@@ -1,3 +1,7 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/placeholders';
+
 .wrapper {
   width: 100%;
   display: flex;
@@ -20,7 +24,13 @@
   z-index: 1;
 
   svg {
-    fill: #014cff;
+    fill: $color-brand-primary-900;
+  }
+
+  &_disabled {
+    svg {
+      fill: $color-neutral-400;
+    }
   }
 }
 
@@ -32,15 +42,44 @@
   z-index: 10;
 
   svg {
-    fill: #014cff;
+    fill: $color-brand-primary-900;
+  }
+
+  &_disabled {
+    svg {
+      fill: $color-neutral-400;
+    }
   }
 }
 
 .container_main {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
+  width: 1570px;
 }
 
 .container_articles {
   display: flex;
+  width: 1350px;
+  gap: 5px;
+}
+
+.button_filter_wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.counter {
+  @extend %text-size-small-extra;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: $color-brand-secondary-700;
+  color: $color-neutral-0;
+  position: absolute;
+  top: 20px;
+  right: 85px;
 }

@@ -1,4 +1,5 @@
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -8,7 +9,7 @@
   row-gap: 48px;
   max-width: $wrapper-articles-preview-desktop;
   margin: 0 auto;
-  padding: 40px 0 78px;
+  padding: 40px 0 80px;
 }
 
 .heading {
@@ -29,4 +30,22 @@
   grid-template-columns: repeat(auto-fill, minmax(746px, auto));
   justify-items: center;
   gap: 24px;
+}
+
+.text {
+  @extend %text-size-medium;
+  color: $color-neutral-600;
+}
+
+.empty {
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 120px;
+}
+
+.crumbs {
+  max-width: $wrapper-articles-preview-desktop;
+  margin: 0 auto;
 }

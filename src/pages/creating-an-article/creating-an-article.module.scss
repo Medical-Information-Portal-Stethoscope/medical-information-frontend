@@ -1,0 +1,123 @@
+@import 'assets/styles/abstracts/variables/colors.scss';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/placeholders.scss';
+
+.wrapper {
+  max-width: $wrapper-authors-desktop;
+
+  &--response {
+    padding-bottom: 25px;
+  }
+}
+
+.heading {
+  @extend %heading-size-medium;
+  margin-bottom: 48px;
+}
+
+.subheading {
+  @extend %heading-size-small;
+  letter-spacing: $font-letter-spacing-main;
+}
+
+.rule {
+  color: $color-neutral-500;
+  letter-spacing: $font-letter-spacing-main;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+
+  > div:not(:first-child) {
+    margin-top: 40px;
+  }
+
+  &--photoPreview {
+    > div:last-child {
+      margin-top: 32px;
+    }
+  }
+}
+
+.instruction {
+  *:not(:first-child) {
+    margin-top: 16px;
+  }
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+
+  div {
+    max-width: 100%;
+  }
+}
+
+.comment {
+  width: 50%;
+  @extend %text-size-small;
+  color: $color-neutral-500;
+  letter-spacing: $font-letter-spacing-main;
+
+  &--error {
+    color: $color-system-error;
+  }
+}
+
+.submit {
+  *:not(:first-child) {
+    margin-top: 24px;
+  }
+}
+
+.imageFile {
+  > .comment {
+    margin-top: 8px;
+  }
+}
+
+.imageWrapper {
+  position: relative;
+  width: 390px;
+  height: 320px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 12px;
+    background: linear-gradient(
+        0deg,
+        rgba(72, 69, 84, 0.2) 0%,
+        rgba(72, 69, 84, 0.2) 100%
+      ),
+      lightgray 50%;
+
+    opacity: 0.2;
+  }
+}
+
+.imageDeleteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background-color: rgba(222, 222, 222, 0.3);
+  backdrop-filter: blur(5px);
+
+  svg {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.imagePreview {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}

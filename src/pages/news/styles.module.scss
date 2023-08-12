@@ -1,0 +1,20 @@
+@import '../../assets/styles/index.scss';
+
+.news {
+  max-width: $wrapper-main-content-desktop;
+  margin: 0 auto 80px;
+
+  &__container {
+    max-width: 1208px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 80px;
+  }
+}
+
+.crumbs {
+  max-width: $wrapper-news-preview-desktop;
+  margin: 0 auto;
+}

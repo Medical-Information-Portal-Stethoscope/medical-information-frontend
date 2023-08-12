@@ -1,10 +1,19 @@
 import type { Meta, StoryObj } from '@storybook/react';
+import { store } from 'services/app/store';
+import { Provider } from 'react-redux';
 import Input from './input';
 
 const meta: Meta<typeof Input> = {
   title: 'uikit/Input',
   component: Input,
   tags: ['autodocs'],
+  decorators: [
+    (Story) => (
+      <Provider store={store}>
+        <Story />
+      </Provider>
+    ),
+  ],
   argTypes: {
     size: {
       description: 'Размер',
@@ -75,6 +84,14 @@ const meta: Meta<typeof Input> = {
 
     touched: {
       description: 'Снятие фокуса',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: { type: 'radio' },
+    },
+
+    hasCheckmark: {
+      description: 'Зеленая галочка при успешной валидации данных',
       type: 'boolean',
       options: [true, false],
       defaultValue: false,

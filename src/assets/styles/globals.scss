@@ -1,8 +1,8 @@
 @import 'normalize.css/normalize.css';
+@import 'assets/styles/abstracts/variables/fonts';
 
 html {
   font-size: 10px;
-  scroll-behavior: smooth;
 }
 
 body {
@@ -48,4 +48,18 @@ button {
 
 ul {
   list-style-type: none;
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: $color-brand-primary-100;
+  border: 1px solid $color-neutral-0;
+}
+
+::-webkit-scrollbar-track {
+  background: $color-neutral-0;
 }

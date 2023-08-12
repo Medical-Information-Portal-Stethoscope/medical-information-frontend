@@ -16,7 +16,7 @@
 }
 
 .input {
-  max-width: 544px;
+  max-width: 648px;
 
   &--label {
     @extend %text-size-medium;
@@ -35,7 +35,7 @@
     padding: 19px 12px;
     border: 1px solid $color-neutral-400;
     border-radius: 16px;
-    transition: $transition-hover;
+    transition: $transition-button;
 
     &--medium {
       padding: 19px 12px;
@@ -115,10 +115,7 @@
   &--span {
     @extend %text-size-small-light;
     display: block;
+    min-height: 16px;
     color: $color-system-error;
-
-    &:empty {
-      min-height: 16px;
-    }
   }
 }

@@ -27,6 +27,11 @@ export const Header: FC = () => {
         <button
           type="button"
           className={styles.header__profile}
+          aria-label={
+            isPopupOpened
+              ? 'Закрыть модальное окно'
+              : 'Открыть модальное окно с переходами на страницы регистрации и авторизации'
+          }
           onClick={handleTogglePopup}
         >
           <UserHeaderIcon />
@@ -34,11 +39,9 @@ export const Header: FC = () => {
       </div>
 
       {isPopupOpened && (
-        // <Portal isOpened={isPopupOpened}>
         <div className={styles.tooltip}>
           <Tooltip />
         </div>
-        // </Portal>
       )}
     </header>
   );
