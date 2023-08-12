@@ -37,6 +37,10 @@
     font-weight: 600;
   }
 
+  &_userInitials {
+    user-select: none;
+  }
+
   &_title {
     @extend %heading-size-small;
     letter-spacing: $font-letter-spacing-main;

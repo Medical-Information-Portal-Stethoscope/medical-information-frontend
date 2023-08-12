@@ -63,7 +63,7 @@ function UserProfile() {
             </div>
             <div className={styles.userProfile_box}>
               <PersonalData
-                name={user?.first_name}
+                firstName={user?.first_name}
                 lastName={user?.last_name}
               />
             </div>

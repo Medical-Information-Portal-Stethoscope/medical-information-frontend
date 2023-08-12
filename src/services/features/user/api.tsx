@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api-routes';
 import {
@@ -102,6 +103,38 @@ export const getUserPersonalData = createAsyncThunk<
         headers: {
           Authorization: `Token ${token}`,
         },
+      }
+    );
+
+    const resBody: unknown = await res.json();
+
+    if (!res.ok) {
+      throw resBody;
+    }
+
+    return resBody as IUserPersonalData;
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});
+
+export const changeUserName = createAsyncThunk<
+  IUserPersonalData,
+  { token: string; first_name: string; last_name: string },
+  { rejectValue: TErrorResponse }
+>('user/changingName', async (data, { rejectWithValue }) => {
+  try {
+    const { token, first_name, last_name } = data;
+
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.me}`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ first_name, last_name }),
       }
     );
 

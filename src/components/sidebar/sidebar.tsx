@@ -106,7 +106,9 @@ function Sidebar() {
         <div>
           <div className={styles.sidebar_header}>
             <div className={styles.sidebar_avatar}>
-              <p>ДВ</p>
+              <span
+                className={styles.sidebar_userInitials}
+              >{`${user?.first_name[0].toUpperCase()}${user?.last_name[0].toUpperCase()}`}</span>
             </div>
             <div>
               <h2
