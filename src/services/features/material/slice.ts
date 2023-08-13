@@ -1,6 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
-import { getMaterialById } from './api';
+import {
+  getMaterialById,
+  addCommentToMaterial,
+  removeCommentFromMaterial,
+} from './api';
 
 interface IErrorResponse {
   [key: string]: string | number | string[];
@@ -44,6 +48,35 @@ const materialSlice = createSlice({
         state.process.isLoading = false;
         state.process.error = null;
         state.material = payload;
+      })
+
+      .addCase(addCommentToMaterial.pending, (state) => {
+        state.process.isLoading = true;
+        state.process.error = null;
+      })
+      .addCase(addCommentToMaterial.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+      .addCase(addCommentToMaterial.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state.material?.comments?.unshift(payload);
+      })
+      .addCase(removeCommentFromMaterial.pending, (state) => {
+        state.process.isLoading = true;
+        state.process.error = null;
+      })
+      .addCase(removeCommentFromMaterial.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+      .addCase(removeCommentFromMaterial.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state!.material!.comments = state.material?.comments?.filter(
+          (comment) => payload.id !== comment.id
+        );
       });
   },
 });
