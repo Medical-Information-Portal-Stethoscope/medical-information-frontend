@@ -122,11 +122,7 @@ export const AvatarModal: FC<IAvatarModalProps> = ({
         token,
         avatar: '',
       })
-    ).then((res) => {
-      if (res.type.endsWith('fulfilled')) {
-        onClose();
-      }
-    });
+    );
   };
 
   const renderPlacematContent = () => {
