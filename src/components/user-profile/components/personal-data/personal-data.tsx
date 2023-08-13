@@ -89,6 +89,7 @@ export const PersonalData: FC<IPersonalDataProps> = ({
         />
       </div>
       <Button
+        extraClass={styles.userProfile_loading}
         type="submit"
         label="Сохранить"
         size="small"
