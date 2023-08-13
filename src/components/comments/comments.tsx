@@ -76,12 +76,12 @@ export const Comments = () => {
         commentId,
       })
     ).then((res) => {
-      console.log(res);
+      const resCommentId = res.payload?.id ? res.payload.id : '';
       setAllComments((prev) =>
-        prev.filter((comment) => commentId !== comment.id && { ...comment })
+        prev.filter((comment) => resCommentId !== comment.id && { ...comment })
       );
       setVisibleComments((prev) =>
-        prev.filter((comment) => commentId !== comment.id && { ...comment })
+        prev.filter((comment) => resCommentId !== comment.id && { ...comment })
       );
     });
   };
