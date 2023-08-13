@@ -1,4 +1,4 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useScrollToTop } from 'hooks/useScrollToTop';
 import {
@@ -24,10 +24,12 @@ import {
 } from 'services/features/information-material/selectors';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import routes from 'utils/routes';
+import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { getFilteredArticles } from 'services/features/filter/api';
 import styles from './articles-preview-page.module.scss';
 
 export default function ArticlesPreviewPage() {
+  const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
   const dispatch = useAppDispatch();
   const articlesBase = useAppSelector(articlesStorage);
   const nextPageArticles = useAppSelector(nextArticlesPage);
@@ -45,8 +47,24 @@ export default function ArticlesPreviewPage() {
 
   useScrollToTop();
 
+  const toggleButtonVisible = () => {
+    if (
+      document.body.scrollTop > 1400 ||
+      document.documentElement.scrollTop > 1400
+    ) {
+      setIsButtonToTopVisible(true);
+    } else {
+      setIsButtonToTopVisible(false);
+    }
+  };
+
   useEffect(() => {
     dispatch(setIsAllArticles());
+    window.addEventListener('scroll', toggleButtonVisible, false);
+
+    return () => {
+      window.removeEventListener('scroll', toggleButtonVisible, false);
+    };
   }, []); // eslint-disable-line
 
   useEffect(() => {
@@ -114,6 +132,9 @@ export default function ArticlesPreviewPage() {
                 />
               )}
             </div>
+          </div>
+          <div className={styles.top_button}>
+            {isButtonToTopVisible && <ButtonTopNavigation />}
           </div>
         </section>
       </main>
