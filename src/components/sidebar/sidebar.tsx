@@ -17,6 +17,7 @@ import {
   cardFavoritesHeightDesktopBig,
   cardFavoritesGapDesktopBig,
 } from 'utils/constants';
+import { Avatar } from './components/avatar';
 import styles from './sidebar.module.scss';
 
 function Sidebar() {
@@ -105,11 +106,15 @@ function Sidebar() {
       <div className={isButtonToTopVisible ? styles.sidebar_content : ''}>
         <div>
           <div className={styles.sidebar_header}>
-            <div className={styles.sidebar_avatar}>
-              <span
-                className={styles.sidebar_userInitials}
-              >{`${user?.first_name[0].toUpperCase()}${user?.last_name[0].toUpperCase()}`}</span>
-            </div>
+            <Avatar
+              user={
+                user && {
+                  first_name: user?.first_name,
+                  last_name: user?.last_name,
+                  avatar: user?.avatar,
+                }
+              }
+            />
             <div>
               <h2
                 className={styles.sidebar_title}

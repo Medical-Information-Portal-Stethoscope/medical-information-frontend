@@ -6,6 +6,7 @@ import {
   logoutUser,
   getUserPersonalData,
   changeUserName,
+  changeUserAvatar,
   subscribeUserToMailingList,
   unsubscribeUserFromMailingList,
 } from './api';
@@ -93,6 +94,16 @@ const userSlice = createSlice({
         state.user = payload;
       })
       .addCase(changeUserName.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(changeUserAvatar.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state.user = payload;
+      })
+      .addCase(changeUserAvatar.rejected, (state, { payload }) => {
         state.process.isLoading = false;
         state.process.error = payload !== undefined ? payload : null;
       })

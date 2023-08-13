@@ -1,5 +1,5 @@
 import { FC } from 'react';
-
+import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import { UserIcon } from 'shared/icons/user-icon';
@@ -17,9 +17,22 @@ export const UserHeaderIcon: FC = () => {
     <UserIcon color="white" size="32" className={styles.user__default} />
   );
   const userIcon = (
-    <div className={styles.user__icon}>
+    <div
+      className={classNames(styles.user__icon, {
+        [styles['user__icon-image']]: !user?.avatar,
+        [styles['user__icon-mask']]: user?.avatar,
+      })}
+    >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-      <span className={styles.user__content}>{username}</span>
+      {user?.avatar ? (
+        <img
+          className={styles.user__avatar}
+          src={user.avatar}
+          alt="Аватар пользователя"
+        />
+      ) : (
+        <span className={styles.user__content}>{username}</span>
+      )}
     </div>
   );
 

@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
 .userProfile {
@@ -26,6 +27,7 @@
         background-color: $color-neutral-100;
         border-color: $color-neutral-150;
         transition: none;
+        transition: border-color 300ms ease-out;
 
         &:has(input:focus) {
           background-color: $color-neutral-0;

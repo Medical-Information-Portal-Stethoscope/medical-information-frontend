@@ -24,23 +24,6 @@
     padding-bottom: 56px;
   }
 
-  &_avatar {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 91px;
-    height: 88px;
-    background-color: $color-brand-primary-100;
-    border-radius: 50%;
-    color: $color-brand-primary-900;
-    @extend %text-article;
-    font-weight: 600;
-  }
-
-  &_userInitials {
-    user-select: none;
-  }
-
   &_title {
     @extend %heading-size-small;
     letter-spacing: $font-letter-spacing-main;

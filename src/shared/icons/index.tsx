@@ -23,6 +23,7 @@ import { DiagnosticsIcon } from './diagnostics-icon';
 import { DirectionToolIcon } from './direction-tool-icon';
 import { EclipsedIcon } from './eclipsed-icon';
 import { EditIcon } from './edit-icon';
+import { EditWithBorderIcon } from './edit-with-border-icon';
 import { EyeClosedIcon } from './eye-closed-icon';
 import { EyeIcon } from './eye-icon';
 import { FiltersIcon } from './filters-icon';
@@ -124,6 +125,7 @@ const icons = {
   DirectionToolIcon,
   EclipsedIcon,
   EditIcon,
+  EditWithBorderIcon,
   EyeClosedIcon,
   EyeIcon,
   FiltersIcon,

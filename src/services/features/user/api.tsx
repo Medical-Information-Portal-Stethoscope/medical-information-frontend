@@ -150,6 +150,38 @@ export const changeUserName = createAsyncThunk<
   }
 });
 
+export const changeUserAvatar = createAsyncThunk<
+  IUserPersonalData,
+  { token: string; avatar: string | ArrayBuffer },
+  { rejectValue: TErrorResponse }
+>('user/avatar', async (data, { rejectWithValue }) => {
+  try {
+    const { token, avatar } = data;
+
+    const res = await fetch(
+      `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.me}`,
+      {
+        method: 'PATCH',
+        headers: {
+          Authorization: `Token ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ avatar }),
+      }
+    );
+
+    const resBody: unknown = await res.json();
+
+    if (!res.ok) {
+      throw resBody;
+    }
+
+    return resBody as IUserPersonalData;
+  } catch (err) {
+    return rejectWithValue(err as TErrorResponse);
+  }
+});
+
 export const subscribeUserToMailingList = createAsyncThunk<
   unknown,
   string,

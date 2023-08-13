@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'services/app/hooks';
@@ -41,14 +42,15 @@ export const Header: FC = () => {
       <Menu />
       <div className={styles.header__search}>
         <Search />
-        <button
-          type="button"
+        <div
           className={styles.header__profile}
+          role="button"
+          tabIndex={0}
           aria-label={createAriaLabel()}
           onClick={user ? navigateToUserProfile : handleTogglePopup}
         >
           <UserHeaderIcon />
-        </button>
+        </div>
       </div>
 
       {isPopupOpened && (
