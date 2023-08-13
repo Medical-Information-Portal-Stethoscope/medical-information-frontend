@@ -84,7 +84,7 @@ export const Comments = () => {
   const sendComment = async () => {
     const reqData = {
       materialId: currentMaterial!.material!.id,
-      text: 'comment text',
+      text: values.comment,
     };
 
     dispatch(addCommentToMaterial(reqData)).then((res) => {
