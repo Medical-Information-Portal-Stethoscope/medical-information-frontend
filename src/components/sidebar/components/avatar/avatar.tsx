@@ -5,7 +5,7 @@ import { resetServerError } from 'services/features/user/slice';
 import { showServerError } from 'services/features/user/selectors';
 import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
 import { Icon } from 'shared/icons';
-import { AvatarModal } from './avatar-modal/avatar-modal';
+import { AvatarModal } from '../avatar-modal/avatar-modal';
 import styles from './avatar.module.scss';
 
 interface IAvatarProps {

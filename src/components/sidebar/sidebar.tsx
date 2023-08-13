@@ -17,7 +17,7 @@ import {
   cardFavoritesHeightDesktopBig,
   cardFavoritesGapDesktopBig,
 } from 'utils/constants';
-import { Avatar } from './components/avatar';
+import { Avatar } from './components/avatar/avatar';
 import styles from './sidebar.module.scss';
 
 function Sidebar() {

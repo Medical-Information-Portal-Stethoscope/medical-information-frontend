@@ -18,7 +18,6 @@ import {
   schemaArticleImage,
 } from 'utils/data/validation/yup-schema';
 import { bytesInMegabyte } from 'utils/constants';
-import { validationErrors } from 'utils/data/validation/validation-errors';
 import { createArticle } from 'utils/api';
 import { filterFormValues } from 'utils/functions/filter-form-values';
 import { Response } from './components/response';
@@ -29,9 +28,7 @@ const articleImageSizeLimitBytes = articleImageSizeLimitMb * bytesInMegabyte;
 
 export const CreatingAnArticlePage: FC = (): ReactElement => {
   const [response, setResponse] = useState<undefined | boolean>(undefined);
-  const [selectedImage, setSelectedImage] = useState<null | Blob | MediaSource>(
-    null
-  );
+  const [selectedImage, setSelectedImage] = useState<null | Blob>(null);
   const [selectedImagePreview, setSelectedImagePreview] = useState('');
   const [hasSelectedImageSizeError, setHasSelectedImageSizeError] =
     useState(false);
@@ -190,7 +187,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
         />
       </div>
       <div className={styles.imageFile}>
-        {selectedImagePreview && (
+        {selectedImagePreview && !hasSelectedImageSizeError && (
           <div className={styles.imageWrapper}>
             <img
               className={styles.imagePreview}
@@ -205,6 +202,30 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             />
           </div>
         )}
+
+        {selectedImagePreview && hasSelectedImageSizeError && (
+          <>
+            <div className={styles.imageWrapperError}>
+              <p>{`Размер загружаемой фотографии не должен превышать ${String(
+                articleImageSizeLimitMb
+              ).replace(/\./, ',')} Мб. Текущий размер: ${
+                selectedImage &&
+                (selectedImage.size / bytesInMegabyte)
+                  .toFixed(2)
+                  .replace(/\./, ',')
+              } Мб`}</p>
+            </div>
+            <FileInput
+              id={nanoid()}
+              name="image"
+              label="Выбрать фотографию"
+              icon={<Icon icon="PaperClipIcon" color="blue" />}
+              accept=".jpg, .jpeg, .png"
+              onChange={selectFile}
+            />
+          </>
+        )}
+
         {!selectedImagePreview && (
           <FileInput
             id={nanoid()}
@@ -215,15 +236,11 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             onChange={selectFile}
           />
         )}
-        <p
-          className={classNames(styles.comment, {
-            [styles[`comment--error`]]: hasSelectedImageSizeError,
-          })}
-        >
+        <p className={classNames(styles.comment)}>
           {!selectedImage &&
-            'Фотография обязательна, не более 1,5 MБ в форматах jpg, jpeg или png'}
-          {hasSelectedImageSizeError &&
-            validationErrors.articles.image.unacceptableSize}
+            `Фотография обязательна, не более ${String(
+              articleImageSizeLimitMb
+            ).replace(/\./, ',')} MБ в форматах jpg, jpeg или png`}
         </p>
       </div>
       <div className={styles.submit}>
