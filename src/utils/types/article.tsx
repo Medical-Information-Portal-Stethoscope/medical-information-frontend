@@ -1,3 +1,16 @@
+export type TComment = {
+  id: string;
+  text: string;
+  author: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    role: string;
+  };
+  created_at: string;
+  updated_at: string;
+};
+
 export type TArticle = {
   id: string;
   is_fan: boolean;
@@ -25,6 +38,7 @@ export type TArticle = {
     pk: string;
     name: string;
   }[];
+  comments?: TComment[] | null | undefined;
 };
 
 export type TArticleCreation = {

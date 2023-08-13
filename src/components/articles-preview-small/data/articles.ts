@@ -34,6 +34,44 @@ export const articlesExample = [
         name: 'Новости',
       },
     ],
+    comments: [
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
+      },
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
+      },
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
+      },
+    ],
   },
   {
     id: '72693381-ddb5-4585-b491-1621cf7f730f',
@@ -68,6 +106,44 @@ export const articlesExample = [
       {
         pk: '357e89f4-5b75-483f-9767-eff6174083ef',
         name: 'Новости',
+      },
+    ],
+    comments: [
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
+      },
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
+      },
+      {
+        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        text: 'Очень важное мнение',
+        author: {
+          id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+          first_name: 'Диванный',
+          last_name: 'Эксперт',
+          role: 'user',
+        },
+        created_at: '2023-08-11T23:31:31.734Z',
+        updated_at: '2023-08-11T23:31:31.734Z',
       },
     ],
   },

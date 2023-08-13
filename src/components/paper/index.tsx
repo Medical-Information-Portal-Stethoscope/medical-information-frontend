@@ -23,6 +23,8 @@ import { articleExample } from 'components/paper/data/data';
 
 import { TArticle } from 'utils/types/article';
 
+import { Comments } from 'components/comments/comments';
+
 import styles from './styles.module.scss';
 
 interface Ipaper {
@@ -139,6 +141,8 @@ export const Paper: FC<Ipaper> = ({
           </ul>
         </div>
       ) : null}
+
+      <Comments />
     </article>
   );
 };

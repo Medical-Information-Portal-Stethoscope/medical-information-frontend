@@ -38,11 +38,13 @@
       fill: $color-brand-secondary-900;
     }
 
-    &:hover {
-      color: $color-brand-primary-500;
+    &_header {
+      &:hover {
+        color: $color-brand-primary-500;
 
-      svg {
-        fill: $color-brand-secondary-700;
+        svg {
+          fill: $color-brand-secondary-700;
+        }
       }
     }
   }

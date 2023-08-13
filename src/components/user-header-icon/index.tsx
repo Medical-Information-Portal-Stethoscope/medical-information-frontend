@@ -7,19 +7,34 @@ import { PlusIcon } from 'shared/icons/plus-icon';
 
 import styles from './styles.module.scss';
 
-export const UserHeaderIcon: FC = () => {
+type UserInfo = {
+  name: string;
+  avatar?: string | '';
+  role: string;
+  isHeader: boolean;
+};
+
+export const UserHeaderIcon: FC<UserInfo> = ({
+  name,
+  avatar,
+  role,
+  isHeader,
+}) => {
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
-  const username = `${user?.first_name[0]} ${user?.last_name[0]}` || 'X Y';
-  const isDoctor = user?.role === 'doctor';
+  const isDoctor = role === 'doctor';
 
   const defaultUserIcon = (
     <UserIcon color="white" size="32" className={styles.user__default} />
   );
   const userIcon = (
-    <div className={styles.user__icon}>
+    <div
+      className={`${styles.user__icon} ${
+        isHeader ? styles.user__icon_header : null
+      }`}
+    >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-      <p className={styles.user__content}>{username}</p>
+      <p className={styles.user__content}>{name}</p>
     </div>
   );
 
@@ -33,6 +48,9 @@ export const UserHeaderIcon: FC = () => {
         return userIcon;
     }
   } else {
-    return defaultUserIcon;
+    if (isHeader) {
+      return defaultUserIcon;
+    }
+    return userIcon;
   }
 };

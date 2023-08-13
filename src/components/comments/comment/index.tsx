@@ -1,63 +1,69 @@
-import { FC } from 'react';
-import classNames from 'classnames';
+/* eslint-disable react/destructuring-assignment */
 import { UserHeaderIcon } from 'components/user-header-icon';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
+import renderFormatDateArticle from 'utils/functions/render-format-date-article';
+import Button from 'shared/buttons/button/button';
+import { TComment } from 'utils/types/article';
 import styles from './styles.module.scss';
 
-// type CommentType = {
-//   id: string;
-//   text: string;
-//   author: {
-//     id: string;
-//     first_name: string;
-//     last_name: string;
-//     role: string;
-//   };
-//   created_at: string;
-//   updated_at?: string;
-// };
-
-const commentExample = {
-  id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-  text: 'Очень важный комментарий',
-  author: {
-    id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-    first_name: 'Дарья',
-    last_name: 'Врачева',
-    role: 'user',
-  },
-  created_at: '2023-08-11T23:31:31.734Z',
-  updated_at: '2023-08-11T23:31:31.734Z',
-};
-
-export const Comment: FC = (comment = commentExample) => {
+const Comment = (comment: TComment) => {
+  // текущий пользователь под логином
   const { user } = useAppSelector(showUserPersonalData);
-  //   const isMaterialOwner = user?.id === comment.author.id;
 
-  //   const name =
-  //     user?.first_name && user?.last_name
-  //       ? `${user?.first_name} ${user?.last_name}`
-  //       : 'Дарья Врачева';
+  const commentDate = renderFormatDateArticle(comment.created_at);
+
+  //   владелец комментария
+  const { author } = comment;
+  // для комментов можно ли удалять?
+  const isCommentOwner = user?.id === author.id;
+
+  const authorName =
+    author?.first_name && author?.last_name
+      ? `${author?.first_name} ${author?.last_name}`
+      : 'Диванный Эксперт';
+
+  const authorNameLogo =
+    author?.first_name && author?.last_name
+      ? `${author?.first_name[0]} ${author?.last_name[0]}`
+      : 'Диванный Эксперт';
+
+  const removeComment = () => {
+    removeComment();
+  };
 
   return (
-    <div className={styles.comment}>
-      <div className={styles.comment__data}>
-        <UserHeaderIcon />
-        {/* <div className={styles.comment__info}>
-          <span
-            className={
-              (styles.comment__name,
-              classNames({ [styles.comment__owner]: isMaterialOwner }))
-            }
-          >
-            {name}
-          </span>
-          <span>time</span>
+    <div
+      className={`${styles.comment} ${
+        isCommentOwner ? styles.comment_owner : null
+      }`}
+    >
+      <div className={styles.comment__info}>
+        <div className={styles.comment__user}>
+          <UserHeaderIcon
+            name={authorNameLogo}
+            role={author.role}
+            avatar=""
+            isHeader={false}
+          />
+          <div className={styles.comment__meta}>
+            <span className={styles.comment__name}>{authorName}</span>
+            <span className={styles.comment__date}>{commentDate}</span>
+          </div>
         </div>
-        <span>remove btn</span> */}
+
+        {isCommentOwner && (
+          <Button
+            model="tertiary"
+            onClick={removeComment}
+            label="Удалить"
+            extraClass={styles.comment__remove}
+          />
+        )}
       </div>
-      {/* <p>comment</p> */}
+      <p className={styles.comment__text}>{comment.text}</p>
     </div>
   );
 };
+
+export default Comment;
