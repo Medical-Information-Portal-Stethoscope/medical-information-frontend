@@ -25,24 +25,32 @@ const maxCommentsDesktop = 7;
 export const Comments = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const currentMaterial = useAppSelector(getDataById);
+  const { user } = useAppSelector(showUserPersonalData);
+  const isUserOnline = !!user?.id;
 
-  const [allComments, setAllComments] = useState<IComment[]>([]);
+  const [allComments, setAllComments] = useState<IComment[]>(
+    currentMaterial.material?.comments || []
+  );
   const [visibleComments, setVisibleComments] = useState<IComment[] | []>([]);
   const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(
     visibleComments.length < allComments.length
   );
-
-  const currentMaterial = useAppSelector(getDataById);
-  const { user } = useAppSelector(showUserPersonalData);
-  const isUserOnline = !!user?.id;
 
   useEffect(() => {
     const comments = currentMaterial.material?.comments || [];
     const visibleData = comments?.slice(0, maxCommentsDesktop) || [];
     setAllComments(comments);
     setVisibleComments(visibleData);
-    setisShowBtnVisible(visibleData.length < comments.length);
+    // setisShowBtnVisible(visibleData.length < comments.length);
   }, []);
+
+  useEffect(() => {
+    if (allComments.length <= maxCommentsDesktop) {
+      setVisibleComments(allComments);
+      setisShowBtnVisible(false);
+    }
+  }, [allComments, visibleComments]);
 
   const showAllComments = () => {
     setVisibleComments(allComments);
@@ -68,6 +76,7 @@ export const Comments = () => {
         commentId,
       })
     ).then((res) => {
+      console.log(res);
       setAllComments((prev) =>
         prev.filter((comment) => commentId !== comment.id && { ...comment })
       );
