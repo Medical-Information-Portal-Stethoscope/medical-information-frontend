@@ -14,7 +14,7 @@ const routes = Object.freeze({
   podcasts: { route: '/podcasts', name: 'Подкасты' },
   drugs: { route: '/drugs', name: 'Лекарства и БАД' },
   doctorQuestion: { route: '/doctor', name: 'Вопрос врачу' },
-  authors: { route: '/authors', name: 'Авторы' },
+  authors: { route: '/authors', name: 'Авторам' },
   about: { route: '/about-us', name: 'О портале' },
   profile: '/profile',
   favorites: 'favorites',
