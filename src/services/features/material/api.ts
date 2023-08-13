@@ -1,10 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import api from 'utils/api-routes';
-import { TArticle, TComment } from 'utils/types/article';
+import { TArticle, IComment } from 'utils/types/article';
 
 interface IErrorResponse {
   [key: string]: string | number | string[];
 }
+
+type TAddCommentReq = {
+  materialId: string;
+  text: string;
+};
+
+const token = localStorage.getItem('auth_token');
 
 export const getMaterialById = createAsyncThunk<
   TArticle,
@@ -35,42 +42,43 @@ export const getMaterialById = createAsyncThunk<
 });
 
 export const addCommentToMaterial = createAsyncThunk<
-  TComment,
-  { materialId: string; text: string },
+  IComment,
+  TAddCommentReq,
   { rejectValue: IErrorResponse }
->('material/addComment', async ({ materialId, text }, { rejectWithValue }) => {
+>('material/addComment', async (reqData, { rejectWithValue }) => {
   try {
     const res = await fetch(
-      `${api.baseUrl}${api.endpoints.articles.base}/${materialId}/comments/`,
+      `${api.baseUrl}${api.endpoints.articles.base}/${reqData.materialId}/comments/`,
       {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Token ${token}`,
         },
         body: JSON.stringify({
-          text,
+          text: reqData.text,
         }),
       }
     );
 
-    const resBody: TComment = await res.json();
+    const resBody: IComment = await res.json();
 
     if (!res.ok) {
       throw Object.assign(resBody, { status: res?.status });
     }
 
-    return resBody as TComment;
+    return resBody as IComment;
   } catch (err) {
     return rejectWithValue(err as IErrorResponse);
   }
 });
 
 export const removeCommentFromMaterial = createAsyncThunk<
-  TComment,
+  IComment,
   { materialId: string; commentId: string },
   { rejectValue: IErrorResponse }
 >(
-  'material/addComment',
+  'material/removeComment',
   async ({ materialId, commentId }, { rejectWithValue }) => {
     try {
       const res = await fetch(
@@ -79,17 +87,18 @@ export const removeCommentFromMaterial = createAsyncThunk<
           method: 'DELETE',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Token ${token}`,
           },
         }
       );
 
-      const resBody: TComment = await res.json();
+      const resBody = await res.json();
 
       if (!res.ok) {
         throw Object.assign(resBody, { status: res?.status });
       }
 
-      return resBody as TComment;
+      return resBody;
     } catch (err) {
       return rejectWithValue(err as IErrorResponse);
     }

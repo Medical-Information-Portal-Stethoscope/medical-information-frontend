@@ -102,14 +102,15 @@ export const Paper: FC<Ipaper> = ({
           onClick={handleForward}
           extraClass={styles.paper__button}
         /> */}
-
-        <ButtonWithIconThree
-          icon={
-            <CommentsIcon color="gray" size="24" className={styles.forward} />
-          }
-          onClick={handleAddComment}
-          extraClass={`${styles.paper__button} `}
-        />
+        <a href="#comments">
+          <ButtonWithIconThree
+            icon={
+              <CommentsIcon color="gray" size="24" className={styles.forward} />
+            }
+            onClick={handleAddComment}
+            extraClass={`${styles.paper__button} `}
+          />
+        </a>
       </div>
 
       {/* TODO: определить ссылку на автора */}

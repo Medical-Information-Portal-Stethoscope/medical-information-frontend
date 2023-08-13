@@ -1,4 +1,4 @@
-export type TComment = {
+export interface IComment {
   id: string;
   text: string;
   author: {
@@ -9,7 +9,7 @@ export type TComment = {
   };
   created_at: string;
   updated_at: string;
-};
+}
 
 export type TArticle = {
   id: string;
@@ -38,7 +38,7 @@ export type TArticle = {
     pk: string;
     name: string;
   }[];
-  comments?: TComment[] | null | undefined;
+  comments: IComment[];
 };
 
 export type TArticleCreation = {

@@ -1,56 +1,84 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import {
+  addCommentToMaterial,
+  removeCommentFromMaterial,
+} from 'services/features/material/api';
+
 import TextArea from 'shared/text-area/text-area';
 
 import Button from 'shared/buttons/button/button';
-import { TComment } from 'utils/types/article';
-// import { useSelector } from 'react-redux';
-// import { getDataById } from 'services/features/material/selectors';
-import { useAppSelector } from 'services/app/hooks';
+import { IComment } from 'utils/types/article';
+import { getDataById } from 'services/features/material/selectors';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 
 import routes from 'utils/routes';
 import Comment from './comment';
-import { testComments } from './data';
 
 import styles from './styles.module.scss';
 
-let maxCommentsDesktop = 7;
+const maxCommentsDesktop = 7;
 
 export const Comments = () => {
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const currentMaterial = useSelector(getDataById);
-  // const comments = currentMaterial.material?.comments || testComments;
-  const comments = testComments;
-  let visibleData = comments?.slice(0, maxCommentsDesktop) || null;
 
-  const [visibleComments, setVisibleComments] = useState<TComment[] | null>(
-    visibleData
-  );
+  const [allComments, setAllComments] = useState<IComment[]>([]);
+  const [visibleComments, setVisibleComments] = useState<IComment[] | []>([]);
   const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(
-    visibleData.length < comments.length
+    visibleComments.length < allComments.length
   );
 
+  const currentMaterial = useAppSelector(getDataById);
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
 
-  const showAllComments = () => {
-    maxCommentsDesktop = comments ? comments.length : maxCommentsDesktop;
-    visibleData = comments?.slice(0, maxCommentsDesktop) || null;
+  useEffect(() => {
+    const comments = currentMaterial.material?.comments || [];
+    const visibleData = comments?.slice(0, maxCommentsDesktop) || [];
+    setAllComments(comments);
     setVisibleComments(visibleData);
+    setisShowBtnVisible(visibleData.length < comments.length);
+  }, []);
+
+  const showAllComments = () => {
+    setVisibleComments(allComments);
     setisShowBtnVisible(false);
   };
 
-  const sendComment = () => {
-    // req:
-    // material id
-    // body: {
-    //   "text": "string"
-    // }
+  const sendComment = async () => {
+    const reqData = {
+      materialId: currentMaterial!.material!.id,
+      text: 'comment text',
+    };
+    dispatch(addCommentToMaterial(reqData)).then((res) => {
+      const newComment = (res.payload as IComment) && (res.payload as IComment);
+      setAllComments((prev) => [newComment, ...prev]);
+      setVisibleComments((prev) => [newComment, ...prev]);
+    });
+  };
+
+  const removeComment = (commentId: string) => {
+    dispatch(
+      removeCommentFromMaterial({
+        materialId: currentMaterial!.material!.id,
+        commentId,
+      })
+    ).then((res) => {
+      setAllComments((prev) =>
+        prev.filter((comment) => commentId !== comment.id && { ...comment })
+      );
+      setVisibleComments((prev) =>
+        prev.filter((comment) => commentId !== comment.id && { ...comment })
+      );
+    });
   };
 
   return (
-    <section className={styles.comments}>
+    <section className={styles.comments} id="comments">
       <p className={styles.comments__label}>Комментарии к статье</p>
       {isUserOnline ? (
         <form action="submit" className={styles.comments__form}>
@@ -58,7 +86,8 @@ export const Comments = () => {
             name="comment"
             placeholder="Написать комментарий..."
             minHeight={149}
-            value="Тестовый комментарий"
+            defaultValue="Тестовый комментарий"
+            value="тест"
           />
           <Button
             label="Отправить"
@@ -87,16 +116,9 @@ export const Comments = () => {
 
       {visibleComments ? (
         <ul className={styles.comments__list}>
-          {visibleComments.map((item) => (
+          {visibleComments.map((item: IComment) => (
             <li key={item.id}>
-              <Comment
-                author={item.author}
-                created_at={item.created_at}
-                id={item.id}
-                text={item.text}
-                updated_at={item.updated_at}
-                key={item.id}
-              />
+              <Comment comment={item} removeComment={removeComment} />
             </li>
           ))}
 

@@ -1,13 +1,18 @@
-/* eslint-disable react/destructuring-assignment */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { UserHeaderIcon } from 'components/user-header-icon';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import renderFormatDateArticle from 'utils/functions/render-format-date-article';
 import Button from 'shared/buttons/button/button';
-import { TComment } from 'utils/types/article';
+import { IComment } from 'utils/types/article';
 import styles from './styles.module.scss';
 
-const Comment = (comment: TComment) => {
+interface ICommentItem {
+  comment: IComment;
+  removeComment: (commentId: string) => void;
+}
+
+const Comment = ({ comment, removeComment }: ICommentItem) => {
   // текущий пользователь под логином
   const { user } = useAppSelector(showUserPersonalData);
 
@@ -28,8 +33,8 @@ const Comment = (comment: TComment) => {
       ? `${author?.first_name[0]} ${author?.last_name[0]}`
       : 'Диванный Эксперт';
 
-  const removeComment = () => {
-    removeComment();
+  const removeItem = () => {
+    removeComment(comment.id);
   };
 
   return (
@@ -55,7 +60,7 @@ const Comment = (comment: TComment) => {
         {isCommentOwner && (
           <Button
             model="tertiary"
-            onClick={removeComment}
+            onClick={removeItem}
             label="Удалить"
             extraClass={styles.comment__remove}
           />

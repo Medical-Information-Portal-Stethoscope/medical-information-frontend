@@ -34,6 +34,7 @@ export const newsExample = [
         name: 'Новости',
       },
     ],
+    comments: [],
   },
   {
     id: '72693381-ddb5-4585-b491-1621cf7f730f',
@@ -70,5 +71,6 @@ export const newsExample = [
         name: 'Новости',
       },
     ],
+    comments: [],
   },
 ];

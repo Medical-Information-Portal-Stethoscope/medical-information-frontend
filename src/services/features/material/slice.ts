@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
 import {
@@ -49,7 +50,6 @@ const materialSlice = createSlice({
         state.process.error = null;
         state.material = payload;
       })
-
       .addCase(addCommentToMaterial.pending, (state) => {
         state.process.isLoading = true;
         state.process.error = null;
@@ -74,7 +74,7 @@ const materialSlice = createSlice({
       .addCase(removeCommentFromMaterial.fulfilled, (state, { payload }) => {
         state.process.isLoading = false;
         state.process.error = null;
-        state!.material!.comments = state.material?.comments?.filter(
+        state!.material!.comments = state!.material!.comments?.filter(
           (comment) => payload.id !== comment.id
         );
       });
