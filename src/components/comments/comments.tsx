@@ -6,7 +6,9 @@ import {
   addCommentToMaterial,
   removeCommentFromMaterial,
 } from 'services/features/material/api';
-
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+import { schemaComment } from 'utils/data/validation/yup-schema';
 import TextArea from 'shared/text-area/text-area';
 
 import Button from 'shared/buttons/button/button';
@@ -42,7 +44,6 @@ export const Comments = () => {
     const visibleData = comments?.slice(0, maxCommentsDesktop) || [];
     setAllComments(comments);
     setVisibleComments(visibleData);
-    // setisShowBtnVisible(visibleData.length < comments.length);
   }, []);
 
   useEffect(() => {
@@ -57,15 +58,40 @@ export const Comments = () => {
     setisShowBtnVisible(false);
   };
 
+  const formik = useFormik({
+    initialValues: {
+      comment: '',
+    },
+
+    validationSchema: Yup.object().shape(schemaComment(Yup)),
+
+    onSubmit: () => {
+      formik.resetForm();
+    },
+  });
+
+  const {
+    values,
+    errors,
+    dirty,
+    isValid,
+    touched,
+    setFieldValue,
+    setFieldTouched,
+    handleChange,
+  } = formik;
+
   const sendComment = async () => {
     const reqData = {
       materialId: currentMaterial!.material!.id,
       text: 'comment text',
     };
+
     dispatch(addCommentToMaterial(reqData)).then((res) => {
       const newComment = (res.payload as IComment) && (res.payload as IComment);
       setAllComments((prev) => [newComment, ...prev]);
       setVisibleComments((prev) => [newComment, ...prev]);
+      setFieldValue('comment', '');
     });
   };
 
@@ -90,13 +116,23 @@ export const Comments = () => {
     <section className={styles.comments} id="comments">
       <p className={styles.comments__label}>Комментарии к статье</p>
       {isUserOnline ? (
-        <form action="submit" className={styles.comments__form}>
+        <form
+          onSubmit={sendComment}
+          action="submit"
+          className={styles.comments__form}
+        >
           <TextArea
             name="comment"
             placeholder="Написать комментарий..."
             minHeight={149}
             defaultValue="Тестовый комментарий"
-            value="тест"
+            // hasCounter
+            // maxSymbols={4000}
+            value={values.comment}
+            error={errors.comment}
+            touched={touched.comment}
+            onFocus={() => setFieldTouched('comment')}
+            onChange={handleChange}
           />
           <Button
             label="Отправить"
@@ -104,6 +140,7 @@ export const Comments = () => {
             model="primary"
             extraClass={styles.comments__send}
             onClick={sendComment}
+            isDisabled={!dirty || !isValid}
           />
         </form>
       ) : (
