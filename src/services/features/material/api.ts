@@ -11,8 +11,6 @@ type TAddCommentReq = {
   text: string;
 };
 
-const token = localStorage.getItem('auth_token');
-
 export const getMaterialById = createAsyncThunk<
   TArticle,
   string,
@@ -46,6 +44,7 @@ export const addCommentToMaterial = createAsyncThunk<
   TAddCommentReq,
   { rejectValue: IErrorResponse }
 >('material/addComment', async (reqData, { rejectWithValue }) => {
+  const token = localStorage.getItem('auth_token');
   try {
     const res = await fetch(
       `${api.baseUrl}${api.endpoints.articles.base}/${reqData.materialId}/comments/`,
@@ -80,6 +79,7 @@ export const removeCommentFromMaterial = createAsyncThunk<
 >(
   'material/removeComment',
   async ({ materialId, commentId }, { rejectWithValue }) => {
+    const token = localStorage.getItem('auth_token');
     try {
       const res = await fetch(
         `${api.baseUrl}${api.endpoints.articles.base}/${materialId}/comments/${commentId}`,

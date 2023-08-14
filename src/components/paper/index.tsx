@@ -143,7 +143,7 @@ export const Paper: FC<Ipaper> = ({
         </div>
       ) : null}
 
-      <Comments />
+      <Comments currentMaterial={data} />
     </article>
   );
 };

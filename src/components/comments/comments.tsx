@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useState, useEffect } from 'react';
+import { useState, useEffect, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   addCommentToMaterial,
@@ -13,8 +13,7 @@ import { schemaComment } from 'utils/data/validation/yup-schema';
 import TextArea from 'shared/text-area/text-area';
 
 import Button from 'shared/buttons/button/button';
-import { IComment } from 'utils/types/article';
-import { getDataById } from 'services/features/material/selectors';
+import { IComment, TArticle } from 'utils/types/article';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 
@@ -25,15 +24,19 @@ import styles from './styles.module.scss';
 
 const maxCommentsDesktop = 7;
 
-export const Comments = () => {
+interface CurrentMaterial {
+  currentMaterial: TArticle;
+}
+
+export const Comments: FC<CurrentMaterial> = ({ currentMaterial }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const currentMaterial = useAppSelector(getDataById);
+  // const currentMaterial = useAppSelector(getDataById);
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
 
   const [allComments, setAllComments] = useState<IComment[]>(
-    currentMaterial.material?.comments || []
+    currentMaterial?.comments || []
   );
   const [visibleComments, setVisibleComments] = useState<IComment[] | []>([]);
   const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(
@@ -41,7 +44,7 @@ export const Comments = () => {
   );
 
   useEffect(() => {
-    const comments = currentMaterial.material?.comments || [];
+    const comments = currentMaterial?.comments || [];
     const visibleData = comments?.slice(0, maxCommentsDesktop) || [];
     setAllComments(comments);
     setVisibleComments(visibleData);
@@ -84,7 +87,7 @@ export const Comments = () => {
 
   const sendComment = async () => {
     const reqData = {
-      materialId: currentMaterial!.material!.id,
+      materialId: currentMaterial!.id,
       text: values.comment,
     };
 
@@ -103,7 +106,7 @@ export const Comments = () => {
   const removeComment = (commentId: string) => {
     dispatch(
       removeCommentFromMaterial({
-        materialId: currentMaterial!.material!.id,
+        materialId: currentMaterial!.id,
         commentId,
       })
     )
@@ -178,7 +181,7 @@ export const Comments = () => {
               <Comment
                 comment={item}
                 removeComment={removeComment}
-                material={currentMaterial.material}
+                material={currentMaterial}
               />
             </li>
           ))}
