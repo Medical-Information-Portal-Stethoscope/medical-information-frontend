@@ -54,7 +54,7 @@ const contentSlice = createSlice({
       state,
       action: PayloadAction<TGetInformationMaterialResponse>
     ) {
-      state.news.storage = action.payload.results;
+      state.news.storage = action.payload.results.slice(0, 5);
       state.news.nextPage = action.payload.next;
     },
     setIsAllArticles(state) {

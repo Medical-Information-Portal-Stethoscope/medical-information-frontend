@@ -41,7 +41,7 @@ export default function NewsPreviewPage() {
 
   useScrollToTop();
 
-  const heightTop = 1500;
+  const heightTop = 1250;
 
   const toggleButtonVisible = () => {
     setIsButtonToTopVisible(
