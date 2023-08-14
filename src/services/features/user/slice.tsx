@@ -13,6 +13,7 @@ import {
 
 type TSliceState = {
   user: IUserPersonalData | null;
+  isAuthChecked: boolean;
 
   process: {
     isLoading: boolean;
@@ -22,6 +23,7 @@ type TSliceState = {
 
 const initialState = {
   user: null,
+  isAuthChecked: false,
 
   process: {
     isLoading: false,
@@ -33,6 +35,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    checkUserAuth(state) {
+      state.isAuthChecked = true;
+    },
+
     resetServerError(state) {
       state.process.error = null;
     },
@@ -137,5 +143,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { resetServerError } = userSlice.actions;
+export const { checkUserAuth, resetServerError } = userSlice.actions;
 export default userSlice.reducer;
