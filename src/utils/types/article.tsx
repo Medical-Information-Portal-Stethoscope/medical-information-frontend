@@ -6,6 +6,7 @@ export interface IComment {
     first_name: string;
     last_name: string;
     role: string;
+    avatar: string;
   };
   created_at: string;
   updated_at: string;

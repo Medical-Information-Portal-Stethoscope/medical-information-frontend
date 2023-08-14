@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import Tooltip from 'shared/tooltip/tooltip';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
-import { UserHeaderIcon } from '../user-header-icon';
+import { UserIconProfile } from '../user-icon-profile';
 import { Search } from './search';
 import { Menu } from './menu';
 
@@ -40,10 +40,10 @@ export const Header: FC = () => {
           }
           onClick={handleTogglePopup}
         >
-          <UserHeaderIcon
+          <UserIconProfile
             name={userName}
             role={user?.role || 'user'}
-            avatar=""
+            avatar={user?.avatar}
             isHeader
           />
         </button>

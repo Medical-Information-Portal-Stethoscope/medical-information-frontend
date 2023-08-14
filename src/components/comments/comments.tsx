@@ -92,6 +92,7 @@ export const Comments = () => {
       setAllComments((prev) => [newComment, ...prev]);
       setVisibleComments((prev) => [newComment, ...prev]);
       setFieldValue('comment', '');
+      setFieldTouched('comment', false, false);
     });
   };
 
@@ -164,7 +165,11 @@ export const Comments = () => {
         <ul className={styles.comments__list}>
           {visibleComments.map((item: IComment) => (
             <li key={item.id}>
-              <Comment comment={item} removeComment={removeComment} />
+              <Comment
+                comment={item}
+                removeComment={removeComment}
+                material={currentMaterial.material}
+              />
             </li>
           ))}
 

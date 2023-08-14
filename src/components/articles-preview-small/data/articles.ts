@@ -23,6 +23,7 @@ export const articlesExample = [
       id: '91f74365-441c-4873-abd5-5ae56c93006c',
       first_name: 'Доктор',
       last_name: 'Стетоскоп',
+      avatar: '',
     },
     tags: [
       {
@@ -43,6 +44,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',
@@ -55,6 +57,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',
@@ -67,6 +70,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',
@@ -97,6 +101,7 @@ export const articlesExample = [
       id: '91f74365-441c-4873-abd5-5ae56c93006c',
       first_name: 'Доктор',
       last_name: 'Стетоскоп',
+      avatar: '',
     },
     tags: [
       {
@@ -117,6 +122,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',
@@ -129,6 +135,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',
@@ -141,6 +148,7 @@ export const articlesExample = [
           first_name: 'Диванный',
           last_name: 'Эксперт',
           role: 'user',
+          avatar: '',
         },
         created_at: '2023-08-11T23:31:31.734Z',
         updated_at: '2023-08-11T23:31:31.734Z',

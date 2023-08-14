@@ -27,7 +27,11 @@
 
   &__name {
     @extend %text-size-medium-semibold;
-    color: $color-brand-primary-900;
+    color: $color-neutral-900;
+
+    &_owner {
+      color: $color-brand-primary-900;
+    }
   }
 
   &__date {

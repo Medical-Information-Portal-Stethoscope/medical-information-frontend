@@ -9,12 +9,12 @@ import styles from './styles.module.scss';
 
 type UserInfo = {
   name: string;
-  avatar?: string | '';
+  avatar: string | undefined;
   role: string;
   isHeader: boolean;
 };
 
-export const UserHeaderIcon: FC<UserInfo> = ({
+export const UserIconProfile: FC<UserInfo> = ({
   name,
   avatar,
   role,
@@ -34,15 +34,21 @@ export const UserHeaderIcon: FC<UserInfo> = ({
       }`}
     >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-      <p className={styles.user__content}>{name}</p>
+
+      {avatar && (
+        <img
+          src={avatar}
+          alt="Аватар пользователя"
+          className={styles.user__avatar}
+        />
+      )}
+      {!avatar && <span className={styles.user__content}>{name}</span>}
     </div>
   );
 
   if (isUserOnline) {
     switch (user?.role) {
-      case 'user':
-        return userIcon;
-      case 'doctor':
+      case 'user' || 'doctor':
         return userIcon;
       default:
         return userIcon;
