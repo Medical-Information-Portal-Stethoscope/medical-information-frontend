@@ -1,61 +1,69 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/animations';
 
 .userProfile {
-  max-width: 745px;
+  max-width: $wrapper-articles-preview-desktop;
+
+  &_wrapper {
+    max-width: $wrapper-profile-desktop;
+
+    &_password {
+      max-width: $wrapper-profile-password-desktop;
+    }
+  }
+
+  &_general {
+    display: flex;
+    flex-direction: column;
+    row-gap: 32px;
+
+    > button {
+      width: max-content;
+    }
+  }
+
+  &_status {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 32px;
+    @extend %text-size-large;
+
+    &_heading {
+      @extend %text-size-medium;
+      font-weight: 400;
+      color: $color-neutral-700;
+    }
+  }
+
+  &_role {
+    display: inline-flex;
+    align-items: center;
+    column-gap: 12px;
+  }
 
   &_title {
     @extend %heading-size-medium;
-    padding-bottom: 48px;
+    margin-bottom: 32px;
   }
 
   &_subtitle {
     @extend %heading-size-small;
-    padding-bottom: 32px;
-  }
-
-  &_box {
-    display: grid;
-    grid-template-columns: 130px auto;
-    gap: 32px;
-    max-width: 744px;
-    border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
-    border-radius: 16px;
-    margin-bottom: 48px;
-    padding: 48px;
-    box-sizing: border-box;
-    color: $color-neutral-700;
-  }
-
-  &_userName {
-    @extend %text-size-large;
-    color: $color-neutral-900;
   }
 
   &_quote {
     @extend %text-size-small;
-    padding-top: 16px;
     color: $color-neutral-600;
   }
 
-  &_form {
-    padding: 48px;
-    border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
-    border-radius: 16px;
-
-    div:first-child {
-      margin-bottom: 12px;
-    }
-
-    div:nth-of-type(2) {
-      margin-bottom: 22px;
-    }
+  &_box {
+    margin-top: 38px;
   }
 
-  &_button {
-    width: 100%;
+  &_button_password {
+    padding: 0;
   }
 }
 

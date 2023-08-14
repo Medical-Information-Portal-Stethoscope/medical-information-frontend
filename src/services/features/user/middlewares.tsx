@@ -9,9 +9,9 @@ export const authMiddleware: Middleware<
     localStorage.setItem('auth_token', action.payload.auth_token);
   }
 
-  // if (action.type === 'user/logout/fulfilled') { TODO: на будущее при выходе юзера из ЛК
-  //   localStorage.removeItem('auth_token');
-  // }
+  if (action.type === 'user/logout/fulfilled') {
+    localStorage.removeItem('auth_token');
+  }
 
   return next(action);
 };

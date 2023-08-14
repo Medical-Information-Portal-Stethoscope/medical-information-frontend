@@ -20,6 +20,15 @@ export const schemaPassword = (yup: typeof import('yup')) => ({
     .required(validationErrors.user.password.required),
 });
 
+export const schemaCurrentPassword = (yup: typeof import('yup')) => ({
+  password_current: yup
+    .string()
+    .defined()
+    .min(6, validationErrors.user.password.unacceptableLength)
+    .max(20, validationErrors.user.password.unacceptableLength)
+    .required(validationErrors.user.password.required),
+});
+
 export const schemaPasswordConfirmation = (yup: typeof import('yup')) => ({
   password_confirmation: yup
     .string()

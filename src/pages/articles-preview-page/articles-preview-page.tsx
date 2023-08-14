@@ -102,7 +102,7 @@ export default function ArticlesPreviewPage() {
               </div>
               {!isAllContent && (
                 <Button
-                  label="Еще статьи"
+                  label="Еще"
                   model="secondary"
                   size="small"
                   hasBorder

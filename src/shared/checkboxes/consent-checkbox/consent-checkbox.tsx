@@ -22,7 +22,7 @@ export const ConsentCheckbox: FC<IConsentCheckboxProps> = ({
       id={id}
       type="checkbox"
       name={name}
-      defaultChecked={isChecked}
+      checked={isChecked}
       disabled={isDisabled}
       onChange={onChange}
     />

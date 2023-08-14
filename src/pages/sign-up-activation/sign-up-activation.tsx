@@ -20,7 +20,10 @@ export const SignUpActivationPage: FC = (): ReactElement => {
 
   useEffect(() => {
     confirmSignUp(uid, token)
-      .then(() => setResponseStatus(true))
+      .then(() => {
+        localStorage.removeItem('hasEmailActivation');
+        setResponseStatus(true);
+      })
       .catch(() => setResponseStatus(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -34,7 +37,7 @@ export const SignUpActivationPage: FC = (): ReactElement => {
           instruction: 'Для продолжения работы войдите в личный кабинет',
           buttonLabel: 'Войти в аккаунт',
           buttonType: 'button',
-          onClick: () => navigate(routes.signin),
+          onClick: () => navigate(routes.signin, { replace: true }),
         };
       case false:
         return {

@@ -40,16 +40,47 @@
 
     &:hover {
       color: $color-brand-primary-500;
+    }
 
-      svg {
-        fill: $color-brand-secondary-700;
+    &-image {
+      &:hover {
+        > .user__plus {
+          fill: $color-brand-secondary-700;
+        }
       }
     }
+
+    &-mask {
+      // TODO: для плавности анимации, видимо, перенести на уровень выше (для доработки после слияния веток с Полиной)
+      &:hover {
+        &::before {
+          content: '';
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          border-radius: 140px;
+          background-color: $color-neutral-900;
+          opacity: 0.3;
+        }
+      }
+    }
+
+    * {
+      transition: $transition-button;
+    }
+  }
+
+  &__avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50px;
   }
 
   &__content {
     text-align: center;
     vertical-align: middle;
+    user-select: none;
   }
 
   &__plus {

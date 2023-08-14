@@ -19,7 +19,7 @@ interface InputProps
   extraClass?: string;
   type?: 'text' | 'email' | 'password';
   error?: string;
-  serverError?: string[];
+  serverError?: string[] | string;
   size?: 'medium' | 'small';
   icon?: boolean;
   isDisabled?: boolean;

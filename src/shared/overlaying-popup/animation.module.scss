@@ -1,0 +1,17 @@
+.overlayEnter {
+  opacity: 0;
+}
+
+.overlayEnterActive {
+  transition: opacity 300ms ease-out;
+  opacity: 1;
+}
+
+.overlayExit {
+  opacity: 1;
+}
+
+.overlayExitActive {
+  opacity: 0;
+  transition: opacity 300ms ease-out;
+}

@@ -27,7 +27,13 @@ export const ResetPasswordPage: FC = (): ReactElement => {
 
     onSubmit: (data, { setSubmitting }) => {
       resetPassword(filterFormValues(data))
-        .then(() => setIsSuccess(true))
+        .then(() => {
+          setIsSuccess(true);
+          localStorage.setItem(
+            'hasResetPasswordActivation',
+            JSON.stringify(true)
+          );
+        })
         .catch((err) => {
           serverError = err;
         })
@@ -83,7 +89,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
       <Button
         label="Вернуться назад"
         model="tertiary"
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(routes.signin)}
       />
     </div>
   );
