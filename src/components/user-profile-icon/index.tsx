@@ -31,7 +31,8 @@ export const UserProfileIcon: FC<UserInfo> = ({
     <div
       className={classNames(styles.user__icon, {
         [styles['user__icon-image']]: !user?.avatar,
-        [styles['user__icon-mask']]: user?.avatar,
+        [styles['user__icon-mask']]: user?.avatar && isHeader,
+        [styles['user__icon-header']]: isHeader,
       })}
     >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
@@ -49,14 +50,15 @@ export const UserProfileIcon: FC<UserInfo> = ({
 
   if (isUserOnline) {
     switch (role) {
-      case 'user':
-        return userIcon;
-      case 'doctor':
+      case 'user' || 'doctor':
         return userIcon;
       default:
         return userIcon;
     }
   } else {
-    return defaultUserIcon;
+    if (isHeader) {
+      return defaultUserIcon;
+    }
+    return userIcon;
   }
 };
