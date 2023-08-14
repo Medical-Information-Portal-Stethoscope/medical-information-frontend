@@ -39,7 +39,9 @@ export const UserIconProfile: FC<UserInfo> = ({
         <img
           src={avatar}
           alt="Аватар пользователя"
-          className={styles.user__avatar}
+          className={`${styles.user__avatar} ${
+            isHeader ? styles.user__avatar_header : null
+          }`}
         />
       )}
       {!avatar && <span className={styles.user__content}>{name}</span>}
