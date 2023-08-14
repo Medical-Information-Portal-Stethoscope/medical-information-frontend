@@ -47,15 +47,13 @@ export default function ArticlesPreviewPage() {
 
   useScrollToTop();
 
+  const heightTop = 1500;
+
   const toggleButtonVisible = () => {
-    if (
-      document.body.scrollTop > 1400 ||
-      document.documentElement.scrollTop > 1400
-    ) {
-      setIsButtonToTopVisible(true);
-    } else {
-      setIsButtonToTopVisible(false);
-    }
+    setIsButtonToTopVisible(
+      document.body.scrollTop > heightTop ||
+        document.documentElement.scrollTop > heightTop
+    );
   };
 
   useEffect(() => {
@@ -120,7 +118,7 @@ export default function ArticlesPreviewPage() {
               </div>
               {!isAllContent && (
                 <Button
-                  label="Еще"
+                  label="Ещё"
                   model="secondary"
                   size="small"
                   hasBorder
