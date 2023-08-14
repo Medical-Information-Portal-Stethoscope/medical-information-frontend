@@ -17,6 +17,7 @@ import { getFilteredArticlesForModal } from 'services/features/filter/api';
 import { useAppDispatch } from 'services/app/hooks';
 import { getFirstPageArticles } from 'services/features/information-material/slice';
 import classNames from 'classnames';
+import { useMount } from 'hooks/useMount';
 import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
@@ -42,6 +43,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const [isButtonShowPress, setIsButtonShowPress] = useState(false);
   const dispatch = useAppDispatch();
+  const { mounted } = useMount({ isOpened: isPopupOpened });
 
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -273,7 +275,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
           <div className={styles.counter}>{activeTags.length}</div>
         )}
       </div>
-      {isPopupOpened && (
+      {mounted && (
         <OverlayingPopup isOpened={isPopupOpened} onClose={handlePopupClose}>
           <FiltersPopup
             handleCloseClick={handleTogglePopup}
@@ -287,6 +289,7 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
             activeTagsForClearModal={activeTagsForClearModal}
             setActiveTagsForClearModal={setActiveTagsForClearModal}
             activeTab={activeTab}
+            isOpened={isPopupOpened}
           />
         </OverlayingPopup>
       )}

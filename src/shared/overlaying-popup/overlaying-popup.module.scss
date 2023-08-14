@@ -9,34 +9,21 @@
   right: 0;
   padding: 30px;
   box-sizing: border-box;
-  z-index: $zindex-filters-modal;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba($color: $color-brand-primary-900, $alpha: 0.2);
-  animation: slide 500ms ease-in-out;
-  opacity: 1;
-  transition: transform 0.5s, display 0.5s,
-    opacity 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+  z-index: $zindex-filters-modal;
 }
 
 .overlay {
-  position: absolute;
+  position: fixed;
+  width: 100%;
+  height: 100%;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  background-color: rgba($color: $color-brand-primary-900, $alpha: 0.2);
   cursor: pointer;
   z-index: $zindex-overlay-filters-modal;
-}
-
-@keyframes slide {
-  from {
-    opacity: 0;
-    transform: translateY(2rem);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0rem);
-  }
 }

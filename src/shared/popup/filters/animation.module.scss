@@ -1,0 +1,35 @@
+.contentEnter {
+  opacity: 0;
+}
+
+.contentEnterActive {
+  opacity: 1;
+  animation: moveUp 300ms ease-out;
+}
+
+.contentExit {
+  opacity: 1;
+}
+
+.contentExitActive {
+  opacity: 0;
+  animation: moveDown 300ms ease-out;
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(2rem);
+  }
+  to {
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0rem);
+  }
+  to {
+    transform: translateY(2rem);
+  }
+}
