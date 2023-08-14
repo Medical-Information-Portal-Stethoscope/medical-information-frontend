@@ -1,11 +1,13 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
-import { Link } from 'react-router-dom';
 import Tooltip from 'shared/tooltip/tooltip';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
-import { UserIconProfile } from '../user-icon-profile';
+import routes from 'utils/routes';
+import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
 import { Menu } from './menu';
 
@@ -13,11 +15,23 @@ import styles from './styles.module.scss';
 
 export const Header: FC = () => {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
-  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
+  const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
   const userName =
     `${user?.first_name[0]} ${user?.last_name[0]}` || 'Дарья Врачева';
+
+  const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
+  const navigateToUserProfile = () => navigate(routes.profile);
+  const createAriaLabel = () => {
+    if (user) {
+      return 'Перейти в личный кабинет пользователя';
+    }
+
+    return isPopupOpened
+      ? 'Закрыть модальное окно'
+      : 'Открыть модальное окно с переходами на страницы регистрации и авторизации';
+  };
 
   return (
     <header className={styles.header}>
@@ -30,23 +44,20 @@ export const Header: FC = () => {
       <Menu />
       <div className={styles.header__search}>
         <Search />
-        <button
-          type="button"
+        <div
           className={styles.header__profile}
-          aria-label={
-            isPopupOpened
-              ? 'Закрыть модальное окно'
-              : 'Открыть модальное окно с переходами на страницы регистрации и авторизации'
-          }
-          onClick={handleTogglePopup}
+          role="button"
+          tabIndex={0}
+          aria-label={createAriaLabel()}
+          onClick={user ? navigateToUserProfile : handleTogglePopup}
         >
-          <UserIconProfile
+          <UserProfileIcon
+            avatar={user?.avatar || ''}
+            isHeader
             name={userName}
             role={user?.role || 'user'}
-            avatar={user?.avatar}
-            isHeader
           />
-        </button>
+        </div>
       </div>
 
       {isPopupOpened && (

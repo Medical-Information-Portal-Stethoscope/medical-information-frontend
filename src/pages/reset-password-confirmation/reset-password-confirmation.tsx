@@ -39,7 +39,10 @@ export const ResetPasswordConfirmationPage: FC = (): ReactElement => {
 
     onSubmit: (values, { setSubmitting }) => {
       resetPasswordConfirmation(uid, token, filterFormValues(values))
-        .then(() => setResponseStatus(true))
+        .then(() => {
+          localStorage.removeItem('hasResetPasswordActivation');
+          setResponseStatus(true);
+        })
         .catch(() => setResponseStatus(false))
         .finally(() => setSubmitting(false));
     },
@@ -91,7 +94,7 @@ export const ResetPasswordConfirmationPage: FC = (): ReactElement => {
           heading: 'Пароль успешно изменён',
           buttonLabel: 'Войти в личный кабинет',
           buttonType: 'button',
-          onClick: () => navigate(routes.signin),
+          onClick: () => navigate(routes.signin, { replace: true }),
         };
       case false:
         return {

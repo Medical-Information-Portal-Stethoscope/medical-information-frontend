@@ -1,5 +1,5 @@
 import { FC } from 'react';
-
+import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import { UserIcon } from 'shared/icons/user-icon';
@@ -9,12 +9,12 @@ import styles from './styles.module.scss';
 
 type UserInfo = {
   name: string;
-  avatar: string | undefined;
+  avatar: string;
   role: string;
   isHeader: boolean;
 };
 
-export const UserIconProfile: FC<UserInfo> = ({
+export const UserProfileIcon: FC<UserInfo> = ({
   name,
   avatar,
   role,
@@ -29,36 +29,34 @@ export const UserIconProfile: FC<UserInfo> = ({
   );
   const userIcon = (
     <div
-      className={`${styles.user__icon} ${
-        isHeader ? styles.user__icon_header : null
-      }`}
+      className={classNames(styles.user__icon, {
+        [styles['user__icon-image']]: !user?.avatar,
+        [styles['user__icon-mask']]: user?.avatar,
+      })}
     >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-
-      {avatar && (
+      {avatar ? (
         <img
+          className={styles.user__avatar}
           src={avatar}
           alt="Аватар пользователя"
-          className={`${styles.user__avatar} ${
-            isHeader ? styles.user__avatar_header : null
-          }`}
         />
+      ) : (
+        <span className={styles.user__content}>{name}</span>
       )}
-      {!avatar && <span className={styles.user__content}>{name}</span>}
     </div>
   );
 
   if (isUserOnline) {
-    switch (user?.role) {
-      case 'user' || 'doctor':
+    switch (role) {
+      case 'user':
+        return userIcon;
+      case 'doctor':
         return userIcon;
       default:
         return userIcon;
     }
   } else {
-    if (isHeader) {
-      return defaultUserIcon;
-    }
-    return userIcon;
+    return defaultUserIcon;
   }
 };

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { UserIconProfile } from 'components/user-icon-profile';
+import { UserProfileIcon } from 'components/user-profile-icon';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import renderFormatDateArticle from 'utils/functions/render-format-date-article';
@@ -21,6 +21,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
 
   //   владелец комментария
   const { author } = comment;
+
   // для комментов можно ли удалять?
   const isCommentOwner = user?.id === author.id;
   // для покдрашивания имени (в зависимости от авторства статьи)
@@ -48,10 +49,10 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
     >
       <div className={styles.comment__info}>
         <div className={styles.comment__user}>
-          <UserIconProfile
+          <UserProfileIcon
             name={authorNameLogo}
             role={author.role}
-            avatar={author?.avatar}
+            avatar={author.avatar}
             isHeader={false}
           />
           <div className={styles.comment__meta}>

@@ -1,0 +1,52 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.avatar {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 91px;
+  height: 88px;
+  background-color: $color-brand-primary-100;
+  border-radius: 50%;
+  color: $color-brand-primary-900;
+  @extend %text-article;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    > svg {
+      path {
+        fill: $color-brand-primary-900;
+      }
+
+      rect {
+        stroke: $color-brand-primary-900;
+      }
+    }
+  }
+
+  > svg {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}
+
+.userImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.userInitials {
+  user-select: none;
+}

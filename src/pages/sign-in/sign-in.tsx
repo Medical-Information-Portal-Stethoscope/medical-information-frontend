@@ -1,5 +1,5 @@
 import { FC, ReactElement, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -15,6 +15,7 @@ import { schemaEmail, schemaPassword } from 'utils/data/validation/yup-schema';
 import styles from './sign-in.module.scss';
 
 const SignInPage: FC = (): ReactElement => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -36,7 +37,7 @@ const SignInPage: FC = (): ReactElement => {
 
           if (token) {
             dispatch(getUserPersonalData(token));
-            navigate(routes.profile);
+            navigate(location.state?.from?.pathname || routes.profile);
           }
         })
         .finally(() => setSubmitting(false));
@@ -69,7 +70,7 @@ const SignInPage: FC = (): ReactElement => {
       <Button
         label="Зарегистрироваться"
         model="tertiary"
-        onClick={() => navigate(routes.signup)}
+        onClick={() => navigate(routes.signup, { replace: true })}
       />
     </div>
   );

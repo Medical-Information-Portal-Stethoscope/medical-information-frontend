@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useState, useEffect } from 'react';
@@ -87,13 +88,16 @@ export const Comments = () => {
       text: values.comment,
     };
 
-    dispatch(addCommentToMaterial(reqData)).then((res) => {
-      const newComment = (res.payload as IComment) && (res.payload as IComment);
-      setAllComments((prev) => [newComment, ...prev]);
-      setVisibleComments((prev) => [newComment, ...prev]);
-      setFieldValue('comment', '');
-      setFieldTouched('comment', false, false);
-    });
+    dispatch(addCommentToMaterial(reqData))
+      .then((res) => {
+        const newComment =
+          (res.payload as IComment) && (res.payload as IComment);
+        setAllComments((prev) => [newComment, ...prev]);
+        setVisibleComments((prev) => [newComment, ...prev]);
+        setFieldValue('comment', '');
+        setFieldTouched('comment', false, false);
+      })
+      .catch((err) => console.log(err));
   };
 
   const removeComment = (commentId: string) => {
@@ -102,15 +106,21 @@ export const Comments = () => {
         materialId: currentMaterial!.material!.id,
         commentId,
       })
-    ).then((res) => {
-      const resCommentId = res.payload?.id ? res.payload.id : '';
-      setAllComments((prev) =>
-        prev.filter((comment) => resCommentId !== comment.id && { ...comment })
-      );
-      setVisibleComments((prev) =>
-        prev.filter((comment) => resCommentId !== comment.id && { ...comment })
-      );
-    });
+    )
+      .then((res) => {
+        const resCommentId = res.payload?.id ? res.payload.id : '';
+        setAllComments((prev) =>
+          prev.filter(
+            (comment) => resCommentId !== comment.id && { ...comment }
+          )
+        );
+        setVisibleComments((prev) =>
+          prev.filter(
+            (comment) => resCommentId !== comment.id && { ...comment }
+          )
+        );
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

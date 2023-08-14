@@ -8,6 +8,7 @@
   height: 168px;
   margin: 32px auto;
   padding: 42px 48px;
+  padding-right: 56px;
   border-radius: 16px;
   box-sizing: border-box;
   position: relative;
@@ -18,14 +19,16 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    column-gap: 48px;
+    gap: 48px;
     justify-self: end;
   }
 
   &__profile {
     margin: 0 8px;
-    background: none;
+    border-radius: 50%;
+    background: transparent;
     fill: $color-neutral-0;
+    cursor: pointer;
     transition: $transition-button;
   }
 
@@ -42,5 +45,5 @@
   height: 188px;
   position: absolute;
   top: 116px;
-  right: 48px;
+  right: 56px;
 }

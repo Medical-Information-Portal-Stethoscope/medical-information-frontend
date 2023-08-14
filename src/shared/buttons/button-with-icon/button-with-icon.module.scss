@@ -17,13 +17,13 @@
 
   &:hover {
     svg {
-      stroke: $color-brand-primary-700;
+      fill: $color-brand-primary-700;
     }
   }
 
   &:active {
     svg {
-      stroke: $color-brand-primary-1000;
+      fill: $color-brand-primary-1000;
     }
   }
 
@@ -31,7 +31,7 @@
     cursor: default;
 
     svg {
-      stroke: $color-neutral-400;
+      fill: $color-neutral-400;
     }
   }
 

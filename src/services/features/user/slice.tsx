@@ -1,9 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { TErrorResponse, IUserPersonalData } from './types';
-import { registerUser, loginUser, getUserPersonalData } from './api';
+import {
+  registerUser,
+  loginUser,
+  logoutUser,
+  getUserPersonalData,
+  changeUserName,
+  changeUserAvatar,
+  subscribeUserToMailingList,
+  unsubscribeUserFromMailingList,
+} from './api';
 
 type TSliceState = {
   user: IUserPersonalData | null;
+  isAuthChecked: boolean;
 
   process: {
     isLoading: boolean;
@@ -13,6 +23,7 @@ type TSliceState = {
 
 const initialState = {
   user: null,
+  isAuthChecked: false,
 
   process: {
     isLoading: false,
@@ -24,6 +35,10 @@ const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    checkUserAuth(state) {
+      state.isAuthChecked = true;
+    },
+
     resetServerError(state) {
       state.process.error = null;
     },
@@ -55,6 +70,14 @@ const userSlice = createSlice({
         state.process.error = payload !== undefined ? payload : null;
       })
 
+      .addCase(logoutUser.fulfilled, (state) => {
+        state.user = null;
+        state.process.error = null;
+      })
+      .addCase(logoutUser.rejected, (state, { payload }) => {
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
       .addCase(getUserPersonalData.pending, (state) => {
         state.process.isLoading = true;
       })
@@ -68,9 +91,57 @@ const userSlice = createSlice({
         state.process.error = payload !== undefined ? payload : null;
       })
 
+      .addCase(changeUserName.pending, (state) => {
+        state.process.isLoading = true;
+      })
+      .addCase(changeUserName.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state.user = payload;
+      })
+      .addCase(changeUserName.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(changeUserAvatar.fulfilled, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = null;
+        state.user = payload;
+      })
+      .addCase(changeUserAvatar.rejected, (state, { payload }) => {
+        state.process.isLoading = false;
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(subscribeUserToMailingList.fulfilled, (state) => {
+        state.process.error = null;
+
+        if (state.user) {
+          state.user.subscribed = true;
+        }
+      })
+      .addCase(subscribeUserToMailingList.rejected, (state, { payload }) => {
+        state.process.error = payload !== undefined ? payload : null;
+      })
+
+      .addCase(unsubscribeUserFromMailingList.fulfilled, (state) => {
+        state.process.error = null;
+
+        if (state.user) {
+          state.user.subscribed = false;
+        }
+      })
+      .addCase(
+        unsubscribeUserFromMailingList.rejected,
+        (state, { payload }) => {
+          state.process.error = payload !== undefined ? payload : null;
+        }
+      )
+
       .addDefaultCase((state) => state);
   },
 });
 
-export const { resetServerError } = userSlice.actions;
+export const { checkUserAuth, resetServerError } = userSlice.actions;
 export default userSlice.reducer;

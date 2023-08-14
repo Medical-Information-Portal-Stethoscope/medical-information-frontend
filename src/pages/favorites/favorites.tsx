@@ -63,7 +63,7 @@ export const FavoritesPage: FC = (): ReactElement => {
         [styles.emptyGallery]: !isNotEmptyGallery,
       })}
     >
-      <h2 className={styles.heading}>Избранное</h2>
+      <h3 className={styles.heading}>Избранное</h3>
       {(isNotEmptyGallery && <div className={styles.gallery}>{cards}</div>) ||
         emptyGallery}
     </section>
