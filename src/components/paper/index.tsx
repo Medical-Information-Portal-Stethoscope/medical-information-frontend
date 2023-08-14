@@ -56,18 +56,23 @@ export const Paper: FC<Ipaper> = ({
         <DotIcon size="24" color="gray" className={styles.paper__dot} />
         <ViewsIcon color="gray" size="24" />
         <p className={styles.paper__views}>{data.views_count}</p>
-        <DotIcon size="24" color="gray" className={styles.paper__dot} />
-        <p className={styles.paper__source}>
-          Источник:{' '}
-          <a
-            className={styles.paper__link}
-            href={data.source_link || '#'}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {data.source_name}
-          </a>
-        </p>
+
+        {data.source_name ? (
+          <>
+            <DotIcon size="24" color="gray" className={styles.paper__dot} />
+            <p className={styles.paper__source}>
+              Источник:{' '}
+              <a
+                className={styles.paper__link}
+                href={data.source_link || '#'}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {data.source_name}
+              </a>
+            </p>
+          </>
+        ) : null}
       </div>
       <img
         className={styles.paper__cover}
