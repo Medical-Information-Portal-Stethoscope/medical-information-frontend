@@ -5,7 +5,7 @@ import { showUserPersonalData } from 'services/features/user/selectors';
 import { Icon } from 'shared/icons';
 import Button from 'shared/buttons/button/button';
 import { PersonalData } from './components/personal-data/personal-data';
-import { PasswordChanging } from './components/password-change/password-changing';
+import { PasswordChanging } from './components/password-changing/password-changing';
 import styles from './user-profile.module.scss';
 
 function UserProfile() {

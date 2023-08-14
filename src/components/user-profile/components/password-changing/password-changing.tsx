@@ -7,7 +7,7 @@ import { Icon } from 'shared/icons';
 import { changePassword } from 'utils/api';
 import {
   schemaPassword,
-  schemaPasswordConfirmation,
+  schemaCurrentPassword,
 } from 'utils/data/validation/yup-schema';
 import styles from './password-changing.module.scss';
 
@@ -20,13 +20,13 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
 }): ReactElement => {
   const formik = useFormik({
     initialValues: {
+      password_current: '',
       password: '',
-      password_confirmation: '',
     },
 
     validationSchema: Yup.object()
-      .shape(schemaPassword(Yup))
-      .shape(schemaPasswordConfirmation(Yup)),
+      .shape(schemaCurrentPassword(Yup))
+      .shape(schemaPassword(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
       changePassword(data).finally(() => setSubmitting(false));
@@ -58,6 +58,17 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
         <div className={styles.userProfile_inputs}>
           <Input
             type="password"
+            name="password_current"
+            label="Ваш текущий пароль"
+            icon
+            value={values.password_current}
+            error={errors?.password_current}
+            touched={touched?.password_current}
+            onFocus={() => setFieldTouched('password_current')}
+            onChange={handleChange}
+          />
+          <Input
+            type="password"
             name="password"
             label="Новый пароль"
             icon
@@ -65,17 +76,6 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
             error={errors?.password}
             touched={touched?.password}
             onFocus={() => setFieldTouched('password')}
-            onChange={handleChange}
-          />
-          <Input
-            type="password"
-            name="password_confirmation"
-            label="Повторите новый пароль"
-            icon
-            value={values.password_confirmation}
-            error={errors?.password_confirmation}
-            touched={touched?.password_confirmation}
-            onFocus={() => setFieldTouched('password_confirmation')}
             onChange={handleChange}
           />
         </div>

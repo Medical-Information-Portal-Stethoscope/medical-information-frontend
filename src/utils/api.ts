@@ -79,8 +79,8 @@ export const resetPasswordConfirmation = async (
 };
 
 export const changePassword = async (data: {
+  password_current: string;
   password: string;
-  password_confirmation: string;
 }) => {
   const res = await fetch(
     `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.password.change}`,
@@ -91,8 +91,8 @@ export const changePassword = async (data: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
+        current_password: data.password_current,
         new_password: data.password,
-        current_password: data.password_confirmation, // TODO: поправить ключи в соответствии с изменениями на бэке
       }),
     }
   );
