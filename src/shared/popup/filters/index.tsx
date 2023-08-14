@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react/no-array-index-key */
-import React, { FC } from 'react';
+import React, { FC, useEffect, useRef, useState } from 'react';
 import { useAppDispatch } from 'services/app/hooks';
 import FilterCheckbox from 'shared/checkboxes/filter-checkbox/filter-checkbox';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
@@ -8,7 +9,10 @@ import { getFirstPageArticles } from 'services/features/information-material/sli
 import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import { TTags } from 'services/features/tags/api';
+import { CSSTransition } from 'react-transition-group';
+import { animationTime } from 'utils/constants';
 import styles from './styles.module.scss';
+import animation from './animation.module.scss';
 
 interface IFiltersProps {
   handleCloseClick: () => void;
@@ -24,6 +28,7 @@ interface IFiltersProps {
     React.SetStateAction<TTags[] | null>
   >;
   activeTab: TTags | null;
+  isOpened?: boolean;
 }
 
 export const FiltersPopup: FC<IFiltersProps> = ({
@@ -38,8 +43,22 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   activeTagsForClearModal,
   setActiveTagsForClearModal,
   activeTab,
+  isOpened,
 }) => {
   const dispatch = useAppDispatch();
+  const contentRef = useRef(null);
+  const [animationIn, setAnimationIn] = useState<boolean | undefined>(false);
+
+  const contentAnimation = {
+    enter: animation.contentEnter,
+    enterActive: animation.contentEnterActive,
+    exit: animation.contentExit,
+    exitActive: animation.contentExitActive,
+  };
+
+  useEffect(() => {
+    setAnimationIn(isOpened);
+  }, [isOpened]);
 
   const handleClickCheckbox = (tag: TTags) => {
     if (!activeTags.find((item) => item.pk === tag.pk)) {
@@ -104,48 +123,59 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   }
 
   return (
-    <div className={styles.filters}>
-      <ButtonWithIcon
-        ariaLabel="Закрыть попап"
-        icon={<Icon color="blue" icon="CloseIcon" />}
-        hasBackground={false}
-        onClick={handlePopupClose}
-        extraClass={styles.filters__close}
-      />
+    <CSSTransition
+      in={animationIn}
+      nodeRef={contentRef}
+      timeout={animationTime}
+      mountOnEnter
+      unmountOnExit
+      classNames={contentAnimation}
+    >
+      <div ref={contentRef} className={styles.filters}>
+        <ButtonWithIcon
+          ariaLabel="Закрыть попап"
+          icon={<Icon color="blue" icon="CloseIcon" />}
+          hasBackground={false}
+          onClick={handlePopupClose}
+          extraClass={styles.filters__close}
+        />
 
-      <div className={styles.filters__content}>
-        <h2 className={styles.filters__header}>Фильтры</h2>
-        <div className={styles.filters__section}>
-          <h3 className={styles.filters__name}>Заболевания</h3>
-          <ul className={styles.filters__items}>
-            {generateFilters(allDiseasesTags)}
-          </ul>
-        </div>
+        <div className={styles.filters__content}>
+          <h2 className={styles.filters__header}>Фильтры</h2>
+          <div className={styles.filters__section}>
+            <h3 className={styles.filters__name}>Заболевания</h3>
+            <ul className={styles.filters__items}>
+              {generateFilters(allDiseasesTags)}
+            </ul>
+          </div>
 
-        <div className={styles.filters__section}>
-          <h3 className={styles.filters__name}>Теги</h3>
-          <ul className={styles.filters__items}>{generateFilters(allTags)}</ul>
-        </div>
+          <div className={styles.filters__section}>
+            <h3 className={styles.filters__name}>Теги</h3>
+            <ul className={styles.filters__items}>
+              {generateFilters(allTags)}
+            </ul>
+          </div>
 
-        <div className={styles.filters__buttons}>
-          <Button
-            label="Очистить всё"
-            model="secondary"
-            size="small"
-            hasBorder={false}
-            onClick={clearFilters}
-            extraClass={styles.filters__button}
-          />
-          <Button
-            label="Показать"
-            model="primary"
-            size="small"
-            hasBorder={false}
-            onClick={sendFilters}
-            extraClass={styles.filters__button}
-          />
+          <div className={styles.filters__buttons}>
+            <Button
+              label="Очистить всё"
+              model="secondary"
+              size="small"
+              hasBorder={false}
+              onClick={clearFilters}
+              extraClass={styles.filters__button}
+            />
+            <Button
+              label="Показать"
+              model="primary"
+              size="small"
+              hasBorder={false}
+              onClick={sendFilters}
+              extraClass={styles.filters__button}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </CSSTransition>
   );
 };
