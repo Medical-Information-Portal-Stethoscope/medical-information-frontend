@@ -23,6 +23,7 @@ import { DiagnosticsIcon } from './diagnostics-icon';
 import { DirectionToolIcon } from './direction-tool-icon';
 import { EclipsedIcon } from './eclipsed-icon';
 import { EditIcon } from './edit-icon';
+import { EditWithBorderIcon } from './edit-with-border-icon';
 import { EyeClosedIcon } from './eye-closed-icon';
 import { EyeIcon } from './eye-icon';
 import { FiltersIcon } from './filters-icon';
@@ -43,6 +44,7 @@ import { LeftArrowIcon } from './left-arrow-icon';
 import { LoaderCircleIcon } from './loader-circle-icon';
 import { LocationPinIcon } from './location-pin-icon';
 import { LogoutOneIcon } from './logout-one-icon';
+import { LogoutTwoIcon } from './logout-two-icon';
 import { LogoutIcon } from './logout-icon';
 import { MailIcon } from './mail-icon';
 import { MoonIcon } from './moon-icon';
@@ -126,6 +128,7 @@ const icons = {
   DirectionToolIcon,
   EclipsedIcon,
   EditIcon,
+  EditWithBorderIcon,
   EyeClosedIcon,
   EyeIcon,
   FiltersIcon,
@@ -146,6 +149,7 @@ const icons = {
   LoaderCircleIcon,
   LocationPinIcon,
   LogoutOneIcon,
+  LogoutTwoIcon,
   LogoutIcon,
   MailIcon,
   MoonIcon,

@@ -54,7 +54,8 @@ export const validationErrors = Object.freeze({
     },
 
     image: {
-      unacceptableSize: 'Размер фотографии превышает 1,5 Мб',
+      unacceptableSize:
+        'Размер загружаемой фотографии не должен превышать 1,5 Мб',
       required: 'Обязательное поле',
     },
   },

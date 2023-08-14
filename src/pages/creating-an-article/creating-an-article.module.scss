@@ -62,10 +62,6 @@
   @extend %text-size-small;
   color: $color-neutral-500;
   letter-spacing: $font-letter-spacing-main;
-
-  &--error {
-    color: $color-system-error;
-  }
 }
 
 .submit {
@@ -99,6 +95,21 @@
       lightgray 50%;
 
     opacity: 0.2;
+  }
+
+  &Error {
+    display: flex;
+    align-items: center;
+    width: 390px;
+    height: 320px;
+    margin-bottom: 40px;
+    text-align: center;
+    @extend %text-size-small;
+    color: $color-system-error;
+    border: 2px dashed $color-system-error;
+    border-radius: 12px;
+    box-sizing: border-box;
+    user-select: none;
   }
 }
 

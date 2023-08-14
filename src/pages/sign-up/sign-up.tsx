@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { FC, ReactElement, useEffect, useState } from 'react';
+import { FC, ReactElement, useEffect, useState, ChangeEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -27,7 +27,9 @@ import {
 import styles from './sign-up.module.scss';
 
 const SignUpPage: FC = (): ReactElement => {
+  const [hasAgreement, setHasAgreement] = useState(true);
   const [isSuccess, setIsSuccess] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -38,7 +40,7 @@ const SignUpPage: FC = (): ReactElement => {
       email: '',
       password: '',
       password_confirmation: '',
-      personal_data_confirmation_has_agreed: true,
+      personal_data_confirmation_has_agreed: hasAgreement,
     },
 
     validationSchema: Yup.object()
@@ -88,6 +90,11 @@ const SignUpPage: FC = (): ReactElement => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const handleAgreement = (evt: ChangeEvent<HTMLInputElement>) => {
+    setHasAgreement(!hasAgreement);
+    handleChange(evt);
+  };
 
   const initialState = (
     <>
@@ -160,8 +167,8 @@ const SignUpPage: FC = (): ReactElement => {
         <ConsentCheckbox
           id="sign-up"
           name="personal_data_confirmation_has_agreed"
-          isChecked
-          onChange={handleChange}
+          isChecked={hasAgreement}
+          onChange={handleAgreement}
         />
         <p>
           Я принимаю условия{' '}
