@@ -62,7 +62,10 @@ const SignUpPage: FC = (): ReactElement => {
         registerUser({ ...data, password, re_password: password_confirmation })
       )
         .then((res) => {
-          if (res.type.endsWith('fulfilled')) setIsSuccess(true);
+          if (res.type.endsWith('fulfilled')) {
+            localStorage.setItem('hasEmailActivation', JSON.stringify(true));
+            setIsSuccess(true);
+          }
         })
         .finally(() => setSubmitting(false));
     },
