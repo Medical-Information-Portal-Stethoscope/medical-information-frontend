@@ -1,5 +1,6 @@
 // UNITS
 export const bytesInMegabyte = 1e6;
+export const bytesInKilobyte = 1e3;
 
 // HEADER
 export const headerHeightWithIndentsDesktopBig = 200;

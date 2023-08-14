@@ -9,9 +9,6 @@ import styles from './profile-page.module.scss';
 
 function ProfilePage() {
   const { pathname } = useLocation();
-  const isRouteFavourites = pathname.endsWith(
-    `${routes.profile}/${routes.favorites}`
-  );
   const isRouteCreatingAnArticle = pathname.endsWith(
     `${routes.profile}/${routes.publication}`
   );
@@ -23,7 +20,6 @@ function ProfilePage() {
       <Header />
       <main
         className={classNames(styles.wrapper, {
-          [styles[`wrapper--favorites`]]: isRouteFavourites,
           [styles[`wrapper--publication`]]: isRouteCreatingAnArticle,
         })}
       >

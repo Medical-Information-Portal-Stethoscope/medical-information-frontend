@@ -1,5 +1,5 @@
 import { FC } from 'react';
-
+import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import { UserIcon } from 'shared/icons/user-icon';
@@ -10,16 +10,29 @@ import styles from './styles.module.scss';
 export const UserHeaderIcon: FC = () => {
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
-  const username = `${user?.first_name[0]} ${user?.last_name[0]}`;
+  const username = `${user?.first_name[0].toUpperCase()}${user?.last_name[0].toUpperCase()}`;
   const isDoctor = user?.role === 'doctor';
 
   const defaultUserIcon = (
     <UserIcon color="white" size="32" className={styles.user__default} />
   );
   const userIcon = (
-    <div className={styles.user__icon}>
+    <div
+      className={classNames(styles.user__icon, {
+        [styles['user__icon-image']]: !user?.avatar,
+        [styles['user__icon-mask']]: user?.avatar,
+      })}
+    >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-      <p className={styles.user__content}>{username}</p>
+      {user?.avatar ? (
+        <img
+          className={styles.user__avatar}
+          src={user.avatar}
+          alt="Аватар пользователя"
+        />
+      ) : (
+        <span className={styles.user__content}>{username}</span>
+      )}
     </div>
   );
 

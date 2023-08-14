@@ -1,0 +1,78 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 128px;
+  background-color: $color-neutral-0;
+  border-radius: 24px;
+}
+
+.heading {
+  @extend %heading-size-small;
+}
+
+.placemat {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 224px;
+  height: 224px;
+  margin: 40px 0 20px;
+  text-align: center;
+  border-radius: 140px;
+  background-color: $color-brand-primary-100;
+
+  &--error {
+    border: 2px dashed $color-system-error;
+    box-sizing: border-box;
+    color: $color-system-error;
+    background-color: transparent;
+
+    .rule {
+      width: 91%;
+    }
+  }
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  column-gap: 56px;
+
+  > button {
+    height: max-content;
+    padding: 0;
+  }
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 140px;
+}
+
+.rule {
+  width: 84.82%;
+  @extend %text-size-small-extra;
+  white-space: pre-wrap;
+  user-select: none;
+}
+
+.closeButton {
+  position: absolute;
+  top: 27px;
+  right: 28px;
+  width: 24px;
+  height: 24px;
+
+  svg {
+    fill: $color-brand-primary-900;
+  }
+}

@@ -13,7 +13,7 @@ import SignInPage from 'pages/sign-in/sign-in';
 import { ResetPasswordPage } from 'pages/reset-password/reset-password';
 import { ResetPasswordConfirmationPage } from 'pages/reset-password-confirmation/reset-password-confirmation';
 import { NotFoundPage } from 'pages/error-page/notFoundPage';
-import AboutPage from 'pages/about-page/about-page';
+import AboutPage from 'pages/about-us/about-us';
 import routes from 'utils/routes';
 import { Article } from 'pages/article';
 import { News } from 'pages/news';

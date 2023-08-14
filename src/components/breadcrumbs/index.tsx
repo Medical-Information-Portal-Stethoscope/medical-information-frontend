@@ -15,7 +15,7 @@ const routeMapping = {
   home: 'Главная',
   news: 'Новости',
   articles: 'Статьи',
-  about: 'O портале',
+  'about-us': 'O портале',
   authors: 'Авторам',
 };
 

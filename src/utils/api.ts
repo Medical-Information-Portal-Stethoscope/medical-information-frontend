@@ -78,6 +78,32 @@ export const resetPasswordConfirmation = async (
   throw new Error('Something went wrong');
 };
 
+export const changePassword = async (data: {
+  password_current: string;
+  password: string;
+}) => {
+  const res = await fetch(
+    `${api.baseUrl}${api.endpoints.user.base}${api.endpoints.user.password.change}`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Token ${localStorage.getItem('auth_token')}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        current_password: data.password_current,
+        new_password: data.password,
+      }),
+    }
+  );
+
+  if (res.ok) {
+    return 'Password is successfully changed';
+  }
+
+  throw new Error('Something went wrong');
+};
+
 // ARTICLES
 export const createArticle = async (data: TArticleCreation) => {
   const res = await fetch(`${api.baseUrl}${api.endpoints.articles.base}/`, {
