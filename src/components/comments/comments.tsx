@@ -116,7 +116,7 @@ export const Comments: FC<ICurrentMaterial> = ({ currentMaterial }) => {
 
   return (
     <section className={styles.comments} id="comments">
-      <p className={styles.comments__label}>Комментарии к статье</p>
+      <p className={styles.comments__label}>Комментарии к&nbsp;статье</p>
       {isUserOnline ? (
         <form
           onSubmit={sendComment}
