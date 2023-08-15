@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, FC } from 'react';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import { NewsPreviewSmall } from 'components/news-preview-small';
 import { Paper } from 'components/paper';
@@ -14,18 +15,34 @@ import routes from 'utils/routes';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import {
   useGetAllNewsQuery,
-  useGetMaterialByIdQuery,
+  // useGetMaterialByIdQuery,
 } from 'services/features/information-material/api';
+
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { getMaterialById } from 'services/features/material/api';
+import {
+  getDataById,
+  getErrStatusAboutDataId,
+} from 'services/features/material/selectors';
 
 import styles from './styles.module.scss';
 
-export const News = () => {
+export const News: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const response = useGetMaterialByIdQuery(id);
-  const article = response?.data;
-  const errResponse = response.error || {};
-  const errCode = 'status' in errResponse ? errResponse.status : null;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMaterialById(id));
+  }, [id]);
+
+  const { material } = useAppSelector(getDataById);
+  const errStatus = useAppSelector(getErrStatusAboutDataId);
+
+  // const response = useGetMaterialByIdQuery(id);
+  // const article = response?.data;
+  // const errResponse = response.error || {};
+  // const errCode = 'status' in errResponse ? errResponse.status : null;
 
   // Получаем список всех тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -36,14 +53,14 @@ export const News = () => {
 
   useScrollToTop();
 
-  return article ? (
+  return material ? (
     <>
       <Header />
-      <Breadcrumbs materialName={article.title} extraClass={styles.crumbs} />
+      <Breadcrumbs materialName={material.title} extraClass={styles.crumbs} />
       <main>
         <section className={styles.news} aria-label="Страница новости">
           <div className={styles.news__container}>
-            <Paper data={article} isNews />
+            <Paper data={material} isNews />
             {data ? (
               <NewsPreviewSmall data={data.results} route={routes.news.route} />
             ) : null}
@@ -54,10 +71,10 @@ export const News = () => {
     </>
   ) : (
     (function _() {
-      if (errCode === 404) {
+      if (errStatus?.status === 404) {
         return <NotFoundPage />;
       }
-      if (errCode === 500) {
+      if (errStatus?.status === 500) {
         return <ServerErrorPage />;
       }
       return null;

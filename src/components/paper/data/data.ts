@@ -1,4 +1,6 @@
-export const articleExample = {
+import { TArticle } from 'utils/types/article';
+
+export const articleExample: TArticle = {
   id: '72693381-ddb5-4585-b491-1621cf7f730f',
   is_fan: false,
   is_hater: false,
@@ -22,6 +24,8 @@ export const articleExample = {
     id: '91f74365-441c-4873-abd5-5ae56c93006c',
     first_name: 'Доктор',
     last_name: 'Стетоскоп',
+    avatar: '',
+    role: 'user',
   },
   tags: [
     {
@@ -33,4 +37,5 @@ export const articleExample = {
       name: 'Новости',
     },
   ],
+  comments: [],
 };

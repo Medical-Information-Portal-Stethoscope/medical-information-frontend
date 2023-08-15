@@ -34,12 +34,14 @@
     border: 1px solid $color-brand-primary-500;
     background-color: $color-neutral-0;
 
-    svg {
-      fill: $color-brand-secondary-900;
-    }
+    &-header {
+      svg {
+        fill: $color-brand-secondary-900;
+      }
 
-    &:hover {
-      color: $color-brand-primary-500;
+      &:hover {
+        color: $color-brand-primary-500;
+      }
     }
 
     &-image {
@@ -51,7 +53,6 @@
     }
 
     &-mask {
-      // TODO: для плавности анимации, видимо, перенести на уровень выше (для доработки после слияния веток с Полиной)
       &:hover {
         &::before {
           content: '';

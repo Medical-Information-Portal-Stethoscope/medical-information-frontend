@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { newsExample } from './data/news';
 
 import { NewsPreviewSmall } from '.';
+import { newsExample } from './data/news';
 
 const meta = {
   title: 'Components/NewsPreviewSmall',
