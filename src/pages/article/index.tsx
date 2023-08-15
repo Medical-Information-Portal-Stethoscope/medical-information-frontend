@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { FC } from 'react';
+import { useEffect, FC } from 'react';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import { ArticlesPreviewSmall } from 'components/articles-preview-small';
 import { Paper } from 'components/paper';
@@ -14,18 +14,31 @@ import routes from 'utils/routes';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import {
   useGetArticlesbyTagsQuery,
-  useGetMaterialByIdQuery,
+  // useGetMaterialByIdQuery,
 } from 'services/features/information-material/api';
+
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { getMaterialById } from 'services/features/material/api';
+import {
+  getDataById,
+  getErrStatusAboutDataId,
+} from 'services/features/material/selectors';
+
 import { useScrollToTop } from 'hooks/useScrollToTop';
+
 import styles from './styles.module.scss';
 
 export const Article: FC = () => {
   const { id } = useParams() as { id: string };
 
-  const response = useGetMaterialByIdQuery(id);
-  const article = response?.data;
-  const errResponse = response.error || {};
-  const errCode = 'status' in errResponse ? errResponse.status : null;
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getMaterialById(id));
+  }, [id]);
+
+  const { material } = useAppSelector(getDataById);
+  const errStatus = useAppSelector(getErrStatusAboutDataId);
 
   // все теги
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -34,7 +47,7 @@ export const Article: FC = () => {
   // теги по конкретной статье, исключаем новости
   // есть ли у статьи теги
   const tagsQuery =
-    article?.tags && article?.tags.map((tag) => `tags=${tag.pk}`).join('&');
+    material?.tags && material?.tags.map((tag) => `tags=${tag.pk}`).join('&');
   // есть\нет теги исключений
   const tagsExclude = newsTag?.pk ? `tags_exclude=${newsTag?.pk}` : '';
 
@@ -44,18 +57,18 @@ export const Article: FC = () => {
 
   const { data } = useGetArticlesbyTagsQuery(materialTagsQuery);
 
-  const materials = data?.results.filter((item) => item.id !== article?.id);
+  const materials = data?.results.filter((item) => item.id !== material?.id);
 
   useScrollToTop();
 
-  return article ? (
+  return material ? (
     <>
       <Header />
-      <Breadcrumbs materialName={article.title} extraClass={styles.crumbs} />
+      <Breadcrumbs materialName={material.title} extraClass={styles.crumbs} />
       <main>
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
-            <Paper data={article} isNews={false} />
+            <Paper data={material} isNews={false} />
             {materials?.length ? (
               <ArticlesPreviewSmall
                 data={materials}
@@ -69,10 +82,10 @@ export const Article: FC = () => {
     </>
   ) : (
     (function _() {
-      if (errCode === 404) {
+      if (errStatus?.status === 404) {
         return <NotFoundPage />;
       }
-      if (errCode === 500) {
+      if (errStatus?.status === 500) {
         return <ServerErrorPage />;
       }
       return null;

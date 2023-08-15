@@ -1,0 +1,69 @@
+@import '../../../assets/styles/index.scss';
+
+.comment {
+  width: 100%;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  box-sizing: border-box;
+  row-gap: 20px;
+
+  // для границы цвет не определен в colors
+  border: 1px solid #bdbdbd5c;
+  border-radius: 16px;
+  transition: $transition-hover;
+
+  &_owner {
+    background-color: $color-neutral-100;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  &__name {
+    @extend %text-size-medium-semibold;
+    color: $color-neutral-900;
+
+    &_owner {
+      color: $color-brand-primary-900;
+    }
+  }
+
+  &__date {
+    @extend %text-size-small;
+    color: $color-neutral-500;
+  }
+
+  &__user {
+    display: flex;
+    flex-direction: row;
+    column-gap: 16px;
+    align-items: center;
+  }
+
+  &__meta {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+  }
+
+  &__text {
+    max-width: 722px;
+    color: $color-neutral-900;
+    @extend %text-article;
+  }
+
+  &__remove {
+    color: $color-neutral-500;
+    @extend %text-size-small-extra;
+
+    :hover {
+      color: red;
+    }
+  }
+}

@@ -7,7 +7,7 @@ import Tooltip from 'shared/tooltip/tooltip';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
 import routes from 'utils/routes';
-import { UserHeaderIcon } from '../user-header-icon';
+import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
 import { Menu } from './menu';
 
@@ -18,6 +18,9 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
+  const userName = `${user?.first_name[0]} ${user?.last_name[0]}`;
+
+  const isUserOnline = !!user?.id;
 
   const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
   const navigateToUserProfile = () => navigate(routes.profile);
@@ -49,7 +52,13 @@ export const Header: FC = () => {
           aria-label={createAriaLabel()}
           onClick={user ? navigateToUserProfile : handleTogglePopup}
         >
-          <UserHeaderIcon />
+          <UserProfileIcon
+            avatar={user?.avatar || ''}
+            isHeader
+            name={userName}
+            role={user?.role || 'user'}
+            isUserOnline={isUserOnline}
+          />
         </div>
       </div>
 

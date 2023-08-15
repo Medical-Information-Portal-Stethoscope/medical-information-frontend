@@ -1,17 +1,26 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import { useAppSelector } from 'services/app/hooks';
-import { showUserPersonalData } from 'services/features/user/selectors';
 import { UserIcon } from 'shared/icons/user-icon';
 import { PlusIcon } from 'shared/icons/plus-icon';
 
 import styles from './styles.module.scss';
 
-export const UserHeaderIcon: FC = () => {
-  const { user } = useAppSelector(showUserPersonalData);
-  const isUserOnline = !!user?.id;
-  const username = `${user?.first_name[0].toUpperCase()}${user?.last_name[0].toUpperCase()}`;
-  const isDoctor = user?.role === 'doctor';
+type UserInfo = {
+  name: string;
+  avatar: string;
+  role: string;
+  isHeader: boolean;
+  isUserOnline?: boolean;
+};
+
+export const UserProfileIcon: FC<UserInfo> = ({
+  name,
+  avatar,
+  role,
+  isHeader,
+  isUserOnline,
+}) => {
+  const isDoctor = role === 'doctor';
 
   const defaultUserIcon = (
     <UserIcon color="white" size="32" className={styles.user__default} />
@@ -19,33 +28,35 @@ export const UserHeaderIcon: FC = () => {
   const userIcon = (
     <div
       className={classNames(styles.user__icon, {
-        [styles['user__icon-image']]: !user?.avatar,
-        [styles['user__icon-mask']]: user?.avatar,
+        [styles['user__icon-image']]: !avatar,
+        [styles['user__icon-mask']]: avatar && isHeader,
+        [styles['user__icon-header']]: isHeader,
       })}
     >
       {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
-      {user?.avatar ? (
+      {avatar ? (
         <img
           className={styles.user__avatar}
-          src={user.avatar}
+          src={avatar}
           alt="Аватар пользователя"
         />
       ) : (
-        <span className={styles.user__content}>{username}</span>
+        <span className={styles.user__content}>{name}</span>
       )}
     </div>
   );
 
   if (isUserOnline) {
-    switch (user?.role) {
-      case 'user':
-        return userIcon;
-      case 'doctor':
+    switch (role) {
+      case 'user' || 'doctor':
         return userIcon;
       default:
         return userIcon;
     }
   } else {
-    return defaultUserIcon;
+    if (isHeader) {
+      return defaultUserIcon;
+    }
+    return userIcon;
   }
 };

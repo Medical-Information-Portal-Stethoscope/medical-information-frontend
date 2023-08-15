@@ -1,3 +1,17 @@
+export interface IComment {
+  id: string;
+  text: string;
+  author: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    role: 'user' | 'doctor' | 'admin' | string;
+    avatar: string;
+  };
+  created_at: string;
+  updated_at: string;
+}
+
 export type TArticle = {
   id: string;
   is_fan: boolean;
@@ -20,11 +34,14 @@ export type TArticle = {
     id: string;
     first_name: string;
     last_name: string;
+    role: 'user' | 'doctor' | 'admin' | string;
+    avatar: string;
   } | null;
   tags: {
     pk: string;
     name: string;
   }[];
+  comments: IComment[];
 };
 
 export type TArticleCreation = {

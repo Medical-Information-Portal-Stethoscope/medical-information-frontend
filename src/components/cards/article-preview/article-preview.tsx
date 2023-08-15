@@ -11,9 +11,6 @@ import IconViews from './test-data/icon_views';
 
 import styles from './article-preview.module.scss';
 
-// TODO: dynamic routes. Here or upper scope?
-// TODO: onClick. Here or upper scope?
-
 interface ICardArticlePreviewProps {
   data: {
     id: string;

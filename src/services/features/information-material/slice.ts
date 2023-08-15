@@ -54,7 +54,11 @@ const contentSlice = createSlice({
       state,
       action: PayloadAction<TGetInformationMaterialResponse>
     ) {
-      state.news.storage = action.payload.results;
+      const maxCountOfNewsOnPage = 5;
+      state.news.storage = action.payload.results.slice(
+        0,
+        maxCountOfNewsOnPage
+      );
       state.news.nextPage = action.payload.next;
     },
     setIsAllArticles(state) {

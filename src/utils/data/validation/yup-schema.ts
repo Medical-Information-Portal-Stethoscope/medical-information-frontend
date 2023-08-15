@@ -107,3 +107,12 @@ export const schemaArticleSourceLink = (yup: typeof import('yup')) => ({
 export const schemaArticleImage = (yup: typeof import('yup')) => ({
   image: yup.string().required(),
 });
+
+// COMMENT
+export const schemaComment = (yup: typeof import('yup')) => ({
+  comment: yup
+    .string()
+    .defined()
+    // .max(4000, validationErrors.comments.unacceptableLength)
+    .required(validationErrors.comment.required),
+});
