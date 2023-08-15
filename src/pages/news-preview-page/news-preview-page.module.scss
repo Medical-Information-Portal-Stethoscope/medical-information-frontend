@@ -29,3 +29,9 @@
   max-width: $wrapper-news-preview-desktop;
   margin: 0 auto;
 }
+
+.top_button {
+  position: fixed;
+  bottom: 372px;
+  left: calc(50vw - 40px + 865px);
+}

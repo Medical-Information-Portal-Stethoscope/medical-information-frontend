@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
@@ -15,6 +15,7 @@ import {
 } from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useScrollToTop } from 'hooks/useScrollToTop';
+import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import {
   isAllContentNews,
   isLoadingContent,
@@ -25,6 +26,7 @@ import routes from 'utils/routes';
 import styles from './news-preview-page.module.scss';
 
 export default function NewsPreviewPage() {
+  const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
   const dispatch = useAppDispatch();
   const newsBase = useAppSelector(newsStorage);
   const nextPageNews = useAppSelector(nextNewsPage);
@@ -39,8 +41,22 @@ export default function NewsPreviewPage() {
 
   useScrollToTop();
 
+  const heightTop = 1250;
+
+  const toggleButtonVisible = () => {
+    setIsButtonToTopVisible(
+      document.body.scrollTop > heightTop ||
+        document.documentElement.scrollTop > heightTop
+    );
+  };
+
   useEffect(() => {
     dispatch(setIsAllArticles());
+    window.addEventListener('scroll', toggleButtonVisible, false);
+
+    return () => {
+      window.removeEventListener('scroll', toggleButtonVisible, false);
+    };
   }, []); // eslint-disable-line
 
   useEffect(() => {
@@ -76,7 +92,7 @@ export default function NewsPreviewPage() {
               <div className={styles.news}>{news}</div>
               {!isAllContent && (
                 <Button
-                  label="Еще"
+                  label="Ещё"
                   model="secondary"
                   size="small"
                   hasBorder
@@ -88,6 +104,9 @@ export default function NewsPreviewPage() {
                 />
               )}
             </div>
+          </div>
+          <div className={styles.top_button}>
+            {isButtonToTopVisible && <ButtonTopNavigation />}
           </div>
         </section>
       </main>
