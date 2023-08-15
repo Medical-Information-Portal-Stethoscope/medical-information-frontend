@@ -1,0 +1,35 @@
+.avatarModalEnter {
+  opacity: 0;
+}
+
+.avatarModalEnterActive {
+  opacity: 1;
+  animation: moveUp 300ms ease-out;
+}
+
+.avatarModalExit {
+  opacity: 1;
+}
+
+.avatarModalExitActive {
+  opacity: 0;
+  animation: moveDown 300ms ease-out;
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(2rem);
+  }
+  to {
+    transform: translateY(0rem);
+  }
+}
+
+@keyframes moveDown {
+  from {
+    transform: translateY(0rem);
+  }
+  to {
+    transform: translateY(2rem);
+  }
+}

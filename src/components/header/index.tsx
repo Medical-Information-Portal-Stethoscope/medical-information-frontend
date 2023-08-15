@@ -6,6 +6,7 @@ import { showUserPersonalData } from 'services/features/user/selectors';
 import Tooltip from 'shared/tooltip/tooltip';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
+import classNames from 'classnames';
 import routes from 'utils/routes';
 import { UserHeaderIcon } from '../user-header-icon';
 import { Search } from './search';
@@ -53,11 +54,13 @@ export const Header: FC = () => {
         </div>
       </div>
 
-      {isPopupOpened && (
-        <div className={styles.tooltip}>
-          <Tooltip />
-        </div>
-      )}
+      <div
+        className={classNames(styles.tooltip, {
+          [styles[`tooltip--open`]]: isPopupOpened,
+        })}
+      >
+        <Tooltip />
+      </div>
     </header>
   );
 };

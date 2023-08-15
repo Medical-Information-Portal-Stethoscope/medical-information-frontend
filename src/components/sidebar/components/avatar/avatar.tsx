@@ -5,6 +5,7 @@ import { resetServerError } from 'services/features/user/slice';
 import { showServerError } from 'services/features/user/selectors';
 import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
 import { Icon } from 'shared/icons';
+import { useMount } from 'hooks/useMount';
 import { AvatarModal } from '../avatar-modal/avatar-modal';
 import styles from './avatar.module.scss';
 
@@ -19,6 +20,7 @@ interface IAvatarProps {
 export const Avatar: FC<IAvatarProps> = ({ user }): ReactElement => {
   const dispatch = useAppDispatch();
   const [isModalOpened, setIsModalOpened] = useState(false);
+  const { mounted } = useMount({ isOpened: isModalOpened });
 
   const serverError = useAppSelector(showServerError);
 
@@ -52,12 +54,13 @@ export const Avatar: FC<IAvatarProps> = ({ user }): ReactElement => {
         <Icon icon="EditWithBorderIcon" color="lightBlue" />
       </div>
 
-      {isModalOpened && (
+      {mounted && (
         <OverlayingPopup isOpened={isModalOpened} onClose={closeModal}>
           <AvatarModal
             avatar={user?.avatar}
             serverError={serverError}
             onClose={closeModal}
+            isOpened={isModalOpened}
           />
         </OverlayingPopup>
       )}

@@ -46,4 +46,21 @@
   position: absolute;
   top: 116px;
   right: 56px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms, visibility 300ms ease-out;
+  &--open {
+    animation: open 300ms ease-out;
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes open {
+  from {
+    top: calc(168px - 90px);
+  }
+  to {
+    top: 116px;
+  }
 }
