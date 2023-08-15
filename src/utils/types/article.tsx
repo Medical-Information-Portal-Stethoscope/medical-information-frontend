@@ -5,7 +5,7 @@ export interface IComment {
     id: string;
     first_name: string;
     last_name: string;
-    role: 'user' | 'doctor' | 'admin';
+    role: 'user' | 'doctor' | 'admin' | string;
     avatar: string;
   };
   created_at: string;
@@ -34,7 +34,7 @@ export type TArticle = {
     id: string;
     first_name: string;
     last_name: string;
-    role: 'user' | 'doctor' | 'admin';
+    role: 'user' | 'doctor' | 'admin' | string;
     avatar: string;
   } | null;
   tags: {
