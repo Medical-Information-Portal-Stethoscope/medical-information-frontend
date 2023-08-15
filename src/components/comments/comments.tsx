@@ -1,6 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable react-hooks/exhaustive-deps */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useState, useEffect, FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -24,31 +21,23 @@ import styles from './styles.module.scss';
 
 const maxCommentsDesktop = 7;
 
-interface CurrentMaterial {
+interface ICurrentMaterial {
   currentMaterial: TArticle;
 }
 
-export const Comments: FC<CurrentMaterial> = ({ currentMaterial }) => {
+export const Comments: FC<ICurrentMaterial> = ({ currentMaterial }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  // const currentMaterial = useAppSelector(getDataById);
+
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
 
-  const [allComments, setAllComments] = useState<IComment[]>(
-    currentMaterial?.comments || []
+  const { comments } = currentMaterial;
+  const [allComments, setAllComments] = useState<IComment[]>(comments);
+  const [visibleComments, setVisibleComments] = useState<IComment[]>(
+    comments.slice(0, maxCommentsDesktop)
   );
-  const [visibleComments, setVisibleComments] = useState<IComment[] | []>([]);
-  const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(
-    visibleComments.length < allComments.length
-  );
-
-  useEffect(() => {
-    const comments = currentMaterial?.comments || [];
-    const visibleData = comments?.slice(0, maxCommentsDesktop) || [];
-    setAllComments(comments);
-    setVisibleComments(visibleData);
-  }, []);
+  const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(true);
 
   useEffect(() => {
     if (allComments.length <= maxCommentsDesktop) {
@@ -85,27 +74,29 @@ export const Comments: FC<CurrentMaterial> = ({ currentMaterial }) => {
     handleChange,
   } = formik;
 
-  const sendComment = async () => {
+  const sendComment = () => {
     const reqData = {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       materialId: currentMaterial!.id,
       text: values.comment,
     };
 
     dispatch(addCommentToMaterial(reqData))
       .then((res) => {
-        const newComment =
-          (res.payload as IComment) && (res.payload as IComment);
+        const newComment = res.payload as IComment;
         setAllComments((prev) => [newComment, ...prev]);
         setVisibleComments((prev) => [newComment, ...prev]);
         setFieldValue('comment', '');
         setFieldTouched('comment', false, false);
       })
+      // eslint-disable-next-line no-console
       .catch((err) => console.log(err));
   };
 
   const removeComment = (commentId: string) => {
     dispatch(
       removeCommentFromMaterial({
+        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         materialId: currentMaterial!.id,
         commentId,
       })
@@ -113,16 +104,13 @@ export const Comments: FC<CurrentMaterial> = ({ currentMaterial }) => {
       .then((res) => {
         const resCommentId = res.payload?.id ? res.payload.id : '';
         setAllComments((prev) =>
-          prev.filter(
-            (comment) => resCommentId !== comment.id && { ...comment }
-          )
+          prev.filter((comment) => resCommentId !== comment.id)
         );
         setVisibleComments((prev) =>
-          prev.filter(
-            (comment) => resCommentId !== comment.id && { ...comment }
-          )
+          prev.filter((comment) => resCommentId !== comment.id)
         );
       })
+      // eslint-disable-next-line no-console
       .catch((err) => console.log(err));
   };
 

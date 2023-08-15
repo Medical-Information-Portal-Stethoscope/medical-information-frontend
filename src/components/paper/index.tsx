@@ -19,8 +19,6 @@ import ButtonWithIconThree from 'shared/buttons/button-with-icon-three/button-wi
 
 import { converMdToHTML } from 'utils/functions/convert-md-to-html';
 
-import { articleExample } from 'components/paper/data/data';
-
 import { TArticle } from 'utils/types/article';
 
 import { Comments } from 'components/comments/comments';
@@ -32,10 +30,7 @@ interface Ipaper {
   isNews: boolean;
 }
 
-export const Paper: FC<Ipaper> = ({
-  data = articleExample,
-  isNews = false,
-}) => {
+export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
   const date = renderFormatDateArticle(data.created_at);
   const readingTime = findReadingTimeArticle(data.text);
 

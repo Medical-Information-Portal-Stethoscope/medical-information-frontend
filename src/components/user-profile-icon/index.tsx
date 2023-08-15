@@ -1,7 +1,5 @@
 import { FC } from 'react';
 import classNames from 'classnames';
-import { useAppSelector } from 'services/app/hooks';
-import { showUserPersonalData } from 'services/features/user/selectors';
 import { UserIcon } from 'shared/icons/user-icon';
 import { PlusIcon } from 'shared/icons/plus-icon';
 
@@ -12,6 +10,7 @@ type UserInfo = {
   avatar: string;
   role: string;
   isHeader: boolean;
+  isUserOnline?: boolean;
 };
 
 export const UserProfileIcon: FC<UserInfo> = ({
@@ -19,9 +18,8 @@ export const UserProfileIcon: FC<UserInfo> = ({
   avatar,
   role,
   isHeader,
+  isUserOnline,
 }) => {
-  const { user } = useAppSelector(showUserPersonalData);
-  const isUserOnline = !!user?.id;
   const isDoctor = role === 'doctor';
 
   const defaultUserIcon = (
@@ -30,8 +28,8 @@ export const UserProfileIcon: FC<UserInfo> = ({
   const userIcon = (
     <div
       className={classNames(styles.user__icon, {
-        [styles['user__icon-image']]: !user?.avatar,
-        [styles['user__icon-mask']]: user?.avatar && isHeader,
+        [styles['user__icon-image']]: !avatar,
+        [styles['user__icon-mask']]: avatar && isHeader,
         [styles['user__icon-header']]: isHeader,
       })}
     >

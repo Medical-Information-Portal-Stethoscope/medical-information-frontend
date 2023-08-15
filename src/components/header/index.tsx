@@ -18,8 +18,9 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
-  const userName =
-    `${user?.first_name[0]} ${user?.last_name[0]}` || 'Дарья Врачева';
+  const userName = `${user?.first_name[0]} ${user?.last_name[0]}`;
+
+  const isUserOnline = !!user?.id;
 
   const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
   const navigateToUserProfile = () => navigate(routes.profile);
@@ -56,6 +57,7 @@ export const Header: FC = () => {
             isHeader
             name={userName}
             role={user?.role || 'user'}
+            isUserOnline={isUserOnline}
           />
         </div>
       </div>

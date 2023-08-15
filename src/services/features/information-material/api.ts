@@ -24,10 +24,6 @@ export const informationMaterialApi = createApi({
       query: (id) => `${api.endpoints.articles.base}/?tags=${id}`,
     }),
 
-    // getMaterialById: builder.query<TArticle, string | undefined>({
-    //   query: (id) => `${api.endpoints.articles.base}/${id}`,
-    // }),
-
     getMostPopularArticle: builder.query<TArticle, void>({
       query: () => `${api.endpoints.articles.base}/the_most_popular`,
     }),
@@ -64,7 +60,6 @@ export const getNextPageContent = createAsyncThunk<
 export const {
   useGetAllArticlesQuery,
   useGetAllNewsQuery,
-  // useGetMaterialByIdQuery,
   useGetMostPopularArticleQuery,
   useGetArticlesbyTagsQuery,
 } = informationMaterialApi;

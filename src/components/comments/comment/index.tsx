@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { UserProfileIcon } from 'components/user-profile-icon';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
@@ -27,19 +26,9 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
   // для покдрашивания имени (в зависимости от авторства статьи)
   const isArticleOwner = material?.author?.id === user?.id;
 
-  const authorName =
-    author?.first_name && author?.last_name
-      ? `${author?.first_name} ${author?.last_name}`
-      : 'Диванный Эксперт';
+  const authorName = `${author.first_name} ${author.last_name}`;
 
-  const authorNameLogo =
-    author?.first_name && author?.last_name
-      ? `${author?.first_name[0]} ${author?.last_name[0]}`
-      : 'Диванный Эксперт';
-
-  const removeItem = () => {
-    removeComment(comment.id);
-  };
+  const authorNameLogo = `${author?.first_name[0]} ${author?.last_name[0]}`;
 
   return (
     <div
@@ -54,6 +43,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
             role={author.role}
             avatar={author.avatar}
             isHeader={false}
+            isUserOnline={false}
           />
           <div className={styles.comment__meta}>
             <span
@@ -70,7 +60,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
         {isCommentOwner && (
           <Button
             model="tertiary"
-            onClick={removeItem}
+            onClick={() => removeComment(comment.id)}
             label="Удалить"
             extraClass={styles.comment__remove}
           />
