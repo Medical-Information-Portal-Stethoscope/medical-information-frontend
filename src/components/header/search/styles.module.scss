@@ -4,8 +4,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 512px;
-  min-width: 512px;
+  max-width: 600px;
   height: 48px;
   padding: 12px;
   border: 1px solid $color-neutral-400;
