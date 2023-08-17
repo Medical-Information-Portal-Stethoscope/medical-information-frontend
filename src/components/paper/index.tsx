@@ -19,9 +19,9 @@ import ButtonWithIconThree from 'shared/buttons/button-with-icon-three/button-wi
 
 import { converMdToHTML } from 'utils/functions/convert-md-to-html';
 
-import { articleExample } from 'components/paper/data/data';
-
 import { TArticle } from 'utils/types/article';
+
+import { Comments } from 'components/comments/comments';
 
 import styles from './styles.module.scss';
 
@@ -30,10 +30,7 @@ interface Ipaper {
   isNews: boolean;
 }
 
-export const Paper: FC<Ipaper> = ({
-  data = articleExample,
-  isNews = false,
-}) => {
+export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
   const date = renderFormatDateArticle(data.created_at);
   const readingTime = findReadingTimeArticle(data.text);
 
@@ -54,18 +51,23 @@ export const Paper: FC<Ipaper> = ({
         <DotIcon size="24" color="gray" className={styles.paper__dot} />
         <ViewsIcon color="gray" size="24" />
         <p className={styles.paper__views}>{data.views_count}</p>
-        <DotIcon size="24" color="gray" className={styles.paper__dot} />
-        <p className={styles.paper__source}>
-          Источник:{' '}
-          <a
-            className={styles.paper__link}
-            href={data.source_link || '#'}
-            target="_blank"
-            rel="noreferrer"
-          >
-            {data.source_name}
-          </a>
-        </p>
+
+        {data.source_name ? (
+          <>
+            <DotIcon size="24" color="gray" className={styles.paper__dot} />
+            <p className={styles.paper__source}>
+              Источник:{' '}
+              <a
+                className={styles.paper__link}
+                href={data.source_link || '#'}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {data.source_name}
+              </a>
+            </p>
+          </>
+        ) : null}
       </div>
       <img
         className={styles.paper__cover}
@@ -100,14 +102,15 @@ export const Paper: FC<Ipaper> = ({
           onClick={handleForward}
           extraClass={styles.paper__button}
         /> */}
-
-        <ButtonWithIconThree
-          icon={
-            <CommentsIcon color="gray" size="24" className={styles.forward} />
-          }
-          onClick={handleAddComment}
-          extraClass={`${styles.paper__button} `}
-        />
+        <a href="#comments">
+          <ButtonWithIconThree
+            icon={
+              <CommentsIcon color="gray" size="24" className={styles.forward} />
+            }
+            onClick={handleAddComment}
+            extraClass={`${styles.paper__button} `}
+          />
+        </a>
       </div>
 
       {/* TODO: определить ссылку на автора */}
@@ -139,6 +142,8 @@ export const Paper: FC<Ipaper> = ({
           </ul>
         </div>
       ) : null}
+
+      <Comments currentMaterial={data} />
     </article>
   );
 };

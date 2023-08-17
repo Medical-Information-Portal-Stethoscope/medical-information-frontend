@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { BrowserRouter } from 'react-router-dom';
-import { articlesExample } from './data/articles';
 
 import { ArticlesPreviewSmall } from '.';
+import { articlesExample } from './data/articles';
 
 const meta = {
   title: 'Components/ArticlesPreviewSmall',

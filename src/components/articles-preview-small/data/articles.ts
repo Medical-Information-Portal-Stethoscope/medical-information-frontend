@@ -1,6 +1,6 @@
 export const articlesExample = [
   {
-    id: '72693381-ddb5-4585-b491-1621cf7f730f',
+    id: '1',
     is_fan: false,
     is_hater: false,
     total_likes: 0,
@@ -23,6 +23,8 @@ export const articlesExample = [
       id: '91f74365-441c-4873-abd5-5ae56c93006c',
       first_name: 'Доктор',
       last_name: 'Стетоскоп',
+      avatar: '',
+      role: 'user',
     },
     tags: [
       {
@@ -34,9 +36,10 @@ export const articlesExample = [
         name: 'Новости',
       },
     ],
+    comments: [],
   },
   {
-    id: '72693381-ddb5-4585-b491-1621cf7f730f',
+    id: '2',
     is_fan: false,
     is_hater: false,
     total_likes: 0,
@@ -59,6 +62,8 @@ export const articlesExample = [
       id: '91f74365-441c-4873-abd5-5ae56c93006c',
       first_name: 'Доктор',
       last_name: 'Стетоскоп',
+      avatar: '',
+      role: 'user',
     },
     tags: [
       {
@@ -70,5 +75,6 @@ export const articlesExample = [
         name: 'Новости',
       },
     ],
+    comments: [],
   },
 ];

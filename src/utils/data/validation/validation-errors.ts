@@ -59,4 +59,9 @@ export const validationErrors = Object.freeze({
       required: 'Обязательное поле',
     },
   },
+
+  comment: {
+    required: 'Обязательное поле',
+    unacceptableLength: 'Недопустимая длина',
+  },
 });

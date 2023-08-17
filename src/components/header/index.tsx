@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import Tooltip from 'shared/tooltip/tooltip';
@@ -8,7 +9,7 @@ import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
 import classNames from 'classnames';
 import routes from 'utils/routes';
-import { UserHeaderIcon } from '../user-header-icon';
+import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
 import { Menu } from './menu';
 
@@ -19,6 +20,9 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
+  const userName = `${user?.first_name[0]} ${user?.last_name[0]}`;
+
+  const isUserOnline = !!user?.id;
 
   const handleTogglePopup = () => setIsPopupOpened(!isPopupOpened);
   const navigateToUserProfile = () => navigate(routes.profile);
@@ -44,13 +48,21 @@ export const Header: FC = () => {
       <div className={styles.header__search}>
         <Search />
         <div
-          className={styles.header__profile}
+          className={classNames(styles.header__profile, {
+            [styles.header__profile_auth]: user,
+          })}
           role="button"
           tabIndex={0}
           aria-label={createAriaLabel()}
           onClick={user ? navigateToUserProfile : handleTogglePopup}
         >
-          <UserHeaderIcon />
+          <UserProfileIcon
+            avatar={user?.avatar || ''}
+            isHeader
+            name={userName}
+            role={user?.role || 'user'}
+            isUserOnline={isUserOnline}
+          />
         </div>
       </div>
 
