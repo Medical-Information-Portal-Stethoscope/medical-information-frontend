@@ -7,7 +7,6 @@ import { showUserPersonalData } from 'services/features/user/selectors';
 import Tooltip from 'shared/tooltip/tooltip';
 import { homeNavLink } from 'utils/data/header/links';
 import { Logo } from 'shared/logo';
-import classNames from 'classnames';
 import routes from 'utils/routes';
 import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
