@@ -65,11 +65,13 @@ export const Header: FC = () => {
         </div>
       </div>
 
-      {isPopupOpened && (
-        <div className={styles.tooltip}>
-          <Tooltip />
-        </div>
-      )}
+      <div
+        className={classNames(styles.tooltip, {
+          [styles[`tooltip--open`]]: isPopupOpened,
+        })}
+      >
+        <Tooltip />
+      </div>
     </header>
   );
 };
