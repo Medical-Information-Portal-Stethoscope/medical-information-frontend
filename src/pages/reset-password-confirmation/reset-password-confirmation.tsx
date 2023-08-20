@@ -92,7 +92,7 @@ export const ResetPasswordConfirmationPage: FC = (): ReactElement => {
         return {
           content: <StatusIcon color="white" size="140" status="success" />,
           heading: 'Пароль успешно изменён',
-          buttonLabel: 'Войти в личный кабинет',
+          buttonLabel: 'Войти в аккаунт',
           buttonType: 'button',
           onClick: () => navigate(routes.signin, { replace: true }),
         };
