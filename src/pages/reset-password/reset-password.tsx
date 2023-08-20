@@ -35,7 +35,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
           );
         })
         .catch((err) => {
-          serverError = err;
+          serverError = { email: err };
         })
         .finally(() => setSubmitting(false));
     },
