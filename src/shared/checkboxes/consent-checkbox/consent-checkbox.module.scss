@@ -33,6 +33,16 @@
   }
 }
 
+.error {
+  & + .checkmark {
+    border-color: $color-system-error;
+
+    &:hover {
+      border-color: $color-brand-primary-900;
+    }
+  }
+}
+
 .checkmark {
   display: inline-flex;
   justify-content: center;

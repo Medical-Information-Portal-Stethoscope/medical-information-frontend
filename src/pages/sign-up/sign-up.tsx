@@ -171,6 +171,7 @@ const SignUpPage: FC = (): ReactElement => {
           id="sign-up"
           name="personal_data_confirmation_has_agreed"
           isChecked={hasAgreement}
+          isValid={!errors?.personal_data_confirmation_has_agreed}
           onChange={handleAgreement}
         />
         <p>
