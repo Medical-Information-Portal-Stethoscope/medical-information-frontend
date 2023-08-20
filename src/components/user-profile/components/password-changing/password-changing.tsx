@@ -1,4 +1,4 @@
-import { FC, ReactElement, Dispatch, SetStateAction } from 'react';
+import { FC, Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Input from 'shared/input/input';
@@ -17,7 +17,11 @@ interface IPasswordChangingProps {
 
 export const PasswordChanging: FC<IPasswordChangingProps> = ({
   onProfileTab,
-}): ReactElement => {
+}) => {
+  const [serverError, setServerError] = useState<null | {
+    current_password: string[];
+  }>(null);
+
   const formik = useFormik({
     initialValues: {
       password_current: '',
@@ -29,7 +33,9 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
       .shape(schemaPassword(Yup)),
 
     onSubmit: (data, { setSubmitting }) => {
-      changePassword(data).finally(() => setSubmitting(false));
+      changePassword(data)
+        .catch((err) => setServerError(err))
+        .finally(() => setSubmitting(false));
     },
   });
 
@@ -43,6 +49,13 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
     handleChange,
     handleSubmit,
   } = formik;
+
+  useEffect(() => {
+    if (!serverError) return;
+
+    setServerError(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
 
   return (
     <>
@@ -63,6 +76,7 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
             icon
             value={values.password_current}
             error={errors?.password_current}
+            serverError={serverError?.current_password}
             touched={touched?.password_current}
             onFocus={() => setFieldTouched('password_current')}
             onChange={handleChange}
