@@ -19,7 +19,7 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
-  const userName = `${user?.first_name[0]} ${user?.last_name[0]}`;
+  const userName = `${user?.first_name[0]}${user?.last_name[0]}`;
 
   const isUserOnline = !!user?.id;
 
