@@ -74,7 +74,7 @@ export const ResetPasswordPage = () => {
         error={errors?.email}
         serverError={serverError?.email}
         touched={touched?.email}
-        hasCheckmark
+        hasCheckmark={!serverError?.email}
         onBlur={handleBlur}
         onChange={handleChange}
       />
@@ -109,7 +109,7 @@ export const ResetPasswordPage = () => {
       buttonLabel={isSuccess ? 'Вернуться на главную' : 'Отправить'}
       altNavigation={isSuccess ? null : navigation}
       isLoading={isSubmitting}
-      isDisabled={!isValid}
+      isDisabled={!isValid || !!serverError}
       onSubmit={handleSubmit}
       onClick={isSuccess ? () => navigate(routes.home) : undefined}
     >

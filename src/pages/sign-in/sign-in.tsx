@@ -81,7 +81,7 @@ const SignInPage: FC = (): ReactElement => {
       buttonLabel="Войти"
       altNavigation={navigation}
       isLoading={isSubmitting}
-      isDisabled={!isValid}
+      isDisabled={!isValid || !!serverError}
       onSubmit={handleSubmit}
     >
       <div className={styles.inputs}>
@@ -94,7 +94,7 @@ const SignInPage: FC = (): ReactElement => {
           error={errors?.email}
           serverError={serverError?.email}
           touched={touched?.email}
-          hasCheckmark
+          hasCheckmark={!serverError?.email}
           onBlur={handleBlur}
           onChange={handleChange}
         />

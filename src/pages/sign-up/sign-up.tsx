@@ -111,7 +111,7 @@ const SignUpPage: FC = (): ReactElement => {
             error={errors?.first_name}
             serverError={serverError?.first_name}
             touched={touched?.first_name}
-            hasCheckmark
+            hasCheckmark={!serverError?.first_namel}
             onBlur={handleBlur}
             onChange={handleChange}
           />
@@ -123,7 +123,7 @@ const SignUpPage: FC = (): ReactElement => {
             error={errors?.last_name}
             serverError={serverError?.last_name}
             touched={touched?.last_name}
-            hasCheckmark
+            hasCheckmark={!serverError?.last_name}
             onBlur={handleBlur}
             onChange={handleChange}
           />
@@ -138,7 +138,7 @@ const SignUpPage: FC = (): ReactElement => {
           error={errors?.email}
           serverError={serverError?.email}
           touched={touched?.email}
-          hasCheckmark
+          hasCheckmark={!serverError?.email}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -229,7 +229,7 @@ const SignUpPage: FC = (): ReactElement => {
       buttonLabel={isSuccess ? 'Перейти на главную' : 'Зарегистрироваться'}
       altNavigation={isSuccess ? null : navigation}
       isLoading={isSubmitting}
-      isDisabled={!isValid}
+      isDisabled={!isValid || !!serverError}
       hasCommentaryWithRequired={!isSuccess}
       onSubmit={handleSubmit}
       onClick={isSuccess ? () => navigate(routes.home) : undefined}
