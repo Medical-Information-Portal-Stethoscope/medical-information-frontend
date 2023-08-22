@@ -12,6 +12,7 @@ import Button from 'shared/buttons/button/button';
 import { filterFormValues } from 'utils/functions/filter-form-values';
 import routes from 'utils/routes';
 import { schemaEmail, schemaPassword } from 'utils/data/validation/yup-schema';
+import { validationErrors } from 'utils/data/validation/validation-errors';
 import styles from './sign-in.module.scss';
 
 const SignInPage: FC = (): ReactElement => {
@@ -92,9 +93,10 @@ const SignInPage: FC = (): ReactElement => {
           autoComplete="on"
           value={values.email}
           error={errors?.email}
-          serverError={serverError?.email}
+          serverError={serverError?.non_field_errors}
+          shouldShowError={false}
           touched={touched?.email}
-          hasCheckmark={!serverError?.email}
+          hasCheckmark={!serverError?.non_field_errors}
           onBlur={handleBlur}
           onChange={handleChange}
         />
@@ -106,7 +108,11 @@ const SignInPage: FC = (): ReactElement => {
             icon
             value={values.password}
             error={errors?.password}
-            serverError={serverError?.non_field_errors || serverError?.password}
+            serverError={
+              serverError?.non_field_errors
+                ? validationErrors.user.auth.general
+                : ''
+            }
             touched={touched?.password}
             onBlur={handleBlur}
             onChange={handleChange}

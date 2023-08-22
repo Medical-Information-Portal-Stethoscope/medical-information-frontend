@@ -1,5 +1,9 @@
 export const validationErrors = Object.freeze({
   user: {
+    auth: {
+      general: 'Пользователь с таким email или паролем не найден',
+    },
+
     email: {
       acceptableSymbols:
         'Поле может содержать только прописные и строчные буквы (A-z), цифры, точку, дефис, @, нижнее подчеркивание, максимум 50 символов',
