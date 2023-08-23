@@ -1,5 +1,6 @@
 import { ReactNode, FC, FormEvent } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 import { Logo } from 'shared/logo';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
@@ -30,6 +31,9 @@ const Entry: FC<IEntryProps> = ({
   onSubmit,
   onClick,
 }) => {
+  const { pathname } = useLocation();
+  const isSignUpForm = pathname.endsWith(routes.signup);
+
   const content = (
     <>
       {hasCommentaryWithRequired && (
@@ -59,7 +63,11 @@ const Entry: FC<IEntryProps> = ({
           <span>медицинский информационный портал</span>
         </Link>
       </div>
-      <div className={styles.columnRight}>
+      <div
+        className={classNames(styles.columnRight, {
+          [styles.columnRightSignUp]: isSignUpForm,
+        })}
+      >
         <div className={styles.formWrapper}>
           <h2 className={styles.heading}>{heading}</h2>
           {buttonType === 'submit' ? (

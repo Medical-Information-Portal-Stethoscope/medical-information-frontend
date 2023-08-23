@@ -15,6 +15,16 @@ function UserProfile() {
 
   const handeUserRole = () => {
     switch (user?.role) {
+      case 'admin':
+        return (
+          <span className={styles.userProfile_role}>
+            Администратор{' '}
+            <span className={styles.userProfile_doubleCheck}>
+              <Icon icon="CheckIcon" color="blue" />
+              <Icon icon="CheckIcon" color="blue" />
+            </span>
+          </span>
+        );
       case 'doctor':
         return (
           <span className={styles.userProfile_role}>

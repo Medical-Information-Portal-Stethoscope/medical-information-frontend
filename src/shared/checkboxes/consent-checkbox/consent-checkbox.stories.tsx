@@ -36,6 +36,16 @@ const meta: Meta<typeof ConsentCheckbox> = {
       },
     },
 
+    isValid: {
+      description: 'Валидность',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: true,
+      control: {
+        type: 'radio',
+      },
+    },
+
     onChange: {
       description: 'Изменения при нажатии',
       type: 'function',

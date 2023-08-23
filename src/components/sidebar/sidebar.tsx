@@ -71,6 +71,8 @@ function Sidebar() {
 
   const handleUserRole = () => {
     switch (user?.role) {
+      case 'admin':
+        return 'Администратор';
       case 'doctor':
         return 'Врач';
       default:

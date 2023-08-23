@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -12,10 +12,11 @@ import { filterFormValues } from 'utils/functions/filter-form-values';
 import routes from 'utils/routes';
 import styles from './reset-password.module.scss';
 
-let serverError: undefined | { email: string[] };
-
-export const ResetPasswordPage: FC = (): ReactElement => {
+export const ResetPasswordPage = () => {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [serverError, setServerError] = useState<null | { email: string[] }>(
+    null
+  );
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -35,7 +36,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
           );
         })
         .catch((err) => {
-          serverError = err;
+          setServerError({ email: err });
         })
         .finally(() => setSubmitting(false));
     },
@@ -52,6 +53,13 @@ export const ResetPasswordPage: FC = (): ReactElement => {
     handleSubmit,
   } = formik;
 
+  useEffect(() => {
+    if (!serverError) return;
+
+    setServerError(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [values]);
+
   const initialState = (
     <>
       <p className={styles.instruction}>
@@ -66,7 +74,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
         error={errors?.email}
         serverError={serverError?.email}
         touched={touched?.email}
-        hasCheckmark
+        hasCheckmark={!serverError?.email}
         onBlur={handleBlur}
         onChange={handleChange}
       />
@@ -101,7 +109,7 @@ export const ResetPasswordPage: FC = (): ReactElement => {
       buttonLabel={isSuccess ? 'Вернуться на главную' : 'Отправить'}
       altNavigation={isSuccess ? null : navigation}
       isLoading={isSubmitting}
-      isDisabled={!isValid}
+      isDisabled={!isValid || !!serverError}
       onSubmit={handleSubmit}
       onClick={isSuccess ? () => navigate(routes.home) : undefined}
     >

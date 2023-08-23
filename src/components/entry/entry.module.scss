@@ -18,6 +18,10 @@
 
 .columnRight {
   background-color: $color-brand-primary-900;
+
+  &SignUp {
+    padding: 64px 0;
+  }
 }
 
 .logo {
