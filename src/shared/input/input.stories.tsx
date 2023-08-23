@@ -46,6 +46,19 @@ const meta: Meta<typeof Input> = {
       type: 'string',
     },
 
+    serverError: {
+      description: 'Поведение при серверной ошибке',
+      type: 'string',
+    },
+
+    shouldShowError: {
+      description: 'Показ ошибки',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: true,
+      control: { type: 'radio' },
+    },
+
     isDisabled: {
       description: 'Поведение при неактивном поле ввода',
       type: 'boolean',

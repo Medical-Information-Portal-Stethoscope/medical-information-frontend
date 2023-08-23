@@ -65,6 +65,16 @@
   &_button_password {
     padding: 0;
   }
+
+  &_doubleCheck {
+    position: relative;
+    display: inline-flex;
+
+    > svg:last-child {
+      position: absolute;
+      left: 5px;
+    }
+  }
 }
 
 .email {

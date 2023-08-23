@@ -1,4 +1,10 @@
-import { regexEmail, regexName, regexSurname, regexUrl } from 'utils/regex';
+import {
+  regexEmail,
+  regexPassword,
+  regexName,
+  regexSurname,
+  regexUrl,
+} from 'utils/regex';
 import { validationErrors } from './validation-errors';
 
 // USER
@@ -6,7 +12,7 @@ export const schemaEmail = (yup: typeof import('yup')) => ({
   email: yup
     .string()
     .defined()
-    .max(50, validationErrors.user.email.unacceptableLength)
+    .max(50, validationErrors.user.email.longLength)
     .matches(regexEmail, validationErrors.user.email.acceptableSymbols)
     .required(validationErrors.user.email.required),
 });
@@ -15,8 +21,9 @@ export const schemaPassword = (yup: typeof import('yup')) => ({
   password: yup
     .string()
     .defined()
-    .min(6, validationErrors.user.password.unacceptableLength)
-    .max(20, validationErrors.user.password.unacceptableLength)
+    .matches(regexPassword, validationErrors.user.password.required)
+    .min(6, validationErrors.user.password.shortLength)
+    .max(20, validationErrors.user.password.longLength)
     .required(validationErrors.user.password.required),
 });
 
@@ -24,8 +31,9 @@ export const schemaCurrentPassword = (yup: typeof import('yup')) => ({
   password_current: yup
     .string()
     .defined()
-    .min(6, validationErrors.user.password.unacceptableLength)
-    .max(20, validationErrors.user.password.unacceptableLength)
+    .matches(regexPassword, validationErrors.user.password.required)
+    .min(6, validationErrors.user.password.shortLength)
+    .max(20, validationErrors.user.password.longLength)
     .required(validationErrors.user.password.required),
 });
 
@@ -33,8 +41,9 @@ export const schemaPasswordConfirmation = (yup: typeof import('yup')) => ({
   password_confirmation: yup
     .string()
     .defined()
-    .min(6, validationErrors.user.password.unacceptableLength)
-    .max(20, validationErrors.user.password.unacceptableLength)
+    .matches(regexPassword, validationErrors.user.password.required)
+    .min(6, validationErrors.user.password.shortLength)
+    .max(20, validationErrors.user.password.longLength)
     .oneOf([yup.ref('password')], validationErrors.user.password.confirmation)
     .required(validationErrors.user.password.required),
 });
@@ -42,20 +51,20 @@ export const schemaPasswordConfirmation = (yup: typeof import('yup')) => ({
 export const schemaName = (yup: typeof import('yup')) => ({
   first_name: yup
     .string()
+    .trim()
     .defined()
     .matches(regexName, validationErrors.user.name.unacceptableSymbols)
-    .min(1, validationErrors.user.name.unacceptableLength)
-    .max(50, validationErrors.user.name.unacceptableLength)
+    .max(50, validationErrors.user.name.longLength)
     .required(validationErrors.user.name.required),
 });
 
 export const schemaLastname = (yup: typeof import('yup')) => ({
   last_name: yup
     .string()
+    .trim()
     .defined()
     .matches(regexSurname, validationErrors.user.surname.unacceptableSymbols)
-    .min(1, validationErrors.user.surname.unacceptableLength)
-    .max(50, validationErrors.user.surname.unacceptableLength)
+    .max(50, validationErrors.user.surname.longLength)
     .required(validationErrors.user.surname.required),
 });
 
