@@ -20,6 +20,7 @@ interface InputProps
   type?: 'text' | 'email' | 'password';
   error?: string;
   serverError?: string[] | string;
+  shouldShowError?: boolean;
   size?: 'medium' | 'small';
   icon?: boolean;
   isDisabled?: boolean;
@@ -51,6 +52,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       value,
       error,
       serverError,
+      shouldShowError = true,
       isDisabled,
       touched,
       name,
@@ -167,7 +169,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           )}
         </div>
         <span className={classNames(styles[`input--span`])}>
-          {(error || serverError) && touched ? error || serverError : ''}
+          {(error || (serverError && shouldShowError)) && touched
+            ? error || serverError
+            : ''}
         </span>
       </div>
     );

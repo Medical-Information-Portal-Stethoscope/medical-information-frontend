@@ -1,4 +1,11 @@
-import { FC, ReactElement, useState, useEffect, ChangeEvent } from 'react';
+import {
+  FC,
+  ReactElement,
+  useState,
+  useEffect,
+  ChangeEvent,
+  useRef,
+} from 'react';
 import { useAppDispatch } from 'services/app/hooks';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
@@ -6,9 +13,15 @@ import { FileInput } from 'shared/file-input/file-input';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
 import { Icon } from 'shared/icons';
 import Button from 'shared/buttons/button/button';
-import { bytesInKilobyte, bytesInMegabyte } from 'utils/constants';
+import {
+  animationTime,
+  bytesInKilobyte,
+  bytesInMegabyte,
+} from 'utils/constants';
 import { changeUserAvatar } from 'services/features/user/api';
 import { TErrorResponse } from 'services/features/user/types';
+import { CSSTransition } from 'react-transition-group';
+import animation from './animation.module.scss';
 import styles from './avatar-modal.module.scss';
 
 const avatarSizeLimitKb = 200;
@@ -21,12 +34,14 @@ interface IAvatarModalProps {
   avatar?: string | null;
   serverError: TErrorResponse | null;
   onClose: () => void;
+  isOpened?: boolean;
 }
 
 export const AvatarModal: FC<IAvatarModalProps> = ({
   avatar,
   serverError,
   onClose,
+  isOpened,
 }): ReactElement => {
   const dispatch = useAppDispatch();
 
@@ -41,6 +56,19 @@ export const AvatarModal: FC<IAvatarModalProps> = ({
     width: number | null;
     height: number | null;
   }>({ size: null, width: null, height: null });
+
+  // Анимация открытия и закрытия попапа с аватаром
+  const avatarRef = useRef(null);
+  const [animationIn, setAnimationIn] = useState<boolean | undefined>(false);
+  const avatarModalAnimation = {
+    enter: animation.avatarModalEnter,
+    enterActive: animation.avatarModalEnterActive,
+    exit: animation.avatarModalExit,
+    exitActive: animation.avatarModalExitActive,
+  };
+  useEffect(() => {
+    setAnimationIn(isOpened);
+  }, [isOpened]);
 
   useEffect(() => {
     if (!selectedImage || !selectedImageDetails) return;
@@ -172,36 +200,45 @@ export const AvatarModal: FC<IAvatarModalProps> = ({
   };
 
   return (
-    <div className={styles.wrapper}>
-      <h3 className={styles.heading}>Фото профиля</h3>
-      <div
-        className={classNames(styles.placemat, {
-          [styles['placemat--error']]:
-            !Object.values(selectedImageErrors).every((err) => !err) ||
-            serverError,
-        })}
-      >
-        {renderPlacematContent()}
-      </div>
-      <div className={(avatar && styles.action) || ''}>
-        <FileInput
-          id={nanoid()}
-          name="avatar"
-          label={avatar ? 'Сменить' : 'Добавить фото'}
-          accept=".jpg, .jpeg, .png"
-          onChange={selectAvatar}
+    <CSSTransition
+      in={animationIn}
+      nodeRef={avatarRef}
+      mountOnEnter
+      unmountOnExit
+      timeout={animationTime}
+      classNames={avatarModalAnimation}
+    >
+      <div ref={avatarRef} className={styles.wrapper}>
+        <h3 className={styles.heading}>Фото профиля</h3>
+        <div
+          className={classNames(styles.placemat, {
+            [styles['placemat--error']]:
+              !Object.values(selectedImageErrors).every((err) => !err) ||
+              serverError,
+          })}
+        >
+          {renderPlacematContent()}
+        </div>
+        <div className={(avatar && styles.action) || ''}>
+          <FileInput
+            id={nanoid()}
+            name="avatar"
+            label={avatar ? 'Сменить' : 'Добавить фото'}
+            accept=".jpg, .jpeg, .png"
+            onChange={selectAvatar}
+          />
+          {avatar && (
+            <Button label="Удалить" model="tertiary" onClick={deleteAvatar} />
+          )}
+        </div>
+        <ButtonWithIcon
+          extraClass={styles.closeButton}
+          icon={<Icon color="blue" icon="CloseIcon" />}
+          hasBackground={false}
+          ariaLabel="Закрыть модальное окно"
+          onClick={onClose}
         />
-        {avatar && (
-          <Button label="Удалить" model="tertiary" onClick={deleteAvatar} />
-        )}
       </div>
-      <ButtonWithIcon
-        extraClass={styles.closeButton}
-        icon={<Icon color="blue" icon="CloseIcon" />}
-        hasBackground={false}
-        ariaLabel="Закрыть модальное окно"
-        onClick={onClose}
-      />
-    </div>
+    </CSSTransition>
   );
 };

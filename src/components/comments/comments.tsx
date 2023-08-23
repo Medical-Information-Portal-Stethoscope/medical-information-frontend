@@ -1,4 +1,4 @@
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   addCommentToMaterial,
@@ -23,28 +23,48 @@ const maxCommentsDesktop = 7;
 
 interface ICurrentMaterial {
   currentMaterial: TArticle;
+  articleHeight?: number;
 }
 
-export const Comments: FC<ICurrentMaterial> = ({ currentMaterial }) => {
+export const Comments: FC<ICurrentMaterial> = ({
+  currentMaterial,
+  articleHeight,
+}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const ref = useRef<HTMLUListElement>(null);
 
   const { user } = useAppSelector(showUserPersonalData);
   const isUserOnline = !!user?.id;
 
   const { comments } = currentMaterial;
-  const [allComments, setAllComments] = useState<IComment[]>(comments);
+  const reverseComments = [...comments].reverse();
+  const [allComments, setAllComments] = useState<IComment[]>(reverseComments);
   const [visibleComments, setVisibleComments] = useState<IComment[]>(
-    comments.slice(0, maxCommentsDesktop)
+    reverseComments.slice(0, maxCommentsDesktop)
   );
   const [isShowBtnVisible, setisShowBtnVisible] = useState<boolean>(true);
+  const [isScrollToDown, setisScrollToDown] = useState<boolean>(false);
 
   useEffect(() => {
     if (allComments.length <= maxCommentsDesktop) {
       setVisibleComments(allComments);
       setisShowBtnVisible(false);
     }
-  }, [allComments, visibleComments]);
+    if (isScrollToDown) {
+      const heightBlockComments = ref.current && ref.current.scrollHeight;
+      const heightToBottomComment = 200;
+      if (heightBlockComments) {
+        const heightOfTop =
+          articleHeight &&
+          articleHeight + heightBlockComments + heightToBottomComment;
+        window.scrollTo({
+          top: heightOfTop,
+          behavior: 'smooth',
+        });
+      }
+    }
+  }, [allComments, isScrollToDown, articleHeight]);
 
   const showAllComments = () => {
     setVisibleComments(allComments);
@@ -84,8 +104,13 @@ export const Comments: FC<ICurrentMaterial> = ({ currentMaterial }) => {
     dispatch(addCommentToMaterial(reqData))
       .then((res) => {
         const newComment = res.payload as IComment;
-        setAllComments((prev) => [newComment, ...prev]);
-        setVisibleComments((prev) => [newComment, ...prev]);
+        setAllComments((prev) => [...prev, newComment]);
+
+        if (allComments.length >= maxCommentsDesktop) {
+          setVisibleComments(() => [...allComments, newComment]);
+          setisShowBtnVisible(false);
+          setisScrollToDown(true);
+        }
         setFieldValue('comment', '');
         setFieldTouched('comment', false, false);
       })
@@ -163,7 +188,7 @@ export const Comments: FC<ICurrentMaterial> = ({ currentMaterial }) => {
       )}
 
       {visibleComments ? (
-        <ul className={styles.comments__list}>
+        <ul className={styles.comments__list} ref={ref}>
           {visibleComments.map((item: IComment) => (
             <li key={item.id}>
               <Comment

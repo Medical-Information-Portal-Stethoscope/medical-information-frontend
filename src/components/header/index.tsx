@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { FC, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import Tooltip from 'shared/tooltip/tooltip';
@@ -18,7 +19,7 @@ export const Header: FC = () => {
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
-  const userName = `${user?.first_name[0]} ${user?.last_name[0]}`;
+  const userName = `${user?.first_name[0]}${user?.last_name[0]}`;
 
   const isUserOnline = !!user?.id;
 
@@ -46,7 +47,9 @@ export const Header: FC = () => {
       <div className={styles.header__search}>
         <Search />
         <div
-          className={styles.header__profile}
+          className={classNames(styles.header__profile, {
+            [styles.header__profile_auth]: user,
+          })}
           role="button"
           tabIndex={0}
           aria-label={createAriaLabel()}
@@ -62,11 +65,13 @@ export const Header: FC = () => {
         </div>
       </div>
 
-      {isPopupOpened && (
-        <div className={styles.tooltip}>
-          <Tooltip />
-        </div>
-      )}
+      <div
+        className={classNames(styles.tooltip, {
+          [styles[`tooltip--open`]]: isPopupOpened,
+        })}
+      >
+        <Tooltip />
+      </div>
     </header>
   );
 };

@@ -15,22 +15,26 @@
 
   &__search {
     display: flex;
-    flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    gap: 48px;
-    justify-self: end;
+    gap: 40px;
+    width: 34.7%;
+
+    form {
+      width: 85.33%;
+    }
   }
 
   &__profile {
+    margin: 0 8px;
     border-radius: 50%;
     background: transparent;
     fill: $color-neutral-0;
     cursor: pointer;
     transition: $transition-button;
 
-    svg {
-      margin: 0 8px;
+    &_auth {
+      margin: 0;
     }
   }
 
@@ -47,5 +51,12 @@
   height: 188px;
   position: absolute;
   top: 116px;
-  right: 56px;
+  right: 48px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms, visibility 300ms ease-out;
+  &--open {
+    visibility: visible;
+    opacity: 1;
+  }
 }

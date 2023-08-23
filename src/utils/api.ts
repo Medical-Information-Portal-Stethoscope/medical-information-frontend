@@ -101,7 +101,7 @@ export const changePassword = async (data: {
     return 'Password is successfully changed';
   }
 
-  throw new Error('Something went wrong');
+  throw await res.json();
 };
 
 // ARTICLES
