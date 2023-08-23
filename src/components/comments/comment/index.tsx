@@ -28,7 +28,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
 
   const authorName = `${author.first_name} ${author.last_name}`;
 
-  const authorNameLogo = `${author?.first_name[0]} ${author?.last_name[0]}`;
+  const authorNameLogo = `${author.first_name[0]}${author.last_name[0]}`;
 
   return (
     <div
