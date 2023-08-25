@@ -1,5 +1,5 @@
 const api = Object.freeze({
-  baseUrl: 'https://stethoscope.acceleratorpracticum.ru/api/v1/',
+  baseUrl: 'https://stethoscope-portal.ru/api/v1/',
 
   endpoints: {
     articles: {
