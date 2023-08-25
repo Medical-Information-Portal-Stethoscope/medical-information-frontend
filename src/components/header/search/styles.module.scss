@@ -2,7 +2,6 @@
 
 .search {
   display: flex;
-  align-items: center;
   justify-content: space-between;
   max-width: 600px;
   height: 48px;
@@ -13,17 +12,8 @@
   transition: all 0.3s ease-out;
   background-color: $color-neutral-0;
 
-  &_active,
   &:hover {
-    border: 1px solid $color-brand-primary-900;
-  }
-
-  &_active {
     cursor: text;
-  }
-
-  &:hover {
-    cursor: pointer;
   }
 
   &__input {
@@ -31,6 +21,7 @@
     width: 100%;
     align-self: flex-end;
     padding: 0;
+    padding-right: 26px;
     border: none;
     outline: 0;
     overflow: hidden;
