@@ -12,7 +12,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
-          repository: "Medical-Information/medical-information-portal"
+          repository: "Medical-Information-Portal-Stethoscope/medical-information-portal"
           event-type: update_remote
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "module": "frontend", "branch": "develop"}'
 
@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ./stethoscope_infra
+            cd /opt/stethoscope_infra
             sudo docker compose down
             sudo docker image rm ${{ vars.DOCKER_USERNAME }}/stethoscope-frontend
             sudo docker compose pull
