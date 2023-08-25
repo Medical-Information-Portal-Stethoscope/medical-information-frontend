@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd ./stethoscope_infra
+            cd /opt/stethoscope_infra
             sudo docker compose down
             sudo docker image rm ${{ vars.DOCKER_USERNAME }}/stethoscope-frontend
             sudo docker compose pull
