@@ -12,7 +12,7 @@ jobs:
         uses: peter-evans/repository-dispatch@v2
         with:
           token: ${{ secrets.PAT }}
-          repository: "Medical-Information/medical-information-portal"
+          repository: "Medical-Information-Portal-Stethoscope/medical-information-portal"
           event-type: update_remote
           client-payload: '{"ref": "${{ github.ref }}", "sha": "${{ github.sha }}", "module": "frontend", "branch": "develop"}'
 
