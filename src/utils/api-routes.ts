@@ -35,6 +35,10 @@ const api = Object.freeze({
       // верхнеуровневые теги
       roots: '/tags/roots',
     },
+
+    search: {
+      base: 'search',
+    },
   },
 });
 

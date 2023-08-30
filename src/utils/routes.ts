@@ -16,6 +16,7 @@ const routes = Object.freeze({
   doctorQuestion: { route: '/doctor', name: 'Вопрос врачу' },
   authors: { route: '/authors', name: 'Авторам' },
   about: { route: '/about-us', name: 'О портале' },
+  search: { route: '/search', name: 'Поиск' },
   profile: '/profile',
   favorites: 'favorites',
   publication: 'creating-an-article',

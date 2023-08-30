@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { FC, useState } from 'react';
+import { FC, FormEvent, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
@@ -15,6 +15,7 @@ import { Menu } from './menu';
 import styles from './styles.module.scss';
 
 export const Header: FC = () => {
+  const [value, setValue] = useState<string>('');
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const navigate = useNavigate();
 
@@ -35,6 +36,14 @@ export const Header: FC = () => {
       : 'Открыть модальное окно с переходами на страницы регистрации и авторизации';
   };
 
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (value) {
+      navigate(`/search/${value}`);
+      setValue('');
+    }
+  };
+
   return (
     <header className={styles.header}>
       <Link to={homeNavLink.to}>
@@ -45,7 +54,7 @@ export const Header: FC = () => {
       </Link>
       <Menu />
       <div className={styles.header__search}>
-        <Search />
+        <Search value={value} setValue={setValue} handleSubmit={handleSearch} />
         <div
           className={classNames(styles.header__profile, {
             [styles.header__profile_auth]: user,

@@ -1,20 +1,19 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC, useCallback, useRef, useState } from 'react';
+import React, { FC, useCallback, useRef } from 'react';
 import { SearchIcon } from 'shared/icons/search-icon';
-
 import styles from './styles.module.scss';
 
-export const Search: FC = () => {
-  const [value, setValue] = useState<string>('');
+interface ISearch {
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+
+export const Search: FC<ISearch> = ({ value, setValue, handleSubmit }) => {
   const ref = useRef<HTMLInputElement>(null);
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
     setValue(event.target.value);
-  }
-
-  function handleSearch(event: React.FormEvent<HTMLFormElement>): string {
-    event.preventDefault();
-    return value;
   }
 
   const onWrapperClick = useCallback(() => {
@@ -27,7 +26,7 @@ export const Search: FC = () => {
       className={styles.search}
       noValidate
       onClick={onWrapperClick}
-      onSubmit={handleSearch}
+      onSubmit={handleSubmit}
     >
       <input
         className={styles.search__input}
