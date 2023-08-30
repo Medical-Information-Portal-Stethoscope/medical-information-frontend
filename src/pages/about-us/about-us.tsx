@@ -5,12 +5,15 @@ import { Header } from 'components/header';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import Footer from 'components/footer/footer';
 import data from 'utils/data/about-us/our-team';
+import { data as gratitude } from 'utils/data/about-us/gratitude';
 import styles from './about-us.module.scss';
 
 const team = data.map((item) => (
   <li
     key={nanoid()}
     className={classNames({
+      [styles['about--team--creators--managers']]:
+        item.department === 'Проджект менеджеры',
       [styles['about--team--creators--designers']]:
         item.department === 'Дизайнеры',
       [styles['about--team--creators--other']]: [
@@ -187,6 +190,16 @@ export default function AboutPage() {
                 МИП Стетоскоп разработали:
               </h3>
               <ul className={styles['about--team--creators']}>{team}</ul>
+            </section>
+            <section className={styles['about--team--gratitude']}>
+              <h3 className={styles['about--team--title--gratitude']}>
+                Выражаем благодарность за вклад в проект:
+              </h3>
+              <ul className={styles['about--team--list--gratitude']}>
+                {gratitude.map((person) => (
+                  <li>{person}</li>
+                ))}
+              </ul>
             </section>
           </section>
         </div>

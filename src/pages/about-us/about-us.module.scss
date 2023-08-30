@@ -26,7 +26,7 @@
 
   &--title {
     @extend %heading-size-medium;
-    margin-bottom: 48px;
+    margin-bottom: 50px;
   }
 
   &--paragraphs {
@@ -50,6 +50,11 @@
     &--title {
       @extend %heading-size-medium;
       margin-bottom: 47px;
+
+      &--gratitude {
+        composes: about--paragraphs--title;
+        margin-bottom: 24px;
+      }
     }
 
     &--creators {
@@ -57,10 +62,15 @@
       grid-template-columns: repeat(4, max-content);
       justify-content: space-between;
       min-height: 700px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(189, 189, 189, 0.36);
+
+      &--managers {
+        max-height: 152px;
+      }
 
       &--designers {
         grid-area: 2 / 1 / 3 / 2;
-        align-self: flex-end;
       }
 
       &--other {
@@ -71,6 +81,18 @@
         @extend %text-size-large;
         font-weight: 400;
         margin-bottom: 32px;
+      }
+    }
+
+    &--gratitude {
+      padding-top: 48px;
+    }
+
+    &--list--gratitude {
+      letter-spacing: $font-letter-spacing-main;
+
+      li:not(:first-child) {
+        margin-top: 16px;
       }
     }
   }
