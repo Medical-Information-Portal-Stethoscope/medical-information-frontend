@@ -71,6 +71,10 @@
 
       &--designers {
         grid-area: 2 / 1 / 3 / 2;
+
+        > .creatorCard > .creatorCard--info > .socialIcons {
+          align-items: normal;
+        }
       }
 
       &--other {
