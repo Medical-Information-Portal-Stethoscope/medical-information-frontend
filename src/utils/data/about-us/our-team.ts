@@ -163,6 +163,7 @@ const data: TOurTeam[] = [
         avatar: 'https://avatars.githubusercontent.com/u/138247376?v=4',
         github: 'https://github.com/BairaEr',
         tg: 'https://t.me/BairaErendzhenova',
+        email: 'bairakoksunova@yandex.ru',
       },
       {
         name: 'Марков Артём',

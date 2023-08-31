@@ -52,7 +52,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика в мессенджере Telegram"
                 >
-                  <Icon icon="SocialTelegramIcon" color="gray" />
+                  <Icon icon="SocialTelegramIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -63,7 +63,7 @@ const team = data.map((item) => (
                   href={`mailto:${person.email}`}
                   aria-label="Написать разработчику на электронный адрес"
                 >
-                  <Icon icon="MailIcon" color="gray" />
+                  <Icon icon="MailIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -76,7 +76,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика на сайте GitHub"
                 >
-                  <Icon icon="SocialGithubIcon" color="gray" />
+                  <Icon icon="SocialGithubIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -89,7 +89,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика на сайте Behance"
                 >
-                  <Icon icon="SocialBehanceIcon" color="gray" />
+                  <Icon icon="SocialBehanceIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -197,7 +197,7 @@ export default function AboutPage() {
               </h3>
               <ul className={styles['about--team--list--gratitude']}>
                 {gratitude.map((person) => (
-                  <li>{person}</li>
+                  <li key={nanoid()}>{person}</li>
                 ))}
               </ul>
             </section>

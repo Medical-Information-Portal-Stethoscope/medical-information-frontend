@@ -160,11 +160,8 @@
 .socialIcons {
   display: flex;
   align-items: center;
-  column-gap: 8px;
-
-  li {
-    margin-top: 9px;
-  }
+  column-gap: 11px;
+  margin-top: 11px;
 }
 
 .telegram {
@@ -174,8 +171,8 @@
 }
 
 .email {
-  width: 28px;
-  height: 26px;
+  width: 22.5px;
+  height: 18.5px;
   @extend %size-icon-link;
 }
 
