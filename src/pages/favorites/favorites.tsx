@@ -17,8 +17,11 @@ export const FavoritesPage: FC = (): ReactElement => {
         <p>Сейчас у вас ничего нет в &laquo;Избранном&raquo;.</p>
         <p>
           Чтобы добавить понравившуюся статью в&nbsp;&laquo;Избранное&raquo;,
-          отметьте её&nbsp;закладкой. Это&nbsp;можно сделать как
-          со&nbsp;страницы статьи, так и&nbsp;из&nbsp;ленты статей.
+          отметьте её&nbsp;закладкой.
+        </p>
+        <p>
+          Это&nbsp;можно сделать как со&nbsp;страницы статьи, так
+          и&nbsp;из&nbsp;ленты статей.
         </p>
       </div>
       <div className={styles.tip}>
@@ -64,7 +67,7 @@ export const FavoritesPage: FC = (): ReactElement => {
       })}
     >
       <h3 className={styles.heading}>Избранное</h3>
-      {(isNotEmptyGallery && <div className={styles.gallery}>{cards}</div>) ||
+      {(!isNotEmptyGallery && <div className={styles.gallery}>{cards}</div>) ||
         emptyGallery}
     </section>
   );
