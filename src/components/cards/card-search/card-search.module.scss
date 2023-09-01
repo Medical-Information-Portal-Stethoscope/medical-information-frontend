@@ -1,0 +1,54 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers';
+
+.article {
+  max-width: $wrapper-search-desktop;
+
+  a {
+    color: initial;
+  }
+
+  &:hover a > .wrapper .heading {
+    color: $color-brand-secondary-900;
+  }
+
+  * {
+    transition: $transition-button;
+  }
+}
+
+.wrapper {
+  display: flex;
+  column-gap: 24px;
+  height: 144px;
+}
+
+.image {
+  max-width: 200px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.heading {
+  display: -webkit-box;
+  max-height: 64px;
+  @extend %heading-size-small;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text {
+  display: -webkit-box; // TODO: Если последнее слово в параграфе имеет точку, то получается многоточие из 4 точек. Также замечен баг, когда многоточие начинается после пустого пробела
+  margin-top: 16px;
+  @extend %text-description;
+  color: $color-neutral-700;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

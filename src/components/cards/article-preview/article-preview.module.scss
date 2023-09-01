@@ -2,9 +2,10 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers';
 
 .article {
-  max-width: 746px;
+  max-width: $wrapper-card-article-preview-desktop;
   width: 100%;
   padding: 24px;
   box-sizing: border-box;

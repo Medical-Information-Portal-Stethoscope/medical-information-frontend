@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect } from 'react';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
 import { useScrollToTop } from 'hooks/useScrollToTop';
 import {
@@ -26,10 +26,13 @@ import { Breadcrumbs } from 'components/breadcrumbs';
 import routes from 'utils/routes';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { getFilteredArticles } from 'services/features/filter/api';
+import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import styles from './articles-preview-page.module.scss';
 
 export default function ArticlesPreviewPage() {
-  const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
+  const { isButtonToTopVisible, toggleButtonVisible } =
+    useToggleButtonVisible();
+
   const dispatch = useAppDispatch();
   const articlesBase = useAppSelector(articlesStorage);
   const nextPageArticles = useAppSelector(nextArticlesPage);
@@ -46,15 +49,6 @@ export default function ArticlesPreviewPage() {
   });
 
   useScrollToTop();
-
-  const heightTop = 1500;
-
-  const toggleButtonVisible = () => {
-    setIsButtonToTopVisible(
-      document.body.scrollTop > heightTop ||
-        document.documentElement.scrollTop > heightTop
-    );
-  };
 
   useEffect(() => {
     dispatch(setIsAllArticles());

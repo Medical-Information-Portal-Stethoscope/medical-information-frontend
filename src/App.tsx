@@ -31,6 +31,7 @@ import { getUserPersonalData } from 'services/features/user/api';
 import { checkUserAuth } from 'services/features/user/slice';
 
 import routes from 'utils/routes';
+import SearchPage from 'pages/search-page/search-page';
 
 function App() {
   const location = useLocation();
@@ -60,6 +61,8 @@ function App() {
 
       <Route path={routes.about.route} element={<AboutPage />} />
       <Route path={routes.authors.route} element={<AuthorsPage />} />
+
+      <Route path={`${routes.search.route}/:query`} element={<SearchPage />} />
 
       <Route
         path={`${routes.profile}/*`}
