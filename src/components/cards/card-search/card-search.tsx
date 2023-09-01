@@ -25,8 +25,8 @@ const CardSearch: FC<ICardArticlePreviewProps> = ({
     <Link to={`${route}/${id}`}>
       <div className={styles.wrapper}>
         <img className={styles.image} src={image} alt="Превью статьи" />
-        <div className={styles.description}>
-          <h3 className={styles.heading}>{title}</h3>
+        <div>
+          <h2 className={styles.heading}>{title}</h2>
           <p className={classNames(styles.text)}>
             {converMdToHTML(annotation, true)}
           </p>

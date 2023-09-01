@@ -8,3 +8,5 @@ export const isAllContent = (state: RootState) => state.search.isAllMaterials;
 
 export const isLoadingContent = (state: RootState) =>
   state.search.process.isLoading;
+
+export const searchQuery = (state: RootState) => state.search.query;

@@ -21,13 +21,17 @@
     width: 100%;
     align-self: flex-end;
     padding: 0;
-    padding-right: 26px;
+    padding-right: 10px;
     border: none;
     outline: 0;
     overflow: hidden;
     white-space: nowrap;
     caret-color: $color-brand-primary-900;
     cursor: text;
+
+    &::-webkit-search-cancel-button:hover {
+      cursor: pointer;
+    }
   }
 
   &__submit {

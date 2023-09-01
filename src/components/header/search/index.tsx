@@ -1,20 +1,35 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC, useCallback, useRef } from 'react';
+import React, { FC, FormEvent, useCallback, useEffect, useRef } from 'react';
 import { SearchIcon } from 'shared/icons/search-icon';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { changeInputValue } from 'services/features/search/slice';
+import { searchQuery } from 'services/features/search/selectors';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-interface ISearch {
-  value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
-}
-
-export const Search: FC<ISearch> = ({ value, setValue, handleSubmit }) => {
+export const Search: FC = () => {
   const ref = useRef<HTMLInputElement>(null);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const value = useAppSelector(searchQuery);
+  const location = useLocation();
 
-  function handleChange(event: React.ChangeEvent<HTMLInputElement>): void {
-    setValue(event.target.value);
-  }
+  useEffect(() => {
+    if (!location.pathname.startsWith('/search')) {
+      dispatch(changeInputValue(''));
+    }
+  }, [location.pathname]); //eslint-disable-line
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(changeInputValue(event.target.value));
+  };
+
+  const handleSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (value) {
+      navigate(`/search/${value}`);
+    }
+  };
 
   const onWrapperClick = useCallback(() => {
     ref.current?.focus();
@@ -26,7 +41,7 @@ export const Search: FC<ISearch> = ({ value, setValue, handleSubmit }) => {
       className={styles.search}
       noValidate
       onClick={onWrapperClick}
-      onSubmit={handleSubmit}
+      onSubmit={handleSearch}
     >
       <input
         className={styles.search__input}

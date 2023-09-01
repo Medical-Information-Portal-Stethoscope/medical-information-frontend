@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
 import { getFirstSearchPage, getNextSearchPage } from './api';
 
@@ -28,7 +28,11 @@ const initialState: TSliceState = {
 const searchSlice = createSlice({
   name: 'search',
   initialState,
-  reducers: {},
+  reducers: {
+    changeInputValue(state, action: PayloadAction<string>) {
+      state.query = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getFirstSearchPage.pending, (state) => {
       state.process.isLoading = true;
@@ -76,4 +80,5 @@ const searchSlice = createSlice({
   },
 });
 
+export const { changeInputValue } = searchSlice.actions;
 export default searchSlice.reducer;

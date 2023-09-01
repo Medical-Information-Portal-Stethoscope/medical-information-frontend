@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
@@ -16,6 +16,7 @@ import {
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useScrollToTop } from 'hooks/useScrollToTop';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
+import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import {
   isAllContentNews,
   isLoadingContent,
@@ -26,7 +27,9 @@ import routes from 'utils/routes';
 import styles from './news-preview-page.module.scss';
 
 export default function NewsPreviewPage() {
-  const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
+  const { isButtonToTopVisible, toggleButtonVisible } =
+    useToggleButtonVisible();
+
   const dispatch = useAppDispatch();
   const newsBase = useAppSelector(newsStorage);
   const nextPageNews = useAppSelector(nextNewsPage);
@@ -40,15 +43,6 @@ export default function NewsPreviewPage() {
   const { data } = useGetAllNewsQuery(newsTag?.pk, { skip: !newsTag });
 
   useScrollToTop();
-
-  const heightTop = 1250;
-
-  const toggleButtonVisible = () => {
-    setIsButtonToTopVisible(
-      document.body.scrollTop > heightTop ||
-        document.documentElement.scrollTop > heightTop
-    );
-  };
 
   useEffect(() => {
     dispatch(setIsAllArticles());

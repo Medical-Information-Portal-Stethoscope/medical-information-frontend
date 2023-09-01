@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Header } from 'components/header';
 import Footer from 'components/footer/footer';
 import CardSearch from 'components/cards/card-search/card-search';
@@ -18,10 +18,13 @@ import {
   getNextSearchPage,
 } from 'services/features/search/api';
 import routes from 'utils/routes';
+import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import styles from './search-page.module.scss';
 
 export default function SearchPage() {
-  const [isButtonToTopVisible, setIsButtonToTopVisible] = useState(false);
+  const { isButtonToTopVisible, toggleButtonVisible } =
+    useToggleButtonVisible();
+
   const dispatch = useAppDispatch();
   const materials = useAppSelector(searchStorage);
   const nextPage = useAppSelector(nextSearchPage);
@@ -30,15 +33,6 @@ export default function SearchPage() {
   const { query } = useParams() as { query: string };
 
   useScrollToTop();
-
-  const heightTop = 1250;
-
-  const toggleButtonVisible = () => {
-    setIsButtonToTopVisible(
-      document.body.scrollTop > heightTop ||
-        document.documentElement.scrollTop > heightTop
-    );
-  };
 
   useEffect(() => {
     dispatch(getFirstSearchPage({ query, pageSize: '10' }));
@@ -95,11 +89,13 @@ export default function SearchPage() {
               </div>
             ) : (
               !isLoading && (
-                <p className={styles.description}>
-                  К сожалению, ничего не нашли :(
-                  <br />
-                  Переформулируйте запрос или попробуйте найти что-нибудь другое
-                </p>
+                <div className={styles.description}>
+                  <p> К сожалению, ничего не нашли :(</p>
+                  <p>
+                    Переформулируйте запрос или попробуйте найти что-нибудь
+                    другое
+                  </p>
+                </div>
               )
             )}
           </div>

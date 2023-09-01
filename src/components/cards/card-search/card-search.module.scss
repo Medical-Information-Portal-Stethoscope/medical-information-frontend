@@ -2,9 +2,10 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/wrappers';
 
 .article {
-  max-width: 1054px;
+  max-width: $wrapper-search-desktop;
 
   a {
     color: initial;
@@ -27,7 +28,7 @@
 
 .image {
   min-width: 200px;
-  max-width: 200px;
+  width: 200px;
   height: 100%;
   object-fit: cover;
   border-radius: 12px;
