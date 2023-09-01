@@ -9,6 +9,7 @@
   &__default {
     background: none;
     fill: $color-neutral-0;
+    transition: $transition-button;
 
     &:hover {
       fill: $color-brand-primary-500;

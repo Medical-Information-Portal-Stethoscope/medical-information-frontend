@@ -1,21 +1,24 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { informationMaterialApi } from 'services/features/information-material/api';
-import userSlice from 'services/features/user/slice';
+import userReducer from 'services/features/user/slice';
 import { tagsApi } from 'services/features/tags/api';
-import contentSlice from 'services/features/information-material/slice';
+import contentReducer from 'services/features/information-material/slice';
 
 import { authMiddleware } from 'services/features/user/middlewares';
 import { filteredArticlesSlice } from 'services/features/filter/slice';
 import { materialReducer } from 'services/features/material/slice';
 
+import searchReducer from 'services/features/search/slice';
+
 export const store = configureStore({
   reducer: {
     [informationMaterialApi.reducerPath]: informationMaterialApi.reducer,
     [tagsApi.reducerPath]: tagsApi.reducer,
-    user: userSlice,
+    user: userReducer,
     [filteredArticlesSlice.name]: filteredArticlesSlice.reducer,
-    content: contentSlice,
+    content: contentReducer,
     material: materialReducer,
+    search: searchReducer,
   },
 
   middleware: (getDefaultMiddleware) =>

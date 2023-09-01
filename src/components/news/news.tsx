@@ -43,7 +43,7 @@ export default function News() {
             <CardArticlePreview
               data={mostPopularArticle.data}
               type="media"
-              route={routes.news.route}
+              route={routes.articles.route}
             />
           )}
         </section>
@@ -55,7 +55,6 @@ export default function News() {
             label="Показать все новости"
             onClick={() => navigate(routes.news.route)}
           />
-          {/* TODO: Вероятно, добавить флаг Link для кнопки, как изначально и предполагалось  */}
         </section>
       </div>
     </section>
