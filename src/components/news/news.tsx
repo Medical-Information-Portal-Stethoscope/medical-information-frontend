@@ -43,7 +43,7 @@ export default function News() {
             <CardArticlePreview
               data={mostPopularArticle.data}
               type="media"
-              route={routes.news.route}
+              route={routes.articles.route}
             />
           )}
         </section>
