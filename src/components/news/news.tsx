@@ -55,7 +55,6 @@ export default function News() {
             label="Показать все новости"
             onClick={() => navigate(routes.news.route)}
           />
-          {/* TODO: Вероятно, добавить флаг Link для кнопки, как изначально и предполагалось  */}
         </section>
       </div>
     </section>
