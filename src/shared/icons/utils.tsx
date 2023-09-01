@@ -3,6 +3,7 @@ import React from 'react';
 export type TIconColor =
   | 'black'
   | 'gray'
+  | 'lightGray'
   | 'blue'
   | 'lightBlue'
   | 'white'
@@ -17,6 +18,8 @@ export const getColor = (color: TIconColor) => {
       return '#000000';
     case 'gray':
       return '#838090';
+    case 'lightGray':
+      return '#ADA9BB';
     case 'blue':
       return '#014CFF';
     case 'lightBlue':

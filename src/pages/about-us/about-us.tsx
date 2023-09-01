@@ -5,12 +5,15 @@ import { Header } from 'components/header';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import Footer from 'components/footer/footer';
 import data from 'utils/data/about-us/our-team';
+import { data as gratitude } from 'utils/data/about-us/gratitude';
 import styles from './about-us.module.scss';
 
 const team = data.map((item) => (
   <li
     key={nanoid()}
     className={classNames({
+      [styles['about--team--creators--managers']]:
+        item.department === 'Проджект менеджеры',
       [styles['about--team--creators--designers']]:
         item.department === 'Дизайнеры',
       [styles['about--team--creators--other']]: [
@@ -49,7 +52,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика в мессенджере Telegram"
                 >
-                  <Icon icon="SocialTelegramIcon" color="gray" />
+                  <Icon icon="SocialTelegramIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -60,7 +63,7 @@ const team = data.map((item) => (
                   href={`mailto:${person.email}`}
                   aria-label="Написать разработчику на электронный адрес"
                 >
-                  <Icon icon="MailIcon" color="gray" />
+                  <Icon icon="MailIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -73,7 +76,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика на сайте GitHub"
                 >
-                  <Icon icon="SocialGithubIcon" color="gray" />
+                  <Icon icon="SocialGithubIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -86,7 +89,7 @@ const team = data.map((item) => (
                   rel="noreferrer"
                   aria-label="Открыть страницу разработчика на сайте Behance"
                 >
-                  <Icon icon="SocialBehanceIcon" color="gray" />
+                  <Icon icon="SocialBehanceIcon" color="lightGray" />
                 </a>
               </li>
             )}
@@ -187,6 +190,16 @@ export default function AboutPage() {
                 МИП Стетоскоп разработали:
               </h3>
               <ul className={styles['about--team--creators']}>{team}</ul>
+            </section>
+            <section className={styles['about--team--gratitude']}>
+              <h3 className={styles['about--team--title--gratitude']}>
+                Выражаем благодарность за вклад в проект:
+              </h3>
+              <ul className={styles['about--team--list--gratitude']}>
+                {gratitude.map((person) => (
+                  <li key={nanoid()}>{person}</li>
+                ))}
+              </ul>
             </section>
           </section>
         </div>
