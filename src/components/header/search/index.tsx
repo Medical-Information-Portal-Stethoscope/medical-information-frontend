@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { changeInputValue } from 'services/features/search/slice';
 import { searchQuery } from 'services/features/search/selectors';
 import { useLocation, useNavigate } from 'react-router-dom';
+import routes from 'utils/routes';
 import styles from './styles.module.scss';
 
 export const Search: FC = () => {
@@ -27,7 +28,7 @@ export const Search: FC = () => {
   const handleSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (value) {
-      navigate(`/search/${value}`);
+      navigate(`${routes.search.route}/${value}`);
     }
   };
 

@@ -84,6 +84,7 @@ export default function SearchPage() {
                     isLoading={isLoading}
                     spinnerSize="small"
                     spinnerColor="blue"
+                    extraClass={styles.button}
                   />
                 )}
               </div>
