@@ -1,0 +1,13 @@
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
+
+.logo {
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    max-width: calc-fluid-element(
+      204,
+      284,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+}

@@ -1,5 +1,6 @@
 import logo from 'assets/images/Logo.svg';
 import logoLight from 'assets/images/Logo-light.svg';
+import styles from './logo.module.scss';
 
 export interface ILogoProps {
   isHeading?: boolean;
@@ -15,9 +16,9 @@ export const Logo = ({
   isHeading ? (
     <h1 className={extClassName}>
       {theme === 'light' ? (
-        <img src={logoLight} alt="логотип" />
+        <img className={styles.logo} src={logoLight} alt="Логотип" />
       ) : (
-        <img src={logo} alt="логотип" />
+        <img className={styles.logo} src={logo} alt="Логотип" />
       )}
     </h1>
   ) : (

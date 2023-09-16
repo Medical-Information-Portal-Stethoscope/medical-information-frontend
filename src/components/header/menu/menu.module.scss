@@ -1,0 +1,53 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/indents';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
+
+.menu {
+  width: 39.22%;
+  box-sizing: border-box;
+  color: $color-neutral-900;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    width: 38.84%;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
+
+  &__item {
+    $border-bottom: 2px solid $color-neutral-0;
+
+    @extend %text-size-large-bold;
+    color: $color-neutral-0;
+    padding: 12px 24px;
+    text-align: center;
+    border: none;
+    box-sizing: border-box;
+    transition: $transition-hover;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      padding: 14px 16px;
+      font-size: $font-size-text-medium;
+      font-weight: 600;
+      line-height: $font-line-height-text-medium;
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    &_active {
+      border-bottom: $border-bottom;
+    }
+
+    &:hover {
+      border-bottom: $border-bottom;
+    }
+  }
+}

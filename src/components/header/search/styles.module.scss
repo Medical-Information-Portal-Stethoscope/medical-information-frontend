@@ -1,8 +1,7 @@
-@import '../../../assets/styles/index.scss';
+@import 'assets/styles/index.scss';
 
 .search {
   display: flex;
-  justify-content: space-between;
   max-width: 600px;
   height: 48px;
   padding: 12px;
@@ -16,10 +15,14 @@
     cursor: text;
   }
 
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    height: 40px;
+    padding: 8px;
+  }
+
   &__input {
     @extend %text-size-medium;
     width: 100%;
-    align-self: flex-end;
     padding: 0;
     padding-right: 10px;
     border: none;
@@ -32,17 +35,25 @@
     &::-webkit-search-cancel-button:hover {
       cursor: pointer;
     }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
+    }
   }
 
   &__submit {
-    border: none;
+    width: 22px;
+    height: 22px;
     background: none;
-    padding: 0;
-    fill: $color-brand-primary-900;
 
     &:hover svg {
       fill: $color-brand-primary-700;
       cursor: pointer;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin-right: 4px;
     }
   }
 }
