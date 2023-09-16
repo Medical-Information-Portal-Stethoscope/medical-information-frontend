@@ -1,0 +1,33 @@
+@use 'sass:math';
+
+@function calc-fluid-element(
+  $size-min,
+  $size-max,
+  $media-min,
+  $media-max,
+  $units: px
+) {
+  $size-min: strip-unit($size-min);
+  $size-max: strip-unit($size-max);
+  $media-min: strip-unit($media-min);
+  $media-max: strip-unit($media-max);
+
+  $k: math.div($size-max - $size-min, $media-max - $media-min);
+  $b: $size-min - $k * $media-min;
+
+  $b: $b + $units;
+
+  @return calc(#{$k} * 100vw + #{$b});
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+@function calc-indents($media, $indent) {
+  @return calc($indent / $media * 100%);
+}
