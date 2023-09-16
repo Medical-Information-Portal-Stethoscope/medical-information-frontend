@@ -7,7 +7,6 @@ import renderFormatDateArticle from 'utils/functions/render-format-date-article'
 import findReadingTimeArticle from 'utils/functions/find-reading-time-article';
 import { Icon } from 'shared/icons';
 import { converMdToHTML } from 'utils/functions/convert-md-to-html';
-import IconViews from './test-data/icon_views';
 
 import styles from './article-preview.module.scss';
 
@@ -94,7 +93,7 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
                 </li>
                 <li className={styles.infoItem}>{readingTime}</li>
                 <li className={`${styles.infoItem} ${styles.views}`}>
-                  <IconViews />
+                  <Icon icon="ViewsIcon" color="gray" />
                   <span>{views_count}</span>
                 </li>
               </ul>
