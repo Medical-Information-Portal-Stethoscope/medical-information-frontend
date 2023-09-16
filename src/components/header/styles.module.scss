@@ -1,17 +1,19 @@
 @import 'assets/styles/index.scss';
 
 .header {
-  max-width: $wrapper-main-content-desktop;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 168px;
-  margin: 32px auto;
-  padding: 42px 48px;
-  border-radius: 16px;
-  box-sizing: border-box;
   position: relative;
+  max-width: $wrapper-main-content-desktop;
+  margin: 32px auto;
+  border-radius: 16px;
   background-color: $color-brand-primary-900;
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 28px 48px;
+    box-sizing: border-box;
+  }
 
   &__search {
     display: flex;
