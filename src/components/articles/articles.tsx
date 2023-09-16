@@ -64,8 +64,8 @@ export default function Articles() {
   return filteredArticles ? (
     <section>
       <div className={styles.wrapper}>
-        <MainCarousel onChangeTab={handleClickTab} />
         <h2 className={styles.heading}>Статьи</h2>
+        <MainCarousel onChangeTab={handleClickTab} />
         <div className={hasFilteredData ? styles.articles : styles.empty}>
           {hasFilteredData ? (
             filteredArticles

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
@@ -14,7 +14,7 @@ import { Menu } from './menu';
 
 import styles from './styles.module.scss';
 
-export const Header: FC = () => {
+export const Header = () => {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
   const navigate = useNavigate();
 
@@ -37,40 +37,42 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.header}>
-      <Link to={homeNavLink.to}>
-        <Logo isHeading theme="light" />
-        <span className={styles.header__logotext}>
-          медицинский информационный портал
-        </span>
-      </Link>
-      <Menu />
-      <div className={styles.header__search}>
-        <Search />
-        <div
-          className={classNames(styles.header__profile, {
-            [styles.header__profile_auth]: user,
-          })}
-          role="button"
-          tabIndex={0}
-          aria-label={createAriaLabel()}
-          onClick={user ? navigateToUserProfile : handleTogglePopup}
-        >
-          <UserProfileIcon
-            avatar={user?.avatar || ''}
-            isHeader
-            name={userName}
-            role={user?.role || 'user'}
-            isUserOnline={isUserOnline}
-          />
+      <div className={styles.header__wrapper}>
+        <Link to={homeNavLink.to}>
+          <Logo isHeading theme="light" />
+          <span className={styles.header__logotext}>
+            медицинский информационный портал
+          </span>
+        </Link>
+        <Menu />
+        <div className={styles.header__search}>
+          <Search />
+          <div
+            className={classNames(styles.header__profile, {
+              [styles.header__profile_auth]: user,
+            })}
+            role="button"
+            tabIndex={0}
+            aria-label={createAriaLabel()}
+            onClick={user ? navigateToUserProfile : handleTogglePopup}
+          >
+            <UserProfileIcon
+              avatar={user?.avatar || ''}
+              isHeader
+              name={userName}
+              role={user?.role || 'user'}
+              isUserOnline={isUserOnline}
+            />
+          </div>
         </div>
-      </div>
 
-      <div
-        className={classNames(styles.tooltip, {
-          [styles[`tooltip--open`]]: isPopupOpened,
-        })}
-      >
-        <Tooltip />
+        <div
+          className={classNames(styles.tooltip, {
+            [styles[`tooltip--open`]]: isPopupOpened,
+          })}
+        >
+          <Tooltip />
+        </div>
       </div>
     </header>
   );

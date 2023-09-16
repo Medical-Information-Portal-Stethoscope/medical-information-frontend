@@ -6,12 +6,15 @@
 .wrapper {
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
-  padding: 40px 0;
+  padding: 32px 0 40px;
+
+  > *:not(:last-child) {
+    margin-bottom: 48px;
+  }
 }
 
 .heading {
   max-width: 40%;
-  margin: 64px 0 48px;
   @extend %heading-size-medium;
 }
 
