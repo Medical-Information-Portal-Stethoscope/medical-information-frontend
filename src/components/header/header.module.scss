@@ -35,12 +35,6 @@
     }
   }
 
-  &__logo {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
   &__search {
     display: flex;
     justify-content: flex-end;
@@ -69,27 +63,6 @@
 
     &_auth {
       margin: 0;
-    }
-  }
-
-  &__logotext {
-    @extend %text-size-small;
-    color: $color-neutral-0;
-    font-weight: 600;
-    margin-top: 4px;
-
-    @media screen and (max-width: calc($media-desktop-large - 1px)) {
-      font-size: calc-fluid-element(
-        10,
-        14,
-        $media-desktop-medium,
-        $media-desktop-large
-      );
-    }
-
-    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-      font-size: 1rem;
-      font-weight: 500;
     }
   }
 }

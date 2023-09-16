@@ -38,10 +38,7 @@ export const Header = () => {
     <header className={styles.header}>
       <div className={styles.header__wrapper}>
         <Link className={styles.header__logo} to={homeNavLink.to}>
-          <Logo isHeading theme="light" />
-          <span className={styles.header__logotext}>
-            медицинский информационный портал
-          </span>
+          <Logo theme="light" hasCaption />
         </Link>
         <Menu />
         <div className={styles.header__search}>

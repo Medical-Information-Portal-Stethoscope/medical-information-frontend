@@ -1,4 +1,3 @@
-import { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'shared/logo';
 import routes from 'utils/routes';
@@ -19,7 +18,7 @@ const links = footerLinks.map(({ _id, heading, url, isRoute }) => (
   </li>
 ));
 
-const Footer: FC = (): ReactElement => (
+const Footer = () => (
   <footer>
     <div className={styles.wrapper}>
       <div className={styles.warning}>
@@ -35,10 +34,7 @@ const Footer: FC = (): ReactElement => (
       <div className={styles.content}>
         <div className={styles.logo}>
           <Link className={styles.logoLink} to={routes.home}>
-            <Logo theme="dark" />
-            <span className={styles.logoName}>
-              медицинский информационный портал
-            </span>
+            <Logo theme="dark" hasCaption />
           </Link>
         </div>
         <ul className={styles.links}>{links}</ul>

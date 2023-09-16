@@ -59,7 +59,7 @@ const Entry: FC<IEntryProps> = ({
     <main className={styles.main}>
       <div className={styles.columnLeft}>
         <Link className={styles.logo} to={routes.home}>
-          <Logo isHeading theme="dark" />
+          <Logo theme="dark" />
           <span>медицинский информационный портал</span>
         </Link>
       </div>
