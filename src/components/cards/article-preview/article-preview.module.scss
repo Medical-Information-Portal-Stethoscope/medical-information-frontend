@@ -1,8 +1,10 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
-@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/functions';
 
 .article {
   max-width: $wrapper-card-article-preview-desktop;
@@ -60,6 +62,15 @@
 
   &--media {
     height: 420px;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      height: calc-fluid-element(
+        336,
+        420,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
   }
 
   &--news {
@@ -98,6 +109,10 @@
 
   &--media {
     min-height: 154px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      min-height: 178px;
+    }
   }
 
   &--news {
@@ -128,6 +143,11 @@
   &--media {
     height: 70px;
     -webkit-line-clamp: 3;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      height: 96px;
+      -webkit-line-clamp: 4;
+    }
   }
 
   &--news {

@@ -1,6 +1,8 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/indents';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -11,21 +13,44 @@
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
   padding: 32px 0 37px;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    margin-right: $indent-section-sides-desktop;
+    margin-left: $indent-section-sides-desktop;
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    grid-template-columns: 48.99% 40.5%;
+    padding-top: calc($indent-section-top-side-desktop-small / 2);
+  }
 }
 
 .heading {
   max-width: 80%;
   margin-bottom: 48px;
   @extend %heading-size-medium;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-bottom: $indent-block-default-top-side-small;
+  }
 }
 
 .news {
   max-height: 488px;
   margin-bottom: 34px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-bottom: 30px;
+  }
 }
 
 .newsItem:not(:first-child) {
-  margin-top: 24px;
+  $gap: 24px;
+  margin-top: $gap;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-top: calc($gap / 2);
+  }
 }
 
 .newsLink {
@@ -39,5 +64,11 @@
 
   &:hover {
     color: $color-brand-secondary-900;
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    font-size: $font-size-text-medium;
+    line-height: $font-line-height-text-medium;
+    letter-spacing: $font-letter-spacing-main;
   }
 }
