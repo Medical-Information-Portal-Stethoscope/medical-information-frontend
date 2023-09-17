@@ -13,7 +13,15 @@
 }
 
 .carousel {
+  width: calc(100% - 282px);
   padding-left: 64px;
+}
+
+.carousel {
+  li:last-child .container_main {
+    display: flex;
+    justify-content: start;
+  }
 }
 
 .next_button {
@@ -55,7 +63,6 @@
 .container_main {
   display: flex;
   justify-content: space-between;
-  width: 1570px;
 }
 
 .container_articles {

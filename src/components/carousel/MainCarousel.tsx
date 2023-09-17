@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import { useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import ButtonWithIcon from 'shared/buttons/button-with-icon/button-with-icon';
@@ -22,7 +22,6 @@ import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
-  type?: 'main' | 'articles';
   onChangeTab: (id: string) => void;
 }
 
@@ -34,7 +33,7 @@ const getArrayForCarousel = (dataArray: TTags[], divider: number) => {
   return container;
 };
 
-function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
+function MainCarousel({ onChangeTab }: IMainCarouselProps) {
   const [activeTags, setActiveTags] = useState<TTags[]>([]);
   const [activeTagsForClearModal, setActiveTagsForClearModal] = useState<
     TTags[] | null
@@ -44,6 +43,18 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   const [isButtonShowPress, setIsButtonShowPress] = useState(false);
   const dispatch = useAppDispatch();
   const { mounted } = useMount({ isOpened: isPopupOpened });
+  const ref = useRef<any>(null);
+  const [carouselWidth, setCarouselWidth] = useState(0);
+  const [arrayOfTabs, setArrayOfTabs] = useState<TTags[][]>([]);
+  console.log('arrayOfTabs:', arrayOfTabs);
+
+  useEffect(() => {
+    setCarouselWidth(ref?.current?.offsetWidth);
+    const listener = () => setCarouselWidth(ref?.current?.offsetWidth);
+    window.addEventListener('resize', listener);
+
+    return () => window.removeEventListener('resize', listener);
+  }, []);
 
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -62,9 +73,12 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   // Получаем список тегов всех специализаций
   const { data: resSpecializations = [], isSuccess: isSuccessSpecializations } =
     useGetSubtreeTagsQuery(idSpecializationsTag, { skip: !specializationsTag });
-  const allSpecializationsTags = isSuccessSpecializations
-    ? resSpecializations[0].children
-    : [];
+  const allSpecializationsTags = useMemo<TTags[]>(
+    () =>
+      // eslint-disable-next-line no-unused-expressions
+      isSuccessSpecializations ? resSpecializations[0].children : [],
+    [isSuccessSpecializations, resSpecializations]
+  );
 
   // Получаем список тегов всех заболеваний
   const { data: resDiseases = [], isSuccess: isSuccessDiseases } =
@@ -76,14 +90,13 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
     useGetSubtreeTagsQuery(idTagsTag, { skip: !idTagsTag });
   const allTags = isSuccessTags ? resTags[0].children : [];
 
-  const arrayOfTabsForMainPage = getArrayForCarousel(
-    allSpecializationsTags,
-    10
-  );
-  const arrayOfTabsForArticlesPage = getArrayForCarousel(
-    allSpecializationsTags,
-    8
-  );
+  useEffect(() => {
+    if (allSpecializationsTags.length && carouselWidth) {
+      const tabWidth = 190;
+      const countOfTabs = Math.floor(carouselWidth / tabWidth);
+      setArrayOfTabs(getArrayForCarousel(allSpecializationsTags, countOfTabs));
+    }
+  }, [allSpecializationsTags, carouselWidth]);
 
   const handleTogglePopup = () => {
     setIsPopupOpened(!isPopupOpened);
@@ -132,14 +145,13 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} ref={ref}>
       <Carousel
         infiniteLoop={false}
         swipeScrollTolerance={10}
         showThumbs={false}
         showIndicators={false}
         showStatus={false}
-        width={type === 'main' ? 1542 : 1262}
         className={styles.carousel}
         renderArrowNext={(onClickHandler, hasNext) => (
           <ButtonWithIcon
@@ -170,97 +182,45 @@ function MainCarousel({ type = 'main', onChangeTab }: IMainCarouselProps) {
           />
         )}
       >
-        {type === 'main'
-          ? arrayOfTabsForMainPage.map((arrayOfTabs, index) => (
-              <div className={styles.container_main} key={index}>
-                {index === 0 && (
-                  <div key={index}>
-                    <FilterTab
-                      icon={<Icon icon="AllIcon" size="24" color="gray" />}
-                      id="0"
-                      label="Все статьи"
-                      isChecked
-                      name="Filter"
-                      onChange={() => handleChangeTab('')}
-                    />
-                  </div>
-                )}
-                {arrayOfTabs.map((tab) => (
-                  <div key={tab.pk}>
-                    {iconsData[tab.name] ? (
-                      <FilterTab
-                        icon={
-                          <Icon
-                            icon={iconsData[tab.name]}
-                            size="24"
-                            color="gray"
-                          />
-                        }
-                        id={tab.pk}
-                        label={tab.name}
-                        name="Filter"
-                        onChange={() => handleChangeTab(tab)}
-                      />
-                    ) : (
-                      <FilterTab
-                        icon={
-                          <Icon icon="FirstAidIcon" size="24" color="gray" />
-                        }
-                        id={tab.pk}
-                        label={tab.name}
-                        name="Filter"
-                        onChange={() => handleChangeTab(tab)}
-                      />
-                    )}
-                  </div>
-                ))}
+        {arrayOfTabs.map((array, index) => (
+          <div className={styles.container_main} key={index}>
+            {index === 0 && (
+              <div key={index}>
+                <FilterTab
+                  icon={<Icon icon="AllIcon" size="24" color="gray" />}
+                  id="0"
+                  label="Все статьи"
+                  isChecked
+                  name="Filter"
+                  onChange={() => handleChangeTab('')}
+                />
               </div>
-            ))
-          : arrayOfTabsForArticlesPage.map((arrayOfTabs, index) => (
-              <div className={styles.container_articles} key={index}>
-                {index === 0 && (
-                  <div key={index}>
-                    <FilterTab
-                      icon={<Icon icon="AllIcon" size="24" color="gray" />}
-                      id="0"
-                      label="Все статьи"
-                      isChecked
-                      name="Filter"
-                      onChange={() => handleChangeTab('')}
-                    />
-                  </div>
+            )}
+            {array.map((tab) => (
+              <div key={tab.pk}>
+                {iconsData[tab.name] ? (
+                  <FilterTab
+                    icon={
+                      <Icon icon={iconsData[tab.name]} size="24" color="gray" />
+                    }
+                    id={tab.pk}
+                    label={tab.name}
+                    name="Filter"
+                    onChange={() => handleChangeTab(tab)}
+                  />
+                ) : (
+                  <FilterTab
+                    icon={<Icon icon="FirstAidIcon" size="24" color="gray" />}
+                    id={tab.pk}
+                    label={tab.name}
+                    name="Filter"
+                    onChange={() => handleChangeTab(tab)}
+                  />
                 )}
-                {arrayOfTabs.map((tab) => (
-                  <div key={tab.pk}>
-                    {iconsData[tab.name] ? (
-                      <FilterTab
-                        icon={
-                          <Icon
-                            icon={iconsData[tab.name]}
-                            size="24"
-                            color="gray"
-                          />
-                        }
-                        id={tab.pk}
-                        label={tab.name}
-                        name="Filter"
-                        onChange={() => handleChangeTab(tab)}
-                      />
-                    ) : (
-                      <FilterTab
-                        icon={
-                          <Icon icon="FirstAidIcon" size="24" color="gray" />
-                        }
-                        id={tab.pk}
-                        label={tab.name}
-                        name="Filter"
-                        onChange={() => handleChangeTab(tab)}
-                      />
-                    )}
-                  </div>
-                ))}
               </div>
             ))}
+          </div>
+        ))}
       </Carousel>
       <div className={styles.button_filter_wrapper}>
         <Button
