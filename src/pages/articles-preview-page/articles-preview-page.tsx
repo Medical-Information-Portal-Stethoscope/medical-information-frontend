@@ -101,7 +101,7 @@ export default function ArticlesPreviewPage() {
         <section>
           <div className={styles.wrapper}>
             <h2 className={styles.heading}>Статьи</h2>
-            <MainCarousel type="articles" onChangeTab={handleClickTab} />
+            <MainCarousel onChangeTab={handleClickTab} />
             <div className={styles.gallery}>
               <div className={articles.length ? styles.content : styles.empty}>
                 {articles.length ? (
