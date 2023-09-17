@@ -1,12 +1,12 @@
 /* eslint-disable react/no-array-index-key */
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { headerNavLinks } from 'utils/data/header/links';
 
-import styles from './styles.module.scss';
+import styles from './menu.module.scss';
 
-export const Menu: FC = () => (
+export const Menu = () => (
   <nav className={styles.menu}>
     <ul className={styles.menu__list}>
       {headerNavLinks.map(

@@ -11,8 +11,7 @@ import routes from 'utils/routes';
 import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
 import { Menu } from './menu';
-
-import styles from './styles.module.scss';
+import styles from './header.module.scss';
 
 export const Header = () => {
   const [isPopupOpened, setIsPopupOpened] = useState(false);
@@ -38,11 +37,8 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header__wrapper}>
-        <Link to={homeNavLink.to}>
-          <Logo isHeading theme="light" />
-          <span className={styles.header__logotext}>
-            медицинский информационный портал
-          </span>
+        <Link className={styles.header__logo} to={homeNavLink.to}>
+          <Logo theme="light" hasCaption />
         </Link>
         <Menu />
         <div className={styles.header__search}>

@@ -1,18 +1,21 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
 
 .article {
   display: grid;
   max-width: 282px;
+  width: 100%;
+  height: 100%;
   padding: 32px 12px 12px 32px;
   box-sizing: border-box;
   color: $color-neutral-0;
   background: $color-brand-primary-900;
   border-radius: 16px;
+  user-select: none;
   cursor: pointer;
-  height: 100%;
-  width: 100%;
 
   svg {
     justify-self: flex-end;
@@ -23,4 +26,18 @@
 .heading {
   width: 78%;
   @extend %text-size-large-extra-semibold;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-large * 10),
+      calc($font-size-text-large-extra-semibold * 10),
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    line-height: $font-line-height-text-large;
+    letter-spacing: normal;
+  }
 }
