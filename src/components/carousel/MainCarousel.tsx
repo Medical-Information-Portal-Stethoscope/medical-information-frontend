@@ -18,6 +18,7 @@ import { useAppDispatch } from 'services/app/hooks';
 import { getFirstPageArticles } from 'services/features/information-material/slice';
 import classNames from 'classnames';
 import { useMount } from 'hooks/useMount';
+import { nanoid } from 'nanoid';
 import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
@@ -33,6 +34,8 @@ const getArrayForCarousel = (dataArray: TTags[], divider: number) => {
   return container;
 };
 
+const tabWidth = 190;
+
 function MainCarousel({ onChangeTab }: IMainCarouselProps) {
   const [activeTags, setActiveTags] = useState<TTags[]>([]);
   const [activeTagsForClearModal, setActiveTagsForClearModal] = useState<
@@ -46,7 +49,6 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
   const ref = useRef<any>(null);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [arrayOfTabs, setArrayOfTabs] = useState<TTags[][]>([]);
-  console.log('arrayOfTabs:', arrayOfTabs);
 
   useEffect(() => {
     setCarouselWidth(ref?.current?.offsetWidth);
@@ -92,7 +94,6 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
 
   useEffect(() => {
     if (allSpecializationsTags.length && carouselWidth) {
-      const tabWidth = 190;
       const countOfTabs = Math.floor(carouselWidth / tabWidth);
       setArrayOfTabs(getArrayForCarousel(allSpecializationsTags, countOfTabs));
     }
@@ -185,10 +186,10 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
         {arrayOfTabs.map((array, index) => (
           <div className={styles.container_main} key={index}>
             {index === 0 && (
-              <div key={index}>
+              <div>
                 <FilterTab
                   icon={<Icon icon="AllIcon" size="24" color="gray" />}
-                  id="0"
+                  id="Все статьи"
                   label="Все статьи"
                   isChecked
                   name="Filter"
@@ -203,7 +204,7 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
                     icon={
                       <Icon icon={iconsData[tab.name]} size="24" color="gray" />
                     }
-                    id={tab.pk}
+                    id={tab.name}
                     label={tab.name}
                     name="Filter"
                     onChange={() => handleChangeTab(tab)}
@@ -211,7 +212,7 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
                 ) : (
                   <FilterTab
                     icon={<Icon icon="FirstAidIcon" size="24" color="gray" />}
-                    id={tab.pk}
+                    id={tab.name}
                     label={tab.name}
                     name="Filter"
                     onChange={() => handleChangeTab(tab)}
