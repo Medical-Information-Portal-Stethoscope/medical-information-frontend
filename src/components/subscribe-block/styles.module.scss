@@ -116,14 +116,11 @@
   }
 
   &__ellipse {
+    flex-shrink: 0;
     width: 424px;
     height: 424px;
     background-color: $color-brand-secondary-700;
     border-radius: 424px;
     margin-right: -246px;
-
-    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-      margin-right: -214px;
-    }
   }
 }
