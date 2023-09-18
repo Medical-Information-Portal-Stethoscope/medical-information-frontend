@@ -29,28 +29,12 @@
     }
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-      max-width: 863px;
+      max-width: 869px;
     }
   }
 
   &__header {
     @extend %heading-size-medium;
-
-    @media screen and (max-width: calc($media-desktop-large - 1px)) {
-      font-size: calc-fluid-element(
-        calc($font-size-heading-3 * 10),
-        calc($font-size-heading-2 * 10),
-        $media-desktop-small,
-        $media-desktop-large
-      );
-    }
-
-    @media screen and (max-width: calc($media-desktop-small - 1px)) {
-      font-size: $font-size-heading-3;
-      font-weight: 600;
-      line-height: $font-line-height-heading-3;
-      letter-spacing: $font-letter-spacing-main;
-    }
   }
 
   &__list {
@@ -60,7 +44,8 @@
     gap: 12px 60px;
 
     @media screen and (max-width: calc($media-desktop-main-page-subscribe-block - 1px)) {
-      margin: 56px 0;
+      margin: 54px 0;
+      gap: 12px 56px;
     }
   }
 
@@ -136,5 +121,9 @@
     background-color: $color-brand-secondary-700;
     border-radius: 424px;
     margin-right: -246px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin-right: -214px;
+    }
   }
 }
