@@ -24,18 +24,43 @@
   }
 
   &__item {
-    $border-bottom: 2px solid $color-neutral-0;
-
+    position: relative;
     @extend %text-size-large-bold;
     color: $color-neutral-0;
-    padding: 12px 24px;
+    margin: 0 24px;
     text-align: center;
-    border: none;
     box-sizing: border-box;
     transition: $transition-hover;
 
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -14px;
+      display: inline-block;
+      height: 2px;
+      width: 100%;
+      background-color: $color-neutral-0;
+      opacity: 0;
+      visibility: hidden;
+      transition: $transition-button;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    &:focus {
+      &::after {
+        display: none;
+      }
+    }
+
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-      padding: 14px 16px;
+      margin: 0 16px;
       font-size: $font-size-text-medium;
       font-weight: 600;
       line-height: $font-line-height-text-medium;
@@ -43,11 +68,20 @@
     }
 
     &_active {
-      border-bottom: $border-bottom;
-    }
+      padding-bottom: 12px;
+      border-bottom: 2px solid $color-neutral-0;
 
-    &:hover {
-      border-bottom: $border-bottom;
+      &::after {
+        opacity: 0;
+        visibility: hidden;
+      }
+
+      &:hover {
+        &::after {
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
     }
   }
 }

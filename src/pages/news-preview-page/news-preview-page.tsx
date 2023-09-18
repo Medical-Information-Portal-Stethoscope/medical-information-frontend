@@ -15,6 +15,7 @@ import {
 } from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useScrollToTop } from 'hooks/useScrollToTop';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import {
@@ -23,12 +24,14 @@ import {
   newsStorage,
   nextNewsPage,
 } from 'services/features/information-material/selectors';
+import { desktopMedium } from 'utils/constants';
 import routes from 'utils/routes';
 import styles from './news-preview-page.module.scss';
 
 export default function NewsPreviewPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
+  const windowDimensions = useWindowDimensions();
 
   const dispatch = useAppDispatch();
   const newsBase = useAppSelector(newsStorage);
@@ -77,30 +80,36 @@ export default function NewsPreviewPage() {
   return (
     <>
       <Header />
-      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
         <section>
           <div className={styles.wrapper}>
-            <h2 className={styles.heading}>Новости</h2>
-            <div className={styles.gallery}>
-              <div className={styles.news}>{news}</div>
-              {!isAllContent && (
-                <Button
-                  label="Ещё"
-                  model="secondary"
-                  size="small"
-                  hasBorder
-                  onClick={uploadNextPageNews}
-                  hasSpinner
-                  isLoading={isLoading}
-                  spinnerSize="small"
-                  spinnerColor="blue"
-                />
-              )}
+            <div className={styles.content}>
+              <Breadcrumbs />
+              <h2 className={styles.heading}>Новости</h2>
+              <div className={styles.gallery}>
+                <div className={styles.news}>{news}</div>
+                {!isAllContent && (
+                  <Button
+                    label="Ещё"
+                    model="secondary"
+                    size="small"
+                    hasBorder
+                    onClick={uploadNextPageNews}
+                    hasSpinner
+                    isLoading={isLoading}
+                    spinnerSize="small"
+                    spinnerColor="blue"
+                  />
+                )}
+              </div>
             </div>
-          </div>
-          <div className={styles.top_button}>
-            {isButtonToTopVisible && <ButtonTopNavigation />}
+            {windowDimensions >= desktopMedium ? (
+              <div className={styles.topButton}>
+                {isButtonToTopVisible && <ButtonTopNavigation />}
+              </div>
+            ) : (
+              isButtonToTopVisible && <ButtonTopNavigation />
+            )}
           </div>
         </section>
       </main>

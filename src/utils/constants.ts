@@ -10,3 +10,6 @@ export const cardFavoritesHeightDesktopBig = 438;
 export const cardFavoritesGapDesktopBig = 24;
 
 export const animationTime = 300;
+
+// WINDOW DIMENSIONS
+export const desktopMedium = 1536;
