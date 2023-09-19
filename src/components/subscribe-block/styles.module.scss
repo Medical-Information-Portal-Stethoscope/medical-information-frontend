@@ -1,5 +1,4 @@
 @import '../../assets/styles/index.scss';
-@import '../../assets/styles/abstracts/variables/colors';
 
 .subscribe {
   display: flex;
@@ -10,11 +9,29 @@
   border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
   border-radius: 16px;
 
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    margin-left: $indent-section-sides-desktop;
+    margin-right: $indent-section-sides-desktop;
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-top: calc($indent-section-top-side-desktop-small / 2);
+  }
+
   &__content {
-    width: 1252px;
-    margin: 60px;
+    max-width: 1252px;
+    margin: 60px 0 60px 60px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      margin: 50px 0 50px 56px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      max-width: 869px;
+    }
   }
 
   &__header {
@@ -24,14 +41,44 @@
   &__list {
     margin: 74px 0;
     display: flex;
-    gap: 60px;
+    flex-wrap: wrap;
+    gap: 12px 60px;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      margin: 57px 0 50px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      gap: 12px 56px;
+    }
   }
 
   &__item {
+    max-width: 250px;
     margin-left: 42px;
     position: relative;
     @extend %text-size-medium;
     color: $color-neutral-900;
+
+    &:nth-child(1) {
+      max-width: 194px;
+    }
+
+    &:nth-child(4) {
+      max-width: 210px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      &:nth-child(2) {
+        order: 2;
+      }
+      &:nth-child(3) {
+        margin-left: 98px;
+      }
+      &:nth-child(4) {
+        order: 2;
+      }
+    }
   }
 
   &__item::before {
@@ -50,6 +97,10 @@
     display: flex;
     align-items: center;
     gap: 40px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      gap: 16px;
+    }
   }
 
   &__button > span {
@@ -61,9 +112,15 @@
   &__caption {
     @extend %text-size-medium;
     color: $color-neutral-500;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
+    }
   }
 
   &__ellipse {
+    flex-shrink: 0;
     width: 424px;
     height: 424px;
     background-color: $color-brand-secondary-700;
