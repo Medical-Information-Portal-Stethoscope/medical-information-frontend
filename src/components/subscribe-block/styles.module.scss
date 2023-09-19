@@ -10,12 +10,12 @@
   border-radius: 16px;
 
   @media screen and (max-width: calc($media-desktop-large - 1px)) {
-    margin-left: 48px;
-    margin-right: 48px;
+    margin-left: $indent-section-sides-desktop;
+    margin-right: $indent-section-sides-desktop;
   }
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-    margin-top: 28px;
+    margin-top: calc($indent-section-top-side-desktop-small / 2);
   }
 
   &__content {
@@ -23,8 +23,9 @@
     margin: 60px 0 60px 60px;
     display: flex;
     flex-direction: column;
+    justify-content: space-around;
 
-    @media screen and (max-width: calc($media-desktop-main-page-subscribe-block - 1px)) {
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
       margin: 50px 0 50px 56px;
     }
 
@@ -43,8 +44,11 @@
     flex-wrap: wrap;
     gap: 12px 60px;
 
-    @media screen and (max-width: calc($media-desktop-main-page-subscribe-block - 1px)) {
-      margin: 54px 0;
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      margin: 57px 0 50px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       gap: 12px 56px;
     }
   }
