@@ -92,7 +92,7 @@ export const AuthorsPage = () => {
                 </li>
                 <li className={styles.listItem}>Текст статьи;</li>
                 <li className={styles.listItem}>
-                  Наименование источника и/или оригинала;
+                  Наименование источника и/или автор оригинала;
                 </li>
                 <li className={styles.listItem}>Ссылка на источник;</li>
                 <li className={styles.listItem}>Фотография или иллюстрация.</li>
