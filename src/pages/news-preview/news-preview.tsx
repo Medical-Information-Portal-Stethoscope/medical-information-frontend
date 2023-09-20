@@ -26,7 +26,7 @@ import {
 } from 'services/features/information-material/selectors';
 import { desktopMedium } from 'utils/constants';
 import routes from 'utils/routes';
-import styles from './news-preview-page.module.scss';
+import styles from './news-preview.module.scss';
 
 export default function NewsPreviewPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
@@ -81,37 +81,35 @@ export default function NewsPreviewPage() {
     <>
       <Header />
       <main>
-        <section>
-          <div className={styles.wrapper}>
-            <div className={styles.content}>
-              <Breadcrumbs />
-              <h2 className={styles.heading}>Новости</h2>
-              <div className={styles.gallery}>
-                <div className={styles.news}>{news}</div>
-                {!isAllContent && (
-                  <Button
-                    label="Ещё"
-                    model="secondary"
-                    size="small"
-                    hasBorder
-                    onClick={uploadNextPageNews}
-                    hasSpinner
-                    isLoading={isLoading}
-                    spinnerSize="small"
-                    spinnerColor="blue"
-                  />
-                )}
-              </div>
+        <div className={styles.wrapper}>
+          <Breadcrumbs />
+          <section className={styles.content}>
+            <h2 className={styles.heading}>Новости</h2>
+            <div className={styles.gallery}>
+              <div className={styles.news}>{news}</div>
+              {!isAllContent && (
+                <Button
+                  label="Ещё"
+                  model="secondary"
+                  size="small"
+                  hasBorder
+                  onClick={uploadNextPageNews}
+                  hasSpinner
+                  isLoading={isLoading}
+                  spinnerSize="small"
+                  spinnerColor="blue"
+                />
+              )}
             </div>
-            {windowDimensions >= desktopMedium ? (
-              <div className={styles.topButton}>
-                {isButtonToTopVisible && <ButtonTopNavigation />}
-              </div>
-            ) : (
-              isButtonToTopVisible && <ButtonTopNavigation />
-            )}
-          </div>
-        </section>
+          </section>
+          {windowDimensions >= desktopMedium ? (
+            <div className={styles.topButton}>
+              {isButtonToTopVisible && <ButtonTopNavigation />}
+            </div>
+          ) : (
+            isButtonToTopVisible && <ButtonTopNavigation />
+          )}
+        </div>
       </main>
       <Footer />
     </>

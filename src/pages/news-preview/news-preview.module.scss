@@ -8,7 +8,11 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr minmax(1184px, 1208px) 1fr;
+  grid-template-columns: 1fr minmax(1184px, $wrapper-news-preview-desktop) 1fr;
+
+  > :first-child {
+    grid-column: 2/3;
+  }
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-template-columns: 1fr;
@@ -22,7 +26,15 @@
         $media-desktop-medium
       );
 
-    > :last-child {
+    > :first-child {
+      grid-column: 1/3;
+
+      > ul {
+        padding-top: calc($indent-section-top-side-desktop-small / 2);
+      }
+    }
+
+    > button {
       position: sticky;
       bottom: 16px;
       justify-self: flex-end;
@@ -32,12 +44,12 @@
 
 .content {
   grid-column: 2 / 3;
-  padding: $indent-block-default-top-side-medium 0
+  padding: calc($indent-section-top-side-desktop-large / 2) 0
     $indent-section-top-side-desktop-large;
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-column: 1 / 4;
-    padding: 28px 0 0;
+    padding: calc($indent-block-default-top-side-large / 2) 0 0;
   }
 
   > div:first-child {

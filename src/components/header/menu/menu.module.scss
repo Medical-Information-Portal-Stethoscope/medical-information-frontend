@@ -33,7 +33,7 @@
     @extend %text-size-large-bold;
     color: $color-neutral-0;
     margin: 0 24px;
-    padding-bottom: 12px;
+    padding-bottom: 8px;
     text-align: center;
     box-sizing: border-box;
     transition: $transition-hover;
@@ -67,7 +67,7 @@
     }
 
     &_active {
-      padding-bottom: 12px;
+      padding-bottom: 8px;
       border-bottom: 2px solid $color-neutral-0;
 
       &::after {
