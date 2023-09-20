@@ -1,4 +1,3 @@
-import { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
@@ -8,7 +7,7 @@ import routes from 'utils/routes';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import styles from './authors.module.scss';
 
-export const AuthorsPage: FC = (): ReactElement => {
+export const AuthorsPage = () => {
   const { user } = useAppSelector(showUserPersonalData);
 
   return (
@@ -93,7 +92,7 @@ export const AuthorsPage: FC = (): ReactElement => {
                 </li>
                 <li className={styles.listItem}>Текст статьи;</li>
                 <li className={styles.listItem}>
-                  Наименование источника и/или оригинала;
+                  Наименование источника и/или автор оригинала;
                 </li>
                 <li className={styles.listItem}>Ссылка на источник;</li>
                 <li className={styles.listItem}>Фотография или иллюстрация.</li>

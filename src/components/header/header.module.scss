@@ -1,0 +1,84 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/indents';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
+
+.header {
+  position: relative;
+  max-width: $wrapper-main-content-desktop;
+  margin: $indent-section-top-side-tablet auto;
+  border-radius: 16px;
+  background-color: $color-brand-primary-900;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    margin-right: $indent-section-sides-desktop;
+    margin-left: $indent-section-sides-desktop;
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-bottom: calc($indent-section-top-side-desktop-small / 2);
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 48px;
+    box-sizing: border-box;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      padding: 33px 32px;
+    }
+  }
+
+  &__search {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 40px;
+    width: 34.7%;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      width: 26.78%;
+      gap: 16px;
+    }
+
+    form {
+      width: 85.33%;
+    }
+  }
+
+  &__profile {
+    display: flex;
+    margin: 0 8px;
+    border-radius: 50%;
+    background: transparent;
+    fill: $color-neutral-0;
+    cursor: pointer;
+    transition: $transition-button;
+
+    &_auth {
+      margin: 0;
+    }
+  }
+}
+
+.tooltip {
+  width: 395px;
+  height: 188px;
+  position: absolute;
+  top: 116px;
+  right: 48px;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 300ms, visibility 300ms ease-out;
+
+  &--open {
+    visibility: visible;
+    opacity: 1;
+  }
+}

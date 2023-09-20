@@ -1,0 +1,84 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/indents';
+@import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
+
+%invisible {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.menu {
+  width: 39.22%;
+  box-sizing: border-box;
+  color: $color-neutral-900;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    width: 38.84%;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    white-space: nowrap;
+  }
+
+  &__item {
+    position: relative;
+    @extend %text-size-large-bold;
+    color: $color-neutral-0;
+    margin: 0 24px;
+    padding-bottom: 8px;
+    text-align: center;
+    box-sizing: border-box;
+    transition: $transition-hover;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      display: inline-block;
+      height: 2px;
+      width: 100%;
+      background-color: $color-neutral-0;
+      @extend %invisible;
+      transition: $transition-button;
+    }
+
+    &:hover {
+      &::after {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin: 0 16px;
+      font-size: $font-size-text-medium;
+      font-weight: 600;
+      line-height: $font-line-height-text-medium;
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    &_active {
+      padding-bottom: 8px;
+      border-bottom: 2px solid $color-neutral-0;
+
+      &::after {
+        @extend %invisible;
+      }
+
+      &:hover {
+        &::after {
+          @extend %invisible;
+        }
+      }
+    }
+  }
+}

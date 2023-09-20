@@ -1,27 +1,34 @@
+import classNames from 'classnames';
 import logo from 'assets/images/Logo.svg';
 import logoLight from 'assets/images/Logo-light.svg';
+import styles from './logo.module.scss';
 
 export interface ILogoProps {
-  isHeading?: boolean;
   extClassName?: string;
-  theme?: 'dark' | 'light';
+  theme: 'dark' | 'light';
+  hasCaption?: boolean;
 }
 
-export const Logo = ({
-  isHeading,
-  extClassName,
-  theme = 'light',
-}: ILogoProps) =>
-  isHeading ? (
-    <h1 className={extClassName}>
-      {theme === 'light' ? (
-        <img src={logoLight} alt="логотип" />
-      ) : (
-        <img src={logo} alt="логотип" />
-      )}
-    </h1>
-  ) : (
-    <div className={extClassName}>
-      <img src={logo} alt="логотип" />
+export const Logo = ({ extClassName, theme, hasCaption }: ILogoProps) =>
+  hasCaption ? (
+    <div className={classNames(styles.wrapper, extClassName)}>
+      <img
+        className={styles.logo}
+        src={theme === 'light' ? logoLight : logo}
+        alt="Логотип"
+      />
+      <span
+        className={classNames(styles.caption, {
+          [styles.captionDark]: theme === 'dark',
+        })}
+      >
+        медицинский информационный портал
+      </span>
     </div>
+  ) : (
+    <img
+      className={styles.logo}
+      src={theme === 'light' ? logoLight : logo}
+      alt="Логотип"
+    />
   );

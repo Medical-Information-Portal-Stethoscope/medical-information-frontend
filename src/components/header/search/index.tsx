@@ -61,7 +61,7 @@ export const Search: FC = () => {
         type="submit"
         name="search-info"
       >
-        <SearchIcon color="blue" size="24" />
+        <SearchIcon color="blue" size="22" />
       </button>
     </form>
   );

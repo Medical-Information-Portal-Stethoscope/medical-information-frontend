@@ -75,7 +75,7 @@ export default function Articles() {
           {hasButton && (
             <Link to={routes.articles.route}>
               <CardMoreContent
-                heading="Еще статьи"
+                heading="Ещё статьи"
                 icon={<Icon icon="BigArrowIcon" color="white" />}
                 extraClass={styles.article}
               />

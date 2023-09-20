@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/placeholders';
 
 .wrapper {
@@ -13,7 +14,20 @@
 }
 
 .carousel {
-  padding-left: 64px;
+  width: calc(100% - 268px);
+  padding-left: 50px;
+
+  li:last-child .container_main {
+    display: flex;
+    justify-content: flex-start;
+    gap: 14px;
+  }
+}
+
+@media screen and (max-width: calc($media-desktop-medium - 1px)) {
+  .carousel {
+    width: calc(100% - 241px);
+  }
 }
 
 .next_button {
@@ -36,7 +50,7 @@
 
 .prev_button {
   position: absolute;
-  left: -64px;
+  left: -50px;
   top: 50%;
   transform: translate(0, -50%);
   z-index: 10;
@@ -54,8 +68,13 @@
 
 .container_main {
   display: flex;
-  justify-content: space-between;
-  width: 1570px;
+  justify-content: space-around;
+}
+
+@media screen and (max-width: calc($media-desktop-small + 1px)) {
+  .container_main {
+    justify-content: space-between;
+  }
 }
 
 .container_articles {

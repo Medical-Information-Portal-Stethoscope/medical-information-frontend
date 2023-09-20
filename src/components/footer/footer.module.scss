@@ -1,6 +1,8 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/indents';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -18,11 +20,15 @@
   margin: 0 auto;
   padding: 57px 0 48px;
   white-space: pre-wrap;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    margin-right: $indent-section-sides-desktop;
+    margin-left: $indent-section-sides-desktop;
+  }
 }
 
 .warning {
   row-gap: 12px;
-  max-width: 70%;
   padding-bottom: 34px;
   letter-spacing: $font-letter-spacing-main;
   color: $color-neutral-700;
@@ -35,23 +41,28 @@
 
 .content {
   display: grid;
-  grid-template-columns: 15.57% 32.46% 14%;
+  grid-template-columns: repeat(3, auto);
   justify-content: space-between;
   align-items: flex-end;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    font-size: $font-size-text-small;
+    line-height: $font-line-height-text-small;
+  }
 }
 
 .logo {
   margin-top: 9px;
-
-  a div img {
-    width: 284px;
-    height: 60px;
-  }
 }
 
 .links {
   display: flex;
   justify-content: space-between;
+  column-gap: 37px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    column-gap: 24px;
+  }
 }
 
 .logoLink,
@@ -62,11 +73,6 @@
 .logoLink {
   row-gap: 1px;
   letter-spacing: $font-letter-spacing-main;
-}
-
-.logoName {
-  @extend %text-size-small;
-  font-weight: 600;
 }
 
 .link {
