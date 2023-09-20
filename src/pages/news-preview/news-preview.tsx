@@ -15,6 +15,7 @@ import {
 } from 'services/features/information-material/slice';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useScrollToTop } from 'hooks/useScrollToTop';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import {
@@ -23,12 +24,14 @@ import {
   newsStorage,
   nextNewsPage,
 } from 'services/features/information-material/selectors';
+import { desktopMedium } from 'utils/constants';
 import routes from 'utils/routes';
-import styles from './news-preview-page.module.scss';
+import styles from './news-preview.module.scss';
 
 export default function NewsPreviewPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
+  const windowDimensions = useWindowDimensions();
 
   const dispatch = useAppDispatch();
   const newsBase = useAppSelector(newsStorage);
@@ -77,10 +80,10 @@ export default function NewsPreviewPage() {
   return (
     <>
       <Header />
-      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
-        <section>
-          <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
+          <Breadcrumbs />
+          <section className={styles.content}>
             <h2 className={styles.heading}>Новости</h2>
             <div className={styles.gallery}>
               <div className={styles.news}>{news}</div>
@@ -98,11 +101,15 @@ export default function NewsPreviewPage() {
                 />
               )}
             </div>
-          </div>
-          <div className={styles.top_button}>
-            {isButtonToTopVisible && <ButtonTopNavigation />}
-          </div>
-        </section>
+          </section>
+          {windowDimensions >= desktopMedium ? (
+            <div className={styles.topButton}>
+              {isButtonToTopVisible && <ButtonTopNavigation />}
+            </div>
+          ) : (
+            isButtonToTopVisible && <ButtonTopNavigation />
+          )}
+        </div>
       </main>
       <Footer />
     </>

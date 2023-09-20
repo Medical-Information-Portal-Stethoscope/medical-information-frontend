@@ -27,11 +27,14 @@ import routes from 'utils/routes';
 import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { getFilteredArticles } from 'services/features/filter/api';
 import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
-import styles from './articles-preview-page.module.scss';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
+import { desktopMedium } from 'utils/constants';
+import styles from './articles-preview.module.scss';
 
 export default function ArticlesPreviewPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
+  const windowDimensions = useWindowDimensions();
 
   const dispatch = useAppDispatch();
   const articlesBase = useAppSelector(articlesStorage);
@@ -96,10 +99,10 @@ export default function ArticlesPreviewPage() {
   return (
     <>
       <Header />
-      <Breadcrumbs extraClass={styles.crumbs} />
       <main>
-        <section>
-          <div className={styles.wrapper}>
+        <div className={styles.wrapper}>
+          <Breadcrumbs />
+          <section className={styles.container}>
             <h2 className={styles.heading}>Статьи</h2>
             <MainCarousel onChangeTab={handleClickTab} />
             <div className={styles.gallery}>
@@ -124,11 +127,15 @@ export default function ArticlesPreviewPage() {
                 />
               )}
             </div>
-          </div>
-          <div className={styles.top_button}>
-            {isButtonToTopVisible && <ButtonTopNavigation />}
-          </div>
-        </section>
+          </section>
+          {windowDimensions >= desktopMedium ? (
+            <div className={styles.topButton}>
+              {isButtonToTopVisible && <ButtonTopNavigation />}
+            </div>
+          ) : (
+            isButtonToTopVisible && <ButtonTopNavigation />
+          )}
+        </div>
       </main>
       <Footer />
     </>
