@@ -16,10 +16,11 @@ const team = data.map((item) => (
         item.department === 'Проджект менеджеры',
       [styles['about--team--creators--designers']]:
         item.department === 'Дизайнеры',
+      [styles['about--team--creators--frontenders']]:
+        item.department === 'Фронтенд-разработчики',
       [styles['about--team--creators--other']]: [
         'Тестировщики',
         'Бэкенд-разработчики',
-        'Фронтенд-разработчики',
       ].includes(item.department),
     })}
   >
