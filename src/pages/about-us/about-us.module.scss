@@ -24,18 +24,13 @@
   margin: 0 auto;
 
   @media screen and (max-width: calc($media-desktop-large - 1px)) {
-    margin-left: calc-fluid-element(
-      $indent-section-sides-desktop,
-      202px,
-      $media-desktop-small,
-      $media-desktop-large
-    );
-    margin-right: calc-fluid-element(
-      $indent-section-sides-desktop,
-      202px,
-      $media-desktop-small,
-      $media-desktop-large
-    );
+    margin: 0
+      calc-fluid-element(
+        $indent-section-sides-desktop,
+        202px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
   }
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
