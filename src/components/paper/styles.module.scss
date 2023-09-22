@@ -8,6 +8,15 @@
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    max-width: calc-fluid-element(
+      882px,
+      900px,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
   &__date {
     align-self: flex-start;
     @extend %text-size-medium-semibold;
@@ -25,6 +34,11 @@
     @extend %text-size-large;
     color: $color-neutral-700;
     margin-bottom: 26px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-article;
+      line-height: $font-line-height-article;
+    }
   }
 
   &__info {

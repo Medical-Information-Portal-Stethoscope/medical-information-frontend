@@ -24,7 +24,7 @@ export const ArticlesPreviewSmall: FC<IArticlePreviewSmall> = ({
     <CardArticlePreview
       key={item.id}
       data={item}
-      type="default"
+      type="fullPageArticle"
       route={route}
       extraClass={styles.articles__item}
     />
