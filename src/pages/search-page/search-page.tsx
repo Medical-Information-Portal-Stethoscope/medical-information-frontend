@@ -104,7 +104,7 @@ export default function SearchPage() {
             )}
           </div>
           {windowDimensions >= desktopMedium ? (
-            <div className={styles.topButton}>
+            <div className={searchMaterials.length ? styles.topButton : ''}>
               {isButtonToTopVisible && <ButtonTopNavigation />}
             </div>
           ) : (

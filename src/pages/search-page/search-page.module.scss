@@ -74,7 +74,11 @@
 
 .description {
   @extend %text-size-medium;
-  padding: 156px 0;
+  padding: 156px 0 104px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    padding: 64px 0 80px;
+  }
 }
 
 .topButton {
