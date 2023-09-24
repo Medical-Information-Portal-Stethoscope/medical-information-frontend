@@ -32,7 +32,7 @@ export const ArticlesPreviewSmall: FC<IArticlePreviewSmall> = ({
 
   return (
     <div className={styles.articles}>
-      <h3 className={styles.articles__header}>Еще по этой теме</h3>
+      <h3 className={styles.articles__header}>Ещё по этой теме</h3>
       <div className={styles.articles__containter}>{articles}</div>
     </div>
   );
