@@ -62,7 +62,11 @@ export const News: FC = () => {
           <div className={styles.news__container}>
             <Paper data={material} isNews />
             {data ? (
-              <NewsPreviewSmall data={data.results} route={routes.news.route} />
+              <NewsPreviewSmall
+                data={data.results}
+                route={routes.news.route}
+                extraClass={styles.onNewsPageWidth}
+              />
             ) : null}
           </div>
         </section>

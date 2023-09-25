@@ -11,10 +11,28 @@
     flex-direction: column;
     justify-content: center;
     gap: 80px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      max-width: 982px;
+    }
+  }
+}
+
+.onNewsPageWidth {
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    max-width: 982px;
   }
 }
 
 .crumbs {
   max-width: $wrapper-news-preview-desktop;
   margin: 0 auto;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    max-width: 982px;
+
+    ul {
+      padding-top: calc($indent-section-top-side-desktop-small / 2);
+    }
+  }
 }

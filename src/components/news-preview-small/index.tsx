@@ -9,6 +9,7 @@ import styles from './styles.module.scss';
 interface INewsPreviewSmall {
   data: TArticle[];
   route: string;
+  extraClass?: string;
 }
 
 const maxNumCardsDesktop = 2;
@@ -16,12 +17,19 @@ const maxNumCardsDesktop = 2;
 export const NewsPreviewSmall: FC<INewsPreviewSmall> = ({
   data,
   route = '/',
+  extraClass,
 }) => {
   const { id } = useParams() as { id: string };
   const randomData = generateSmallPreview(data, maxNumCardsDesktop, id);
 
   const news = randomData.map((item) => (
-    <CardArticlePreview key={item.id} data={item} type="news" route={route} />
+    <CardArticlePreview
+      key={item.id}
+      data={item}
+      type="news"
+      route={route}
+      extraClass={extraClass}
+    />
   ));
 
   return (

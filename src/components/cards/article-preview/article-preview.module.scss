@@ -69,6 +69,10 @@
     );
   }
 
+  &--fullPageArticle {
+    height: 320px;
+  }
+
   &--media {
     height: 420px;
 
@@ -118,6 +122,10 @@
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     min-height: 225px;
+  }
+
+  &--fullPageArticle {
+    min-height: 208px;
   }
 
   &--media {
