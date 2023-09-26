@@ -1,12 +1,15 @@
 @import '../../assets/styles/index.scss';
 
-.error {
+.wrapper {
   max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
+}
+
+.error {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 0 auto;
   box-sizing: border-box;
 
   &__image {
