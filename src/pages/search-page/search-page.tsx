@@ -18,12 +18,15 @@ import {
   getNextSearchPage,
 } from 'services/features/search/api';
 import routes from 'utils/routes';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
+import { desktopMedium } from 'utils/constants';
 import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import styles from './search-page.module.scss';
 
 export default function SearchPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
+  const windowDimensions = useWindowDimensions();
 
   const dispatch = useAppDispatch();
   const materials = useAppSelector(searchStorage);
@@ -100,9 +103,13 @@ export default function SearchPage() {
               )
             )}
           </div>
-          <div className={styles.top_button}>
-            {isButtonToTopVisible && <ButtonTopNavigation />}
-          </div>
+          {windowDimensions >= desktopMedium ? (
+            <div className={searchMaterials.length ? styles.topButton : ''}>
+              {isButtonToTopVisible && <ButtonTopNavigation />}
+            </div>
+          ) : (
+            isButtonToTopVisible && <ButtonTopNavigation />
+          )}
         </section>
       </main>
       <Footer />
