@@ -7,13 +7,6 @@
 @import 'assets/styles/abstracts/functions.scss';
 
 .search {
-  $indent-1920: calc-fluid-element(
-    $indent-section-sides-desktop,
-    356px,
-    $media-desktop-small,
-    $media-desktop-large
-  );
-
   display: grid;
   grid-template-columns: 1fr $wrapper-search-preview-desktop 1fr;
   padding-top: 32px;
@@ -24,7 +17,13 @@
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-template-columns: 1fr;
-    margin: 0 $indent-1920;
+    margin: 0
+      calc-fluid-element(
+        $indent-section-sides-desktop,
+        356px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
     padding-top: calc($indent-section-top-side-desktop-small / 2);
 
     > :first-child {
