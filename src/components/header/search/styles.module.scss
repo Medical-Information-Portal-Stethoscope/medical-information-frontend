@@ -2,6 +2,7 @@
 
 .search {
   display: flex;
+  align-items: center;
   max-width: 600px;
   height: 48px;
   padding: 12px;
@@ -18,6 +19,10 @@
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     height: 40px;
     padding: 8px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    height: 64px;
   }
 
   &__input {
@@ -39,6 +44,11 @@
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       font-size: $font-size-text-small;
       line-height: $font-line-height-text-small;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-medium-additional;
+      line-height: $font-line-height-text-medium-additional;
     }
   }
 

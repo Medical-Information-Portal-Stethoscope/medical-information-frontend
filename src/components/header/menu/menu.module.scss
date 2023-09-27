@@ -66,6 +66,10 @@
       letter-spacing: $font-letter-spacing-main;
     }
 
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-large-extra;
+    }
+
     &_active {
       padding-bottom: 8px;
       border-bottom: 2px solid $color-neutral-0;

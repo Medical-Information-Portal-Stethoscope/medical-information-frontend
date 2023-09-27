@@ -1,0 +1,19 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 123px;
+  padding-top: 115px;
+}
+
+.search {
+  max-width: 716px;
+  width: 100%;
+}
+
+.menu {
+  > ul {
+    flex-direction: column;
+    row-gap: 60px;
+  }
+}

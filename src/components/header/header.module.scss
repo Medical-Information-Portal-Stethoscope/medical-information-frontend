@@ -2,6 +2,7 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/z-index';
 @import 'assets/styles/abstracts/variables/indents';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
@@ -23,16 +24,38 @@
     margin-bottom: calc($indent-section-top-side-desktop-small / 2);
   }
 
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  @media screen and (max-width: $media-tablet-large) {
+    position: sticky;
+    top: 0;
+    z-index: $zindex-header;
+    margin: 0 0 calc($indent-section-top-side-tablet / 2);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &__outerWrapper {
     padding: 30px 48px;
     box-sizing: border-box;
+
+    transition: $transition-button;
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       padding: 33px 32px;
     }
+
+    @media screen and (max-width: $media-tablet-large) {
+      padding: 20px 24px;
+    }
+
+    &_active {
+      min-height: 100vh !important;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__search {
@@ -45,6 +68,10 @@
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       width: 26.78%;
       gap: 16px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      width: auto;
     }
 
     form {
@@ -60,6 +87,15 @@
     fill: $color-neutral-0;
     cursor: pointer;
     transition: $transition-button;
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 0;
+
+      > svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
 
     &_auth {
       margin: 0;
