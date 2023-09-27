@@ -32,11 +32,10 @@ export const ErrorPage = ({
     <>
       <Header />
       <main>
-        <section className={styles.error}>
+        <div className={styles.wrapper}>
           <img className={styles.error__image} src={img} alt="Логотип ошибки" />
           <h2 className={styles.error__title}>{title}</h2>
           <p className={styles.error__message}>{message}</p>
-
           <Button
             extraClass={styles.error__button}
             label="Перейти на&nbsp;главную"
@@ -46,7 +45,7 @@ export const ErrorPage = ({
             hasBorder
             onClick={handleClick}
           />
-        </section>
+        </div>
       </main>
       <Footer />
     </>
