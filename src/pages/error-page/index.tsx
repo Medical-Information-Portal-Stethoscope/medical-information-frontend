@@ -33,25 +33,18 @@ export const ErrorPage = ({
       <Header />
       <main>
         <div className={styles.wrapper}>
-          <section className={styles.error}>
-            <img
-              className={styles.error__image}
-              src={img}
-              alt="Логотип ошибки"
-            />
-            <h2 className={styles.error__title}>{title}</h2>
-            <p className={styles.error__message}>{message}</p>
-
-            <Button
-              extraClass={styles.error__button}
-              label="Перейти на&nbsp;главную"
-              size="medium"
-              type="button"
-              model="secondary"
-              hasBorder
-              onClick={handleClick}
-            />
-          </section>
+          <img className={styles.error__image} src={img} alt="Логотип ошибки" />
+          <h2 className={styles.error__title}>{title}</h2>
+          <p className={styles.error__message}>{message}</p>
+          <Button
+            extraClass={styles.error__button}
+            label="Перейти на&nbsp;главную"
+            size="medium"
+            type="button"
+            model="secondary"
+            hasBorder
+            onClick={handleClick}
+          />
         </div>
       </main>
       <Footer />

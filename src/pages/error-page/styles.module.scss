@@ -3,18 +3,15 @@
 .wrapper {
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .error {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  box-sizing: border-box;
-
   &__image {
     max-width: 363px;
-    margin: 32px auto 24px;
+    margin: 32px 0 24px;
 
     @media screen and (max-width: calc($media-desktop-large - 1px)) {
       max-width: calc-fluid-element(
@@ -32,7 +29,7 @@
 
   &__title {
     @extend %heading-size-large;
-    margin: 24px auto 12px;
+    margin: 24px 0 12px;
     padding: 0;
     color: $color-neutral-900;
     text-align: center;
@@ -55,7 +52,7 @@
 
   &__message {
     @extend %text-size-large-extra-semibold;
-    margin: 12px auto 24px;
+    margin: 12px 0 24px;
     padding: 0;
     color: $color-neutral-500;
     text-align: center;
@@ -87,7 +84,7 @@
   &__button {
     width: 284px;
     height: 48px;
-    margin: 24px auto 80px;
+    margin: 24px 0 80px;
     padding: 0;
   }
 
