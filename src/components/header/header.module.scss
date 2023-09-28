@@ -44,7 +44,25 @@
     }
 
     @media screen and (max-width: $media-tablet-large) {
-      padding: 20px 24px;
+      padding: 20px
+        calc-fluid-element(
+          $indent-section-sides-tablet,
+          $indent-section-sides-desktop,
+          $media-tablet-small,
+          $media-desktop-small
+        );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      $indent-mobile: calc-fluid-element(
+        $indent-section-sides-mobile,
+        $indent-section-sides-tablet,
+        $media-mobile-small,
+        $media-tablet-small
+      );
+
+      padding-right: $indent-mobile;
+      padding-left: $indent-mobile;
     }
 
     &_active {

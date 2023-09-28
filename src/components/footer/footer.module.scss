@@ -34,7 +34,7 @@
   @media screen and (max-width: calc($media-desktop-small - 1px)) {
     margin: 0
       calc-fluid-element(
-        $indent-section-sides-mobile,
+        $indent-section-sides-tablet,
         $indent-section-sides-desktop,
         $media-tablet-small,
         $media-desktop-small
@@ -42,7 +42,13 @@
   }
 
   @media screen and (max-width: calc($media-tablet-small - 1px)) {
-    margin: 0 $indent-section-sides-mobile;
+    margin: 0
+      calc-fluid-element(
+        $indent-section-sides-mobile,
+        $indent-section-sides-tablet,
+        $media-mobile-small,
+        $media-tablet-small
+      );
   }
 }
 

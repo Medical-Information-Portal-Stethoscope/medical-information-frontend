@@ -32,6 +32,10 @@
       $media-desktop-small
     );
   }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    max-width: 153px;
+  }
 }
 
 .caption {
