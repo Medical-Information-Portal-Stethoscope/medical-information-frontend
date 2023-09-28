@@ -8,6 +8,13 @@
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/functions';
 
+$indent-tablet: calc-fluid-element(
+  $indent-section-sides-tablet,
+  $indent-section-sides-desktop,
+  $media-tablet-small,
+  $media-desktop-small
+);
+
 .header {
   position: relative;
   max-width: $wrapper-main-content-desktop;
@@ -22,6 +29,18 @@
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     margin-bottom: calc($indent-section-top-side-desktop-small / 2);
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    $indent-tablet: calc-fluid-element(
+      $indent-section-sides-tablet,
+      $indent-section-sides-desktop,
+      $media-tablet-small,
+      $media-desktop-small
+    );
+
+    margin-right: $indent-tablet;
+    margin-left: $indent-tablet;
   }
 
   @media screen and (max-width: $media-tablet-large) {
@@ -44,13 +63,7 @@
     }
 
     @media screen and (max-width: $media-tablet-large) {
-      padding: 20px
-        calc-fluid-element(
-          $indent-section-sides-tablet,
-          $indent-section-sides-desktop,
-          $media-tablet-small,
-          $media-desktop-small
-        );
+      padding: 20px $indent-tablet;
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
