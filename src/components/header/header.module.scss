@@ -8,12 +8,23 @@
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/functions';
 
+$billet-height: 240px;
 $indent-tablet: calc-fluid-element(
   $indent-section-sides-tablet,
   $indent-section-sides-desktop,
   $media-tablet-small,
   $media-desktop-small
 );
+
+@keyframes billet-appearance {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: $billet-height;
+  }
+}
 
 .header {
   position: relative;
@@ -147,5 +158,19 @@ $indent-tablet: calc-fluid-element(
   &--open {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+.billet {
+  position: fixed;
+  bottom: 0;
+  z-index: $zindex-filters-modal;
+  width: 100%;
+  height: 0;
+  transition: height 0.3s ease-out;
+
+  &Active {
+    height: $billet-height;
+    animation: billet-appearance 0.3s ease-out;
   }
 }
