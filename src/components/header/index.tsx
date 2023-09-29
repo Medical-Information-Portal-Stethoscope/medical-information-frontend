@@ -78,9 +78,7 @@ export const Header = () => {
     <>
       <header className={styles.header}>
         <div
-          className={classNames(styles.header__outerWrapper, {
-            [styles.header__outerWrapper_active]: isHamburgerMenuOpened,
-          })}
+          className={styles.header__outerWrapper}
           style={{ minHeight: headerRef.current?.clientHeight }}
         >
           <div ref={headerRef} className={styles.header__wrapper}>
@@ -126,7 +124,7 @@ export const Header = () => {
             )}
           </div>
 
-          {!isDesktop && isHamburgerMenuOpened && <HamburgerMenu />}
+          {!isDesktop && <HamburgerMenu isOpened={isHamburgerMenuOpened} />}
         </div>
       </header>
 

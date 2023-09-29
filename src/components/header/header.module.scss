@@ -55,10 +55,11 @@ $indent-tablet: calc-fluid-element(
   }
 
   @media screen and (max-width: $media-tablet-large) {
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: $zindex-header;
-    margin: 0 0 calc($indent-section-top-side-tablet / 2);
+    width: 100%;
+    margin: 0;
     border-top-left-radius: 0;
     border-top-right-radius: 0;
   }
@@ -89,9 +90,9 @@ $indent-tablet: calc-fluid-element(
       padding-left: $indent-mobile;
     }
 
-    &_active {
-      min-height: 100vh !important;
-    }
+    // &_active {
+    //   min-height: 100vh !important;
+    // }
   }
 
   &__wrapper {

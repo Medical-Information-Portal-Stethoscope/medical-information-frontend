@@ -3,7 +3,17 @@
   flex-direction: column;
   align-items: center;
   row-gap: 123px;
+  height: 0;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease-out;
+}
+
+.active {
+  height: 100vh;
   padding-top: 115px;
+  opacity: 1;
+  visibility: visible;
 }
 
 .search {

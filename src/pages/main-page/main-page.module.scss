@@ -1,0 +1,7 @@
+@import 'assets/styles/abstracts/variables/media-queries';
+
+.main {
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: 100px; // TODO: переделать на адаптиве следующих блоков
+  }
+}
