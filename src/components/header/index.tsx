@@ -47,6 +47,15 @@ export const Header = () => {
     }
   }, [clientYStart, clientYEnd]);
 
+  useEffect(() => {
+    const { body } = document;
+
+    // eslint-disable-next-line no-unused-expressions
+    isHamburgerMenuOpened
+      ? body.classList.add('page_no-scroll')
+      : body.classList.remove('page_no-scroll');
+  }, [isHamburgerMenuOpened]);
+
   const navigate = useNavigate();
 
   const { user } = useAppSelector(showUserPersonalData);
