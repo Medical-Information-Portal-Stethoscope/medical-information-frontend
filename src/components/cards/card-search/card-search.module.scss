@@ -3,6 +3,7 @@
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/media-queries';
 
 .article {
   max-width: $wrapper-search-desktop;
@@ -41,6 +42,11 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media screen and (max-width: calc($media-tablet-large)) {
+    font-size: $font-size-text-medium;
+    line-height: $font-line-height-text-medium;
+  }
 }
 
 .text {
