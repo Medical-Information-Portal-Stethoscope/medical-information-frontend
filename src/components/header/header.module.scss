@@ -170,7 +170,8 @@ $indent-tablet: calc-fluid-element(
   right: 48px;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 300ms, visibility 300ms ease-out;
+  transition: opacity $transition-default-time,
+    visibility $transition-default-time ease-out;
 
   &--open {
     visibility: visible;
@@ -184,10 +185,10 @@ $indent-tablet: calc-fluid-element(
   z-index: $zindex-filters-modal;
   width: 100%;
   height: 0;
-  transition: height 0.3s ease-out;
+  transition: height $transition-default-time ease-out;
 
   &Active {
     height: $billet-height;
-    animation: billet-appearance 0.3s ease-out;
+    animation: billet-appearance $transition-default-time ease-out;
   }
 }

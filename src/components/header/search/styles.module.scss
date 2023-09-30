@@ -9,7 +9,7 @@
   border: 1px solid $color-neutral-400;
   border-radius: 16px;
   box-sizing: border-box;
-  transition: all 0.3s ease-out;
+  transition: $transition-button;
   background-color: $color-neutral-0;
 
   &:hover {
