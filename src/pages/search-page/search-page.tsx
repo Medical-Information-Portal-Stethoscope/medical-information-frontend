@@ -19,7 +19,7 @@ import {
 } from 'services/features/search/api';
 import routes from 'utils/routes';
 import { useWindowDimensions } from 'hooks/useWindowDimensions';
-import { desktopMedium } from 'utils/constants';
+import { desktopMedium, tabletAlbumOrientation } from 'utils/constants';
 import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import styles from './search-page.module.scss';
 
@@ -27,6 +27,9 @@ export default function SearchPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
   const windowDimensions = useWindowDimensions();
+
+  const windowBig = windowDimensions >= desktopMedium;
+  const windowSmall = windowDimensions <= tabletAlbumOrientation;
 
   const dispatch = useAppDispatch();
   const materials = useAppSelector(searchStorage);
@@ -65,7 +68,10 @@ export default function SearchPage() {
 
   return (
     <>
-      <Header />
+      <Header
+        hasHeaderSearchField={windowSmall}
+        hasHamburgerMenuSearchField={false}
+      />
       <main>
         <section className={styles.search} aria-label="Страница поиска">
           <div className={styles.wrapper}>
@@ -103,7 +109,7 @@ export default function SearchPage() {
               )
             )}
           </div>
-          {windowDimensions >= desktopMedium ? (
+          {windowBig ? (
             <div className={searchMaterials.length ? styles.topButton : ''}>
               {isButtonToTopVisible && <ButtonTopNavigation />}
             </div>

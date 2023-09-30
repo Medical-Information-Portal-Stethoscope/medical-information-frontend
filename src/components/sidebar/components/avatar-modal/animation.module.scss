@@ -1,10 +1,12 @@
+@import 'assets/styles/abstracts/variables/animations';
+
 .avatarModalEnter {
   opacity: 0;
 }
 
 .avatarModalEnterActive {
   opacity: 1;
-  animation: moveUp 300ms ease-out;
+  animation: moveUp $transition-default-time ease-out;
 }
 
 .avatarModalExit {
@@ -13,7 +15,7 @@
 
 .avatarModalExitActive {
   opacity: 0;
-  animation: moveDown 300ms ease-out;
+  animation: moveDown $transition-default-time ease-out;
 }
 
 @keyframes moveUp {

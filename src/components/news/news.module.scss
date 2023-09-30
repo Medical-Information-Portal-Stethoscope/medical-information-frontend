@@ -24,6 +24,10 @@
     padding-top: calc($indent-section-top-side-desktop-small / 2);
     padding-bottom: calc($indent-section-top-side-desktop-small / 2);
   }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: 0;
+  }
 }
 
 .heading {

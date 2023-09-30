@@ -2,10 +2,35 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/variables/z-index';
 @import 'assets/styles/abstracts/variables/indents';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/functions';
+
+$billet-height: 240px;
+$indent-tablet: calc-fluid-element(
+  $indent-section-sides-tablet,
+  $indent-section-sides-desktop,
+  $media-tablet-small,
+  $media-desktop-small
+);
+$indent-mobile: calc-fluid-element(
+  $indent-section-sides-mobile,
+  $indent-section-sides-tablet,
+  $media-mobile-small,
+  $media-tablet-small
+);
+
+@keyframes billet-appearance {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: $billet-height;
+  }
+}
 
 .header {
   position: relative;
@@ -23,16 +48,65 @@
     margin-bottom: calc($indent-section-top-side-desktop-small / 2);
   }
 
-  &__wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin-right: $indent-tablet;
+    margin-left: $indent-tablet;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    position: fixed;
+    top: 0;
+    z-index: $zindex-header;
+    width: 100%;
+    margin: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  &__outerWrapper {
     padding: 30px 48px;
     box-sizing: border-box;
+
+    transition: $transition-button;
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       padding: 33px 32px;
     }
+
+    @media screen and (max-width: $media-tablet-large) {
+      display: grid;
+      padding: 20px $indent-tablet;
+
+      > form {
+        justify-self: center;
+        max-width: 716px;
+        width: 100%;
+        margin-top: 27px;
+        margin-bottom: 0;
+      }
+
+      &_search {
+        padding-bottom: 28px;
+      }
+
+      &_opened {
+        > form {
+          margin-top: 116px;
+          margin-bottom: 7px;
+        }
+      }
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      padding-right: $indent-mobile;
+      padding-left: $indent-mobile;
+    }
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
 
   &__search {
@@ -45,6 +119,10 @@
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       width: 26.78%;
       gap: 16px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      width: auto;
     }
 
     form {
@@ -61,6 +139,15 @@
     cursor: pointer;
     transition: $transition-button;
 
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 0;
+
+      > svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+
     &_auth {
       margin: 0;
     }
@@ -75,10 +162,25 @@
   right: 48px;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 300ms, visibility 300ms ease-out;
+  transition: opacity $transition-default-time,
+    visibility $transition-default-time ease-out;
 
   &--open {
     visibility: visible;
     opacity: 1;
+  }
+}
+
+.billet {
+  position: fixed;
+  bottom: 0;
+  z-index: $zindex-filters-modal;
+  width: 100%;
+  height: 0;
+  transition: height $transition-default-time ease-out;
+
+  &Active {
+    height: $billet-height;
+    animation: billet-appearance $transition-default-time ease-out;
   }
 }
