@@ -13,3 +13,4 @@ export const animationTime = 300;
 
 // WINDOW DIMENSIONS
 export const desktopMedium = 1536;
+export const tabletAlbumOrientation = 1024;
