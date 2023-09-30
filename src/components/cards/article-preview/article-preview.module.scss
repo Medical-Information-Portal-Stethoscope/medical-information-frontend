@@ -21,6 +21,10 @@ $border: 1px solid
   border-radius: 16px;
   cursor: pointer;
 
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 16px;
+  }
+
   a {
     color: initial;
   }
@@ -36,12 +40,12 @@ $border: 1px solid
     border: none;
 
     @media screen and (max-width: $media-tablet-large) {
-      padding: 16px;
       border: $border;
     }
 
     @media screen and (max-width: $media-tablet-large) {
       min-height: 400px;
+      padding: 16px;
     }
   }
 
@@ -82,6 +86,19 @@ $border: 1px solid
       $media-desktop-small,
       $media-desktop-large
     );
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    height: calc-fluid-element(
+      180,
+      258,
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    height: 180px;
   }
 
   &--fullPageArticle {
@@ -158,6 +175,11 @@ $border: 1px solid
     min-height: 225px;
   }
 
+  @media screen and (max-width: $media-tablet-large) {
+    min-height: 150px;
+    margin-top: 10px;
+  }
+
   &--fullPageArticle {
     min-height: 208px;
   }
@@ -212,10 +234,30 @@ $border: 1px solid
   height: 96px;
   margin-top: 8px;
   @extend %text-description;
+  line-height: 2.4rem;
   color: $color-neutral-700;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small * 10),
+      calc($font-size-description * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    height: 64px;
+    margin-top: 12px;
+    line-height: 1.6rem;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-small;
+  }
 
   &--media {
     height: 70px;
@@ -226,23 +268,8 @@ $border: 1px solid
       -webkit-line-clamp: 4;
     }
 
-    @media screen and (max-width: calc($media-desktop-small - 1px)) {
-      font-size: calc-fluid-element(
-        calc($font-size-text-small * 10),
-        calc($font-size-description * 10),
-        $media-tablet-small,
-        $media-desktop-small
-      );
-    }
-
     @media screen and (max-width: $media-tablet-large) {
       height: 64px;
-      margin-top: 12px;
-      line-height: $font-line-height-text-small;
-    }
-
-    @media screen and (max-width: calc($media-tablet-small - 1px)) {
-      font-size: $font-size-text-small;
     }
   }
 
@@ -303,6 +330,25 @@ $border: 1px solid
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    max-width: calc-fluid-element(
+      83px,
+      106px,
+      $media-tablet-small-extra,
+      $media-tablet-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    max-width: 220px;
+  }
+
+  &--media,
+  &--news,
+  &--fullPageArticle {
+    max-width: 220px;
+  }
 }
 
 .views {
