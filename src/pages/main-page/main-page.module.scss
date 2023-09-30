@@ -1,7 +1,8 @@
 @import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/indents';
 
 .main {
   @media screen and (max-width: $media-tablet-large) {
-    padding-top: 100px; // TODO: переделать на адаптиве следующих блоков
+    margin-top: $indent-main-top-screen-small;
   }
 }

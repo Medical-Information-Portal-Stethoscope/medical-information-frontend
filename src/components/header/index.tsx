@@ -20,7 +20,15 @@ import { Menu } from './menu';
 import { Billet } from './billet/billet';
 import styles from './header.module.scss';
 
-export const Header = () => {
+interface IHeaderProps {
+  hasHeaderSearchField?: boolean;
+  hasHamburgerMenuSearchField?: boolean;
+}
+
+export const Header = ({
+  hasHeaderSearchField = false,
+  hasHamburgerMenuSearchField = true,
+}: IHeaderProps) => {
   const isDesktop = useWindowDimensions() > tabletAlbumOrientation;
 
   const headerRef = useRef<HTMLDivElement>(null);
@@ -78,7 +86,10 @@ export const Header = () => {
     <>
       <header className={styles.header}>
         <div
-          className={styles.header__outerWrapper}
+          className={classNames(styles.header__outerWrapper, {
+            [styles.header__outerWrapper_search]: hasHeaderSearchField,
+            [styles.header__outerWrapper_opened]: isHamburgerMenuOpened,
+          })}
           style={{ minHeight: headerRef.current?.clientHeight }}
         >
           <div ref={headerRef} className={styles.header__wrapper}>
@@ -124,7 +135,14 @@ export const Header = () => {
             )}
           </div>
 
-          {!isDesktop && <HamburgerMenu isOpened={isHamburgerMenuOpened} />}
+          {hasHeaderSearchField && <Search />}
+
+          {!isDesktop && (
+            <HamburgerMenu
+              isOpened={isHamburgerMenuOpened}
+              hasSearchField={hasHamburgerMenuSearchField}
+            />
+          )}
         </div>
       </header>
 

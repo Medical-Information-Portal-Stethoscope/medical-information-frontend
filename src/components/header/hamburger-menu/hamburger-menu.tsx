@@ -5,11 +5,15 @@ import styles from './hamburger-menu.module.scss';
 
 interface IHamburgerMenuProps {
   isOpened: boolean;
+  hasSearchField: boolean;
 }
 
-export const HamburgerMenu = ({ isOpened }: IHamburgerMenuProps) => (
+export const HamburgerMenu = ({
+  isOpened,
+  hasSearchField = true,
+}: IHamburgerMenuProps) => (
   <div className={classNames(styles.wrapper, { [styles.active]: isOpened })}>
-    <Search extraClass={styles.search} />
+    {hasSearchField && <Search extraClass={styles.search} />}
     <Menu extraClass={styles.menu} />
   </div>
 );

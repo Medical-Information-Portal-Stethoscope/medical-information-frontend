@@ -75,7 +75,27 @@ $indent-tablet: calc-fluid-element(
     }
 
     @media screen and (max-width: $media-tablet-large) {
+      display: grid;
       padding: 20px $indent-tablet;
+
+      > form {
+        justify-self: center;
+        max-width: 716px;
+        width: 100%;
+        margin-top: 27px;
+        margin-bottom: 0;
+      }
+
+      &_search {
+        padding-bottom: 28px;
+      }
+
+      &_opened {
+        > form {
+          margin-top: 116px;
+          margin-bottom: 7px;
+        }
+      }
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
@@ -89,10 +109,6 @@ $indent-tablet: calc-fluid-element(
       padding-right: $indent-mobile;
       padding-left: $indent-mobile;
     }
-
-    // &_active {
-    //   min-height: 100vh !important;
-    // }
   }
 
   &__wrapper {
