@@ -15,6 +15,12 @@ $indent-tablet: calc-fluid-element(
   $media-tablet-small,
   $media-desktop-small
 );
+$indent-mobile: calc-fluid-element(
+  $indent-section-sides-mobile,
+  $indent-section-sides-tablet,
+  $media-mobile-small,
+  $media-tablet-small
+);
 
 @keyframes billet-appearance {
   from {
@@ -43,13 +49,6 @@ $indent-tablet: calc-fluid-element(
   }
 
   @media screen and (max-width: calc($media-desktop-small - 1px)) {
-    $indent-tablet: calc-fluid-element(
-      $indent-section-sides-tablet,
-      $indent-section-sides-desktop,
-      $media-tablet-small,
-      $media-desktop-small
-    );
-
     margin-right: $indent-tablet;
     margin-left: $indent-tablet;
   }
@@ -99,13 +98,6 @@ $indent-tablet: calc-fluid-element(
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
-      $indent-mobile: calc-fluid-element(
-        $indent-section-sides-mobile,
-        $indent-section-sides-tablet,
-        $media-mobile-small,
-        $media-tablet-small
-      );
-
       padding-right: $indent-mobile;
       padding-left: $indent-mobile;
     }
