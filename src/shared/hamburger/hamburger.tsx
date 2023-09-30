@@ -3,7 +3,7 @@ import { ButtonHTMLAttributes } from 'react';
 import styles from './hamburger.module.scss';
 
 interface IHamburgerProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  isMenuOpened?: boolean;
+  isMenuOpened: boolean;
 }
 
 export const Hamburger = ({ isMenuOpened, onClick }: IHamburgerProps) => (
