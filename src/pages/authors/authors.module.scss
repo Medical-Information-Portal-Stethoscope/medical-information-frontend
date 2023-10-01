@@ -7,23 +7,58 @@
 @import 'assets/styles/abstracts/placeholders.scss';
 @import 'assets/styles/abstracts/functions.scss';
 
+$indent-desktop: calc-fluid-element(
+  $indent-section-sides-desktop,
+  202px,
+  $media-desktop-small,
+  $media-desktop-large
+);
+$indent-tablet: calc-fluid-element(
+  $indent-section-sides-tablet,
+  $indent-section-sides-desktop,
+  $media-tablet-small,
+  $media-desktop-small
+);
+$indent-mobile: calc-fluid-element(
+  $indent-section-sides-mobile,
+  $indent-section-sides-tablet,
+  $media-mobile-small,
+  $media-tablet-small
+);
+
+.main {
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: $indent-main-top-screen-small-with-breadcrumbs;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    margin-top: 71px;
+  }
+}
+
 .wrapper {
   max-width: $wrapper-articles-preview-desktop;
   margin: 0 auto;
 
   @media screen and (max-width: calc($media-desktop-large - 1px)) {
-    margin-left: calc-fluid-element(
-      $indent-section-sides-desktop,
-      202px,
-      $media-desktop-small,
-      $media-desktop-large
-    );
+    margin-right: $indent-desktop;
+    margin-left: $indent-desktop;
   }
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     > :first-child > ul {
       padding-top: calc($indent-section-top-side-desktop-small / 2);
     }
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin-right: $indent-tablet;
+    margin-left: $indent-tablet;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    margin-right: $indent-mobile;
+    margin-left: $indent-mobile;
   }
 }
 
@@ -34,11 +69,40 @@
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     padding-top: calc($indent-section-top-side-desktop-medium / 2);
   }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: 22px;
+    padding-bottom: calc($indent-section-sides-mobile * 2);
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding-bottom: 30px;
+  }
 }
 
 .authorsHeading {
   @extend %heading-size-large;
   margin-bottom: 48px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-heading-3 * 10),
+      calc($font-size-heading-1 * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    font-weight: 600;
+    line-height: $font-line-height-heading-3;
+    letter-spacing: $font-letter-spacing-main;
+    margin-bottom: $indent-block-default-top-side-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-heading-3;
+  }
 }
 
 .authorsSection:not(:last-child) {
@@ -48,10 +112,45 @@
 .heading {
   @extend %heading-size-small;
   margin-bottom: 16px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-heading-3 * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium;
+  }
 }
 
 .text {
   @extend %text-size-large;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium-additional * 10),
+      calc($font-size-text-large * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-medium-additional;
+    letter-spacing: $font-letter-spacing-main;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium-additional;
+  }
 }
 
 .publication {
@@ -62,6 +161,11 @@
   composes: text;
   margin-left: 31px;
   padding-left: 2px;
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin-left: 24px;
+    padding-left: 0;
+  }
 }
 
 .link {
