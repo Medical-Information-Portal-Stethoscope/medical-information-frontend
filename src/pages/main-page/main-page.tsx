@@ -6,6 +6,7 @@ import Articles from 'components/articles/articles';
 import { SubscribeBlock } from 'components/subscribe-block';
 import Footer from 'components/footer/footer';
 import { showUserPersonalData } from 'services/features/user/selectors';
+import styles from './main-page.module.scss';
 
 export default function MainPage() {
   useScrollToTop();
@@ -15,7 +16,7 @@ export default function MainPage() {
   return (
     <>
       <Header />
-      <main>
+      <main className={styles.main}>
         <News />
         <Articles />
         {!user && <SubscribeBlock />}

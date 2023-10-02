@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { FC, FormEvent, useCallback, useEffect, useRef } from 'react';
+import classNames from 'classnames';
+import React, { FormEvent, useCallback, useEffect, useRef } from 'react';
 import { SearchIcon } from 'shared/icons/search-icon';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { changeInputValue } from 'services/features/search/slice';
@@ -8,7 +9,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import routes from 'utils/routes';
 import styles from './styles.module.scss';
 
-export const Search: FC = () => {
+interface ISearchProps {
+  extraClass?: string;
+}
+
+export const Search = ({ extraClass }: ISearchProps) => {
   const ref = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -39,7 +44,7 @@ export const Search: FC = () => {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
     <form
-      className={styles.search}
+      className={classNames(styles.search, extraClass)}
       noValidate
       onClick={onWrapperClick}
       onSubmit={handleSearch}

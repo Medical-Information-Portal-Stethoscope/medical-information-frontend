@@ -1,0 +1,8 @@
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/indents';
+
+.main {
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: $indent-main-top-screen-small;
+  }
+}
