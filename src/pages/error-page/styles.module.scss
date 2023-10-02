@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: $indent-main-top-screen-small;
+  }
 }
 
 .error {
@@ -31,7 +35,7 @@
     }
 
     @media screen and (max-width: calc($media-tablet-large)) {
-      margin: 26px 0 16px;
+      margin: 0 0 16px;
     }
   }
 
