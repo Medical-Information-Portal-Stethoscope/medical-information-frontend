@@ -135,7 +135,7 @@
 .button {
   align-self: center;
 
-  @media screen and (max-width: calc($media-tablet-large)) {
+  @media screen and (max-width: $media-tablet-large) {
     width: 335px;
   }
 
@@ -146,10 +146,16 @@
 
 .description {
   @extend %text-size-medium;
+  color: $color-neutral-600;
+
   padding: 156px 0 104px;
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     padding: 64px 0 80px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 32px 0 40px;
   }
 }
 
