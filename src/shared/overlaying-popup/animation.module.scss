@@ -1,9 +1,11 @@
+@import 'assets/styles/abstracts/variables/animations';
+
 .overlayEnter {
   opacity: 0;
 }
 
 .overlayEnterActive {
-  transition: opacity 300ms ease-out;
+  transition: opacity $transition-default-time ease-out;
   opacity: 1;
 }
 
@@ -13,5 +15,5 @@
 
 .overlayExitActive {
   opacity: 0;
-  transition: opacity 300ms ease-out;
+  transition: opacity $transition-default-time ease-out;
 }

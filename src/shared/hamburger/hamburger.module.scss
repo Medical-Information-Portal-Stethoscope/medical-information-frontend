@@ -1,0 +1,45 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/animations';
+
+.hamburger {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 17px;
+  background-color: transparent;
+}
+
+.line {
+  display: inline-block;
+  width: 100%;
+  height: 3px;
+  border-radius: 16px;
+  background-color: $color-neutral-0;
+  -webkit-transition: $transition-button;
+  -o-transition: $transition-button;
+  transition: $transition-button;
+}
+
+.active {
+  $translation: 7px;
+  $rotation: 45deg;
+
+  > :first-child {
+    -webkit-transform: translateY($translation) rotate($rotation);
+    -ms-transform: translateY($translation) rotate($rotation);
+    -o-transform: translateY($translation) rotate($rotation);
+    transform: translateY($translation) rotate($rotation);
+  }
+
+  > :nth-child(2) {
+    opacity: 0;
+  }
+
+  > :last-child {
+    -webkit-transform: translateY(-$translation) rotate(-$rotation);
+    -ms-transform: translateY(-$translation) rotate(-$rotation);
+    -o-transform: translateY(-$translation) rotate(-$rotation);
+    transform: translateY(-$translation) rotate(-$rotation);
+  }
+}

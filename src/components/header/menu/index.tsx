@@ -1,4 +1,5 @@
 /* eslint-disable react/no-array-index-key */
+import classNames from 'classnames';
 import { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 
@@ -6,8 +7,12 @@ import { headerNavLinks } from 'utils/data/header/links';
 
 import styles from './menu.module.scss';
 
-export const Menu = () => (
-  <nav className={styles.menu}>
+interface IMenuProps {
+  extraClass?: string;
+}
+
+export const Menu = ({ extraClass }: IMenuProps) => (
+  <nav className={classNames(styles.menu, extraClass)}>
     <ul className={styles.menu__list}>
       {headerNavLinks.map(
         (navItem, idx): ReactNode => (
