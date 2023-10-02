@@ -4,6 +4,7 @@
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .article {
   max-width: $wrapper-search-desktop;
@@ -43,9 +44,23 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
 
-  @media screen and (max-width: calc($media-tablet-large)) {
-    font-size: $font-size-text-medium;
-    line-height: $font-line-height-text-medium;
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-heading-3 * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+    line-height: calc-fluid-element(
+      calc($font-line-height-text-medium * $font-size-text-medium / 10),
+      calc($font-line-height-heading-3 * $font-size-heading-3 / 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    font-size: $font-size-text-medium-additional;
   }
 }
 

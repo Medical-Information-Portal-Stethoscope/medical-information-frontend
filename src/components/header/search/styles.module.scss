@@ -25,6 +25,10 @@
     height: 64px;
   }
 
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    height: 48px;
+  }
+
   &__input {
     @extend %text-size-medium;
     width: 100%;
