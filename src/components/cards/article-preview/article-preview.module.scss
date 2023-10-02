@@ -36,12 +36,9 @@ $border: 1px solid
     border: none;
 
     @media screen and (max-width: $media-tablet-large) {
+      min-height: 400px;
       padding: 16px;
       border: $border;
-    }
-
-    @media screen and (max-width: $media-tablet-large) {
-      min-height: 400px;
     }
   }
 
@@ -200,6 +197,10 @@ $border: 1px solid
       $media-tablet-small,
       $media-desktop-small
     );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-medium;
   }
 
   @media screen and (max-width: calc($media-tablet-small - 1px)) {
