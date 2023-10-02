@@ -23,6 +23,19 @@
       $media-desktop-large
     );
   }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    max-width: calc-fluid-element(
+      153,
+      204,
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    max-width: 153px;
+  }
 }
 
 .caption {
@@ -43,6 +56,10 @@
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     font-size: 1rem;
     font-weight: 500;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    display: none;
   }
 
   &Dark {
