@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { Link, useNavigate } from 'react-router-dom';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import { useGetRootsTagsQuery } from 'services/features/tags/api';
@@ -5,8 +6,10 @@ import {
   useGetAllNewsQuery,
   useGetMostPopularArticleQuery,
 } from 'services/features/information-material/api';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
+import { tabletAlbumOrientation } from 'utils/constants';
 import styles from './news.module.scss';
 
 const maxNumNewsDesktop = 6;
@@ -23,6 +26,7 @@ export default function News() {
   });
 
   const mostPopularArticle = useGetMostPopularArticleQuery();
+  const isWindowSmall = useWindowDimensions() <= tabletAlbumOrientation;
 
   const news = data?.results
     .slice(0, maxNumNewsDesktop)
@@ -47,12 +51,15 @@ export default function News() {
             />
           )}
         </section>
-        <section>
+        <section className={styles.sectionNews}>
           <h2 className={styles.heading}>Новости</h2>
           <ul className={styles.news}>{news}</ul>
           <Button
-            model="tertiary"
+            extraClass={classNames({ [styles.button]: isWindowSmall })}
+            model={isWindowSmall ? 'secondary' : 'tertiary'}
+            size={isWindowSmall ? 'small' : undefined}
             label="Показать все новости"
+            hasBorder={isWindowSmall}
             onClick={() => navigate(routes.news.route)}
           />
         </section>

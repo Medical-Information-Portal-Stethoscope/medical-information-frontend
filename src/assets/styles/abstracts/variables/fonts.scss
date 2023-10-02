@@ -8,6 +8,7 @@ $font-size-text-large-extra-semibold: 3.3rem;
 $font-size-text-large-extra: 2.4rem;
 $font-size-text-large: 2.2rem;
 $font-size-text-medium: 1.8rem;
+$font-size-text-medium-small: 1.6rem;
 $font-size-text-medium-additional: 1.6rem;
 $font-size-text-small: 1.4rem;
 $font-size-text-small-extra: 1.2rem;
@@ -23,6 +24,8 @@ $font-line-height-text-large-extra-semibold: calc(
 );
 $font-line-height-text-large: calc(2.8rem / $font-size-text-large * 100%);
 $font-line-height-text-medium: calc(2.4rem / $font-size-text-medium * 100%);
+$font-line-height-text-medium-small: calc(
+  2.4rem / $font-size-text-medium-small * 100%
 $font-line-height-text-medium-additional: calc(
   2.4rem / $font-size-text-medium-additional * 100%
 );

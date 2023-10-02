@@ -4,11 +4,25 @@
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/variables/indents';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
+
+$indent-tablet: calc-fluid-element(
+  $indent-section-sides-tablet,
+  $indent-section-sides-desktop,
+  $media-tablet-small,
+  $media-desktop-small
+);
+$indent-mobile: calc-fluid-element(
+  $indent-section-sides-mobile,
+  $indent-section-sides-tablet,
+  $media-mobile-small,
+  $media-tablet-small
+);
 
 .wrapper {
   max-width: $wrapper-main-content-desktop;
   margin: 0 auto;
-  padding: 32px 0 40px;
+  padding: 28px 0 40px;
 
   > *:not(:last-child) {
     margin-bottom: $indent-block-default-top-side-large;
@@ -27,20 +41,58 @@
     padding-top: calc($indent-section-top-side-desktop-small / 2);
     padding-bottom: calc($indent-section-top-side-desktop-small / 2);
   }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin-right: $indent-tablet;
+    margin-left: $indent-tablet;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: calc($indent-section-top-side-tablet / 2);
+    padding-bottom: calc($indent-section-top-side-tablet / 2);
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    margin-right: $indent-mobile;
+    margin-left: $indent-mobile;
+  }
 }
 
 .heading {
   max-width: 40%;
   @extend %heading-size-medium;
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-heading-3 * 10),
+      calc($font-size-heading-2 * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-heading-3;
+    font-weight: 600;
+    letter-spacing: $font-letter-spacing-main;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-heading-3;
+  }
 }
 
 .articles {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  gap: 1.33em;
+  gap: 24px;
 
-  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-    gap: 1.4em;
+  @media screen and (max-width: $media-tablet-large) {
+    > button {
+      grid-column: span 12;
+      justify-self: center;
+      width: 335px;
+    }
   }
 
   a {
@@ -96,6 +148,19 @@
 
     &:nth-child(6) {
       grid-column: span 5;
+    }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    &:nth-child(2n + 1),
+    &:nth-child(2n) {
+      grid-column: span 6;
+    }
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    &:nth-child(n) {
+      grid-column: span 12;
     }
   }
 }
