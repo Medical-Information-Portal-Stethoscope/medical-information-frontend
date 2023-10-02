@@ -64,3 +64,7 @@ ul {
 ::-webkit-scrollbar-track {
   background: $color-neutral-0;
 }
+
+.page_no-scroll {
+  overflow: hidden;
+}

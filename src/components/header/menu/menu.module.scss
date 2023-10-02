@@ -20,6 +20,10 @@
     width: 38.84%;
   }
 
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    width: 48.84%;
+  }
+
   &__list {
     display: flex;
     align-items: center;
@@ -64,6 +68,10 @@
       font-weight: 600;
       line-height: $font-line-height-text-medium;
       letter-spacing: $font-letter-spacing-main;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-large-extra;
     }
 
     &_active {
