@@ -17,3 +17,4 @@ export const tabletAlbumOrientation = 1024;
 
 // SWIPER
 export const minSwipeSize = 50; // px
+
