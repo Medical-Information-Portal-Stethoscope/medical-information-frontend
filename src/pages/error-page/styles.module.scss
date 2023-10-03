@@ -34,7 +34,7 @@
       max-width: 277px;
     }
 
-    @media screen and (max-width: calc($media-tablet-large)) {
+    @media screen and (max-width: $media-tablet-large) {
       margin: 0 0 16px;
     }
   }
@@ -53,12 +53,6 @@
         $media-desktop-small,
         $media-desktop-large
       );
-      line-height: calc-fluid-element(
-        calc($font-line-height-heading-2 * $font-size-heading-2 / 10),
-        calc($font-line-height-heading-1 * $font-size-heading-1 / 10),
-        $media-desktop-small,
-        $media-desktop-large
-      );
     }
 
     @media screen and (max-width: calc($media-desktop-small - 1px)) {
@@ -68,21 +62,16 @@
         $media-tablet-small,
         $media-desktop-small
       );
-      line-height: calc-fluid-element(
-        calc($font-line-height-text-large * $font-size-text-large / 10),
-        calc($font-line-height-heading-2 * $font-size-heading-2 / 10),
-        $media-tablet-small,
-        $media-desktop-small
-      );
+      line-height: $font-line-height-heading-2;
     }
 
     @media screen and (max-width: calc($media-tablet-large)) {
       margin: 16px 0 8px;
+      line-height: $font-line-height-text-large;
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
       font-size: $font-size-text-large;
-      line-height: $font-line-height-text-large;
     }
   }
 
@@ -100,19 +89,11 @@
         $media-desktop-small,
         $media-desktop-large
       );
-      line-height: calc-fluid-element(
-        calc($font-line-height-text-large * $font-size-text-large / 10),
-        calc(
-          $font-line-height-text-large-extra-semibold *
-            $font-size-text-large-extra-semibold / 10
-        ),
-        $media-desktop-small,
-        $media-desktop-large
-      );
     }
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       font-weight: 400;
+      line-height: $font-line-height-text-large;
     }
 
     @media screen and (max-width: calc($media-desktop-small - 1px)) {
@@ -122,24 +103,15 @@
         $media-tablet-small,
         $media-desktop-small
       );
-      line-height: calc-fluid-element(
-        calc(
-          $font-size-mobile-text-medium * $font-line-height-mobile-text-medium /
-            10
-        ),
-        calc($font-line-height-text-large * $font-size-text-large / 10),
-        $media-tablet-small,
-        $media-desktop-small
-      );
     }
 
-    @media screen and (max-width: calc($media-tablet-large)) {
+    @media screen and (max-width: $media-tablet-large) {
       margin: 8px 0 16px;
+      line-height: $font-line-height-mobile-text-medium;
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
       font-size: $font-size-mobile-text-medium;
-      line-height: $font-line-height-mobile-text-medium;
       padding: 0 20px;
     }
   }
