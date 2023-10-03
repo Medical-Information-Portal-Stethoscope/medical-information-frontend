@@ -84,7 +84,7 @@ $indent-mobile: calc-fluid-element(
   @extend %heading-size-large;
   margin-bottom: 48px;
 
-  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
     font-size: calc-fluid-element(
       calc($font-size-heading-3 * 10),
       calc($font-size-heading-1 * 10),
