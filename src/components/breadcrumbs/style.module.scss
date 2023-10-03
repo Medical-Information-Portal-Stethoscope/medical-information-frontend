@@ -19,6 +19,13 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     column-gap: 4px;
+
+    > svg {
+      @media screen and (max-width: $media-tablet-large) {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 
   &__arrow {
@@ -39,6 +46,11 @@
 
     &:active {
       color: $color-brand-primary-1000;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
     }
   }
 }
