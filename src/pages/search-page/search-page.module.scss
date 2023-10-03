@@ -76,17 +76,16 @@
       $media-tablet-small,
       $media-desktop-small
     );
-    line-height: calc-fluid-element(
-      calc($font-line-height-text-medium * $font-size-text-medium / 10),
-      calc($font-line-height-text-large * $font-size-text-large / 10),
-      $media-tablet-small,
-      $media-desktop-small
-    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
     letter-spacing: $font-letter-spacing-main;
+    line-height: $font-line-height-text-medium;
   }
 
   @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
-    font-size: $font-size-text-medium-additional;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
   }
 }
 
@@ -102,7 +101,6 @@
 
   @media screen and (max-width: $media-tablet-large) {
     padding-top: $indent-section-top-side-tablet-medium;
-    padding-bottom: 56px;
   }
 
   @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
@@ -113,22 +111,6 @@
       $media-mobile-small,
       $media-tablet-small-extra
     );
-
-    > article > a > div {
-      flex-direction: column;
-      height: auto;
-      row-gap: 16px;
-
-      > img {
-        max-width: inherit;
-        height: calc-fluid-element(
-          148px,
-          273px,
-          $media-mobile-small,
-          $media-tablet-small-extra
-        );
-      }
-    }
   }
 }
 
@@ -156,6 +138,12 @@
 
   @media screen and (max-width: $media-tablet-large) {
     padding: 32px 0 40px;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding: 24px 0 32px;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
   }
 }
 
