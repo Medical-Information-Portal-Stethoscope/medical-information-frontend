@@ -16,9 +16,9 @@ import FilterTab from 'shared/checkboxes/filter-tab/filter-tab';
 import { getFilteredArticlesForModal } from 'services/features/filter/api';
 import { useAppDispatch } from 'services/app/hooks';
 import { getFirstPageArticles } from 'services/features/information-material/slice';
+import { tabletCarouselWidth } from 'utils/constants';
 import classNames from 'classnames';
 import { useMount } from 'hooks/useMount';
-import { nanoid } from 'nanoid';
 import { iconsData } from './test-data/test-data';
 import styles from './styles.module.scss';
 
@@ -29,12 +29,19 @@ interface IMainCarouselProps {
 const getArrayForCarousel = (dataArray: TTags[], divider: number) => {
   const container = [];
   for (let i = 0; i < Math.ceil(dataArray.length / divider); i += 1) {
-    container[i] = dataArray.slice(i * divider, i * divider + divider);
+    if (i === 0) {
+      container[0] = dataArray.slice(0, divider - 1);
+    } else if (i === Math.ceil(dataArray.length / divider) - 1) {
+      container[i] = dataArray.slice(i * divider - 1, i * divider + divider);
+    } else {
+      container[i] = dataArray.slice(
+        i * divider - 1,
+        i * divider + divider - 1
+      );
+    }
   }
   return container;
 };
-
-const tabWidth = 190;
 
 function MainCarousel({ onChangeTab }: IMainCarouselProps) {
   const [activeTags, setActiveTags] = useState<TTags[]>([]);
@@ -94,6 +101,7 @@ function MainCarousel({ onChangeTab }: IMainCarouselProps) {
 
   useEffect(() => {
     if (allSpecializationsTags.length && carouselWidth) {
+      const tabWidth = carouselWidth > tabletCarouselWidth ? 190 : 110;
       const countOfTabs = Math.floor(carouselWidth / tabWidth);
       setArrayOfTabs(getArrayForCarousel(allSpecializationsTags, countOfTabs));
     }

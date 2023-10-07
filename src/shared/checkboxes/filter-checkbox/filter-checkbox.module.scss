@@ -2,6 +2,7 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
 
 .checkbox:not(:checked),
 .checkbox:checked {
@@ -15,8 +16,8 @@
     display: inline-flex;
     align-items: center;
     column-gap: 8px;
-    height: 40px;
-    padding: 8px 16px;
+    min-height: 40px;
+    padding: 7px 15px;
     box-sizing: border-box;
 
     @extend %text-size-medium;
@@ -29,6 +30,11 @@
     transition: $transition-button;
     user-select: none;
     cursor: pointer;
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-medium-small;
+      line-height: $font-line-height-text-medium-small;
+    }
 
     &:hover {
       color: $color-brand-primary-900;
