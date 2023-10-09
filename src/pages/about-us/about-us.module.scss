@@ -38,6 +38,51 @@
       padding-top: calc($indent-section-top-side-desktop-small / 2);
     }
   }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin: 0
+      calc-fluid-element(
+        $indent-section-sides-tablet,
+        $indent-section-sides-desktop,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+
+    > :first-child > ul > li > a {
+      font-size: calc-fluid-element(
+        calc($font-size-text-small * 10),
+        calc($font-size-text-medium * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    > :first-child > ul {
+      padding-top: 0;
+    }
+    margin-top: 108px;
+    line-height: $font-line-height-text-small;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    margin: 108px
+      calc-fluid-element(
+        $indent-section-sides-mobile,
+        $indent-section-sides-tablet,
+        $media-mobile-small,
+        $media-tablet-small
+      )
+      0;
+    > :first-child > ul > li > a {
+      font-size: $font-size-text-small;
+    }
+  }
+
+  @media screen and (max-width: $media-tablet-small-extra) {
+    margin-top: 100px;
+  }
 }
 
 .about {
@@ -47,25 +92,109 @@
     padding-top: $indent-block-default-top-side-small;
   }
 
+  @media screen and (max-width: $media-tablet-large) {
+    padding-bottom: $indent-section-top-side-tablet;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding-bottom: $indent-block-default-top-side-medium;
+  }
+
   &--title {
     @extend %heading-size-large;
     margin-bottom: 50px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-heading-3 * 10),
+        calc($font-size-heading-1 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-bottom: $indent-block-default-top-side-medium;
+      line-height: $font-line-height-heading-3;
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-heading-3;
+    }
   }
 
   &--paragraphs {
     max-width: 1054px;
 
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      max-width: calc-fluid-element(
+        596px,
+        1054px,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      max-width: calc-fluid-element(
+        335px,
+        596px,
+        $media-mobile-small,
+        $media-tablet-small
+      );
+    }
+
     section:not(:last-child) {
       margin-bottom: 40px;
+
+      @media screen and (max-width: $media-tablet-large) {
+        margin-bottom: 32px;
+      }
     }
 
     &--title {
       @extend %heading-size-small;
       margin-bottom: 16px;
+
+      @media screen and (max-width: calc($media-desktop-small - 1px)) {
+        font-size: calc-fluid-element(
+          calc($font-size-text-medium-small * 10),
+          calc($font-size-heading-3 * 10),
+          $media-tablet-small,
+          $media-desktop-small
+        );
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        line-height: $font-line-height-text-medium-small;
+        letter-spacing: $font-letter-spacing-main;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        font-size: $font-size-text-medium-small;
+      }
     }
 
     &--text {
       @extend %text-size-large;
+
+      @media screen and (max-width: calc($media-desktop-small - 1px)) {
+        font-size: calc-fluid-element(
+          calc($font-size-text-medium-small * 10),
+          calc($font-size-text-large * 10),
+          $media-tablet-small,
+          $media-desktop-small
+        );
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        line-height: $font-line-height-text-medium-small;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        font-size: $font-size-text-medium-small;
+      }
     }
   }
 
@@ -73,6 +202,30 @@
     &--title {
       @extend %heading-size-medium;
       margin-bottom: 47px;
+
+      @media screen and (max-width: calc($media-desktop-small - 1px)) {
+        font-size: calc-fluid-element(
+          calc($font-size-text-medium-small * 10),
+          calc($font-size-heading-2 * 10),
+          $media-tablet-small,
+          $media-desktop-small
+        );
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        margin-bottom: 32px;
+        line-height: $font-line-height-text-medium-small;
+        letter-spacing: $font-letter-spacing-main;
+        font-weight: 600;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        font-size: $font-size-text-medium-small;
+      }
+
+      @media screen and (max-width: $media-tablet-small-extra) {
+        margin-bottom: 24px;
+      }
 
       &--gratitude {
         composes: about--paragraphs--title;
@@ -90,6 +243,21 @@
       @media screen and (max-width: calc($media-desktop-medium - 1px)) {
         padding-bottom: $indent-section-top-side-desktop-small;
         grid-template-rows: 300px 300px;
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        grid-template-rows: 288px 288px;
+        justify-content: start;
+        column-gap: 78px;
+        padding-bottom: $indent-section-top-side-tablet;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        justify-content: space-between;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small-extra)) {
+        grid-template-rows: 288px 288px 400px 736px;
       }
 
       &--managers {
@@ -110,16 +278,56 @@
         @media screen and (max-width: calc($media-desktop-medium - 1px)) {
           grid-row: 3;
         }
+
+        @media screen and (max-width: $media-tablet-large) {
+          grid-row: 1 / 3;
+        }
+
+        @media screen and (max-width: $media-tablet-small-extra) {
+          grid-row: 3;
+        }
       }
 
       &--other {
         grid-row: 1 / 3;
+
+        @media screen and (max-width: $media-tablet-large) {
+          grid-row: 3;
+        }
+
+        @media screen and (max-width: $media-tablet-small-extra) {
+          grid-row: 4;
+        }
+      }
+
+      > li:last-child {
+        @media screen and (max-width: $media-tablet-small-extra) {
+          grid-row: 5;
+        }
       }
 
       &--department {
         @extend %text-size-large;
         font-weight: 400;
         margin-bottom: 32px;
+
+        @media screen and (max-width: calc($media-desktop-small - 1px)) {
+          font-size: calc-fluid-element(
+            calc($font-size-text-medium * 10),
+            calc($font-size-text-large * 10),
+            $media-tablet-small,
+            $media-desktop-small
+          );
+        }
+
+        @media screen and (max-width: $media-tablet-large) {
+          line-height: $font-line-height-text-medium;
+          letter-spacing: $font-letter-spacing-main;
+        }
+
+        @media screen and (max-width: calc($media-tablet-small - 1px)) {
+          font-size: $font-size-text-medium;
+        }
       }
     }
 
@@ -129,10 +337,31 @@
       @media screen and (max-width: calc($media-desktop-medium - 1px)) {
         padding-top: $indent-section-top-side-desktop-small;
       }
+
+      @media screen and (max-width: $media-tablet-large) {
+        padding-top: $indent-section-top-side-tablet;
+      }
     }
 
     &--list--gratitude {
       letter-spacing: $font-letter-spacing-main;
+
+      @media screen and (max-width: calc($media-desktop-small - 1px)) {
+        font-size: calc-fluid-element(
+          calc($font-size-text-medium-small * 10),
+          calc($font-size-text-medium * 10),
+          $media-tablet-small,
+          $media-desktop-small
+        );
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        line-height: $font-line-height-text-medium-small;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        font-size: $font-size-text-medium-small;
+      }
 
       li:not(:first-child) {
         margin-top: 16px;
@@ -146,6 +375,10 @@
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     padding-top: $indent-section-top-side-desktop-small;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: $indent-section-top-side-tablet;
   }
 }
 
@@ -189,6 +422,23 @@
     &--name {
       @extend %text-size-medium-semibold;
       color: $color-neutral-900;
+
+      @media screen and (max-width: calc($media-desktop-small - 1px)) {
+        font-size: calc-fluid-element(
+          calc($font-size-text-medium-small * 10),
+          calc($font-size-text-medium * 10),
+          $media-tablet-small,
+          $media-desktop-small
+        );
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        line-height: $font-line-height-text-medium-small;
+      }
+
+      @media screen and (max-width: calc($media-tablet-small - 1px)) {
+        font-size: $font-size-text-medium-small;
+      }
     }
 
     &--contacts {
