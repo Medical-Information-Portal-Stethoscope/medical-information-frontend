@@ -25,7 +25,7 @@ interface ICardArticlePreviewProps {
     } | null;
     views_count: number;
   };
-  type: 'media' | 'news' | 'fullPageArticle' | 'default';
+  type: 'media' | 'news' | 'fullPageArticle' | 'fullPageNews' | 'default';
   extraClass?: string;
   route: string;
 }

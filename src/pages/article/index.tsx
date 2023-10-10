@@ -64,8 +64,8 @@ export const Article: FC = () => {
   return material ? (
     <>
       <Header />
-      <Breadcrumbs materialName={material.title} extraClass={styles.crumbs} />
-      <main>
+      <main className={styles.main}>
+        <Breadcrumbs materialName={material.title} extraClass={styles.crumbs} />
         <section className={styles.article} aria-label="Страница статьи">
           <div className={styles.article__container}>
             <Paper data={material} isNews={false} />
