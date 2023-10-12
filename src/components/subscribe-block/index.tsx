@@ -22,10 +22,10 @@ export const SubscribeBlock: FC = () => {
             Писать&nbsp;и&nbsp;публиковать&nbsp; свои статьи
           </li>
           <li className={styles.subscribe__item}>
-            Подписываться на&nbsp;еженедельную&nbsp;рассылку
+            Подписываться на&nbsp;еженедельную рассылку
           </li>
           <li className={styles.subscribe__item}>
-            Участвовать&nbsp;в&nbsp;обсуждениях&nbsp; под статьями
+            Участвовать&nbsp;в&nbsp;обсуждениях под&nbsp;статьями
           </li>
           <li className={styles.subscribe__item}>
             Добавлять интересные статьи в&nbsp;избранное
