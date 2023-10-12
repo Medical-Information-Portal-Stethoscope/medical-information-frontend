@@ -12,6 +12,12 @@ $indent-mobile: calc-fluid-element(
   $media-mobile-small,
   $media-tablet-small
 );
+$indent-section: calc-fluid-element(
+  0,
+  40px,
+  $media-mobile-small,
+  $media-tablet-small
+);
 
 .subscribe {
   display: flex;
@@ -68,13 +74,7 @@ $indent-mobile: calc-fluid-element(
     }
 
     @media screen and (max-width: $media-tablet-small) {
-      margin: calc-fluid-element(
-          0,
-          40px,
-          $media-mobile-small,
-          $media-tablet-small
-        )
-        0 calc-fluid-element(0, 40px, $media-mobile-small, $media-tablet-small)
+      margin: $indent-section 0 $indent-section
         calc-fluid-element(0, 32px, $media-mobile-small, $media-tablet-small);
     }
 
@@ -184,6 +184,12 @@ $indent-mobile: calc-fluid-element(
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
       font-size: $font-size-text-medium-small;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      &:nth-child(1) {
+        max-width: 260px;
+      }
     }
   }
 
