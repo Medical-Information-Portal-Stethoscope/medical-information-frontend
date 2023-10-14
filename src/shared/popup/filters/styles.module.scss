@@ -2,7 +2,7 @@
 
 .filters {
   position: relative;
-  padding: 64px 64px 96px;
+  padding: 64px 52px 96px 64px;
   background-color: $color-neutral-0;
   border-radius: 24px;
   box-sizing: border-box;
@@ -33,6 +33,7 @@
     color: $color-neutral-900;
     margin: 0 auto 38px;
     text-align: center;
+    padding-right: 12px;
 
     @media screen and (max-width: calc($media-desktop-small - 1px)) {
       font-size: calc-fluid-element(
@@ -47,6 +48,7 @@
       line-height: $font-line-height-heading-3;
       font-weight: 600;
       margin-bottom: 32px;
+      padding-right: 0;
     }
 
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
@@ -56,7 +58,7 @@
   }
 
   &__content {
-    width: 896px;
+    width: 908px;
 
     @media screen and (max-width: calc($media-desktop-small - 1px)) {
       width: calc-fluid-element(
@@ -89,6 +91,10 @@
 
     @media screen and (max-width: calc($media-mobile-large - 1px)) {
       max-height: 497px;
+
+      &::-webkit-scrollbar {
+        width: 6px;
+      }
     }
   }
 
@@ -170,6 +176,7 @@
     overflow-y: scroll;
     flex-wrap: wrap;
     gap: 12px;
+    padding-right: 20px;
 
     @media screen and (max-width: $media-tablet-large) {
       height: 200px;
@@ -203,20 +210,13 @@
 
   &__buttons {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 32px 0 0;
+    padding: 32px 12px 0 0;
     border-top: 1px solid rgba(1, 76, 255, 0.2);
 
     @media screen and (max-width: $media-tablet-large) {
-      background-color: $color-neutral-0;
-      width: 100%;
-      box-sizing: border-box;
       padding: 24px 0 0;
-      position: sticky;
-      bottom: 0;
-      left: 0;
     }
 
     @media screen and (max-width: calc($media-mobile-large - 1px)) {

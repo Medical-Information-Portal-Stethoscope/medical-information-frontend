@@ -19,7 +19,7 @@ import { getFirstPageArticles } from 'services/features/information-material/sli
 import { tabletCarouselWidth } from 'utils/constants';
 import classNames from 'classnames';
 import { useMount } from 'hooks/useMount';
-import { iconsData } from './test-data/test-data';
+import { iconsData } from './data/data';
 import styles from './styles.module.scss';
 
 interface IMainCarouselProps {
