@@ -6,6 +6,10 @@ export type TGetInformationMaterialResponse = {
   results: TArticle[];
 };
 
+export type TGetInformationNewsResponse = {
+  maxNumDisplay: 5 | 6;
+} & TGetInformationMaterialResponse;
+
 export type TError = {
   [key: string]: string;
 };

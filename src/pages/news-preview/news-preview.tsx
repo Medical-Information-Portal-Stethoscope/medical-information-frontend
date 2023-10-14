@@ -24,7 +24,7 @@ import {
   newsStorage,
   nextNewsPage,
 } from 'services/features/information-material/selectors';
-import { desktopMedium } from 'utils/constants';
+import { desktopMedium, tabletAlbumOrientation } from 'utils/constants';
 import routes from 'utils/routes';
 import styles from './news-preview.module.scss';
 
@@ -32,6 +32,7 @@ export default function NewsPreviewPage() {
   const { isButtonToTopVisible, toggleButtonVisible } =
     useToggleButtonVisible();
   const windowDimensions = useWindowDimensions();
+  const isScreenDeviceSmall = useWindowDimensions() <= tabletAlbumOrientation;
 
   const dispatch = useAppDispatch();
   const newsBase = useAppSelector(newsStorage);
@@ -58,9 +59,14 @@ export default function NewsPreviewPage() {
 
   useEffect(() => {
     if (data) {
-      dispatch(getFirstPageNews(data));
+      dispatch(
+        getFirstPageNews({
+          ...data,
+          maxNumDisplay: isScreenDeviceSmall ? 6 : 5,
+        })
+      );
     }
-  }, [data]); // eslint-disable-line
+  }, [data, isScreenDeviceSmall]); // eslint-disable-line
 
   const uploadNextPageNews = () => {
     if (nextPageNews) {
@@ -72,7 +78,8 @@ export default function NewsPreviewPage() {
     <CardArticlePreview
       key={item.id}
       data={item}
-      type="news"
+      type={isScreenDeviceSmall ? 'default' : 'news'}
+      hasFavoriteButton={false}
       route={routes.news.route}
     />
   ));
@@ -80,7 +87,7 @@ export default function NewsPreviewPage() {
   return (
     <>
       <Header />
-      <main>
+      <main className={styles.main}>
         <div className={styles.wrapper}>
           <Breadcrumbs />
           <section className={styles.content}>
