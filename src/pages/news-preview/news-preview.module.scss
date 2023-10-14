@@ -70,6 +70,7 @@ $indent-mobile: calc-fluid-element(
   @media screen and (max-width: $media-tablet-large) {
     > button {
       position: fixed;
+      bottom: 36px;
     }
   }
 
@@ -105,7 +106,7 @@ $indent-mobile: calc-fluid-element(
   }
 
   @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
-    padding-bottom: $indent-block-default-top-side-medium;
+    padding-bottom: $indent-block-default-top-side-small;
   }
 }
 

@@ -86,6 +86,7 @@ $indent-mobile: calc-fluid-element(
   @media screen and (max-width: $media-tablet-large) {
     > button {
       position: fixed;
+      bottom: 36px;
     }
   }
 
