@@ -6,6 +6,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: $indent-main-top-screen-small;
+  }
 }
 
 .error {
@@ -16,7 +20,7 @@
     @media screen and (max-width: calc($media-desktop-large - 1px)) {
       max-width: calc-fluid-element(
         277px,
-        363px,
+        362px,
         $media-desktop-small,
         $media-desktop-large
       );
@@ -24,6 +28,14 @@
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       margin-top: 34px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      max-width: 277px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 0 0 16px;
     }
   }
 
@@ -41,12 +53,25 @@
         $media-desktop-small,
         $media-desktop-large
       );
-      line-height: calc-fluid-element(
-        calc($font-line-height-heading-2 * $font-size-heading-2 / 10),
-        calc($font-line-height-heading-1 * $font-size-heading-1 / 10),
-        $media-desktop-small,
-        $media-desktop-large
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-large * 10),
+        calc($font-size-heading-2 * 10),
+        $media-tablet-small,
+        $media-desktop-small
       );
+      line-height: $font-line-height-heading-2;
+    }
+
+    @media screen and (max-width: calc($media-tablet-large)) {
+      margin: 16px 0 8px;
+      line-height: $font-line-height-text-large;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-large;
     }
   }
 
@@ -64,20 +89,30 @@
         $media-desktop-small,
         $media-desktop-large
       );
-      line-height: calc-fluid-element(
-        calc($font-line-height-text-large * $font-size-text-large / 10),
-        calc(
-          $font-line-height-text-large-extra-semibold *
-            $font-size-text-large-extra-semibold / 10
-        ),
-        $media-desktop-small,
-        $media-desktop-large
-      );
     }
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
       font-weight: 400;
-      letter-spacing: 0;
+      line-height: $font-line-height-text-large;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-mobile-text-medium * 10),
+        calc($font-size-text-large * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 8px 0 16px;
+      line-height: $font-line-height-mobile-text-medium;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-mobile-text-medium;
+      padding: 0 20px;
     }
   }
 
@@ -86,6 +121,15 @@
     height: 48px;
     margin: 24px 0 80px;
     padding: 0;
+
+    @media screen and (max-width: calc($media-tablet-large)) {
+      margin: 16px 0 40px;
+      width: 335px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-small - 1px)) {
+      width: calc(100% - 40px);
+    }
   }
 
   &__button > span {

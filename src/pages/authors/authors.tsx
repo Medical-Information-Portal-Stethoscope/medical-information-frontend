@@ -13,7 +13,7 @@ export const AuthorsPage = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className={styles.main}>
         <div className={styles.wrapper}>
           <Breadcrumbs />
           <section className={styles.authors}>
@@ -83,7 +83,7 @@ export const AuthorsPage = () => {
             </section>
             <section className={styles.authorsSection}>
               <h3 className={styles.heading}>
-                Какая информация нужна для публикации:
+                Какая информация нужна для&nbsp;публикации:
               </h3>
               <ol>
                 <li className={styles.listItem}>Заголовок вашей статьи;</li>
