@@ -22,7 +22,7 @@
     }
   }
 
-  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+  @media screen and (max-width: $media-tablet-large) {
     background-color: rgba($color: $color-brand-primary-100, $alpha: 0.7);
   }
 }
