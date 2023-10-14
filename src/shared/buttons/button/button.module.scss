@@ -28,6 +28,10 @@
     );
   }
 
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium-additional;
+  }
+
   &--small {
     padding: 12px 64px;
   }
