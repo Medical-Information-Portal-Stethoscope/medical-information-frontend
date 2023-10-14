@@ -81,11 +81,12 @@ $indent-mobile: calc-fluid-element(
 
 .content {
   grid-column: 2 / 3;
-  padding-top: calc($indent-section-top-side-desktop-large / 2);
+  padding: calc($indent-section-top-side-desktop-large / 2) 0
+    $indent-section-top-side-desktop-large;
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-column: 1 / 4;
-    padding-top: calc($indent-block-default-top-side-large / 2);
+    padding: calc($indent-block-default-top-side-large / 2) 0 0;
   }
 
   > div:first-child {
