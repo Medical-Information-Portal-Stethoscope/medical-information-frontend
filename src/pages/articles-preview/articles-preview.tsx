@@ -99,7 +99,7 @@ export default function ArticlesPreviewPage() {
   return (
     <>
       <Header />
-      <main>
+      <main className={styles.main}>
         <div className={styles.wrapper}>
           <Breadcrumbs />
           <section className={styles.container}>
