@@ -81,8 +81,7 @@ $indent-mobile: calc-fluid-element(
 
 .content {
   grid-column: 2 / 3;
-  padding: calc($indent-section-top-side-desktop-large / 2) 0
-    $indent-section-top-side-desktop-large;
+  padding-top: calc($indent-section-top-side-desktop-large / 2);
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-column: 1 / 4;

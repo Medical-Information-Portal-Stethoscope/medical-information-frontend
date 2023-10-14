@@ -100,7 +100,6 @@ $indent-mobile: calc-fluid-element(
   flex-direction: column;
   row-gap: $indent-block-default-top-side-large;
   grid-column: 2/3;
-  padding-bottom: 80px;
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-column: 1/1;
