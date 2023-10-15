@@ -48,7 +48,6 @@
     > button {
       position: fixed;
       bottom: 36px;
-      right: 20px;
     }
   }
 
@@ -139,7 +138,7 @@
   }
 
   @media screen and (max-width: $media-tablet-large) {
-    padding: 32px 0 40px;
+    padding: 32px 0 0;
   }
 
   @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
