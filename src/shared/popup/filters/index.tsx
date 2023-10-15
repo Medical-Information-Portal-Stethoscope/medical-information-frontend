@@ -10,7 +10,9 @@ import Button from 'shared/buttons/button/button';
 import { Icon } from 'shared/icons';
 import { TTags } from 'services/features/tags/api';
 import { CSSTransition } from 'react-transition-group';
-import { animationTime } from 'utils/constants';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
+import { animationTime, tabletAlbumOrientation } from 'utils/constants';
+import classNames from 'classnames';
 import styles from './styles.module.scss';
 import animation from './animation.module.scss';
 
@@ -48,6 +50,10 @@ export const FiltersPopup: FC<IFiltersProps> = ({
   const dispatch = useAppDispatch();
   const contentRef = useRef(null);
   const [animationIn, setAnimationIn] = useState<boolean | undefined>(false);
+  const [isOpenedDiseases, setOpenedDiseases] = useState(false);
+  const [isOpenedTags, setOpenedTags] = useState(false);
+
+  const isWindowSmall = useWindowDimensions() <= tabletAlbumOrientation;
 
   const contentAnimation = {
     enter: animation.contentEnter,
@@ -70,6 +76,14 @@ export const FiltersPopup: FC<IFiltersProps> = ({
 
   const clearFilters = () => {
     setActiveTags([]);
+  };
+
+  const openDiseases = () => {
+    setOpenedDiseases(!isOpenedDiseases);
+  };
+
+  const openTags = () => {
+    setOpenedTags(!isOpenedTags);
   };
 
   const sendFilters = async () => {
@@ -140,40 +154,66 @@ export const FiltersPopup: FC<IFiltersProps> = ({
           extraClass={styles.filters__close}
         />
 
+        <h2 className={styles.filters__header}>Фильтры</h2>
         <div className={styles.filters__content}>
-          <h2 className={styles.filters__header}>Фильтры</h2>
           <div className={styles.filters__section}>
             <h3 className={styles.filters__name}>Заболевания</h3>
-            <ul className={styles.filters__items}>
+            <ul
+              className={classNames(styles.filters__items, {
+                [styles.filters__items_diseases]: isOpenedDiseases,
+              })}
+            >
               {generateFilters(allDiseasesTags)}
             </ul>
           </div>
-
+          {isWindowSmall && (
+            <Button
+              label={isOpenedDiseases ? 'Свернуть' : 'Развернуть'}
+              model="tertiary"
+              size="small"
+              hasBorder={false}
+              onClick={openDiseases}
+              extraClass={styles.filters__button_expand}
+            />
+          )}
           <div className={styles.filters__section}>
             <h3 className={styles.filters__name}>Теги</h3>
-            <ul className={styles.filters__items}>
+            <ul
+              className={classNames(styles.filters__items, {
+                [styles.filters__items_diseases]: isOpenedTags,
+              })}
+            >
               {generateFilters(allTags)}
             </ul>
           </div>
-
-          <div className={styles.filters__buttons}>
+          {isWindowSmall && (
             <Button
-              label="Очистить всё"
-              model="secondary"
+              label={isOpenedTags ? 'Свернуть' : 'Развернуть'}
+              model="tertiary"
               size="small"
               hasBorder={false}
-              onClick={clearFilters}
-              extraClass={styles.filters__button}
+              onClick={openTags}
+              extraClass={styles.filters__button_expand}
             />
-            <Button
-              label="Показать"
-              model="primary"
-              size="small"
-              hasBorder={false}
-              onClick={sendFilters}
-              extraClass={styles.filters__button}
-            />
-          </div>
+          )}
+        </div>
+        <div className={styles.filters__buttons}>
+          <Button
+            label="Очистить всё"
+            model="tertiary"
+            size="small"
+            hasBorder={false}
+            onClick={clearFilters}
+            extraClass={styles.filters__button_clear}
+          />
+          <Button
+            label="Показать"
+            model="primary"
+            size="small"
+            hasBorder={false}
+            onClick={sendFilters}
+            extraClass={styles.filters__button}
+          />
         </div>
       </div>
     </CSSTransition>

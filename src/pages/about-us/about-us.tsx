@@ -194,7 +194,7 @@ export default function AboutPage() {
             </section>
             <section className={styles['about--team--gratitude']}>
               <h3 className={styles['about--team--title--gratitude']}>
-                Выражаем благодарность за вклад в проект:
+                Выражаем благодарность за&nbsp;вклад&nbsp;в&nbsp;проект:
               </h3>
               <ul className={styles['about--team--list--gratitude']}>
                 {gratitude.map((person) => (
