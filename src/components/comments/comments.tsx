@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FC, useRef } from 'react';
+import { useState, useEffect, FC, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   addCommentToMaterial,
@@ -24,11 +24,13 @@ const maxCommentsDesktop = 7;
 interface ICurrentMaterial {
   currentMaterial: TArticle;
   articleHeight?: number;
+  isNews?: boolean;
 }
 
 export const Comments: FC<ICurrentMaterial> = ({
   currentMaterial,
   articleHeight,
+  isNews,
 }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -92,6 +94,7 @@ export const Comments: FC<ICurrentMaterial> = ({
     setFieldValue,
     setFieldTouched,
     handleChange,
+    handleBlur,
   } = formik;
 
   const sendComment = () => {
@@ -141,7 +144,9 @@ export const Comments: FC<ICurrentMaterial> = ({
 
   return (
     <section className={styles.comments} id="comments">
-      <p className={styles.comments__label}>Комментарии к&nbsp;статье</p>
+      <p className={styles.comments__label}>
+        Комментарии к&nbsp;{isNews ? 'новости' : 'статье'}
+      </p>
       {isUserOnline ? (
         <form
           onSubmit={sendComment}
@@ -158,7 +163,7 @@ export const Comments: FC<ICurrentMaterial> = ({
             value={values.comment}
             error={errors.comment}
             touched={touched.comment}
-            onFocus={() => setFieldTouched('comment')}
+            onBlur={handleBlur}
             onChange={handleChange}
           />
           <Button

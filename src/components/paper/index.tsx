@@ -153,7 +153,11 @@ export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
         ) : null}
       </div>
 
-      <Comments currentMaterial={data} articleHeight={articleHeight} />
+      <Comments
+        currentMaterial={data}
+        articleHeight={articleHeight}
+        isNews={isNews}
+      />
     </article>
   );
 };

@@ -20,7 +20,7 @@
   position: relative;
   transition: $transition-hover;
 
-  &__content {
+  &--content {
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -30,11 +30,11 @@
     border-radius: 16px;
     transition: right 100ms ease-out;
 
-    &_owner {
+    &-owner {
       background-color: $color-neutral-100;
     }
 
-    &_open {
+    &-open {
       padding-right: 0;
       position: absolute;
       right: 115px;
@@ -44,23 +44,23 @@
     }
   }
 
-  &__info {
+  &--info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
   }
 
-  &__name {
+  &--name {
     @extend %text-size-medium-semibold;
     color: $color-neutral-900;
 
-    &_owner {
+    &-owner {
       color: $color-brand-primary-900;
     }
   }
 
-  &__date {
+  &--date {
     @extend %text-size-small;
     color: $color-neutral-500;
 
@@ -69,20 +69,20 @@
     }
   }
 
-  &__user {
+  &--user {
     display: flex;
     flex-direction: row;
     column-gap: 16px;
     align-items: center;
   }
 
-  &__meta {
+  &--meta {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
   }
 
-  &__text {
+  &--text {
     max-width: 722px;
     color: $color-neutral-900;
     @extend %text-article;
@@ -92,7 +92,7 @@
     }
   }
 
-  &__remove {
+  &--remove {
     color: $color-neutral-500;
     @extend %text-size-small-extra;
 
@@ -101,7 +101,7 @@
     }
   }
 
-  &__removeMobileCont {
+  &--removeMobileCont {
     height: 142px;
     display: flex;
     align-items: center;
@@ -113,13 +113,13 @@
     border-bottom-right-radius: 16px;
     border-top-right-radius: 16px;
 
-    &_open {
+    &-open {
       width: 67px;
       padding: 0 24px;
     }
   }
 
-  &__removeMobile {
+  &--removeMobile {
     color: #fff;
     font-size: $font-size-text-medium-small;
   }

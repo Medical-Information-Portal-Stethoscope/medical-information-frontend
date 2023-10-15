@@ -15,14 +15,17 @@
     display: flex;
     align-items: center;
     flex-direction: row;
-    overflow: hidden;
-    text-overflow: ellipsis;
     white-space: nowrap;
     column-gap: 4px;
 
+    li:last-of-type {
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
     > svg {
       @media screen and (max-width: $media-tablet-large) {
-        width: 16px;
+        min-width: 16px;
         height: 16px;
       }
     }

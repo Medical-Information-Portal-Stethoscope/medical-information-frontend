@@ -65,21 +65,18 @@ $border: 1px solid
 .wrapper {
   row-gap: 10px;
 
+  &--fullPageNews,
   &--news {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 38px;
-  }
-
-  &--fullPageNews {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 38px;
 
     @media screen and (max-width: $media-tablet-large) {
-      display: flex;
-      flex-direction: column;
-      row-gap: 16px;
+      &--fullPageNews {
+        display: flex;
+        flex-direction: column;
+        row-gap: 16px;
+      }
     }
   }
 }

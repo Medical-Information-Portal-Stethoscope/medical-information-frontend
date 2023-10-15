@@ -92,6 +92,9 @@
     align-items: center;
     @extend %text-size-small-light;
     color: $color-neutral-600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
     &:first-child {
       @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
