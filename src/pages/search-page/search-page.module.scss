@@ -36,6 +36,26 @@
       justify-self: flex-end;
     }
   }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin: 0 $indent-section-sides-desktop;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin: $indent-search-top-tablet $indent-section-sides-tablet 0;
+    padding: $indent-section-top-side-tablet 0;
+
+    > button {
+      position: fixed;
+      bottom: 36px;
+    }
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    margin: $indent-search-top-mobile $indent-section-sides-mobile 0;
+    padding-top: 30px;
+    padding-bottom: $indent-section-top-side-tablet-medium;
+  }
 }
 
 .wrapper {
@@ -54,6 +74,25 @@
     color: $color-brand-primary-1000;
     font-weight: 700;
   }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-text-large * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    letter-spacing: $font-letter-spacing-main;
+    line-height: $font-line-height-text-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
+  }
 }
 
 .gallery {
@@ -65,18 +104,47 @@
   display: grid;
   row-gap: 40px;
   padding: 48px 0 40px 0;
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: $indent-section-top-side-tablet-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding: 24px 0 30px;
+    row-gap: 24px;
+  }
 }
 
 .button {
   align-self: center;
+
+  @media screen and (max-width: $media-tablet-large) {
+    width: 335px;
+  }
+
+  @media screen and (max-width: calc($media-mobile-small)) {
+    width: 100%;
+  }
 }
 
 .description {
   @extend %text-size-medium;
+  color: $color-neutral-600;
+
   padding: 156px 0 104px;
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     padding: 64px 0 80px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 32px 0 0;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding: 24px 0 0;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
   }
 }
 

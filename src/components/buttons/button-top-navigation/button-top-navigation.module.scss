@@ -1,3 +1,6 @@
+@import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/media-queries';
+
 .button {
   width: 80px;
   height: 80px;
@@ -17,5 +20,9 @@
     svg {
       stroke: inherit;
     }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    background-color: rgba($color: $color-brand-primary-100, $alpha: 0.7);
   }
 }
