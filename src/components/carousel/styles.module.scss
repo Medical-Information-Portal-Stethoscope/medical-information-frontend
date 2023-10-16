@@ -7,6 +7,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .wrapper > div > div {
@@ -22,11 +23,14 @@
     justify-content: flex-start;
     gap: 14px;
   }
-}
 
-@media screen and (max-width: calc($media-desktop-medium - 1px)) {
-  .carousel {
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     width: calc(100% - 241px);
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-left: 0;
+    width: 100%;
   }
 }
 
@@ -46,6 +50,10 @@
       fill: $color-neutral-400;
     }
   }
+
+  @media screen and (max-width: $media-tablet-large) {
+    display: none;
+  }
 }
 
 .prev_button {
@@ -63,6 +71,10 @@
     svg {
       fill: $color-neutral-400;
     }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    display: none;
   }
 }
 
@@ -87,7 +99,14 @@
   position: relative;
   display: flex;
   align-items: center;
+
+  @media screen and (max-width: $media-tablet-large) {
+    position: absolute;
+    top: -66px;
+    right: 0;
+  }
 }
+
 .counter {
   @extend %text-size-small-extra;
   display: flex;
@@ -100,5 +119,9 @@
   color: $color-neutral-0;
   position: absolute;
   top: 20px;
-  right: 85px;
+  right: calc(100% - 28px);
+
+  @media screen and (max-width: $media-tablet-large) {
+    top: 4px;
+  }
 }

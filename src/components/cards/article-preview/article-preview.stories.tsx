@@ -26,6 +26,15 @@ const meta: Meta<typeof CardArticlePreview> = {
       },
     },
 
+    hasFavoriteButton: {
+      description: 'Наличие кнопки добавления в избранное',
+      optiions: [true, false],
+      control: {
+        type: 'radio',
+      },
+      defaultValue: true,
+    },
+
     extraClass: {
       description: 'Дополнительные стили',
       type: 'string',
