@@ -63,7 +63,7 @@ $indent-mobile: calc-fluid-element(
   }
 
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
     row-gap: 0;
     margin: 0 $indent-1280;
     padding-top: calc($indent-section-top-side-desktop-small / 2);
@@ -105,7 +105,6 @@ $indent-mobile: calc-fluid-element(
   @media screen and (max-width: calc($media-desktop-medium - 1px)) {
     grid-column: 1/1;
     row-gap: $indent-block-default-top-side-medium;
-    max-width: 1184px;
     padding: calc($indent-block-default-top-side-large / 2) 0 0;
   }
 
