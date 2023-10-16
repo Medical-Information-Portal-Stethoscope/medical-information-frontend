@@ -46,7 +46,8 @@ $border: 1px solid
     }
   }
 
-  &--news {
+  &--news,
+  &--fullPageNews {
     max-width: 1208px;
   }
 
@@ -64,10 +65,19 @@ $border: 1px solid
 .wrapper {
   row-gap: 10px;
 
+  &--fullPageNews,
   &--news {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 38px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    &--fullPageNews {
+      display: flex;
+      flex-direction: column;
+      row-gap: 16px;
+    }
   }
 }
 
@@ -100,6 +110,19 @@ $border: 1px solid
 
   &--fullPageArticle {
     height: 320px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      height: calc-fluid-element(
+        180,
+        320,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: 180px;
+    }
   }
 
   &--media {
@@ -134,8 +157,24 @@ $border: 1px solid
     }
   }
 
+  &--fullPageNews,
   &--news {
     height: 292px;
+  }
+
+  &--fullPageNews {
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      height: calc-fluid-element(
+        180,
+        292,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: 180px;
+    }
   }
 }
 
@@ -151,13 +190,15 @@ $border: 1px solid
   top: 12px;
   right: 12px;
 
-  &--news {
+  &--news,
+  &--fullPageNews {
     display: none;
   }
 }
 
 .content {
-  &--news {
+  &--news,
+  &--fullPageNews {
     display: flex;
     flex-direction: column;
   }
@@ -179,6 +220,10 @@ $border: 1px solid
 
   &--fullPageArticle {
     min-height: 208px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 152px;
+    }
   }
 
   &--media {
@@ -198,9 +243,17 @@ $border: 1px solid
     }
   }
 
+  &--fullPageNews,
   &--news {
     min-height: 243px;
     margin-top: 32px;
+  }
+
+  &--fullPageNews {
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 168px;
+      margin-top: 12px;
+    }
   }
 }
 
@@ -292,6 +345,12 @@ $border: 1px solid
   &--news {
     margin-top: 16px;
   }
+
+  &--fullPageArticle {
+    @media screen and (max-width: $media-tablet-large) {
+      height: 48px;
+    }
+  }
 }
 
 .date {
@@ -362,7 +421,8 @@ $border: 1px solid
 
   &--media,
   &--news,
-  &--fullPageArticle {
+  &--fullPageArticle,
+  &--fullPageNews {
     max-width: 220px;
   }
 }

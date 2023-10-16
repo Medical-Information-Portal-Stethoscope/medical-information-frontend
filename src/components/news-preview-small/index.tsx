@@ -26,7 +26,7 @@ export const NewsPreviewSmall: FC<INewsPreviewSmall> = ({
     <CardArticlePreview
       key={item.id}
       data={item}
-      type="news"
+      type="fullPageNews"
       route={route}
       extraClass={extraClass}
     />

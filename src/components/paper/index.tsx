@@ -49,14 +49,16 @@ export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
           {converMdToHTML(data.annotation, true)}
         </p>
         <div className={styles.paper__info}>
-          <ClockIcon color="gray" size="24" className={styles.paper__clock} />
-          <p className={styles.paper__time}>{readingTime}</p>
-          <DotIcon size="24" color="gray" className={styles.paper__dot} />
-          <ViewsIcon color="gray" size="24" />
-          <p className={styles.paper__views}>{data.views_count}</p>
+          <div className={styles.paper__info_block}>
+            <ClockIcon color="gray" size="24" className={styles.paper__clock} />
+            <p className={styles.paper__time}>{readingTime}</p>
+            <DotIcon size="24" color="gray" className={styles.paper__dot} />
+            <ViewsIcon color="gray" size="24" />
+            <p className={styles.paper__views}>{data.views_count}</p>
+          </div>
 
           {data.source_name ? (
-            <>
+            <div className={styles.paper__info_block}>
               <DotIcon size="24" color="gray" className={styles.paper__dot} />
               <p className={styles.paper__source}>
                 Источник:{' '}
@@ -69,7 +71,7 @@ export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
                   {data.source_name}
                 </a>
               </p>
-            </>
+            </div>
           ) : null}
         </div>
         <img
@@ -130,7 +132,7 @@ export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
         </div>
 
         {data.tags && !isNews ? (
-          <div className={styles.paper__additional}>
+          <div className={styles.paper__additional_tags}>
             <p className={styles.paper__additional_text}>Теги:</p>
             <ul className={styles.paper__tags}>
               {data?.tags.map((tag, idx) => (
@@ -151,7 +153,11 @@ export const Paper: FC<Ipaper> = ({ data, isNews = false }) => {
         ) : null}
       </div>
 
-      <Comments currentMaterial={data} articleHeight={articleHeight} />
+      <Comments
+        currentMaterial={data}
+        articleHeight={articleHeight}
+        isNews={isNews}
+      />
     </article>
   );
 };
