@@ -87,12 +87,14 @@ export const Comments: FC<ICurrentMaterial> = ({
 
   const {
     values,
+    errors,
     dirty,
     isValid,
     touched,
     setFieldValue,
     setFieldTouched,
     handleChange,
+    handleBlur,
   } = formik;
 
   const sendComment = () => {
@@ -158,9 +160,11 @@ export const Comments: FC<ICurrentMaterial> = ({
             defaultValue="Тестовый комментарий"
             // hasCounter
             // maxSymbols={4000}
+            error={errors.comment}
             value={values.comment}
             touched={touched.comment}
             onChange={handleChange}
+            onBlur={handleBlur}
           />
           <Button
             label="Отправить"
