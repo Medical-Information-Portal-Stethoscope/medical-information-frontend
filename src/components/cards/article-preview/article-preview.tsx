@@ -26,6 +26,7 @@ interface ICardArticlePreviewProps {
     views_count: number;
   };
   type: 'media' | 'news' | 'fullPageArticle' | 'fullPageNews' | 'default';
+  hasFavoriteButton?: boolean;
   extraClass?: string;
   route: string;
 }
@@ -33,6 +34,7 @@ interface ICardArticlePreviewProps {
 const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
   data: { id, title, annotation, text, image, created_at, author, views_count },
   type,
+  hasFavoriteButton = true,
   extraClass,
   route,
 }) => {
@@ -60,14 +62,16 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
             )}
           >
             <img className={styles.image} src={image} alt="Превью статьи" />
-            <ButtonWithIconTwo
-              extraClass={classNames(
-                styles.favoriteButton,
-                styles[`favoriteButton--${type}`]
-              )}
-              onClick={handleLike}
-              icon={<Icon icon="BookmarkIcon" color="white" size="32" />}
-            />
+            {hasFavoriteButton && (
+              <ButtonWithIconTwo
+                extraClass={classNames(
+                  styles.favoriteButton,
+                  styles[`favoriteButton--${type}`]
+                )}
+                onClick={handleLike}
+                icon={<Icon icon="BookmarkIcon" color="white" size="32" />}
+              />
+            )}
           </div>
           <div
             className={classNames(styles.content, styles[`content--${type}`])}

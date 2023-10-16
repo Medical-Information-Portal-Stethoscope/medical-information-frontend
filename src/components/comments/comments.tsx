@@ -87,14 +87,12 @@ export const Comments: FC<ICurrentMaterial> = ({
 
   const {
     values,
-    errors,
     dirty,
     isValid,
     touched,
     setFieldValue,
     setFieldTouched,
     handleChange,
-    handleBlur,
   } = formik;
 
   const sendComment = () => {
@@ -161,9 +159,7 @@ export const Comments: FC<ICurrentMaterial> = ({
             // hasCounter
             // maxSymbols={4000}
             value={values.comment}
-            error={errors.comment}
             touched={touched.comment}
-            onBlur={handleBlur}
             onChange={handleChange}
           />
           <Button

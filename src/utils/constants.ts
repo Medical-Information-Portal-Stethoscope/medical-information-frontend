@@ -18,3 +18,6 @@ export const tabletSmallExtra = 600;
 
 // SWIPER
 export const minSwipeSize = 50; // px
+
+// CAROUSEL
+export const tabletCarouselWidth = 952;

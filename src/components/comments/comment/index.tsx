@@ -72,8 +72,8 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
             isOpen && isMobile && isCommentOwner,
         })}
       >
-        <div className={classNames(styles['comment--info'])}>
-          <div className={classNames(styles['comment--user'])}>
+        <div className={styles.comment__info}>
+          <div className={styles.comment__user}>
             <UserProfileIcon
               name={authorNameLogo}
               role={author.role}
@@ -81,7 +81,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
               isHeader={false}
               isUserOnline={false}
             />
-            <div className={classNames(styles['comment--meta'])}>
+            <div className={styles.comment__meta}>
               <span
                 className={classNames(styles['comment--name'], {
                   [styles['comment--name-owner']]: isArticleOwner,
@@ -89,9 +89,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
               >
                 {authorName}
               </span>
-              <span className={classNames(styles['comment--date'])}>
-                {commentDate}
-              </span>
+              <span className={styles.comment__date}>{commentDate}</span>
             </div>
           </div>
           {isCommentOwner && !isMobile && (
@@ -99,11 +97,11 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
               model="tertiary"
               onClick={() => removeComment(comment.id)}
               label="Удалить"
-              extraClass={classNames(styles['comment--remove'])}
+              extraClass={styles.comment__remove}
             />
           )}
         </div>
-        <p className={classNames(styles['comment--text'])}>{comment.text}</p>
+        <p className={styles.comment__text}>{comment.text}</p>
       </div>
       {isCommentOwner && isMobile && (
         <div
@@ -116,7 +114,7 @@ const Comment = ({ comment, removeComment, material }: ICommentItem) => {
               model="tertiary"
               onClick={() => removeComment(comment.id)}
               label="Удалить"
-              extraClass={classNames(styles['comment--removeMobile'])}
+              extraClass={styles.comment__removeMobile}
             />
           )}
         </div>

@@ -44,7 +44,7 @@
     }
   }
 
-  &--info {
+  &__info {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -60,7 +60,7 @@
     }
   }
 
-  &--date {
+  &__date {
     @extend %text-size-small;
     color: $color-neutral-500;
 
@@ -69,20 +69,20 @@
     }
   }
 
-  &--user {
+  &__user {
     display: flex;
     flex-direction: row;
     column-gap: 16px;
     align-items: center;
   }
 
-  &--meta {
+  &__meta {
     display: flex;
     flex-direction: column;
     row-gap: 8px;
   }
 
-  &--text {
+  &__text {
     max-width: 722px;
     color: $color-neutral-900;
     @extend %text-article;
@@ -92,7 +92,7 @@
     }
   }
 
-  &--remove {
+  &__remove {
     color: $color-neutral-500;
     @extend %text-size-small-extra;
 
@@ -119,7 +119,7 @@
     }
   }
 
-  &--removeMobile {
+  &__removeMobile {
     color: #fff;
     font-size: $font-size-text-medium-small;
   }
