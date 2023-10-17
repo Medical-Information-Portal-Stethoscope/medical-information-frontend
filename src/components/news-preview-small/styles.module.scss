@@ -10,6 +10,26 @@
     color: $color-neutral-900;
     padding: 0;
     margin-bottom: 32px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-heading-3 * 10),
+        calc($font-size-heading-2 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-weight: 600;
+      line-height: $font-line-height-heading-3;
+      letter-spacing: $font-letter-spacing-main;
+      margin-bottom: $indent-block-default-top-side-small;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-heading-3;
+    }
   }
 
   &__containter {
@@ -17,5 +37,13 @@
     display: flex;
     flex-direction: column;
     gap: 24px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      flex-direction: row;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      flex-direction: column;
+    }
   }
 }

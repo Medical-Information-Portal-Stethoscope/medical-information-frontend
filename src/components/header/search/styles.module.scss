@@ -1,25 +1,37 @@
-@import '../../../assets/styles/index.scss';
+@import 'assets/styles/index.scss';
 
 .search {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   max-width: 600px;
   height: 48px;
   padding: 12px;
   border: 1px solid $color-neutral-400;
   border-radius: 16px;
   box-sizing: border-box;
-  transition: all 0.3s ease-out;
+  transition: $transition-button;
   background-color: $color-neutral-0;
 
   &:hover {
     cursor: text;
   }
 
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    height: 40px;
+    padding: 8px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    height: 64px;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    height: 48px;
+  }
+
   &__input {
     @extend %text-size-medium;
     width: 100%;
-    align-self: flex-end;
     padding: 0;
     padding-right: 10px;
     border: none;
@@ -32,17 +44,30 @@
     &::-webkit-search-cancel-button:hover {
       cursor: pointer;
     }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-medium-additional;
+      line-height: $font-line-height-text-medium-additional;
+    }
   }
 
   &__submit {
-    border: none;
+    width: 22px;
+    height: 22px;
     background: none;
-    padding: 0;
-    fill: $color-brand-primary-900;
 
     &:hover svg {
       fill: $color-brand-primary-700;
       cursor: pointer;
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin-right: 4px;
     }
   }
 }

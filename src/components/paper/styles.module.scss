@@ -8,6 +8,28 @@
   display: flex;
   flex-direction: column;
 
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    max-width: calc-fluid-element(
+      882px,
+      900px,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: 24px;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    max-width: calc-fluid-element(
+      720px,
+      882px,
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
   &__date {
     align-self: flex-start;
     @extend %text-size-medium-semibold;
@@ -19,20 +41,66 @@
     @extend %heading-size-medium;
     color: $color-neutral-900;
     margin-bottom: 24px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-heading-3 * 10),
+        calc($font-size-heading-2 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-weight: 600;
+      line-height: $font-line-height-heading-3;
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-heading-3;
+    }
   }
 
   &__annotation {
     @extend %text-size-large;
     color: $color-neutral-700;
     margin-bottom: 26px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-article;
+      line-height: $font-line-height-article;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-bottom: 20px;
+    }
   }
 
   &__info {
     display: flex;
     flex-direction: row;
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      flex-direction: column;
+    }
+  }
+
+  &__info_block {
+    display: flex;
+    flex-direction: row;
     align-items: center;
     @extend %text-size-small-light;
-    color: $color-neutral-700;
+    color: $color-neutral-600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:first-child {
+      @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+        margin-bottom: 16px;
+      }
+    }
   }
 
   &__clock {
@@ -41,6 +109,12 @@
 
   &__dot {
     margin: 0 8px;
+
+    &:last-of-type {
+      @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+        display: none;
+      }
+    }
   }
 
   &__views {
@@ -65,12 +139,31 @@
     margin: 32px auto;
     object-fit: cover;
     border-radius: 12px;
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: calc-fluid-element(
+        207px,
+        500px,
+        $media-mobile-small,
+        $media-tablet-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      margin-top: $indent-block-default-top-side-small;
+      margin-bottom: $indent-block-default-top-side-small;
+    }
   }
 
   &__text {
     @extend %text-article;
     color: $color-neutral-900;
     margin: 0 auto 32px;
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-medium-small;
+      line-height: $font-line-height-text-medium-small;
+    }
 
     h3,
     p {
@@ -120,6 +213,22 @@
     margin-bottom: 30px;
     @extend %text-size-medium-semibold;
     color: $color-neutral-500;
+  }
+
+  &__additional_tags {
+    display: flex;
+    width: 100%;
+    margin-bottom: 30px;
+    align-items: center;
+    @extend %text-size-medium-semibold;
+    color: $color-neutral-500;
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
   }
 
   &__additional_text {

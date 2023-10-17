@@ -1,6 +1,8 @@
 @import 'assets/styles/abstracts/variables/colors.scss';
 @import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/media-queries.scss';
 @import 'assets/styles/abstracts/placeholders.scss';
+@import 'assets/styles/abstracts/functions.scss';
 @import 'assets/styles/abstracts/variables/animations.scss';
 
 .button {
@@ -15,6 +17,19 @@
 
   &:disabled {
     cursor: default;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium-additional * 10),
+      calc($font-size-text-medium * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium-additional;
   }
 
   &--small {

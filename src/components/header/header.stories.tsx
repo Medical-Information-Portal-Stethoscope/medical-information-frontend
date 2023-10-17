@@ -18,6 +18,18 @@ const meta = {
       </Provider>
     ),
   ],
+  argTypes: {
+    hasSearchField: {
+      description:
+        'Наличие поисковой строки cнизу (для мобильной версии и отдельных страниц)',
+      type: 'boolean',
+      options: [true, false],
+      defaultValue: false,
+      control: {
+        type: 'radio',
+      },
+    },
+  },
 } as Meta<typeof Header>;
 
 export default meta;

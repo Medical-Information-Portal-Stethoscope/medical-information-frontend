@@ -16,10 +16,11 @@ const team = data.map((item) => (
         item.department === 'Проджект менеджеры',
       [styles['about--team--creators--designers']]:
         item.department === 'Дизайнеры',
+      [styles['about--team--creators--frontenders']]:
+        item.department === 'Фронтенд-разработчики',
       [styles['about--team--creators--other']]: [
         'Тестировщики',
         'Бэкенд-разработчики',
-        'Фронтенд-разработчики',
       ].includes(item.department),
     })}
   >
@@ -193,7 +194,7 @@ export default function AboutPage() {
             </section>
             <section className={styles['about--team--gratitude']}>
               <h3 className={styles['about--team--title--gratitude']}>
-                Выражаем благодарность за вклад в проект:
+                Выражаем благодарность за&nbsp;вклад&nbsp;в&nbsp;проект:
               </h3>
               <ul className={styles['about--team--list--gratitude']}>
                 {gratitude.map((person) => (

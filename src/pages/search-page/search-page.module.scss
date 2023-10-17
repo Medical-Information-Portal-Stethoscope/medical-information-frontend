@@ -2,15 +2,69 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/indents';
+@import 'assets/styles/abstracts/functions.scss';
 
 .search {
-  max-width: $wrapper-search-preview-desktop;
-  margin: 0 auto;
-  padding: 32px 0 80px 0;
+  display: grid;
+  grid-template-columns: 1fr $wrapper-search-preview-desktop 1fr;
+  padding-top: 32px;
+
+  > :first-child {
+    grid-column: 2/3;
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    grid-template-columns: 1fr;
+    margin: 0
+      calc-fluid-element(
+        $indent-section-sides-desktop,
+        356px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    padding-top: calc($indent-section-top-side-desktop-small / 2);
+
+    > :first-child {
+      grid-column: 1;
+    }
+
+    > button {
+      position: sticky;
+      bottom: 16px;
+      justify-self: flex-end;
+    }
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    margin: 0 $indent-section-sides-desktop;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin: $indent-search-top-tablet $indent-section-sides-tablet 0;
+    padding: $indent-section-top-side-tablet 0;
+
+    > button {
+      position: fixed;
+      bottom: 36px;
+    }
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    margin: $indent-search-top-mobile $indent-section-sides-mobile 0;
+    padding-top: 30px;
+    padding-bottom: $indent-section-top-side-tablet-medium;
+  }
 }
 
 .wrapper {
   max-width: $wrapper-search-desktop;
+  padding-bottom: 80px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    padding-bottom: 0;
+  }
 }
 
 .title {
@@ -19,6 +73,25 @@
   &_heading {
     color: $color-brand-primary-1000;
     font-weight: 700;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-text-large * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    letter-spacing: $font-letter-spacing-main;
+    line-height: $font-line-height-text-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
   }
 }
 
@@ -30,20 +103,66 @@
 .materials {
   display: grid;
   row-gap: 40px;
-  padding: 56px 0 80px 0;
+  padding: 48px 0 40px 0;
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding-top: $indent-section-top-side-tablet-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding: 24px 0 30px;
+    row-gap: 24px;
+  }
 }
 
 .button {
   align-self: center;
+
+  @media screen and (max-width: $media-tablet-large) {
+    width: 335px;
+  }
+
+  @media screen and (max-width: calc($media-mobile-small)) {
+    width: 100%;
+  }
 }
 
 .description {
   @extend %text-size-medium;
-  padding: 156px 0;
+  color: $color-neutral-600;
+
+  padding: 156px 0 104px;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    padding: 64px 0 80px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 32px 0 0;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    padding: 24px 0 0;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
+  }
 }
 
-.top_button {
-  position: fixed;
-  bottom: 372px;
-  left: calc(50vw - 40px + 865px);
+.topButton {
+  position: sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: calc(100vh - 16px);
+
+  & > button {
+    position: absolute;
+    right: 38px;
+
+    @media screen and (min-width: $media-desktop-large) {
+      left: 234px;
+    }
+  }
 }

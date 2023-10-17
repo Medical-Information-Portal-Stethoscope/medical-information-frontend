@@ -6,9 +6,9 @@ import { useAppDispatch } from 'services/app/hooks';
 import { OnlyAuth, OnlyUnAuth } from 'hocs/withProtectedRoute';
 
 import MainPage from 'pages/main-page/main-page';
-import NewsPreviewPage from 'pages/news-preview-page/news-preview-page';
+import NewsPreviewPage from 'pages/news-preview/news-preview';
 import { News } from 'pages/news';
-import ArticlesPreviewPage from 'pages/articles-preview-page/articles-preview-page';
+import ArticlesPreviewPage from 'pages/articles-preview/articles-preview';
 import { Article } from 'pages/article';
 import AboutPage from 'pages/about-us/about-us';
 import { AuthorsPage } from 'pages/authors/authors';

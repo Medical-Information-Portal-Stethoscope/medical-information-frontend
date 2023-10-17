@@ -1,2 +1,4 @@
+$transition-default-time: 300ms;
+
 $transition-hover: all 100ms ease-out;
-$transition-button: all 300ms ease-out;
+$transition-button: all $transition-default-time ease-out;

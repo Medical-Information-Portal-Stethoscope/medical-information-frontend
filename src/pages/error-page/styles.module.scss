@@ -1,40 +1,135 @@
 @import '../../assets/styles/index.scss';
 
-.error {
+.wrapper {
   max-width: $wrapper-main-content-desktop;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  margin: 0 auto;
-  box-sizing: border-box;
 
+  @media screen and (max-width: $media-tablet-large) {
+    margin-top: $indent-main-top-screen-small;
+  }
+}
+
+.error {
   &__image {
-    width: 363px;
-    margin: 40px auto 24px;
+    max-width: 363px;
+    margin: 32px 0 24px;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      max-width: calc-fluid-element(
+        277px,
+        362px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin-top: 34px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      max-width: 277px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 0 0 16px;
+    }
   }
 
   &__title {
     @extend %heading-size-large;
-    margin: 24px auto 12px;
+    margin: 24px 0 12px;
     padding: 0;
     color: $color-neutral-900;
     text-align: center;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-heading-2 * 10),
+        calc($font-size-heading-1 * 10),
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-large * 10),
+        calc($font-size-heading-2 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+      line-height: $font-line-height-heading-2;
+    }
+
+    @media screen and (max-width: calc($media-tablet-large)) {
+      margin: 16px 0 8px;
+      line-height: $font-line-height-text-large;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-large;
+    }
   }
 
   &__message {
     @extend %text-size-large-extra-semibold;
-    margin: 12px auto 24px;
+    margin: 12px 0 24px;
     padding: 0;
     color: $color-neutral-500;
     text-align: center;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-large * 10),
+        calc($font-size-text-large-extra-semibold * 10),
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-weight: 400;
+      line-height: $font-line-height-text-large;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-mobile-text-medium * 10),
+        calc($font-size-text-large * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 8px 0 16px;
+      line-height: $font-line-height-mobile-text-medium;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-mobile-text-medium;
+      padding: 0 20px;
+    }
   }
 
   &__button {
     width: 284px;
     height: 48px;
-    margin: 24px auto 80px;
+    margin: 24px 0 80px;
     padding: 0;
+
+    @media screen and (max-width: calc($media-tablet-large)) {
+      margin: 16px 0 40px;
+      width: 335px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-small - 1px)) {
+      width: calc(100% - 40px);
+    }
   }
 
   &__button > span {
