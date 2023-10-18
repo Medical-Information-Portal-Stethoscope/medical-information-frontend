@@ -53,8 +53,8 @@ function UserProfile() {
               </div>
               {user?.role === 'user' && (
                 <p className={styles.userProfile_quote}>
-                  Вы можете подтвердить свой статус врача, обратившись к
-                  администратору:{' '}
+                  Вы можете подтвердить свой статус врача, обратившись
+                  к&nbsp;администратору:{' '}
                   <a
                     className={styles.email}
                     href="mailto:admin@stethoscope-portal.ru"

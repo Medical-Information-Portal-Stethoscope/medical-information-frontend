@@ -106,7 +106,7 @@ function Sidebar() {
   return (
     <div className={styles.sidebar} ref={sidebarRef}>
       <div className={isButtonToTopVisible ? styles.sidebar_content : ''}>
-        <div>
+        <div className={styles.sidebar_wrapper}>
           <div className={styles.sidebar_header}>
             <Avatar
               user={
@@ -117,14 +117,14 @@ function Sidebar() {
                 }
               }
             />
-            <div>
+            <div className={styles.sidebar_info}>
               <h2
                 className={styles.sidebar_title}
               >{`${user?.first_name} ${user?.last_name}`}</h2>
               <p className={styles.sidebar_subtitle}>{handleUserRole()}</p>
             </div>
           </div>
-          <nav>
+          <nav className={styles.sidebar_nav}>
             <ul className={styles.sidebar_list}>
               <li className={styles.sidebar_list_item}>
                 <NavLink
@@ -167,15 +167,19 @@ function Sidebar() {
               </li>
             </ul>
           </nav>
-          <p className={styles.sidebar_email}>Еженедельная рассылка на email</p>
-          <div className={styles.sidebar_mailingList}>
-            <ConsentCheckbox
-              id={nanoid()}
-              name="mailingList"
-              isChecked={hasSubscription}
-              onChange={handleUserSubscription}
-            />
-            <p className={styles.sidebar_label}>Подписаться на рассылку</p>
+          <div className={styles.sidebar_subscribe}>
+            <p className={styles.sidebar_email}>
+              Еженедельная рассылка на email
+            </p>
+            <div className={styles.sidebar_mailingList}>
+              <ConsentCheckbox
+                id={nanoid()}
+                name="mailingList"
+                isChecked={hasSubscription}
+                onChange={handleUserSubscription}
+              />
+              <p className={styles.sidebar_label}>Подписаться на рассылку</p>
+            </div>
           </div>
           <div className={styles.sidebar_border} />
           <button
