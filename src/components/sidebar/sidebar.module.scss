@@ -52,7 +52,7 @@
     @media screen and (max-width: calc($media-tablet-small - 1px)) {
       font-size: calc-fluid-element(
         calc($font-size-text-medium * 10),
-        $font-size-heading-3,
+        calc($font-size-heading-3 * 10),
         $media-mobile-small,
         $media-tablet-small
       );
@@ -119,8 +119,8 @@
     padding: 12px;
 
     @media screen and (max-width: $media-tablet-large) {
-      padding-right: 0;
-      padding-left: 0;
+      padding-right: 7px;
+      padding-left: 7px;
       border: 0.5px solid rgba($color: $color-neutral-350, $alpha: 0.36);
       border-radius: 12px;
       box-sizing: border-box;
