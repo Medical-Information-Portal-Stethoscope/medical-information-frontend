@@ -1,10 +1,12 @@
+@import 'assets/styles/abstracts/variables/animations';
+
 .contentEnter {
   opacity: 0;
 }
 
 .contentEnterActive {
   opacity: 1;
-  animation: moveUp 300ms ease-out;
+  animation: moveUp $transition-default-time ease-out;
 }
 
 .contentExit {
@@ -13,7 +15,7 @@
 
 .contentExitActive {
   opacity: 0;
-  animation: moveDown 300ms ease-out;
+  animation: moveDown $transition-default-time ease-out;
 }
 
 @keyframes moveUp {

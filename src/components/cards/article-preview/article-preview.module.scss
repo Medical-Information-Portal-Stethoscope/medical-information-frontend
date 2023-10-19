@@ -1,17 +1,29 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
-@import 'assets/styles/abstracts/variables/wrappers';
+@import 'assets/styles/abstracts/functions';
+
+$border: 1px solid
+  rgba(
+    $color: $color-neutral-300,
+    $alpha: 0.36,
+  );
 
 .article {
   max-width: $wrapper-card-article-preview-desktop;
   width: 100%;
   padding: 24px;
   box-sizing: border-box;
-  border: 1px solid var(--stroke, rgba(189, 189, 189, 0.36));
+  border: $border;
   border-radius: 16px;
   cursor: pointer;
+
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 16px;
+  }
 
   a {
     color: initial;
@@ -22,13 +34,20 @@
   }
 
   &--media {
-    max-width: 900px;
+    max-width: 952px;
     min-height: 564px;
     padding: 0;
     border: none;
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 400px;
+      padding: 16px;
+      border: $border;
+    }
   }
 
-  &--news {
+  &--news,
+  &--fullPageNews {
     max-width: 1208px;
   }
 
@@ -46,10 +65,19 @@
 .wrapper {
   row-gap: 10px;
 
+  &--fullPageNews,
   &--news {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 38px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    &--fullPageNews {
+      display: flex;
+      flex-direction: column;
+      row-gap: 16px;
+    }
   }
 }
 
@@ -58,12 +86,95 @@
   width: 100%;
   height: 320px;
 
-  &--media {
-    height: 360px;
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    height: calc-fluid-element(
+      258,
+      320,
+      $media-desktop-small,
+      $media-desktop-large
+    );
   }
 
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    height: calc-fluid-element(
+      180,
+      258,
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    height: 180px;
+  }
+
+  &--fullPageArticle {
+    height: 320px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      height: calc-fluid-element(
+        180,
+        320,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: 180px;
+    }
+  }
+
+  &--media {
+    height: 420px;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      height: calc-fluid-element(
+        336,
+        420,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      height: calc-fluid-element(
+        180,
+        336,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: 180px;
+    }
+
+    > img {
+      @media screen and (max-width: $media-tablet-large) {
+        object-position: top;
+      }
+    }
+  }
+
+  &--fullPageNews,
   &--news {
     height: 292px;
+  }
+
+  &--fullPageNews {
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      height: calc-fluid-element(
+        180,
+        292,
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      height: 180px;
+    }
   }
 }
 
@@ -79,13 +190,15 @@
   top: 12px;
   right: 12px;
 
-  &--news {
+  &--news,
+  &--fullPageNews {
     display: none;
   }
 }
 
 .content {
-  &--news {
+  &--news,
+  &--fullPageNews {
     display: flex;
     flex-direction: column;
   }
@@ -96,13 +209,51 @@
   min-height: 208px;
   margin-top: 12px;
 
-  &--media {
-    min-height: 154px;
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    min-height: 225px;
   }
 
+  @media screen and (max-width: $media-tablet-large) {
+    min-height: 150px;
+    margin-top: 10px;
+  }
+
+  &--fullPageArticle {
+    min-height: 208px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 152px;
+    }
+  }
+
+  &--media {
+    min-height: 158px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      min-height: 182px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 144px;
+      margin-top: 8px;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      min-height: 170px;
+    }
+  }
+
+  &--fullPageNews,
   &--news {
-    min-height: 239px;
+    min-height: 243px;
     margin-top: 32px;
+  }
+
+  &--fullPageNews {
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 168px;
+      margin-top: 12px;
+    }
   }
 }
 
@@ -113,6 +264,23 @@
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-heading-3 * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-medium;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium;
+  }
 }
 
 .text {
@@ -120,18 +288,68 @@
   height: 96px;
   margin-top: 8px;
   @extend %text-description;
+  line-height: 2.4rem;
   color: $color-neutral-700;
   -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
 
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small * 10),
+      calc($font-size-description * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    height: 64px;
+    margin-top: 12px;
+    line-height: 1.6rem;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-small;
+  }
+
   &--media {
     height: 70px;
     -webkit-line-clamp: 3;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      height: 96px;
+      -webkit-line-clamp: 4;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-small * 10),
+        calc($font-size-description * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      height: 64px;
+      margin-top: 12px;
+      line-height: $font-line-height-text-small;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-small;
+    }
   }
 
   &--news {
     margin-top: 16px;
+  }
+
+  &--fullPageArticle {
+    @media screen and (max-width: $media-tablet-large) {
+      height: 48px;
+    }
   }
 }
 
@@ -150,7 +368,21 @@
 .info {
   column-gap: 32px;
   @extend %text-size-small-light;
+  font-weight: 300;
   color: $color-neutral-700;
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small-extra * 10),
+      calc($font-size-text-small * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-small-extra;
+  }
 }
 
 .infoItem:not(:first-child) {
@@ -173,6 +405,26 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    max-width: calc-fluid-element(
+      83px,
+      106px,
+      $media-tablet-small-extra,
+      $media-tablet-small
+    );
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    max-width: 220px;
+  }
+
+  &--media,
+  &--news,
+  &--fullPageArticle,
+  &--fullPageNews {
+    max-width: 220px;
+  }
 }
 
 .views {

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { TArticle } from 'utils/types/article';
 import { getNextPageContent } from './api';
-import { TGetInformationMaterialResponse } from './types';
+import { TGetInformationNewsResponse } from './types';
 
 type TSliceState = {
   articles: {
@@ -52,9 +52,10 @@ const contentSlice = createSlice({
     },
     getFirstPageNews(
       state,
-      action: PayloadAction<TGetInformationMaterialResponse>
+      action: PayloadAction<TGetInformationNewsResponse>
     ) {
-      const maxCountOfNewsOnPage = 5;
+      const maxCountOfNewsOnPage = action.payload.maxNumDisplay;
+
       state.news.storage = action.payload.results.slice(
         0,
         maxCountOfNewsOnPage

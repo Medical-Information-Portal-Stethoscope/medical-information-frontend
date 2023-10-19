@@ -1,4 +1,3 @@
-import { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
@@ -8,13 +7,13 @@ import routes from 'utils/routes';
 import { Breadcrumbs } from 'components/breadcrumbs';
 import styles from './authors.module.scss';
 
-export const AuthorsPage: FC = (): ReactElement => {
+export const AuthorsPage = () => {
   const { user } = useAppSelector(showUserPersonalData);
 
   return (
     <>
       <Header />
-      <main>
+      <main className={styles.main}>
         <div className={styles.wrapper}>
           <Breadcrumbs />
           <section className={styles.authors}>
@@ -84,7 +83,7 @@ export const AuthorsPage: FC = (): ReactElement => {
             </section>
             <section className={styles.authorsSection}>
               <h3 className={styles.heading}>
-                Какая информация нужна для публикации:
+                Какая информация нужна для&nbsp;публикации:
               </h3>
               <ol>
                 <li className={styles.listItem}>Заголовок вашей статьи;</li>
@@ -93,7 +92,7 @@ export const AuthorsPage: FC = (): ReactElement => {
                 </li>
                 <li className={styles.listItem}>Текст статьи;</li>
                 <li className={styles.listItem}>
-                  Наименование источника и/или оригинала;
+                  Наименование источника и/или автор оригинала;
                 </li>
                 <li className={styles.listItem}>Ссылка на источник;</li>
                 <li className={styles.listItem}>Фотография или иллюстрация.</li>

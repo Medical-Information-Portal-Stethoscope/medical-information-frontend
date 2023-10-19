@@ -2,5 +2,5 @@
 
 [Storybook](https://medical-information.github.io/medical-information-frontend/)
 
-[Сайт](https://stethoscope.acceleratorpracticum.ru/)
+[Сайт](https://stethoscope-portal.ru/)
 

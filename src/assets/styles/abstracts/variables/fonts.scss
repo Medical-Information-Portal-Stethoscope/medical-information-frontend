@@ -5,10 +5,14 @@ $font-size-heading-3: 2.4rem;
 $font-size-article: 1.8rem;
 $font-size-description: 1.7rem;
 $font-size-text-large-extra-semibold: 3.3rem;
+$font-size-text-large-extra: 2.4rem;
 $font-size-text-large: 2.2rem;
 $font-size-text-medium: 1.8rem;
+$font-size-text-medium-small: 1.6rem;
+$font-size-text-medium-additional: 1.6rem;
 $font-size-text-small: 1.4rem;
 $font-size-text-small-extra: 1.2rem;
+$font-size-mobile-text-medium: 1.6rem;
 
 $font-line-height-huge: calc(8rem / $font-size-huge * 100%);
 $font-line-height-heading-1: calc(7.2rem / $font-size-heading-1 * 100%);
@@ -21,9 +25,18 @@ $font-line-height-text-large-extra-semibold: calc(
 );
 $font-line-height-text-large: calc(2.8rem / $font-size-text-large * 100%);
 $font-line-height-text-medium: calc(2.4rem / $font-size-text-medium * 100%);
+$font-line-height-text-medium-small: calc(
+  2.4rem / $font-size-text-medium-small * 100%
+);
+$font-line-height-text-medium-additional: calc(
+  2.4rem / $font-size-text-medium-additional * 100%
+);
 $font-line-height-text-small: calc(1.6rem / $font-size-text-small * 100%);
 $font-line-height-text-small-extra: calc(
   1.6rem / $font-size-text-small-extra * 100%
+);
+$font-line-height-mobile-text-medium: calc(
+  2.4rem / $font-size-mobile-text-medium * 100%
 );
 
 $font-letter-spacing-main: 0.4px;

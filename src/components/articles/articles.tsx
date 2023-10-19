@@ -7,15 +7,20 @@ import CardMoreContent from 'components/cards/more-content/more-content';
 import { TArticle } from 'utils/types/article';
 import { Icon } from 'shared/icons';
 import { Link } from 'react-router-dom';
+import Button from 'shared/buttons/button/button';
 import { useAppDispatch, useAppSelector } from 'services/app/hooks';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import routes from 'utils/routes';
 import { getFilteredArticles } from 'services/features/filter/api';
 import { getAllArticles } from 'services/features/filter/slice';
+import { tabletAlbumOrientation } from 'utils/constants';
 import styles from './articles.module.scss';
 
 const maxNumArticlesDesktop = 6;
 
 export default function Articles() {
+  const isScreenDeviceLarge = useWindowDimensions() > tabletAlbumOrientation;
+
   const dispatch = useAppDispatch();
   // Получаем список всех корневых тегов
   const { data: tags = [] } = useGetRootsTagsQuery();
@@ -58,28 +63,36 @@ export default function Articles() {
       )) || null;
 
   const hasFilteredData = !!(filteredArticles && filteredArticles?.length > 0);
-
   const hasButton = !!(filteredArticles && filteredArticles?.length === 6);
 
   return filteredArticles ? (
     <section>
       <div className={styles.wrapper}>
-        <MainCarousel onChangeTab={handleClickTab} />
         <h2 className={styles.heading}>Статьи</h2>
+        <MainCarousel onChangeTab={handleClickTab} />
         <div className={hasFilteredData ? styles.articles : styles.empty}>
           {hasFilteredData ? (
             filteredArticles
           ) : (
             <p className={styles.text}>По заданным фильтрам ничего нет</p>
           )}
-          {hasButton && (
+          {isScreenDeviceLarge && hasButton && (
             <Link to={routes.articles.route}>
               <CardMoreContent
-                heading="Еще статьи"
+                heading="Ещё статьи"
                 icon={<Icon icon="BigArrowIcon" color="white" />}
                 extraClass={styles.article}
               />
             </Link>
+          )}
+
+          {!isScreenDeviceLarge && hasButton && (
+            <Button
+              model="secondary"
+              size="small"
+              label="Ещё статьи"
+              hasBorder
+            />
           )}
         </div>
       </div>

@@ -119,9 +119,6 @@ export const schemaArticleImage = (yup: typeof import('yup')) => ({
 
 // COMMENT
 export const schemaComment = (yup: typeof import('yup')) => ({
-  comment: yup
-    .string()
-    .defined()
-    // .max(4000, validationErrors.comments.unacceptableLength)
-    .required(validationErrors.comment.required),
+  comment: yup.string(),
+  // .max(4000, validationErrors.comments.unacceptableLength)
 });

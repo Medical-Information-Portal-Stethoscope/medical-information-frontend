@@ -43,6 +43,7 @@ a {
 
 button {
   border: none;
+  user-select: none;
   cursor: pointer;
 }
 
@@ -62,4 +63,8 @@ ul {
 
 ::-webkit-scrollbar-track {
   background: $color-neutral-0;
+}
+
+.page_no-scroll {
+  overflow: hidden;
 }

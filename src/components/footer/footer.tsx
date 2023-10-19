@@ -1,4 +1,3 @@
-import { FC, ReactElement } from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from 'shared/logo';
 import routes from 'utils/routes';
@@ -19,7 +18,7 @@ const links = footerLinks.map(({ _id, heading, url, isRoute }) => (
   </li>
 ));
 
-const Footer: FC = (): ReactElement => (
+const Footer = () => (
   <footer>
     <div className={styles.wrapper}>
       <div className={styles.warning}>
@@ -28,17 +27,14 @@ const Footer: FC = (): ReactElement => (
         </h2>
         <p className={styles.paragraph}>
           {
-            'Информация на сайте не является руководством по самолечению и представлена для ознакомления.\nКоманда сайта настоятельно рекомендует обратиться к профильному специалисту при подозрении на какое-либо заболевание.'
+            'Информация на\u00a0сайте не\u00a0является руководством по\u00a0самолечению и\u00a0представлена для ознакомления.\nКоманда сайта настоятельно рекомендует обратиться к\u00a0профильному специалисту при подозрении на\u00a0какое-либо заболевание.'
           }
         </p>
       </div>
       <div className={styles.content}>
         <div className={styles.logo}>
           <Link className={styles.logoLink} to={routes.home}>
-            <Logo theme="dark" />
-            <span className={styles.logoName}>
-              медицинский информационный портал
-            </span>
+            <Logo theme="dark" hasCaption />
           </Link>
         </div>
         <ul className={styles.links}>{links}</ul>
