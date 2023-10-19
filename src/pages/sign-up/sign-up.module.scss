@@ -2,6 +2,8 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .navigation {
   @extend %text-size-medium-semibold;
@@ -13,12 +15,27 @@
   flex-direction: column;
   row-gap: 12px;
   margin: 24px 0;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin: 14px 0;
+    row-gap: 5px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin: 18px 0;
+    row-gap: 0;
+  }
 }
 
 .person {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 32px;
+
+  @media screen and (max-width: $media-tablet-large) {
+    grid-template-columns: 1fr;
+    row-gap: 0;
+  }
 }
 
 .navigation {
@@ -26,6 +43,24 @@
   margin-top: 29px;
   font-weight: 700;
   letter-spacing: $font-letter-spacing-main;
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-mobile-text-medium * 10),
+      calc($font-size-text-medium * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-mobile-text-medium;
+    margin-top: 16px;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-mobile-text-medium;
+  }
 }
 
 .link {
@@ -48,6 +83,28 @@
   margin-bottom: 24px;
   color: $color-neutral-700;
   letter-spacing: $font-letter-spacing-main;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small * 10),
+      calc($font-size-text-medium * 10),
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    line-height: $font-line-height-text-small;
+    margin-bottom: 20px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    font-size: $font-size-text-small-extra;
+    line-height: $font-line-height-text-small-extra;
+    letter-spacing: 0;
+    column-gap: 8px;
+    margin-bottom: 24px;
+  }
 }
 
 .content {

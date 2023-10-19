@@ -2,6 +2,8 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .icon_button {
   background-color: $color-neutral-0;
@@ -22,6 +24,23 @@
     @extend %text-size-medium;
     color: $color-neutral-700;
 
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-small * 10),
+        calc($font-size-text-medium * 10),
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      line-height: $font-line-height-text-small;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: $font-size-text-small;
+    }
+
     &--disabled {
       color: $color-neutral-400;
     }
@@ -39,6 +58,10 @@
 
     &--medium {
       padding: 19px 12px;
+
+      @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+        padding: 11px;
+      }
     }
 
     &--small {
@@ -117,5 +140,23 @@
     display: block;
     min-height: 16px;
     color: $color-system-error;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-small-extra * 10),
+        calc($font-size-text-small * 10),
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: $font-size-text-small-extra;
+      line-height: $font-line-height-text-small-extra;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 0;
+    }
   }
 }
