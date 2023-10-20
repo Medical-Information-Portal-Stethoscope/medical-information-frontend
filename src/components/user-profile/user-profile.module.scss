@@ -1,8 +1,10 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
-@import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/animations';
+@import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
 
 .userProfile {
   max-width: $wrapper-articles-preview-desktop;
@@ -12,6 +14,18 @@
 
     &_password {
       max-width: $wrapper-profile-password-desktop;
+
+      > button {
+        @extend %text-size-medium-semibold;
+
+        > span {
+          column-gap: 7px;
+        }
+      }
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      max-width: 472px;
     }
   }
 
@@ -19,6 +33,10 @@
     display: flex;
     flex-direction: column;
     row-gap: 32px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      row-gap: 24px;
+    }
 
     > button {
       width: max-content;
@@ -30,6 +48,23 @@
     align-items: center;
     column-gap: 32px;
     @extend %text-size-large;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-medium * 10),
+        calc($font-size-text-large * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-medium;
+    }
 
     &_heading {
       font-weight: 400;
@@ -46,6 +81,25 @@
   &_title {
     @extend %heading-size-medium;
     margin-bottom: 32px;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-heading-3 * 10),
+        calc($font-size-heading-2 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-bottom: 28px;
+      font-weight: 600;
+      letter-spacing: $font-letter-spacing-main;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-heading-3;
+    }
   }
 
   &_subtitle {
@@ -59,6 +113,10 @@
 
   &_box {
     margin-top: 38px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-top: 30px;
+    }
   }
 
   &_button_password {

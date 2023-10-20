@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -39,6 +40,11 @@
 
     &--medium {
       padding: 19px 12px;
+
+      @media screen and (max-width: $media-tablet-large) {
+        padding-top: 11px;
+        padding-bottom: 11px;
+      }
     }
 
     &--small {
