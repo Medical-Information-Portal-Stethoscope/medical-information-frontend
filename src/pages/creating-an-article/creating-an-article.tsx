@@ -2,14 +2,12 @@ import { ChangeEvent, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 import { useWindowDimensions } from 'hooks/useWindowDimensions';
-import { useToggleButtonVisible } from 'hooks/useToggleButtonVisible';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import TextArea from 'shared/text-area/text-area';
 import { FileInput } from 'shared/file-input/file-input';
 import Button from 'shared/buttons/button/button';
 import ButtonWithIconTwo from 'shared/buttons/button-with-icon-two/button-with-icon-two';
-import { ButtonTopNavigation } from 'components/buttons/button-top-navigation/button-top-navigation';
 import { Icon } from 'shared/icons';
 import {
   schemaArticleTitle,
@@ -38,22 +36,11 @@ export const CreatingAnArticlePage = () => {
 
   const inputMinHeight = isSmallScreenDevice ? 48 : 64;
 
-  const { isButtonToTopVisible, toggleButtonVisible } =
-    useToggleButtonVisible();
-
   const [response, setResponse] = useState<undefined | boolean>(undefined);
   const [selectedImage, setSelectedImage] = useState<null | Blob>(null);
   const [selectedImagePreview, setSelectedImagePreview] = useState('');
   const [hasSelectedImageSizeError, setHasSelectedImageSizeError] =
     useState(false);
-
-  useEffect(() => {
-    window.addEventListener('scroll', toggleButtonVisible, false);
-
-    return () => {
-      window.removeEventListener('scroll', toggleButtonVisible, false);
-    };
-  }, []); // eslint-disable-line
 
   useEffect(() => {
     if (!selectedImage) {
@@ -338,7 +325,6 @@ export const CreatingAnArticlePage = () => {
       <div className={styles.wrapper}>
         <h3 className={styles.heading}>Публикация статьи</h3>
         {renderContent()}
-        {isSmallScreenDevice && isButtonToTopVisible && <ButtonTopNavigation />}
       </div>
     </section>
   );
