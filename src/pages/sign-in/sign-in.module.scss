@@ -1,19 +1,69 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .inputs {
   display: flex;
   flex-direction: column;
   row-gap: 12px;
+
+  div > label {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      display: block;
+    }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    row-gap: 24px;
+  }
 }
 
 .password {
   position: relative;
 
+  @media screen and (max-width: $media-tablet-large) {
+    padding-bottom: 18px;
+  }
+
   span:first-child {
     position: absolute;
     top: 0;
     right: 0;
+
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-medium-small * 10),
+        calc($font-size-text-medium * 10),
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      line-height: $font-line-height-text-medium-small;
+      top: -4px;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: $font-size-text-medium-small;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      position: static;
+    }
+  }
+
+  > div > span {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      min-height: 12px;
+    }
+  }
+
+  > div {
+    @media screen and (max-width: $media-tablet-large) {
+      padding-bottom: 20px;
+    }
   }
 }
 
@@ -23,4 +73,31 @@
   font-weight: 700;
   color: $color-neutral-700;
   letter-spacing: $font-letter-spacing-main;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    margin-top: 20px;
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium-small * 10),
+      calc($font-size-text-medium * 10),
+      $media-tablet-small,
+      $media-desktop-medium
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-medium-small;
+    min-width: 335px;
+    margin-top: 46px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(189, 189, 189, 0.36);
+    text-align: center;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-medium-small;
+  }
+
+  @media screen and (max-width: calc($media-mobile-small - 1px)) {
+    min-width: auto;
+  }
 }

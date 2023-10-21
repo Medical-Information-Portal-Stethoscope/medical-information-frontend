@@ -80,7 +80,9 @@ const Entry: FC<IEntryProps> = ({
         <div
           className={classNames(styles.formWrapper, {
             [styles.formWrapper_signUp]: heading === 'Регистрация',
-            [styles.formWrapper_notSignUp]: heading !== 'Регистрация',
+            [styles.formWrapper_signIn]: heading === 'Вход в аккаунт',
+            [styles.formWrapper_notSignUp]:
+              heading !== 'Регистрация' && heading !== 'Вход в аккаунт',
           })}
         >
           <h2

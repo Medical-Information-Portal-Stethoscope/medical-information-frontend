@@ -28,7 +28,7 @@ import styles from './sign-up.module.scss';
 
 const SignUpPage: FC = (): ReactElement => {
   const [hasAgreement, setHasAgreement] = useState(true);
-  const [isSuccess, setIsSuccess] = useState(true);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();

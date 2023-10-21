@@ -23,6 +23,7 @@
   &--label {
     @extend %text-size-medium;
     color: $color-neutral-700;
+    // display: block;
 
     @media screen and (max-width: calc($media-desktop-large - 1px)) {
       font-size: calc-fluid-element(
