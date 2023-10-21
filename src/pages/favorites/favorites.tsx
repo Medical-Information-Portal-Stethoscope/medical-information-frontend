@@ -68,7 +68,13 @@ export const FavoritesPage = () => {
         [styles.emptyGallery]: !isNotEmptyGallery,
       })}
     >
-      <h3 className={styles.heading}>Избранное</h3>
+      <h3
+        className={classNames(styles.heading, {
+          [styles.headingEmptyGallery]: isNotEmptyGallery,
+        })}
+      >
+        Избранное
+      </h3>
       {(!isNotEmptyGallery && <div className={styles.gallery}>{cards}</div>) ||
         emptyGallery}
       {/* TODO: добавить кнопку загрузки новых статей (после окончания логики избранных) */}

@@ -25,6 +25,10 @@
   @extend %heading-size-medium;
   margin-bottom: 48px;
 
+  &EmptyGallery {
+    margin-bottom: 56px;
+  }
+
   @media screen and (max-width: calc($media-desktop-small - 1px)) {
     font-size: calc-fluid-element(
       calc($font-size-heading-3 * 10),
