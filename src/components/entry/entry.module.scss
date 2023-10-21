@@ -30,6 +30,10 @@
     align-items: flex-start;
   }
 
+  @media screen and (max-width: $media-tablet-large) {
+    padding: 72px 0 0;
+  }
+
   &SignUp {
     padding: 64px 0;
 
@@ -69,25 +73,44 @@
       $media-desktop-small,
       $media-desktop-large
     );
-    padding: calc-fluid-element(
-      32px,
-      48px,
-      $media-desktop-small,
-      $media-desktop-large
-    );
   }
 
   @media screen and (max-width: calc($media-desktop-small - 1px)) {
     max-width: 480px;
-    padding: 32px;
   }
 
   @media screen and (max-width: $media-tablet-large) {
-    max-width: 400px;
+    max-width: 335px;
+    box-sizing: content-box;
   }
 
-  @media screen and (max-width: calc($media-mobile-large - 1px)) {
-    padding: 20px 20px 0;
+  &_signUp {
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      padding: calc-fluid-element(
+        32px,
+        48px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      padding: 32px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-large - 1px)) {
+      padding: 20px 20px 0;
+    }
+  }
+
+  &_notSignUp {
+    @media screen and (max-width: $media-tablet-large) {
+      padding-top: 72px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-large - 1px)) {
+      padding: 40px 20px 0;
+    }
   }
 }
 
@@ -118,6 +141,12 @@
 
   @media screen and (max-width: calc($media-desktop-small - 1px)) {
     font-size: $font-size-heading-3;
+  }
+
+  &_notSignUp {
+    @media screen and (max-width: calc($media-tablet-large - 1px)) {
+      text-align: center;
+    }
   }
 }
 

@@ -77,8 +77,20 @@ const Entry: FC<IEntryProps> = ({
           [styles.columnRightSignUp]: isSignUpForm,
         })}
       >
-        <div className={styles.formWrapper}>
-          <h2 className={styles.heading}>{heading}</h2>
+        <div
+          className={classNames(styles.formWrapper, {
+            [styles.formWrapper_signUp]: heading === 'Регистрация',
+            [styles.formWrapper_notSignUp]: heading !== 'Регистрация',
+          })}
+        >
+          <h2
+            className={classNames(styles.heading, {
+              [styles.heading_notSignUp]:
+                heading !== 'Регистрация' && heading !== 'Вход в аккаунт',
+            })}
+          >
+            {heading}
+          </h2>
           {buttonType === 'submit' ? (
             <form className={styles.form} noValidate onSubmit={onSubmit}>
               {content}

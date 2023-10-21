@@ -33,7 +33,7 @@
   }
 
   &--small {
-    padding: 12px 64px;
+    padding: 12px 63px;
   }
 
   &--medium {
@@ -66,6 +66,7 @@
   justify-content: center;
   align-items: center;
   column-gap: 4.5px;
+  text-wrap: nowrap;
 }
 
 .button--primary {

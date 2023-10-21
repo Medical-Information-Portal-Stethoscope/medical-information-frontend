@@ -34,7 +34,7 @@ export const SignUpActivationPage: FC = (): ReactElement => {
         return {
           content: <MailWithIcon hasStatusIcon statusIcon="success" />,
           heading: 'Email подтверждён',
-          instruction: 'Для продолжения работы войдите в личный кабинет',
+          instruction: 'Для продолжения работы войдите в\u00A0личный кабинет',
           buttonLabel: 'Войти в аккаунт',
           buttonType: 'button',
           onClick: () => navigate(routes.signin, { replace: true }),
@@ -44,7 +44,7 @@ export const SignUpActivationPage: FC = (): ReactElement => {
           content: <MailWithIcon hasStatusIcon statusIcon="fail" />,
           heading: 'В процессе подтверждения email произошла ошибка',
           instruction:
-            'Попробуйте перейти по ссылке ещё раз или повторите регистрацию',
+            'Попробуйте перейти по ссылке ещё раз или\u00A0повторите регистрацию',
           buttonLabel: 'Вернуться к регистрации',
           buttonType: 'button',
           onClick: () => navigate(routes.signup),
@@ -70,7 +70,13 @@ export const SignUpActivationPage: FC = (): ReactElement => {
       onClick={onClick}
     >
       <>
-        <p className={styles.subheading}>{instruction}</p>
+        <p
+          className={classNames(styles.subheading, {
+            [styles.subheading_responseFalse]: responseStatus === false,
+          })}
+        >
+          {instruction}
+        </p>
         <div
           className={classNames(styles.content, {
             [styles[`content--response`]]:
