@@ -30,6 +30,7 @@ const TextArea: FC<ITextAreaProps> = ({
   autoComplete = 'off',
   error,
   touched,
+  rows = 1,
   onFocus,
   onBlur,
   onChange,
@@ -47,7 +48,7 @@ const TextArea: FC<ITextAreaProps> = ({
       )}px`;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [value]);
+  }, [value, minHeight, rows]);
 
   return (
     <div className={styles.textarea}>
@@ -64,6 +65,7 @@ const TextArea: FC<ITextAreaProps> = ({
           name={name}
           placeholder={placeholder}
           autoComplete={autoComplete}
+          rows={rows}
           onFocus={onFocus}
           onBlur={onBlur}
           onChange={onChange}
