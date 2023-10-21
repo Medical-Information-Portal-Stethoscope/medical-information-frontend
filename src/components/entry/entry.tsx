@@ -61,6 +61,14 @@ const Entry: FC<IEntryProps> = ({
     </>
   );
 
+  const formClassListSignInAndReset = [
+    'Вход в аккаунт',
+    'Восстановление пароля',
+    'Придумайте новый пароль',
+    'Пароль успешно изменён',
+    'При сохранении пароля произошла ошибка',
+  ];
+
   return (
     <main className={styles.main}>
       {isAboveTabletScreens ? (
@@ -80,15 +88,21 @@ const Entry: FC<IEntryProps> = ({
         <div
           className={classNames(styles.formWrapper, {
             [styles.formWrapper_signUp]: heading === 'Регистрация',
-            [styles.formWrapper_signIn]: heading === 'Вход в аккаунт',
-            [styles.formWrapper_notSignUp]:
-              heading !== 'Регистрация' && heading !== 'Вход в аккаунт',
+            [styles.formWrapper_signInAndReset]:
+              formClassListSignInAndReset.includes(heading),
+            [styles.formWrapper_notSignUpAndSignInAndReset]:
+              !formClassListSignInAndReset.includes(heading) &&
+              heading !== 'Регистрация',
           })}
         >
           <h2
             className={classNames(styles.heading, {
               [styles.heading_notSignUp]:
-                heading !== 'Регистрация' && heading !== 'Вход в аккаунт',
+                heading !== 'Регистрация' &&
+                heading !== 'Вход в аккаунт' &&
+                (heading !== 'Восстановление пароля' ||
+                  buttonType === 'button') &&
+                heading !== 'Придумайте новый пароль',
             })}
           >
             {heading}

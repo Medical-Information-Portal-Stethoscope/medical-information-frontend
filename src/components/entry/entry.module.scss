@@ -103,7 +103,7 @@
     }
   }
 
-  &_signIn {
+  &_signInAndReset {
     composes: formWrapper_signUp;
 
     @media screen and (max-width: $media-tablet-large) {
@@ -115,7 +115,7 @@
     }
   }
 
-  &_notSignUp {
+  &_notSignUpAndSignInAndReset {
     @media screen and (max-width: $media-tablet-large) {
       padding-top: 72px;
     }
@@ -156,7 +156,7 @@
   }
 
   &_notSignUp {
-    @media screen and (max-width: calc($media-tablet-large - 1px)) {
+    @media screen and (max-width: $media-tablet-large) {
       text-align: center;
     }
   }
