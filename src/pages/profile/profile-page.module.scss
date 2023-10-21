@@ -49,10 +49,24 @@ $indent-mobile: calc-fluid-element(
     grid-template-columns: 1fr;
     row-gap: 35px;
     padding: 104px 0 32px;
+
+    > button {
+      &:last-child {
+        position: fixed;
+        bottom: 36px;
+        right: $indent-tablet;
+      }
+    }
   }
 
   @media screen and (max-width: calc($media-tablet-small - 1px)) {
     margin: 0 $indent-mobile;
+
+    > button {
+      &:last-child {
+        right: $indent-mobile;
+      }
+    }
   }
 
   &--publication {

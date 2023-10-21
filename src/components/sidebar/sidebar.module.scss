@@ -85,19 +85,16 @@
     letter-spacing: $font-letter-spacing-main;
     padding-bottom: 16px;
 
-    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    @media screen and (max-width: $media-tablet-large) {
+      min-width: 100px;
+      padding-bottom: 0;
+      text-align: center;
       font-size: calc-fluid-element(
         calc($font-size-text-small-extra-extra * 10),
         calc($font-size-heading-3 * 10),
         $media-tablet-small,
         $media-desktop-small
       );
-    }
-
-    @media screen and (max-width: $media-tablet-large) {
-      min-width: 100px;
-      padding-bottom: 0;
-      text-align: center;
       font-weight: 500;
       letter-spacing: $font-letter-spacing-tablet;
     }

@@ -14,7 +14,6 @@
 
     > button {
       max-width: 224px;
-      min-width: max-content;
     }
 
     @media screen and (max-width: $media-tablet-large) {
@@ -26,7 +25,9 @@
     @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
       padding: 0;
       border: none;
+    }
 
+    @media screen and (max-width: calc($media-mobile-small - 1px)) {
       > button {
         max-width: 100%;
         width: 100%;
