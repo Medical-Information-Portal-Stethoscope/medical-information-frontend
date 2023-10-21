@@ -56,6 +56,10 @@ $indent-mobile: calc-fluid-element(
   }
 
   &--publication {
-    padding-bottom: 55px;
+    padding-bottom: 80px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      padding-bottom: 32px;
+    }
   }
 }

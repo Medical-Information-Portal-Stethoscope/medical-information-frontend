@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/variables/animations';
@@ -42,6 +43,12 @@
     &::placeholder {
       @extend %text-size-medium;
       color: $color-neutral-400;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      min-height: 48px;
     }
   }
 

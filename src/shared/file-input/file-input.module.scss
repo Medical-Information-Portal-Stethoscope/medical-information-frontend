@@ -1,8 +1,10 @@
 @import 'assets/styles/abstracts/variables/colors.scss';
 @import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/media-queries.scss';
 @import 'assets/styles/abstracts/variables/z-index';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders.scss';
+@import 'assets/styles/abstracts/functions.scss';
 
 .fileWrapper {
   position: relative;
@@ -47,5 +49,18 @@
 
   * {
     transition: $transition-button;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium-small * 10),
+      calc($font-size-text-medium * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    font-size: $font-size-text-medium-small;
   }
 }
