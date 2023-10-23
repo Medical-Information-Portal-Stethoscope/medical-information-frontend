@@ -10,7 +10,7 @@ import {
   schemaPassword,
   schemaCurrentPassword,
 } from 'utils/data/validation/yup-schema';
-import { tabletAlbumOrientation } from 'utils/constants';
+import { desktopMedium } from 'utils/constants';
 import styles from './password-changing.module.scss';
 
 interface IPasswordChangingProps {
@@ -24,7 +24,7 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
     current_password: string[];
   }>(null);
 
-  const isSmallScreenDevice = useWindowDimensions() <= tabletAlbumOrientation;
+  const isMediumScreenDevice = useWindowDimensions() <= desktopMedium;
 
   const formik = useFormik({
     initialValues: {
@@ -101,7 +101,7 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
           extraClass={styles.userProfile_button}
           type="submit"
           label="Сохранить новый пароль"
-          size={isSmallScreenDevice ? 'small' : 'medium'}
+          size={isMediumScreenDevice ? 'small' : 'medium'}
           hasSpinner
           spinnerSize="small"
           spinnerColor="white"
