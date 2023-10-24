@@ -46,6 +46,12 @@ $border: 1px solid
     }
   }
 
+  &--favorites {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      padding: 16px;
+    }
+  }
+
   &--news,
   &--fullPageNews {
     max-width: 1208px;
@@ -78,6 +84,10 @@ $border: 1px solid
       flex-direction: column;
       row-gap: 16px;
     }
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    row-gap: 12px;
   }
 }
 
@@ -154,6 +164,30 @@ $border: 1px solid
       @media screen and (max-width: $media-tablet-large) {
         object-position: top;
       }
+    }
+  }
+
+  &--favorites {
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      height: calc-fluid-element(
+        180,
+        320,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      > button {
+        &:last-child {
+          top: 7px;
+          right: 7px;
+        }
+      }
+    }
+
+    @media screen and (max-width: $media-desktop-small) {
+      height: 180px;
     }
   }
 
@@ -243,6 +277,12 @@ $border: 1px solid
     }
   }
 
+  &--favorites {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      min-height: 148px;
+    }
+  }
+
   &--fullPageNews,
   &--news {
     min-height: 243px;
@@ -280,6 +320,15 @@ $border: 1px solid
 
   @media screen and (max-width: calc($media-tablet-small - 1px)) {
     font-size: $font-size-text-medium;
+  }
+
+  &--favorites {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-text-medium;
+      font-weight: 600;
+      line-height: $font-line-height-text-medium;
+      letter-spacing: $font-letter-spacing-main;
+    }
   }
 }
 
@@ -344,6 +393,15 @@ $border: 1px solid
 
   &--news {
     margin-top: 16px;
+  }
+
+  &--favorites {
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      height: 64px;
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
+      letter-spacing: $font-letter-spacing-main;
+    }
   }
 
   &--fullPageArticle {

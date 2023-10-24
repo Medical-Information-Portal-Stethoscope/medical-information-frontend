@@ -1,9 +1,9 @@
-import { FC, ReactElement, ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 import classNames from 'classnames';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import Input from 'shared/input/input';
 import TextArea from 'shared/text-area/text-area';
 import { FileInput } from 'shared/file-input/file-input';
 import Button from 'shared/buttons/button/button';
@@ -17,7 +17,11 @@ import {
   schemaArticleSourceLink,
   schemaArticleImage,
 } from 'utils/data/validation/yup-schema';
-import { bytesInMegabyte } from 'utils/constants';
+import {
+  bytesInMegabyte,
+  tabletAlbumOrientation,
+  tabletSmallExtra,
+} from 'utils/constants';
 import { createArticle } from 'utils/api';
 import { filterFormValues } from 'utils/functions/filter-form-values';
 import { Response } from './components/response';
@@ -26,7 +30,12 @@ import styles from './creating-an-article.module.scss';
 const articleImageSizeLimitMb = 1.5;
 const articleImageSizeLimitBytes = articleImageSizeLimitMb * bytesInMegabyte;
 
-export const CreatingAnArticlePage: FC = (): ReactElement => {
+export const CreatingAnArticlePage = () => {
+  const isSmallScreenDevice = useWindowDimensions() <= tabletAlbumOrientation;
+  const isExtraSmallScreenDevice = useWindowDimensions() < tabletSmallExtra;
+
+  const inputMinHeight = isSmallScreenDevice ? 48 : 64;
+
   const [response, setResponse] = useState<undefined | boolean>(undefined);
   const [selectedImage, setSelectedImage] = useState<null | Blob>(null);
   const [selectedImagePreview, setSelectedImagePreview] = useState('');
@@ -132,9 +141,10 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
         </p>
       </div>
       <div className={styles.inputs}>
-        <Input
+        <TextArea
           name="title"
           label="Заголовок статьи*"
+          minHeight={inputMinHeight}
           placeholder="Что делает мозг, пока мы спим"
           value={values.title}
           error={errors?.title}
@@ -165,9 +175,10 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           onFocus={() => setFieldTouched('text')}
           onChange={handleChange}
         />
-        <Input
+        <TextArea
           name="source_name"
           label="Источник и/или автор оригинала"
+          minHeight={inputMinHeight}
           placeholder="Минздрав или minzdrav.gov.ru"
           value={values.source_name}
           error={errors.source_name}
@@ -175,13 +186,15 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           onFocus={() => setFieldTouched('source_name')}
           onChange={handleChange}
         />
-        <Input
+        <TextArea
           name="source_link"
           label="Ссылка на источник"
+          minHeight={inputMinHeight}
           placeholder="https://cuprum.media/lifestyle/the-brain-sleeps"
           value={values.source_link}
           error={errors.source_link}
           touched={touched.source_link}
+          rows={isExtraSmallScreenDevice ? 2 : 1}
           onFocus={() => setFieldTouched('source_link')}
           onChange={handleChange}
         />
@@ -248,9 +261,10 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
           Статья будет опубликована на сайте после модерации
         </p>
         <Button
+          extraClass={styles.button}
           type="submit"
           label="Отправить на публикацию"
-          size="medium"
+          size={isSmallScreenDevice ? 'small' : 'medium'}
           isDisabled={!dirty || !isValid}
           isLoading={isSubmitting}
           hasSpinner
@@ -273,6 +287,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
             button={
               <Button
                 label="Написать ещё статью"
+                size={isSmallScreenDevice ? 'small' : 'medium'}
                 onClick={() => setResponse(undefined)}
               />
             }
@@ -289,6 +304,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
               button={
                 <Button
                   type="submit"
+                  size={isSmallScreenDevice ? 'small' : 'medium'}
                   label="Отправить повторно"
                   hasSpinner
                   spinnerSize="small"
@@ -306,12 +322,7 @@ export const CreatingAnArticlePage: FC = (): ReactElement => {
 
   return (
     <section>
-      <div
-        className={classNames(styles.wrapper, {
-          [styles[`wrapper--response`]]:
-            typeof response === 'boolean' || selectedImagePreview,
-        })}
-      >
+      <div className={styles.wrapper}>
         <h3 className={styles.heading}>Публикация статьи</h3>
         {renderContent()}
       </div>

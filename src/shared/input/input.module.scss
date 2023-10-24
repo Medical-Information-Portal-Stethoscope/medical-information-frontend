@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/variables/media-queries';
@@ -23,23 +24,10 @@
   &--label {
     @extend %text-size-medium;
     color: $color-neutral-700;
-    // display: block;
-
-    @media screen and (max-width: calc($media-desktop-large - 1px)) {
-      font-size: calc-fluid-element(
-        calc($font-size-text-small * 10),
-        calc($font-size-text-medium * 10),
-        $media-desktop-small,
-        $media-desktop-large
-      );
-    }
 
     @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-      line-height: $font-line-height-text-small;
-    }
-
-    @media screen and (max-width: calc($media-desktop-small - 1px)) {
       font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
     }
 
     &--disabled {
@@ -61,7 +49,8 @@
       padding: 19px 12px;
 
       @media screen and (max-width: calc($media-desktop-medium - 1px)) {
-        padding: 11px;
+        padding-top: 11px;
+        padding-bottom: 11px;
       }
     }
 

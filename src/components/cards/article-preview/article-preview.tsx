@@ -25,7 +25,13 @@ interface ICardArticlePreviewProps {
     } | null;
     views_count: number;
   };
-  type: 'media' | 'news' | 'fullPageArticle' | 'fullPageNews' | 'default';
+  type:
+    | 'media'
+    | 'news'
+    | 'favorites'
+    | 'fullPageArticle'
+    | 'fullPageNews'
+    | 'default';
   hasFavoriteButton?: boolean;
   extraClass?: string;
   route: string;
@@ -84,7 +90,14 @@ const CardArticlePreview: FC<ICardArticlePreviewProps> = ({
               )}
             >
               <div className={styles.title}>
-                <h3 className={styles.heading}>{title}</h3>
+                <h3
+                  className={classNames(
+                    styles.heading,
+                    styles[`heading--${type}`]
+                  )}
+                >
+                  {title}
+                </h3>
                 <p className={classNames(styles.text, styles[`text--${type}`])}>
                   {converMdToHTML(annotation, true)}
                 </p>
