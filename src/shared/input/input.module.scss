@@ -1,5 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
 
@@ -22,6 +23,11 @@
     @extend %text-size-medium;
     color: $color-neutral-700;
 
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      font-size: $font-size-text-small;
+      line-height: $font-line-height-text-small;
+    }
+
     &--disabled {
       color: $color-neutral-400;
     }
@@ -39,6 +45,11 @@
 
     &--medium {
       padding: 19px 12px;
+
+      @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+        padding-top: 11px;
+        padding-bottom: 11px;
+      }
     }
 
     &--small {

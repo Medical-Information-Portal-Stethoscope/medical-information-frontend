@@ -1,5 +1,8 @@
-import { FC, ReactElement, ReactNode } from 'react';
+import { FC, ReactNode } from 'react';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import { MailWithIcon } from 'shared/mail-with-icon/mail-with-icon';
+import { StatusIcon } from 'shared/icons/status-icon';
+import { tabletAlbumOrientation } from 'utils/constants';
 import styles from './response.module.scss';
 
 interface IResponseProps {
@@ -8,16 +11,22 @@ interface IResponseProps {
   button: ReactNode;
 }
 
-export const Response: FC<IResponseProps> = ({
-  message,
-  status,
-  button,
-}): ReactElement => (
-  <div className={styles.content}>
-    <p className={styles.message}>{message}</p>
-    <div className={styles.icon}>
-      <MailWithIcon hasStatusIcon statusIcon={status} />
+export const Response: FC<IResponseProps> = ({ message, status, button }) => {
+  const isSmallScreenDevice = useWindowDimensions() <= tabletAlbumOrientation;
+
+  return (
+    <div className={styles.content}>
+      <div className={styles.contentMessage}>
+        <p className={styles.message}>{message}</p>
+        <div className={styles.icon}>
+          {isSmallScreenDevice ? (
+            <StatusIcon color="white" status={status} />
+          ) : (
+            <MailWithIcon hasStatusIcon statusIcon={status} />
+          )}
+        </div>
+      </div>
+      {button}
     </div>
-    {button}
-  </div>
-);
+  );
+};

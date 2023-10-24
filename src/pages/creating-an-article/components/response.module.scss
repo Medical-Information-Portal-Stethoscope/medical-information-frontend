@@ -1,17 +1,53 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
 
 .content {
-  display: flex;
-  flex-direction: column;
-  row-gap: 54px;
   max-width: $wrapper-response-desktop;
   white-space: pre-wrap;
 
+  > *:not(:first-child) {
+    margin-top: 54px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-top: 32px;
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      margin-top: 42px;
+    }
+  }
+
   button {
-    max-width: 370px;
+    min-width: 370px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      min-width: 335px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-small - 1px)) {
+      min-width: auto;
+      max-width: 335px;
+    }
+  }
+}
+
+.contentMessage {
+  > *:not(:first-child) {
+    margin-top: 54px;
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin: 0;
+    }
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    display: flex;
+    align-items: center;
+    column-gap: 12px;
   }
 }
 
@@ -19,9 +55,38 @@
   @extend %text-size-large;
   line-height: 151%;
   color: $color-neutral-700;
+
+  @media screen and (max-width: $media-tablet-large) {
+    order: 2;
+  }
+
+  @media screen and (max-width: calc($media-tablet-large)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium-small * 10),
+      calc($font-size-text-large * 10),
+      $media-tablet-small,
+      $media-tablet-large
+    );
+    line-height: $font-line-height-text-medium-small;
+    letter-spacing: $font-letter-spacing-main;
+  }
+
+  @media screen and (max-width: $media-tablet-small) {
+    font-size: $font-size-text-medium-small;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    max-width: 82.09%;
+  }
 }
 
 .icon {
   min-height: 235px;
   margin-left: 11%;
+
+  @media screen and (max-width: $media-tablet-large) {
+    width: 48px;
+    height: 48px;
+    min-height: auto;
+  }
 }

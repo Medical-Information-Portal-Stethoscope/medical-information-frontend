@@ -1,5 +1,6 @@
 import { FC, Dispatch, SetStateAction, useState, useEffect } from 'react';
 import { useFormik } from 'formik';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import * as Yup from 'yup';
 import Input from 'shared/input/input';
 import Button from 'shared/buttons/button/button';
@@ -9,6 +10,7 @@ import {
   schemaPassword,
   schemaCurrentPassword,
 } from 'utils/data/validation/yup-schema';
+import { desktopMedium } from 'utils/constants';
 import styles from './password-changing.module.scss';
 
 interface IPasswordChangingProps {
@@ -21,6 +23,8 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
   const [serverError, setServerError] = useState<null | {
     current_password: string[];
   }>(null);
+
+  const isMediumScreenDevice = useWindowDimensions() <= desktopMedium;
 
   const formik = useFormik({
     initialValues: {
@@ -97,6 +101,7 @@ export const PasswordChanging: FC<IPasswordChangingProps> = ({
           extraClass={styles.userProfile_button}
           type="submit"
           label="Сохранить новый пароль"
+          size={isMediumScreenDevice ? 'small' : 'medium'}
           hasSpinner
           spinnerSize="small"
           spinnerColor="white"

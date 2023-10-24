@@ -1,15 +1,18 @@
-import { FC, ReactElement } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import classNames from 'classnames';
 import CardArticlePreview from 'components/cards/article-preview/article-preview';
 import { Icon } from 'shared/icons';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
 import testArticles from 'utils/data/tests/articles';
+import { tabletAlbumOrientation } from 'utils/constants';
 import styles from './favorites.module.scss';
 
-export const FavoritesPage: FC = (): ReactElement => {
+export const FavoritesPage = () => {
   const navigate = useNavigate();
+
+  const isSmallScreenDevice = useWindowDimensions() <= tabletAlbumOrientation;
 
   const emptyGallery = (
     <>
@@ -17,11 +20,8 @@ export const FavoritesPage: FC = (): ReactElement => {
         <p>Сейчас у вас ничего нет в &laquo;Избранном&raquo;.</p>
         <p>
           Чтобы добавить понравившуюся статью в&nbsp;&laquo;Избранное&raquo;,
-          отметьте её&nbsp;закладкой.
-        </p>
-        <p>
-          Это&nbsp;можно сделать как со&nbsp;страницы статьи, так
-          и&nbsp;из&nbsp;ленты статей.
+          отметьте её&nbsp;закладкой. Это&nbsp;можно сделать как
+          со&nbsp;страницы статьи, так и&nbsp;из&nbsp;ленты статей.
         </p>
       </div>
       <div className={styles.tip}>
@@ -34,7 +34,9 @@ export const FavoritesPage: FC = (): ReactElement => {
         </div>
       </div>
       <Button
+        extraClass={styles.button}
         label="Перейти к статьям"
+        size={isSmallScreenDevice ? 'small' : 'medium'}
         onClick={() => navigate(routes.articles.route)}
       />
     </>
@@ -53,7 +55,7 @@ export const FavoritesPage: FC = (): ReactElement => {
         author: card.author,
         views_count: card.views_count,
       }}
-      type="default"
+      type="favorites"
       route="test"
     />
   ));
@@ -66,9 +68,16 @@ export const FavoritesPage: FC = (): ReactElement => {
         [styles.emptyGallery]: !isNotEmptyGallery,
       })}
     >
-      <h3 className={styles.heading}>Избранное</h3>
+      <h3
+        className={classNames(styles.heading, {
+          [styles.headingEmptyGallery]: isNotEmptyGallery,
+        })}
+      >
+        Избранное
+      </h3>
       {(!isNotEmptyGallery && <div className={styles.gallery}>{cards}</div>) ||
         emptyGallery}
+      {/* TODO: добавить кнопку загрузки новых статей (после окончания логики избранных) */}
     </section>
   );
 };

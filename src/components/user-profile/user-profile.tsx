@@ -1,19 +1,18 @@
-import { useState } from 'react';
 import classNames from 'classnames';
 import { useAppSelector } from 'services/app/hooks';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import { Icon } from 'shared/icons';
 import Button from 'shared/buttons/button/button';
+import { useProfileTab } from 'pages/profile/profile-page';
 import { PersonalData } from './components/personal-data/personal-data';
 import { PasswordChanging } from './components/password-changing/password-changing';
 import styles from './user-profile.module.scss';
 
 function UserProfile() {
-  const [isProfileTab, setIsProfileTab] = useState(true);
-
+  const { isProfileTab, setIsProfileTab } = useProfileTab();
   const { user } = useAppSelector(showUserPersonalData);
 
-  const handeUserRole = () => {
+  const handleUserRole = () => {
     switch (user?.role) {
       case 'admin':
         return (
@@ -49,12 +48,12 @@ function UserProfile() {
             <div className={styles.userProfile_general}>
               <div className={styles.userProfile_status}>
                 <h4 className={styles.userProfile_status_heading}>Статус</h4>
-                {handeUserRole()}
+                {handleUserRole()}
               </div>
               {user?.role === 'user' && (
                 <p className={styles.userProfile_quote}>
-                  Вы можете подтвердить свой статус врача, обратившись к
-                  администратору:{' '}
+                  Вы можете подтвердить свой статус врача, обратившись
+                  к&nbsp;администратору:{' '}
                   <a
                     className={styles.email}
                     href="mailto:admin@stethoscope-portal.ru"

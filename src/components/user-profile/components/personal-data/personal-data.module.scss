@@ -1,7 +1,9 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
+@import 'assets/styles/abstracts/variables/media-queries';
 @import 'assets/styles/abstracts/variables/animations';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/functions';
 
 .userProfile {
   &_form {
@@ -13,16 +15,63 @@
     > button {
       max-width: 224px;
     }
+
+    @media screen and (max-width: $media-tablet-large) {
+      > button {
+        min-width: 335px;
+      }
+    }
+
+    @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+      padding: 0;
+      border: none;
+    }
+
+    @media screen and (max-width: calc($media-mobile-small - 1px)) {
+      > button {
+        max-width: 100%;
+        width: 100%;
+      }
+    }
   }
 
   &_title {
     @extend %heading-size-small;
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      font-size: calc-fluid-element(
+        calc($font-size-text-medium * 10),
+        calc($font-size-heading-3 * 10),
+        $media-tablet-small,
+        $media-desktop-small
+      );
+    }
+
+    @media screen and (max-width: calc($media-tablet-small - 1px)) {
+      font-size: $font-size-text-medium;
+    }
   }
 
   &_inputs {
-    margin: 28px 0 7px;
+    margin: 28px 0 6px;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin: 20px 0 3px;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      margin-bottom: 6px;
+    }
 
     > div {
+      &:not(:first-child) {
+        margin-top: 5px;
+
+        @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+          margin-top: 0;
+        }
+      }
+
       > div {
         background-color: $color-neutral-100;
         border-color: $color-neutral-150;
@@ -40,10 +89,6 @@
             background-color: $color-neutral-0;
           }
         }
-      }
-
-      &:not(:first-child) {
-        margin-top: 4px;
       }
     }
   }
