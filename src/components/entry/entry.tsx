@@ -57,6 +57,7 @@ const Entry: FC<IEntryProps> = ({
         spinnerColor="white"
         onClick={onClick}
         size={isBelowMediumScreens ? 'small' : 'medium'}
+        extraClass={styles.button}
       />
     </>
   );
