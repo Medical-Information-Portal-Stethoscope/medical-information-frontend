@@ -17,7 +17,7 @@ import styles from './reset-password-confirmation.module.scss';
 
 export const ResetPasswordConfirmationPage: FC = (): ReactElement => {
   const [responseStatus, setResponseStatus] = useState<boolean | undefined>(
-    false
+    undefined
   );
 
   const navigate = useNavigate();

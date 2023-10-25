@@ -92,7 +92,7 @@ function App() {
       />
       <Route
         path={routes.password.resetConfirmation}
-        element={<ResetPasswordConfirmationPage />}
+        element={<OnlyUnAuth component={<ResetPasswordConfirmationPage />} />}
       />
 
       <Route path="*" element={<NotFoundPage />} />
