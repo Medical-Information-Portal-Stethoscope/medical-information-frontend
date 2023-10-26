@@ -7,18 +7,31 @@ export interface ILogoProps {
   extClassName?: string;
   theme: 'dark' | 'light';
   hasCaption?: boolean;
+  isSignUp?: boolean;
 }
 
-export const Logo = ({ extClassName, theme, hasCaption }: ILogoProps) =>
+export const Logo = ({
+  extClassName,
+  theme,
+  hasCaption,
+  isSignUp,
+}: ILogoProps) =>
   hasCaption ? (
-    <div className={classNames(styles.wrapper, extClassName)}>
+    <div
+      className={classNames(
+        isSignUp ? styles.wrapper_signup : styles.wrapper,
+        extClassName
+      )}
+    >
       <img
-        className={styles.logo}
+        className={isSignUp ? styles.logo_signup : styles.logo}
         src={theme === 'light' ? logoLight : logo}
         alt="Логотип"
       />
       <span
-        className={classNames(styles.caption, {
+        className={classNames({
+          [styles.caption]: !isSignUp,
+          [styles.caption_signup]: isSignUp,
           [styles.captionDark]: theme === 'dark',
         })}
       >
@@ -27,7 +40,7 @@ export const Logo = ({ extClassName, theme, hasCaption }: ILogoProps) =>
     </div>
   ) : (
     <img
-      className={styles.logo}
+      className={isSignUp ? styles.logo_signup : styles.logo}
       src={theme === 'light' ? logoLight : logo}
       alt="Логотип"
     />

@@ -9,6 +9,7 @@ import Button from 'shared/buttons/button/button';
 import { resetPassword } from 'utils/api';
 import { schemaEmail } from 'utils/data/validation/yup-schema';
 import { filterFormValues } from 'utils/functions/filter-form-values';
+import classNames from 'classnames';
 import routes from 'utils/routes';
 import styles from './reset-password.module.scss';
 
@@ -63,7 +64,7 @@ export const ResetPasswordPage = () => {
   const initialState = (
     <>
       <p className={styles.instruction}>
-        Введите email, который вы использовали при&nbsp;регистрации
+        Введите email, который вы&nbsp;использовали при&nbsp;регистрации
       </p>
       <Input
         name="email"
@@ -83,8 +84,9 @@ export const ResetPasswordPage = () => {
 
   const successState = (
     <>
-      <p className={styles.instruction}>
-        Мы отправили инструкцию по восстановлению пароля на указанную почту
+      <p className={classNames(styles.instruction, styles.instruction_success)}>
+        Мы отправили инструкцию по&nbsp;восстановлению пароля на&nbsp;указанную
+        почту
       </p>
       <div className={styles.iconWrapper}>
         <MailWithIcon hasStatusIcon statusIcon="success" />

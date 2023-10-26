@@ -4,6 +4,9 @@ import classNames from 'classnames';
 import { Logo } from 'shared/logo';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
+import { useWindowDimensions } from 'hooks/useWindowDimensions';
+import { desktopMedium, tabletAlbumOrientation } from 'utils/constants';
+import { Header } from 'components/header';
 import styles from './entry.module.scss';
 
 interface IEntryProps {
@@ -19,6 +22,14 @@ interface IEntryProps {
   onClick?: () => void;
 }
 
+const formClassListSignInAndReset = [
+  'Вход в аккаунт',
+  'Восстановление пароля',
+  'Придумайте новый пароль',
+  'Пароль успешно изменён',
+  'При сохранении пароля произошла ошибка',
+];
+
 const Entry: FC<IEntryProps> = ({
   children,
   heading,
@@ -33,12 +44,14 @@ const Entry: FC<IEntryProps> = ({
 }) => {
   const { pathname } = useLocation();
   const isSignUpForm = pathname.endsWith(routes.signup);
+  const isBelowMediumScreens = useWindowDimensions() < desktopMedium;
+  const isAboveTabletScreens = useWindowDimensions() > tabletAlbumOrientation;
 
   const content = (
     <>
       {hasCommentaryWithRequired && (
         <span className={styles.commentary}>
-          Поля со звёздочкой обязательны к заполнению
+          Поля со звёздочкой обязательны для заполнения
         </span>
       )}
       {children}
@@ -51,25 +64,50 @@ const Entry: FC<IEntryProps> = ({
         spinnerSize="small"
         spinnerColor="white"
         onClick={onClick}
+        size={isBelowMediumScreens ? 'small' : 'medium'}
+        extraClass={styles.button}
       />
     </>
   );
 
   return (
     <main className={styles.main}>
-      <div className={styles.columnLeft}>
-        <Link className={styles.logo} to={routes.home}>
-          <Logo theme="dark" />
-          <span>медицинский информационный портал</span>
-        </Link>
-      </div>
+      {isAboveTabletScreens ? (
+        <div className={styles.columnLeft}>
+          <Link to={routes.home}>
+            <Logo theme="dark" isSignUp hasCaption />
+          </Link>
+        </div>
+      ) : (
+        <Header />
+      )}
       <div
         className={classNames(styles.columnRight, {
           [styles.columnRightSignUp]: isSignUpForm,
         })}
       >
-        <div className={styles.formWrapper}>
-          <h2 className={styles.heading}>{heading}</h2>
+        <div
+          className={classNames(styles.formWrapper, {
+            [styles.formWrapperSignUp]: heading === 'Регистрация',
+            [styles.formWrapperSignInAndReset]:
+              formClassListSignInAndReset.includes(heading),
+            [styles.formWrapperNotSignUpAndSignInAndReset]:
+              !formClassListSignInAndReset.includes(heading) &&
+              heading !== 'Регистрация',
+          })}
+        >
+          <h2
+            className={classNames(styles.heading, {
+              [styles.headingNotSignUp]:
+                heading !== 'Регистрация' &&
+                heading !== 'Вход в аккаунт' &&
+                (heading !== 'Восстановление пароля' ||
+                  buttonType === 'button') &&
+                heading !== 'Придумайте новый пароль',
+            })}
+          >
+            {heading}
+          </h2>
           {buttonType === 'submit' ? (
             <form className={styles.form} noValidate onSubmit={onSubmit}>
               {content}
