@@ -2,11 +2,17 @@
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/wrappers';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .main {
   display: grid;
   grid-template-columns: 50.62% 49.38%;
   height: 100vh;
+
+  @media screen and (max-width: $media-tablet-large) {
+    grid-template-columns: 100%;
+  }
 }
 
 .columnLeft,
@@ -19,17 +25,33 @@
 .columnRight {
   background-color: $color-brand-primary-900;
 
+  @media screen and (max-width: $media-tablet-large) {
+    background-color: $color-neutral-0;
+    align-items: flex-start;
+    padding: 72px 0 0;
+  }
+
   &SignUp {
     padding: 64px 0;
-  }
-}
 
-.logo {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  @extend %text-size-large;
-  color: inherit;
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      padding: calc-fluid-element(
+          40px,
+          64px,
+          $media-desktop-small,
+          $media-desktop-large
+        )
+        0;
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      padding: 40px 0;
+    }
+
+    @media screen and (max-width: $media-tablet-large) {
+      padding: 72px 0 0;
+    }
+  }
 }
 
 .formWrapper {
@@ -40,6 +62,65 @@
   box-sizing: border-box;
   background-color: $color-neutral-0;
   border-radius: 24px;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    max-width: calc-fluid-element(
+      480px,
+      $wrapper-entry-form-desktop,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    max-width: 480px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    max-width: 335px;
+    box-sizing: content-box;
+  }
+
+  &SignUp {
+    @media screen and (max-width: calc($media-desktop-large - 1px)) {
+      padding: calc-fluid-element(
+        32px,
+        48px,
+        $media-desktop-small,
+        $media-desktop-large
+      );
+    }
+
+    @media screen and (max-width: calc($media-desktop-small - 1px)) {
+      padding: 32px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-large - 1px)) {
+      padding: 20px 20px 0;
+    }
+  }
+
+  &SignInAndReset {
+    composes: formWrapperSignUp;
+
+    @media screen and (max-width: $media-tablet-large) {
+      padding-top: 72px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-large - 1px)) {
+      padding: 40px 20px 0;
+    }
+  }
+
+  &NotSignUpAndSignInAndReset {
+    @media screen and (max-width: $media-tablet-large) {
+      padding-top: 72px;
+    }
+
+    @media screen and (max-width: calc($media-mobile-large - 1px)) {
+      padding: 40px 20px 0;
+    }
+  }
 }
 
 .form {
@@ -50,9 +131,57 @@
 .heading {
   padding-bottom: 40px;
   @extend %heading-size-medium;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-heading-3 * 10),
+      calc($font-size-heading-2 * 10),
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    line-height: $font-line-height-heading-3;
+    letter-spacing: $font-letter-spacing-main;
+    font-weight: 600;
+    padding-bottom: 16px;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: $font-size-heading-3;
+  }
+
+  &NotSignUp {
+    @media screen and (max-width: $media-tablet-large) {
+      text-align: center;
+    }
+  }
 }
 
 .commentary {
   @extend %text-size-small;
   color: $color-neutral-500;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small-extra * 10),
+      calc($font-size-text-small * 10),
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    line-height: $font-line-height-text-small-extra;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: $font-size-text-small-extra;
+  }
+}
+
+.button {
+  padding-left: 10px;
+  padding-right: 10px;
 }

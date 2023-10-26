@@ -1,7 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/variables/media-queries';
-@import 'assets/styles/abstracts/functions';
 @import 'assets/styles/abstracts/placeholders';
 @import 'assets/styles/abstracts/functions';
 
@@ -10,6 +9,15 @@
   flex-direction: column;
   align-items: center;
   user-select: none;
+}
+
+.wrapper_signup {
+  composes: wrapper;
+  align-items: flex-end;
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    align-items: center;
+  }
 }
 
 .logo {
@@ -35,6 +43,23 @@
 
   @media screen and (max-width: calc($media-tablet-small - 1px)) {
     max-width: 153px;
+  }
+}
+
+.logo_signup {
+  max-width: 592px;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    max-width: calc-fluid-element(
+      382,
+      592,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    max-width: 382px;
   }
 }
 
@@ -65,4 +90,9 @@
   &Dark {
     color: $color-neutral-900;
   }
+}
+
+.caption_signup {
+  @extend %text-size-large;
+  color: $color-neutral-900;
 }
