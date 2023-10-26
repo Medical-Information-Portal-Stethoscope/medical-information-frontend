@@ -28,9 +28,6 @@
   @media screen and (max-width: $media-tablet-large) {
     background-color: $color-neutral-0;
     align-items: flex-start;
-  }
-
-  @media screen and (max-width: $media-tablet-large) {
     padding: 72px 0 0;
   }
 
@@ -84,7 +81,7 @@
     box-sizing: content-box;
   }
 
-  &_signUp {
+  &SignUp {
     @media screen and (max-width: calc($media-desktop-large - 1px)) {
       padding: calc-fluid-element(
         32px,
@@ -103,8 +100,8 @@
     }
   }
 
-  &_signInAndReset {
-    composes: formWrapper_signUp;
+  &SignInAndReset {
+    composes: formWrapperSignUp;
 
     @media screen and (max-width: $media-tablet-large) {
       padding-top: 72px;
@@ -115,7 +112,7 @@
     }
   }
 
-  &_notSignUpAndSignInAndReset {
+  &NotSignUpAndSignInAndReset {
     @media screen and (max-width: $media-tablet-large) {
       padding-top: 72px;
     }
@@ -155,7 +152,7 @@
     font-size: $font-size-heading-3;
   }
 
-  &_notSignUp {
+  &NotSignUp {
     @media screen and (max-width: $media-tablet-large) {
       text-align: center;
     }

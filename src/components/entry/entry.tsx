@@ -22,6 +22,14 @@ interface IEntryProps {
   onClick?: () => void;
 }
 
+const formClassListSignInAndReset = [
+  'Вход в аккаунт',
+  'Восстановление пароля',
+  'Придумайте новый пароль',
+  'Пароль успешно изменён',
+  'При сохранении пароля произошла ошибка',
+];
+
 const Entry: FC<IEntryProps> = ({
   children,
   heading,
@@ -62,14 +70,6 @@ const Entry: FC<IEntryProps> = ({
     </>
   );
 
-  const formClassListSignInAndReset = [
-    'Вход в аккаунт',
-    'Восстановление пароля',
-    'Придумайте новый пароль',
-    'Пароль успешно изменён',
-    'При сохранении пароля произошла ошибка',
-  ];
-
   return (
     <main className={styles.main}>
       {isAboveTabletScreens ? (
@@ -88,17 +88,17 @@ const Entry: FC<IEntryProps> = ({
       >
         <div
           className={classNames(styles.formWrapper, {
-            [styles.formWrapper_signUp]: heading === 'Регистрация',
-            [styles.formWrapper_signInAndReset]:
+            [styles.formWrapperSignUp]: heading === 'Регистрация',
+            [styles.formWrapperSignInAndReset]:
               formClassListSignInAndReset.includes(heading),
-            [styles.formWrapper_notSignUpAndSignInAndReset]:
+            [styles.formWrapperNotSignUpAndSignInAndReset]:
               !formClassListSignInAndReset.includes(heading) &&
               heading !== 'Регистрация',
           })}
         >
           <h2
             className={classNames(styles.heading, {
-              [styles.heading_notSignUp]:
+              [styles.headingNotSignUp]:
                 heading !== 'Регистрация' &&
                 heading !== 'Вход в аккаунт' &&
                 (heading !== 'Восстановление пароля' ||
