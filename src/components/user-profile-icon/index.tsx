@@ -33,7 +33,14 @@ export const UserProfileIcon: FC<UserInfo> = ({
         [styles['user__icon-header']]: isHeader,
       })}
     >
-      {isDoctor && <PlusIcon color="red" className={styles.user__plus} />}
+      {isDoctor && (
+        <PlusIcon
+          color="red"
+          className={classNames(styles.user__plus, {
+            [styles['user__plus-header']]: isHeader,
+          })}
+        />
+      )}
       {avatar ? (
         <img
           className={styles.user__avatar}

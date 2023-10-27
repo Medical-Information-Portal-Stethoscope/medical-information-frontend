@@ -1,4 +1,6 @@
 @import 'assets/styles/abstracts/variables/colors';
+@import 'assets/styles/abstracts/variables/fonts.scss';
+@import 'assets/styles/abstracts/variables/media-queries.scss';
 
 .billet {
   border-top-left-radius: 24px;
@@ -22,6 +24,10 @@
   height: 5px;
   border-radius: 100px;
   background-color: $color-neutral-400;
+
+  @media screen and (max-width: calc($media-tablet-small-extra - 1px)) {
+    width: 38px;
+  }
 }
 
 .buttons {
@@ -29,8 +35,18 @@
   flex-direction: column;
   row-gap: 24px;
 
-  button {
+  &_unauth {
     padding-right: 83px;
     padding-left: 83px;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
+  }
+
+  &_auth {
+    height: 48px;
+    padding-right: 56px;
+    padding-left: 56px;
+    font-size: $font-size-text-medium-small;
+    line-height: $font-line-height-text-medium-small;
   }
 }
