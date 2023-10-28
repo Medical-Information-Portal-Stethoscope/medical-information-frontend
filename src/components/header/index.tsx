@@ -13,12 +13,12 @@ import routes from 'utils/routes';
 import { tabletAlbumOrientation, minSwipeSize } from 'utils/constants';
 import { Hamburger } from 'shared/hamburger/hamburger';
 import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
+import { logoutUser } from 'services/features/user/api';
 import { HamburgerMenu } from './hamburger-menu/hamburger-menu';
 import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
 import { Menu } from './menu';
 import { Billet } from './billet/billet';
-import { logoutUser } from '../../services/features/user/api';
 import styles from './header.module.scss';
 
 interface IHeaderProps {

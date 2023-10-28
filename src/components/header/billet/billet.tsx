@@ -3,9 +3,9 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Button from 'shared/buttons/button/button';
 import routes from 'utils/routes';
-import { useAppSelector } from '../../../services/app/hooks';
-import { showUserPersonalData } from '../../../services/features/user/selectors';
-import { Icon } from '../../../shared/icons';
+import { useAppSelector } from 'services/app/hooks';
+import { showUserPersonalData } from 'services/features/user/selectors';
+import { Icon } from 'shared/icons';
 import styles from './billet.module.scss';
 
 interface IBilletProps {
@@ -42,11 +42,7 @@ export const Billet = ({
             model="primary"
             size="small"
             label={user ? 'Перейти в личный кабинет' : 'Зарегистрироваться'}
-            onClick={
-              user
-                ? () => navigate(routes.profile)
-                : () => navigate(routes.signup)
-            }
+            onClick={() => navigate(user ? routes.profile : routes.signup)}
             extraClass={user ? styles.buttons_auth : styles.buttons_unauth}
             isDisabled={isProfilePage}
           />
