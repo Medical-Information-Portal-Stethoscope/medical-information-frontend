@@ -36,6 +36,16 @@
     background-color: $color-neutral-0;
 
     &-header {
+      @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+        width: 40px;
+        height: 40px;
+      }
+
+      @media screen and (max-width: $media-tablet-large) {
+        width: 24px;
+        height: 24px;
+      }
+
       svg {
         fill: $color-brand-secondary-900;
       }
@@ -86,6 +96,12 @@
     text-align: center;
     vertical-align: middle;
     user-select: none;
+
+    @media screen and (max-width: $media-tablet-large) {
+      font-size: $font-size-text-small-extra;
+      line-height: $font-line-height-text-small-extra;
+      font-weight: 700;
+    }
   }
 
   &__plus {
@@ -94,6 +110,13 @@
     position: absolute;
     top: -2px;
     right: 0;
+
+    &-header {
+      @media screen and (max-width: $media-tablet-large) {
+        width: 12px;
+        height: 12px;
+      }
+    }
   }
 
   &:hover {

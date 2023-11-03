@@ -226,6 +226,7 @@ export const AvatarModal: FC<IAvatarModalProps> = ({
             label={avatar ? 'Сменить' : 'Добавить фото'}
             accept=".jpg, .jpeg, .png"
             onChange={selectAvatar}
+            extraClass={styles.button_text}
           />
           {avatar && (
             <Button label="Удалить" model="tertiary" onClick={deleteAvatar} />
