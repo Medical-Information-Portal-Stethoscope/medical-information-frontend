@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import classNames from 'classnames';
-import { useAppSelector } from 'services/app/hooks';
+import { useAppDispatch, useAppSelector } from 'services/app/hooks';
 import { useWindowDimensions } from 'hooks/useWindowDimensions';
 import { showUserPersonalData } from 'services/features/user/selectors';
 import Tooltip from 'shared/tooltip/tooltip';
@@ -13,6 +13,7 @@ import routes from 'utils/routes';
 import { tabletAlbumOrientation, minSwipeSize } from 'utils/constants';
 import { Hamburger } from 'shared/hamburger/hamburger';
 import { OverlayingPopup } from 'shared/overlaying-popup/overlaying-popup';
+import { logoutUser } from 'services/features/user/api';
 import { HamburgerMenu } from './hamburger-menu/hamburger-menu';
 import { UserProfileIcon } from '../user-profile-icon';
 import { Search } from './search';
@@ -65,6 +66,7 @@ export const Header = ({
   }, [isHamburgerMenuOpened]);
 
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { user } = useAppSelector(showUserPersonalData);
   const userName = `${user?.first_name[0]}${user?.last_name[0]}`;
@@ -80,6 +82,18 @@ export const Header = ({
     return isPopupOpened
       ? 'Закрыть модальное окно'
       : 'Открыть модальное окно с переходами на страницы регистрации и авторизации';
+  };
+
+  const handleUserOut = () => {
+    const token = localStorage.getItem('auth_token');
+
+    if (!token) return;
+
+    dispatch(logoutUser(token)).then(() =>
+      navigate(routes.home, { replace: true })
+    );
+
+    setIsPopupOpened(false);
   };
 
   return (
@@ -112,7 +126,9 @@ export const Header = ({
                 role="button"
                 tabIndex={0}
                 aria-label={createAriaLabel()}
-                onClick={user ? navigateToUserProfile : handleTogglePopup}
+                onClick={
+                  user && isDesktop ? navigateToUserProfile : handleTogglePopup
+                }
               >
                 <UserProfileIcon
                   avatar={user?.avatar || ''}
@@ -124,7 +140,7 @@ export const Header = ({
               </div>
             </div>
 
-            {isDesktop && (
+            {isDesktop && !user && (
               <div
                 className={classNames(styles.tooltip, {
                   [styles[`tooltip--open`]]: isPopupOpened,
@@ -157,6 +173,7 @@ export const Header = ({
             })}
             onSwipeStart={swipeStart}
             onSwipeEnd={swipeEnd}
+            onLogout={handleUserOut}
           />
         </OverlayingPopup>
       )}

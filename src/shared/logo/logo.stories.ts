@@ -14,5 +14,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     theme: 'dark',
+    isSignUp: false,
+  },
+};
+
+export const ForSignUp: Story = {
+  args: {
+    theme: 'dark',
+    isSignUp: true,
   },
 };

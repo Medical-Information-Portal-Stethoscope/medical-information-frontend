@@ -1,6 +1,8 @@
 @import 'assets/styles/abstracts/variables/colors';
 @import 'assets/styles/abstracts/variables/fonts';
 @import 'assets/styles/abstracts/placeholders';
+@import 'assets/styles/abstracts/variables/media-queries';
+@import 'assets/styles/abstracts/functions';
 
 .content {
   display: flex;
@@ -8,6 +10,23 @@
   align-items: center;
   min-height: 239px;
   margin-bottom: 40px;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    min-height: calc-fluid-element(
+      172px,
+      239px,
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    min-height: 172px;
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    margin-bottom: 102px;
+  }
 
   &--response {
     margin-bottom: 0;
@@ -19,6 +38,10 @@
 
   div:first-child {
     margin-right: 8%;
+
+    @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+      margin-right: 0;
+    }
 
     > span {
       position: absolute;
@@ -37,4 +60,44 @@
   @extend %text-size-large;
   color: $color-neutral-500;
   margin-bottom: 40px;
+
+  @media screen and (max-width: calc($media-desktop-large - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-medium * 10),
+      calc($font-size-text-large * 10),
+      $media-desktop-small,
+      $media-desktop-large
+    );
+  }
+
+  @media screen and (max-width: calc($media-desktop-medium - 1px)) {
+    line-height: $font-line-height-text-medium;
+    letter-spacing: $font-letter-spacing-main;
+  }
+
+  @media screen and (max-width: calc($media-desktop-small - 1px)) {
+    font-size: calc-fluid-element(
+      calc($font-size-text-small * 10),
+      calc($font-size-text-medium * 10),
+      $media-tablet-small,
+      $media-desktop-small
+    );
+  }
+
+  @media screen and (max-width: $media-tablet-large) {
+    line-height: $font-line-height-text-small;
+    text-align: center;
+    min-height: 80px;
+    margin-bottom: 48px;
+  }
+
+  @media screen and (max-width: calc($media-tablet-small - 1px)) {
+    font-size: $font-size-text-small;
+  }
+
+  &_responseFalse {
+    @media screen and (max-width: $media-tablet-large) {
+      min-height: 50px;
+    }
+  }
 }
